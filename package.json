@@ -1,0 +1,37 @@
+{
+  "name": "pro-shop-wave",
+  "version": "1.0.0",
+  "author": "Adachi Masakazu <marscode48@gmail.com>",
+  "license": "MIT",
+  "description": "PRO SHOP WAVE Website with Gulp, Dart Sass, GSAP, Swiper",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production gulp build",
+    "start": "cross-env NODE_ENV=production gulp serve",
+    "dev": "cross-env NODE_ENV=development gulp serve"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "cross-env": "^7.0.3",
+    "del": "6.1.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-dart-sass": "^1.1.0",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-load-plugins": "^2.0.8",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-webp": "4.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2"
+  },
+  "dependencies": {
+    "gsap": "^3.12.2",
+    "source-map-support": "^0.5.21",
+    "swiper": "^9.0.0"
+  }
+}
