@@ -1,4 +1,10 @@
-/* style.scss */
-@use './globals/index' as *;
-@use './pages/home'; // トップページ専用スタイル（ページ毎に作成）
-@use './parts/common'; // 各ページ共通スタイル
+/*
+Theme Name: proshopwave
+Author: 足立雅和
+Version: 1.0
+Description: PRO SHOP WAVEのオリジナルテーマ
+*/
+
+@use 'globals/index' as *;
+@use 'pages/home';
+@use 'parts/common';
