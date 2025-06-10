@@ -9,7 +9,11 @@ vendor/
 *.bak
 *.tmp
 
-# ビルドファイル（必要に応じて）
+# ビルド出力と生成ファイル
 dist/
 build/
 .sass-cache/
+css/
+js/
+images/
+*.php
