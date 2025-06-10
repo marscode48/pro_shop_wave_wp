@@ -1,0 +1,78 @@
+/* Compiled CSS from Sass */
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+.header {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 1rem;
+}
+
+.header__logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+}
+
+.header__nav-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.header__nav-item a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.footer {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 1rem;
+  text-align: center;
+}
+
+.hero {
+  text-align: center;
+  padding: 5vh 0;
+}
+
+.hero__title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  color: #000000;
+}
+
+.hero__desc {
+  font-size: 1.5rem;
+  color: #B3B3B3;
+}
+
+.latest-parts {
+  padding: 4rem 0;
+}
+
+.latest-parts .section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.latest-parts__list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.latest-parts__item {
+  text-align: center;
+}
+
+@media screen and (max-width: 960px) {
+  .latest-parts__list {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,855 @@
+@use '../globals/variables' as *;
+@use '../globals/mixin' as *;
+@use '../globals/mq' as *;
+@use 'sass:color';
+
+// ========================
+// セクション共通
+// ========================
+.section {
+  padding: 3rem 5vw;
+
+  &__title {
+    font-size: 2rem;
+    font-family: $font-heading;
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    text-shadow: $text-shadow-black-default;
+  }
+
+  &__text {
+    text-align: center;
+    font-size: 1rem;
+    color: $color-white;
+    margin-bottom: 2rem;
+    text-shadow: $text-shadow-black-default;
+  }
+
+  &__button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 240px;
+    width: 160px;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, color.adjust($color-red, $lightness: 15%) 0%, color.adjust($color-red, $lightness: -15%) 100%);
+    color: $color-white;
+    font-family: $font-heading;
+    font-weight: bold;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    transform: skew(-20deg, 0deg);
+    border: 1px solid $color-black;
+    box-shadow: $box-shadow-red-default;
+    cursor: pointer;
+    transition: background-color $transition, color $transition, box-shadow $transition, border $transition;
+
+    @include mq(lg) {
+      width: 200px;
+    }
+
+    &:hover {
+      @include mq(lg) {
+        background: linear-gradient(135deg, color.adjust($color-white, $lightness: 15%) 70%, color.adjust($color-red, $lightness: 5%) 100%);
+        color: $color-red;
+        border-color: $color-red;
+        box-shadow: $box-shadow-red-hover;
+        animation: bright-flash 0.2s linear forwards;
+      }
+    }
+
+    &-inner {
+      display: inline-block;
+      transform: skewX(15deg);
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      background-color: $color-white;
+      transition: transform $transition, background-color $transition;
+    }
+
+    &::before {
+      width: 35px;
+      right: -20px;
+      top: 35%;
+    }
+
+    &::after {
+      width: 20px;
+      right: -5px;
+      top: 55%;
+    }
+
+    &:hover::before,
+    &:hover::after {
+      @include mq(lg) {
+        transform: translateX(10px);
+        background-color: $color-red;
+      }
+    }
+  }
+
+  &__flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    @include mq(lg) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  
+    @include mq(lg) {
+      flex: 0 1 45vw;
+    }
+  }
+  
+  &__picture {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: $radius-image;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+
+    @include mq(lg) {
+      aspect-ratio: 3 / 2;
+
+      .section__link:hover & {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    display: block;
+    transition: transform $transition, filter $transition;
+  
+    .section__link:hover & {
+      @include mq(lg) {
+        transform: scale(1.02);
+        animation: bright-flash 0.2s linear forwards;
+      }
+    }
+  }
+  
+  &--reverse .section__flex {
+    @include mq(lg) {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+// ========================
+// HERO セクション
+// ========================
+$marker-anim-name: hero__text-marker-anim;
+$marker-bg-anim-name: hero__text-marker-bg;
+$marker-hide-anim-name: hero__text-marker-hide;
+$marker-anim-duration: var(--marker-animation-duration);
+
+.hero {
+  height: calc(100svh - $header-height);
+  position: relative;
+
+  &-swiper {
+    .hero-slide {
+      height: 100%;
+    }
+
+    // Swiper フェードモード：画像遷移にフェードを適用
+    &.swiper-fade {
+      .swiper-slide {
+        transition-property: opacity, transform !important;
+        pointer-events: none;
+
+        &.swiper-slide[class*=-active] {
+          pointer-events: auto;
+        }
+      }
+    }
+
+    // 画像ズームアニメーション（アクティブ時）
+    .slide-media img {
+      transition: 7s 1s ease-out;
+    }
+    .swiper-slide[class*=-active] .slide-media img {
+      transition-delay: 0s;
+      transform: scale(1.2);
+    }
+
+    // ========================
+    // マーカーアニメーション共通
+    // ========================
+    .hero__text-marker {
+      position: relative;
+      display: inline-block;
+      clip-path: inset(0 100% 0 0);
+      animation-delay: inherit; // JSで設定したdelayを継承
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background: linear-gradient(
+          135deg,
+          color.adjust($color-red, $lightness: 15%) 0%,
+          color.adjust($color-red, $lightness: -30%) 100%
+        );
+        animation-delay: inherit;
+      }
+    }
+
+    // ========================
+    // マーカーアニメーション：開始
+    // ========================
+    .is-marker-active {
+      .hero__text-marker {
+        animation: #{$marker-anim-name} #{$marker-anim-duration} both;
+
+        &::after {
+          animation: #{$marker-bg-anim-name} #{$marker-anim-duration} both;
+        }
+      }
+    }
+
+    // ========================
+    // マーカーアニメーション：終了時の非表示
+    // ========================
+    .is-marker-completed {
+      .hero__text-marker {
+        animation: #{$marker-hide-anim-name} 0.8s both;
+
+        &::after {
+          clip-path: inset(0 0 0 100%);
+        }
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__content {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 5vw;
+    color: $color-white;
+    height: max-content;
+    margin: auto;
+    pointer-events: none;
+  }
+
+  &__heading-en {
+    @include clamp-font-size(2rem, 4vw, 5rem);
+    font-family: $font-heading;
+    font-weight: 700;
+    text-align: left;
+    text-shadow: $text-shadow-black-default;
+  }
+
+  &__highlight {
+    color: $color-red;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  &__subheading-jp {
+    @include clamp-font-size(1rem, 2.5vw, 1.3rem);
+    font-family: $font-body;
+    font-weight: 400;
+    line-height: 1.8;
+    color: $color-white;
+    text-align: center;
+    text-shadow: $text-shadow-black-default;
+    margin-top: 40vh;
+
+    @include mq(lg) {
+      margin-top: 30vh;
+    }
+    
+    @include mq(xl) {
+      margin-top: 35vh;
+    }
+    
+    @include mq(xxl) {
+      margin-top: 45vh;
+    }
+  }
+
+  // ========================
+  // スクロールインジケータ
+  // ========================
+  & .scroll-indicator {
+    position: absolute;
+    z-index: 10;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(2rem);
+    opacity: 0;
+    text-align: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+
+    &__text {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: $color-white;
+      display: block;
+    }
+
+    &__arrow {
+      position: absolute;
+      top: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 30px;
+      background-color: $color-white;
+
+      @include animation(
+        $name: scroll-down-arrow-anim,
+        $iteration-count: infinite,
+        $duration: 1.5s,
+        $timing-function: ease-in-out
+      );
+    }
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+// ========================
+// キーフレーム定義
+// ========================
+@keyframes hero__text-marker-anim {
+  60%, 100% {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes hero__text-marker-bg {
+  60% {
+    clip-path: inset(0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@keyframes hero__text-marker-hide {
+  0% {
+    clip-path: inset(0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@keyframes scroll-down-arrow-anim {
+  0% {
+    height: 0;
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  30% {
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    transform: translate(-50%, 50px);
+    opacity: 0;
+  }
+}
+
+// ========================
+// New Parts セクション
+// ========================
+.section--new {
+  // background-color: $color-black;
+
+  .section__title {
+    font-family: $font-heading;
+    text-align: center;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    margin-bottom: 2rem;
+    color: $color-white;
+    text-transform: uppercase;
+  }
+
+  .new-arrivals-swiper {
+    position: relative;
+
+    .swiper {
+      overflow: visible;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: grid;
+      place-content: center;
+      width: 2.8rem;
+      height: 2.8rem;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include mq(lg) {
+        top: 110%;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        border: 1px solid $color-red;
+        background-color: rgba($color-dark-gray, 0.6);
+        box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.05), -0.4rem -0.3rem 3rem $color-red;
+
+        @include mq(lg) {
+          transition: transform $transition;
+        }
+      }
+
+      &:hover::before {
+        @include mq(lg) {
+          transform: scale(1.2);
+        }
+      }
+
+      &::after {
+        width: 1rem;
+        height: 1rem;
+        content: "";
+        border: solid $color-red;
+        border-width: 3px 3px 0 0;
+      }
+    }
+
+    .swiper-button-prev {
+      right: calc(100% - 7vw);
+
+      @include mq(md) {
+        right: calc(100% - 5vw);
+      }
+
+      &::after {
+        margin-left: 0.4rem;
+        transform: rotate(-135deg);
+      }
+    }
+
+    .swiper-button-next {
+      left: calc(100% - 7vw);
+
+      @include mq(md) {
+        left: calc(100% - 5vw);
+      }
+
+      &::after {
+        margin-right: 0.4rem;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .swiper-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 0.8rem;
+    justify-content: center;
+    margin-top: 3.2rem;
+    text-align: center;
+  }
+
+  .swiper-pagination-bullet {
+    width: 1.6rem;
+    height: 2px;
+    cursor: pointer;
+    transition: width $transition;
+    vertical-align: top;
+    background-color: $color-gray;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 4rem;
+    background-color: $color-red;
+  }
+
+  .card-item {
+    background-color: rgba($color-dark-gray, 0.6);
+    border: 1px solid $color-red;
+    padding: 1rem;
+    border-radius: $radius-card;
+    overflow: hidden;
+    text-align: center;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+
+    &:hover {
+      @include mq(lg) {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+  
+    &__image {
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 3 / 2;
+      border-radius: $radius-image;
+    }
+  
+    &__content {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      flex: 1;
+    }
+  
+    &__date {
+      font-size: 0.8rem;
+      color: $color-gray;
+      margin-bottom: 0.4rem;
+    }
+  
+    &__title {
+      font-family: $font-heading;
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      @include clamp-font-size(1rem, 2vw, 1.3rem);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  
+    &__subtitle {
+      font-family: $font-body;
+      font-size: 0.85rem;
+      color: $color-gray;
+      margin-bottom: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    &__more {
+      margin-top: 1rem;
+
+      &-link {
+        display: inline-block;
+        font-size: 0.9rem;
+        color: $color-red;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: $font-heading;
+        letter-spacing: 0.3em;
+        transition: color $transition;
+        @include link-underline-animate;
+
+        i {
+          margin-left: 0.2em;
+          transition: transform $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: color.adjust($color-red, $lightness: 10%);
+  
+            i {
+              transform: translateX(4px);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ========================
+// Blog セクション
+// ========================
+.section--blog {
+
+  .section__title {
+    text-transform: uppercase;
+  }
+
+  .card-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  
+    @include mq(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    @include mq(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card-blog {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid $color-red;
+    border-radius: $radius-card;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+
+    &:hover {
+      @include mq(lg) {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("../../images/bg_blog_card_sp.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      z-index: -1;
+    
+      @include mq(lg) {
+        background-image: url("../../images/bg_blog_card_pc.webp");
+      }
+    }
+  
+    &__link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
+
+      &:hover {
+        @include mq(lg) {
+          // aリンク全体のhoverで画像アニメーション
+          .card-blog__image {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+          }
+
+          // aリンク全体のhoverでmoreアニメーション
+          .card-blog__more {
+            &::after {
+              width: 100%;
+            }
+
+            i {
+              transform: translateX(4px);
+            }
+          }
+        }
+      }
+    }
+
+    &__picture {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+  
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition, filter $transition;
+      display: block;
+    }
+
+    &__tags {
+      font-size: 0.75rem;
+      color: $color-red;
+      margin-bottom: 0.4rem;
+      font-family: $font-body;
+      letter-spacing: 0.05em;
+    }
+  
+    &__date {
+      font-size: 0.85rem;
+      color: $color-gray;
+      margin-bottom: 0.4rem;
+      font-family: $font-body;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+  
+    &__title {
+      font-size: 1.25rem;
+      font-family: $font-heading;
+      color: $color-white;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  
+      @include mq(lg) {
+        font-size: 1.3rem;
+      }
+    }
+  
+    &__text {
+      font-size: 1rem;
+      color: $color-white;
+      margin-bottom: 1.2rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      min-height: 3.9em; // 3行分
+    }
+  
+    &__more {
+      @include link-underline-animate();
+      font-size: 0.95rem;
+      color: $color-red;
+      font-family: $font-heading;
+      font-weight: bold;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: color $transition;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0 0 0.2em 0;
+      margin-top: auto;
+  
+      i {
+        margin-left: 0.3em;
+        transition: transform $transition;
+      }
+    }
+  }
+}
+
+// ========================
+// SNS セクション
+// ========================
+.section--sns {
+  background-image: url('../images/bg_sns_section_sp.webp');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  @include mq(lg) {
+    background-image: url('../images/bg_sns_section_pc.webp');
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba($color-black, 0.3);
+    z-index: 0;
+  }
+
+  .sns__widget {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ========================
+// セクショングループ（背景画像＋GSAPパララックス用）
+// ========================
+.section-group {
+  position: relative;
+  overflow: hidden;
+
+  .section-bg {
+
+    &__picture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) blur(2px);
+    }
+  }
+
+  .section {
+    position: relative;
+    z-index: 1;
+    // background: transparent;
+  }
+}
+
+@keyframes bright-flash {
+  0% {
+    filter: brightness(2.5);
+  }
+  100% {
+    filter: brightness(1.25);
+  }
+}

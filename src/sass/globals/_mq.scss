@@ -1,0 +1,16 @@
+/* _mq.scss メディアクエリ用mixin */
+@use 'sass:map';
+
+$breakpoints: (
+  'sm': 'screen and (min-width: 480px)',
+  'md': 'screen and (min-width: 600px)',
+  'lg': 'screen and (min-width: 960px)',
+  'xl': 'screen and (min-width: 1280px)',
+  'xxl': 'screen and (min-width: 1920px)',
+) !default;
+
+@mixin mq($breakpoint: lg) {
+  @media #{map.get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}

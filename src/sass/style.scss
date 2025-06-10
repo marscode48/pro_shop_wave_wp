@@ -1,0 +1,4 @@
+/* style.scss */
+@use './globals/index' as *;
+@use './pages/home'; // トップページ専用スタイル（ページ毎に作成）
+@use './parts/common'; // 各ページ共通スタイル

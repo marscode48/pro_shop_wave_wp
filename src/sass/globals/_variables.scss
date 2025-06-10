@@ -1,0 +1,27 @@
+/* _variables.scss 変数定義（カラー、フォントなど）*/
+// Colors
+$color-black: #000000;
+$color-red: #E60012;
+$color-white: #FFFFFF;
+$color-gray: #B3B3B3;
+$color-dark-gray: #211d1d;
+
+// Fonts
+$font-heading: 'Oswald', sans-serif;
+$font-body: 'Noto Sans JP', sans-serif;
+
+// Layout
+$header-height: 80px;
+$radius-card: 8px;
+$radius-image: 10px;
+
+// Animation
+$duration: 0.3s;
+$transition: $duration ease;
+
+// Box shadows
+$box-shadow-red-default: 0 0.5rem 2rem rgba($color-red, 0.6);
+$box-shadow-red-hover: 0 0.5rem 2.5rem rgba($color-red, 1);
+
+// Text shadows
+$text-shadow-black-default: 2px 3px 3px rgba($color-black, 0.6);
