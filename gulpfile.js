@@ -8,11 +8,13 @@ const webp = require("gulp-webp");
 const sass = require("sass");
 const browserSync = require("browser-sync").create();
 const isProd = process.env.NODE_ENV === "production";
+const mergeStream = require("merge-stream");
 
 // **ファイルのパス設定**
 const paths = {
   styles: {
-    src: "src/sass/**/*.scss",
+    src: ["src/sass/**/*.scss", "!src/sass/style.scss"],
+    main: "src/sass/style.scss",
     dest: "css"
   },
   scripts: {
@@ -31,18 +33,27 @@ const paths = {
 
 // **Sassのコンパイル**
 function styles() {
-  return src(paths.styles.src)
+  // style.scss（WordPress用） → テーマ直下に style.css を出力
+  const compileMainStyle = src(paths.styles.main)
     .pipe($.plumber({ errorHandler: $.notify.onError("Sass Error: <%= error.message %>") }))
     .pipe($.if(!isProd, $.sourcemaps.init()))
-    .pipe($.dartSass({ 
-      outputStyle: isProd ? "compressed" : "expanded", 
-      logger: sass.logger, // Loggerを適用してSass のエラーをカスタマイズ
-      silenceDeprecations: ["legacy-js-api"] // 警告を非表示
-    }))
+    .pipe($.dartSass({ outputStyle: isProd ? "compressed" : "expanded", logger: sass.logger, silenceDeprecations: ["legacy-js-api"] }))
+    .pipe($.autoprefixer({ cascade: true }))
+    .pipe($.if(!isProd, $.sourcemaps.write(".")))
+    .pipe(dest("./"))
+    .pipe(browserSync.stream());
+
+  // その他のSCSS → cssフォルダへ
+  const compileOtherStyles = src(paths.styles.src)
+    .pipe($.plumber({ errorHandler: $.notify.onError("Sass Error: <%= error.message %>") }))
+    .pipe($.if(!isProd, $.sourcemaps.init()))
+    .pipe($.dartSass({ outputStyle: isProd ? "compressed" : "expanded", logger: sass.logger, silenceDeprecations: ["legacy-js-api"] }))
     .pipe($.autoprefixer({ cascade: true }))
     .pipe($.if(!isProd, $.sourcemaps.write(".")))
     .pipe(dest(paths.styles.dest))
     .pipe(browserSync.stream());
+
+  return mergeStream(compileMainStyle, compileOtherStyles);
 }
 
 // **JSの処理**
