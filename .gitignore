@@ -17,3 +17,5 @@ css/
 js/
 images/
 *.php
+*.css
+*.css.map
