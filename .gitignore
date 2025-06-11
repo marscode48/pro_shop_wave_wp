@@ -16,6 +16,13 @@ build/
 css/
 js/
 images/
+
+# PHPファイル全体を一旦除外
 *.php
+
+# ただし、src/ 配下の PHP は除外しない（=管理対象にする）
+!src/**/*.php
+
+# CSS 出力物
 *.css
 *.css.map
