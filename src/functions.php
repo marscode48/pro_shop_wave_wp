@@ -83,6 +83,57 @@ add_filter('script_loader_tag', 'add_type_attribute', 10, 3);
 // -----------------------------
 add_filter( 'big_image_size_threshold', '__return_false' );
 
+// -----------------------------
+// ブログ用初期カテゴリの自動登録
+// -----------------------------
+function proshopwave_register_default_categories() {
+  $categories = [
+    [
+      'name'        => 'お知らせ',
+      'slug'        => 'news',
+      'description' => '営業情報、臨時休業、キャンペーンなど公式告知全般',
+    ],
+    [
+      'name'        => 'イベント',
+      'slug'        => 'events',
+      'description' => 'ドリフトイベント、展示会、サーキット走行会など',
+    ],
+    [
+      'name'        => 'カスタム事例',
+      'slug'        => 'custom-builds',
+      'description' => '実際のチューニング事例、パーツ取り付け例',
+    ],
+    [
+      'name'        => '商品紹介',
+      'slug'        => 'product-info',
+      'description' => '新商品の解説、パーツの使い方・効果の紹介',
+    ],
+    [
+      'name'        => 'スタッフブログ',
+      'slug'        => 'staff-blog',
+      'description' => 'カジュアルな日記、裏話、日常の一コマなど',
+    ],
+    [
+      'name'        => 'ドリフトコラム',
+      'slug'        => 'drift-column',
+      'description' => '走り屋文化、JDMスタイル、90’sカルチャー解説など',
+    ],
+  ];
+
+  foreach ($categories as $category) {
+    if (!term_exists($category['slug'], 'category')) {
+      wp_insert_term(
+        $category['name'],
+        'category',
+        [
+          'slug'        => $category['slug'],
+          'description' => $category['description'],
+        ]
+      );
+    }
+  }
+}
+add_action('init', 'proshopwave_register_default_categories');
 
 // -----------------------------
 // WPML 対応言語切り替え対応（必要に応じて）
