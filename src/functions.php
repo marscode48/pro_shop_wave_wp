@@ -79,6 +79,12 @@ function add_type_attribute($tag, $handle, $src) {
 add_filter('script_loader_tag', 'add_type_attribute', 10, 3);
 
 // -----------------------------
+// 2560px超え画像を縮小させない
+// -----------------------------
+add_filter( 'big_image_size_threshold', '__return_false' );
+
+
+// -----------------------------
 // WPML 対応言語切り替え対応（必要に応じて）
 // -----------------------------
 // WPMLが有効な場合は、テンプレートで do_action('wpml_add_language_selector') などを使えます。
