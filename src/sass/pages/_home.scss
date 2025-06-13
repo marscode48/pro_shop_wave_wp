@@ -658,7 +658,7 @@ $marker-anim-duration: var(--marker-animation-duration);
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("../../images/bg_blog_card_sp.webp");
+      background-image: url("./images/bg_blog_card_sp.webp");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -666,7 +666,7 @@ $marker-anim-duration: var(--marker-animation-duration);
       z-index: -1;
     
       @include mq(lg) {
-        background-image: url("../../images/bg_blog_card_pc.webp");
+        background-image: url("./images/bg_blog_card_pc.webp");
       }
     }
   
@@ -788,13 +788,13 @@ $marker-anim-duration: var(--marker-animation-duration);
 // SNS セクション
 // ========================
 .section--sns {
-  background-image: url('../images/bg_sns_section_sp.webp');
+  background-image: url('./images/bg_sns_section_sp.webp');
   background-size: cover;
   background-position: center;
   position: relative;
 
   @include mq(lg) {
-    background-image: url('../images/bg_sns_section_pc.webp');
+    background-image: url('./images/bg_sns_section_pc.webp');
   }
 
   &::before {
