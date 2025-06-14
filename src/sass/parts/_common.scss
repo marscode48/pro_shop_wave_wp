@@ -524,7 +524,7 @@ ul, ol {
 // ========================
 .footer {
   position: relative;
-  background-image: url('../../images/bg_footer_sp.webp');
+  background-image: url('./images/bg_footer_sp.webp');
   background-size: cover;
   background-position: center;
   color: $color-white;
@@ -532,7 +532,7 @@ ul, ol {
   font-size: 0.8rem;
 
   @include mq(lg) {
-    background-image: url('../../images/bg_footer_pc.webp');
+    background-image: url('./images/bg_footer_pc.webp');
   }
 
   &::before {
