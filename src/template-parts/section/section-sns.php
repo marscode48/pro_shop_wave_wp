@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for SNS section
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <section class="section section--sns">

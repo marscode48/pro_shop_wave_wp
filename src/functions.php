@@ -1,6 +1,8 @@
 <?php
 /**
  * PRO SHOP WAVE テーマ関数
+ *
+ * @package PRO_SHOP_WAVE
  */
 
 // -----------------------------

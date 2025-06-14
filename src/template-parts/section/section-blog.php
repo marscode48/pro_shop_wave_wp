@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for Blog section
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <section class="section section--blog">
@@ -19,8 +21,6 @@
       ?>
         <article class="card-blog fadeup">
           <a href="<?php the_permalink(); ?>" class="card-blog__link">
-
-
             <picture class="card-blog__picture">
               <?php if (has_post_thumbnail()) : ?>
                 <?php

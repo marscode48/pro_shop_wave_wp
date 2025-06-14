@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for Hero Slide 1
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <div class="swiper-slide">

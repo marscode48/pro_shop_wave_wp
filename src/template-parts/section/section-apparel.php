@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for Apparel section
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <section class="section section--categories section--apparel section--reverse">
