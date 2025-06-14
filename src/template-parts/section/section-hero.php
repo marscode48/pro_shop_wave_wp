@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for displaying the Hero section
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <section class="hero swiper hero-swiper">

@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for Custom Parts section
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <section class="section section--categories section--custom-parts">

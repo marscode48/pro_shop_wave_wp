@@ -1,6 +1,8 @@
 <?php
 /**
  * Template part for New Arrivals section
+ *
+ * @package PRO_SHOP_WAVE
  */
 ?>
 <section class="section section--new">

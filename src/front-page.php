@@ -1,6 +1,7 @@
 <?php
 /**
  * Template Name: Front Page
+ *
  * @package PRO_SHOP_WAVE
  */
 get_header();
