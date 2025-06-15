@@ -46,7 +46,7 @@ ul, ol {
   z-index: 98;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity $transition;
 
   &.is-active {
     opacity: 1;
@@ -100,7 +100,7 @@ ul, ol {
 
   &.is-scrolled {
     background-color: rgba(0, 0, 0, 0.8);
-    transition: all 0.3s ease;
+    transition: all $transition;
   }
 
   &__inner {
@@ -132,7 +132,7 @@ ul, ol {
       background-color: color.adjust($color-red, $lightness: 10%);
       left: 0;
       border-radius: 2px;
-      transition: transform 0.3s ease, width 0.3s ease, top 0.3s ease;
+      transition: transform $transition, width $transition, top $transition;
   
       &:nth-child(1) {
         top: 0;
@@ -207,7 +207,7 @@ ul, ol {
     opacity: 0;
     transform: translateX(-100%);
     pointer-events: none;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition: transform $transition, opacity $transition;
 
     &.is-open {
       opacity: 1;
@@ -398,7 +398,7 @@ ul, ol {
       align-items: center;
       justify-content: center;
       color: $color-white;
-      transition: color 0.3s;
+      transition: color $transition;
 
       @include mq(lg) {
         font-size: 1.4rem;
@@ -429,7 +429,7 @@ ul, ol {
         text-decoration: none;
         font-size: 0.9rem;
         padding-bottom: 3px;
-        transition: color 0.3s;
+        transition: color $transition;
 
         &::after {
           content: '';
@@ -439,7 +439,7 @@ ul, ol {
           width: 0%;
           height: 2px;
           background-color: $color-red;
-          transition: width 0.3s ease;
+          transition: width $transition;
         }
 
         &:hover::after {
@@ -484,7 +484,7 @@ ul, ol {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity $transition, transform $transition;
 
   input {
     flex: 1;
@@ -656,7 +656,7 @@ ul, ol {
     a {
       color: $color-white;
       font-size: 2em;
-      transition: color 0.3s;
+      transition: color $transition;
   
       &:hover {
         color: $color-red;
