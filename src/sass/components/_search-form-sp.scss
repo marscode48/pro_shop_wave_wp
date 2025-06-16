@@ -1,0 +1,46 @@
+@use '../globals/index' as *;
+
+// ========================
+// 検索フォーム（SP表示用）
+// ========================
+.search-form-sp {
+  position: fixed;
+  top: $header-height; // ← ヘッダーの高さと同じ
+  left: 0;
+  width: 100%;
+  z-index: 200;
+  background: $color-black;
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity $transition, transform $transition;
+
+  input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: $color-white;
+    color: $color-black;
+    border: 1px solid $color-gray;
+  }
+
+  button {
+    background: $color-red;
+    color: $color-white;
+    border: none;
+    padding: 0.5rem 1rem;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @include mq(lg) {
+    display: none !important;
+  }
+}
