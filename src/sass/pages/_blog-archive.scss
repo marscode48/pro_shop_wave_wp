@@ -1,0 +1,40 @@
+@use '../globals/index' as *;
+@use 'sass:color';
+
+// ========================
+// 投稿ページ（ブログ一覧 / home.php 用）
+// ========================
+.blog-archive {
+  background-color: $color-black;
+  color: $color-white;
+
+  .card-list--blog {
+    margin-bottom: 3rem;
+  }
+
+  &__pagination {
+    margin-top: 2rem;
+    text-align: center;
+    font-family: $font-heading;
+    
+    .page-numbers {
+      color: $color-white;
+      margin: 0 0.5rem;
+
+      @include mq(lg) {
+        transition: color $transition;
+      }
+
+      &:hover {
+        @include mq(lg) {
+          color: $color-red;
+        }
+      }
+
+      &.current {
+        font-weight: bold;
+        color: $color-red;
+      }
+    }
+  }
+}
