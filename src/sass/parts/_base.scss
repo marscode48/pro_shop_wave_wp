@@ -1,0 +1,50 @@
+@use '../globals/index' as *;
+
+// ========================
+// ベーススタイル（body, img, a, ul など）
+// ========================
+body {
+  font-family: $font-body;
+  color: $color-black;
+  background-color: $color-black;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+
+  li::marker {
+    display: none;
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.sp-only {
+  display: inline;
+
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.pc-only {
+  display: none;
+
+  @include mq(lg) {
+    display: inline;
+  }
+}

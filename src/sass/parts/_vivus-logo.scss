@@ -1,0 +1,20 @@
+@use '../globals/index' as *;
+
+// ========================
+// Vivusアニメーションロゴ
+// ========================
+.vivus-logo {
+  fill-opacity: 0;
+  stroke-opacity: 1;
+  stroke: $color-white;
+  fill: $color-white;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill-opacity 1s, stroke-opacity .5s;
+
+  &.vivus-finished {
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
+}

@@ -5,6 +5,31 @@ Version: 1.0
 Description: PRO SHOP WAVEのオリジナルテーマ
 */
 
+// ========================
+// グローバル設定（変数・関数・リセットなど）
+// ========================
 @use 'globals/index' as *;
-@use 'pages/front-page';
-@use 'parts/common';
+
+// ========================
+// ページ別スタイル
+// ========================
+@use 'pages/front-page'; // front-page.php 用（トップページ）
+@use 'pages/blog-archive'; // home.php 用（投稿一覧ページ）
+// @use 'pages/archive'; // カスタム投稿タイプなどのアーカイブページ
+
+// ========================
+// パーツ（共通パーツなど）
+// ========================
+@use 'parts/blog-card'; // ブログカード（card-blog）共通パーツ
+@use 'parts/base'; // ベーススタイル（body、img、ul、aなど）
+@use 'parts/vivus-logo'; // Vivusアニメーションロゴ用
+
+// ========================
+// コンポーネント（複数ページで共通のセクションなど）
+// ========================
+@use 'components/section'; // セクション共通スタイル（.section__titleなど）
+@use 'components/header'; // ヘッダー（.headerなど）
+@use 'components/footer'; // フッター（.footerなど）
+@use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
+@use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
+@use 'components/layout-main'; // メインレイアウト（.layout-main）
