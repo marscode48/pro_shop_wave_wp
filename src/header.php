@@ -76,11 +76,11 @@
         <!-- グローバルナビ -->
         <nav class="header__nav">
           <ul class="header__nav-list">
-            <li class="header__nav-item"><a href="#">Parts</a></li>
-            <li class="header__nav-item"><a href="#">Apparel</a></li>
-            <li class="header__nav-item"><a href="#">Blog</a></li>
-            <li class="header__nav-item"><a href="#">Contact</a></li>
-            <li class="header__nav-item"><a href="#">Access</a></li>
+            <li class="header__nav-item"><a href="/parts/">Parts</a></li>
+            <li class="header__nav-item"><a href="/apparel/">Apparel</a></li>
+            <li class="header__nav-item"><a href="/blog/">Blog</a></li>
+            <li class="header__nav-item"><a href="/contact/">Contact</a></li>
+            <li class="header__nav-item"><a href="/access/">Access</a></li>
 
             <!-- 多言語切り替え（SPのみ表示） -->
             <li class="header__nav-item header__nav-lang">
