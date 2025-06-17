@@ -1,0 +1,129 @@
+@use '../globals/index' as *;
+
+// ========================
+// ブログ投稿ページ（single.php）
+// ========================
+.single-blog {
+
+  &__inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: $color-dark-gray;
+  }
+
+  &__header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+  }
+
+  &__meta {
+    font-size: 0.85rem;
+    color: $color-gray;
+    font-family: $font-body;
+    margin-bottom: 1rem;
+  }
+
+  &__thumbnail {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: $color-white;
+    font-family: $font-body;
+
+    a {
+      color: $color-red;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    h2, h3, h4 {
+      color: $color-white;
+      margin-top: 2em;
+      margin-bottom: 1em;
+      line-height: 1.4;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-bottom: 1px solid $color-gray;
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    h4 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin-bottom: 1.5em;
+    }
+
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+    }
+
+    blockquote {
+      border-left: 4px solid $color-red;
+      padding-left: 1rem;
+      color: $color-gray;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 2rem 0;
+      border-radius: 0.5rem;
+    }
+
+    iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin: 2rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+
+      th, td {
+        border: 1px solid $color-gray;
+        padding: 0.75rem;
+        text-align: left;
+      }
+
+      th {
+        background-color: $color-black;
+      }
+    }
+  }
+}
