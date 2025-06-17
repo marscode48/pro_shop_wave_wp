@@ -11,13 +11,6 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'globals/index' as *;
 
 // ========================
-// ページ別スタイル
-// ========================
-@use 'pages/front-page'; // front-page.php 用（トップページ）
-@use 'pages/blog-archive'; // home.php 用（投稿一覧ページ）
-// @use 'pages/archive'; // カスタム投稿タイプなどのアーカイブページ
-
-// ========================
 // パーツ（共通パーツなど）
 // ========================
 @use 'parts/blog-card'; // ブログカード（card-blog）共通パーツ
@@ -33,3 +26,11 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
 @use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
 @use 'components/layout-main'; // メインレイアウト（.layout-main）
+
+// ========================
+// ページ別スタイル
+// ========================
+@use 'pages/front-page'; // front-page.php 用（トップページ）
+@use 'pages/blog-archive'; // home.php 用（投稿一覧ページ）
+@use 'pages/single-blog'; // single.php 用（投稿詳細ページ）
+// @use 'pages/archive'; // カスタム投稿タイプなどのアーカイブページ
