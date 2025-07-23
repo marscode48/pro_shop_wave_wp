@@ -1,0 +1,511 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/assets/css/woocommerce.scss
+// ========================
+.woocommerce {
+  /**
+	 * Product Page
+	 */
+  div.product {
+    .product-overview {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+
+      @include mq(lg) {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 3vw;
+        margin-bottom: 4.375rem;
+      }
+
+      .woocommerce-product-gallery {
+        flex: 1;
+      }
+
+      .summary {
+        flex: 1;
+      }
+    }
+
+    .product_title {
+      font-size: 2rem;
+      font-family: $font-heading;
+      margin-bottom: 1rem;
+    }
+
+    span.price,
+    p.price {
+      font-size: 1.5rem;
+      color: $color-white;
+      margin-bottom: 1rem;
+      font-weight: bold;
+
+      ins {
+        text-decoration: none;
+      }
+
+      del {
+        opacity: 1;
+        margin-right: 0.2em;
+        text-decoration-color: $color-red;
+      }
+    }
+
+    .woocommerce-product-details__short-description {
+      margin-bottom: 1rem;
+      line-height: 1.8;
+
+      @include mq(lg) {
+        line-height: 2;
+      }
+    }
+
+    p.stock,
+    p.out-of-stock {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    p.stock {
+      color: $color-white;
+    }
+
+    p.out-of-stock {
+      color: $color-red;
+    }
+
+    .woocommerce-product-rating {
+      margin-bottom: 1rem;
+    }
+
+    div.images {
+      margin-bottom: 0;
+
+      img {
+        object-fit: cover;
+        aspect-ratio: 3 / 2;
+      }
+
+      &.woocommerce-product-gallery {
+        position: relative;
+      }
+
+      .woocommerce-product-gallery__wrapper {
+        transition: transform $transition; // 商品画像を切り替えした時のスライドアニメーション
+      }
+
+      .woocommerce-product-gallery__wrapper .zoomImg {
+        background-color: $color-white; // 商品画像をクリックした時のズーム表示
+      }
+
+      // 商品画像下サムネイル
+      // ここをflexスタイルに変更する
+      .flex-control-thumbs {
+        // overflow: hidden;
+        // zoom: 1;
+        // margin: 0;
+        // padding: 0;
+
+        li {
+          // width: 25%;
+          // float: left;
+          // margin: 0;
+          // list-style: none;
+
+          img {
+            // cursor: pointer;
+            // opacity: 0.5;
+            // margin: 0;
+
+            transition: transform $transition, filter $transition;
+
+            &.flex-active,
+            &:hover {
+              // opacity: 1;
+
+              transform: scale(1.05);
+            }
+          }
+        }
+      }
+    }
+
+    .woocommerce-product-gallery--columns-3 {
+      .flex-control-thumbs li:nth-child(3n + 1) {
+        clear: none;
+      }
+    }
+
+    .woocommerce-product-gallery--columns-4 {
+      .flex-control-thumbs li:nth-child(4n + 1) {
+        clear: none;
+      }
+    }
+
+    .woocommerce-product-gallery--columns-5 {
+      .flex-control-thumbs li:nth-child(5n + 1) {
+        clear: none;
+      }
+    }
+
+    // 赤いボックスシャドウの装飾
+    .woocommerce-product-gallery::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      box-shadow: $box-shadow-red-default;
+      transition: box-shadow $transition;
+      pointer-events: none;
+    }
+
+    // ホバー時にシャドウ強調（PCのみ）
+    .woocommerce-product-gallery:hover::before {
+      @include mq(lg) {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    div.summary {
+      margin-bottom: 0;
+    }
+
+    .woocommerce-tabs {
+      ul.tabs {
+        display: flex;
+        margin: 0;
+        padding: 0;
+
+        li {
+          border: 1px solid $color-red;
+          background-color: $color-black;
+          color: $color-white;
+          flex: 1;
+          margin: 0;
+          padding: 0;
+          border-color: $color-red;
+          border-style: solid;
+          border-width: 1px 0 1px 1px;
+          font-size: 0.75rem;
+
+          @include mq(lg) {
+            font-size: 1rem;
+          }
+
+          &:last-child {
+            border-right-width: 1px;
+          }
+
+          a {
+            font-family: $font-heading;
+            color: $color-gray;
+            transition: color $transition;
+            display: block;
+            padding: 0.5em;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+
+            &:hover,
+            &[aria-selected="true"] {
+              text-decoration: none;
+              color: $color-white;
+            }
+          }
+
+          &.active {
+            background: color.adjust($color-gray, $lightness: -50%);
+            color: $color-white;
+            border-bottom-color: color.adjust($color-gray, $lightness: -50%);
+            border-bottom: none;
+
+            &::before {
+              display: none;
+            }
+
+            &::after {
+              display: none;
+            }
+          }
+
+          &::before,
+          &::after {
+            display: none;
+          }
+        }
+
+        &::before {
+          display: none;
+        }
+      }
+
+      .panel {
+        margin: 0;
+        padding: 1.875rem;
+        line-height: 1.8;
+        background-color: color.adjust($color-gray, $lightness: -50%);
+        border: 1px solid $color-red;
+        border-radius: 0 0 4px 4px;
+
+        h2 {
+          font-family: $font-body;
+          font-size: 1rem;
+          font-weight: bold;
+          margin-bottom: 1rem;
+          border-left: 4px solid $color-red;
+          padding-left: 0.75em;
+
+          @include mq(lg) {
+            font-size: 1.25rem;
+          }
+        }
+
+        p {
+          font-size: 0.75rem;
+
+          @include mq(lg) {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    form.cart {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+      margin-bottom: 0;
+
+      @include reset-clearfix();
+
+      .product-quantity {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5em;
+        font-size: 1rem;
+
+        &__label {
+          font-size: 0.875rem;
+          color: $color-white;
+        }
+
+        &__controls {
+          display: flex;
+          align-items: center;
+          border: 1px solid $color-white;
+        }
+
+        &__button {
+          width: 2.5em;
+          height: 2.5em;
+          background-color: $color-black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          user-select: none;
+
+          @include mq(lg) {
+            transition: background-color $transition;
+
+            &:hover {
+              background-color: $color-gray;
+            }
+          }
+
+          &--decrease::before {
+            content: "−";
+            font-size: 1.2em;
+          }
+
+          &--increase::before {
+            content: "+";
+            font-size: 1.2em;
+          }
+        }
+
+        &__input-wrapper {
+          flex-grow: 1;
+        }
+
+        &__input {
+          width: 2.5em;
+          height: 2.5em;
+          padding: 0.5em;
+          text-align: center;
+          font-size: 1rem;
+          background-color: $color-white;
+
+          // スピンボタン非表示（Webkit系）
+          &::-webkit-inner-spin-button,
+          &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          // スピンボタン非表示（Firefox）
+          -moz-appearance: textfield;
+          appearance: textfield;
+        }
+      }
+
+      .variations {
+        margin-bottom: 0;
+
+        tr {
+          display: flex;
+          align-items: center;
+          column-gap: 0.5em;
+        }
+
+        td,
+        th {
+          line-height: normal;
+          vertical-align: baseline;
+        }
+
+        td {
+          display: flex;
+          align-items: center;
+          column-gap: 0.5em;
+        }
+
+        label {
+          font-weight: normal;
+          font-size: 0.875rem;
+        }
+
+        select {
+          margin-right: 0;
+          width: auto;
+          height: 2.5em;
+          padding-left: 0.5em;
+          background-color: $color-white;
+          border: 1px solid $color-black;
+        }
+
+        td.label {
+          padding-right: 1em;
+        }
+      }
+
+      .woocommerce-variation-description p {
+        margin-bottom: 1em;
+      }
+
+      .reset_variations {
+        font-size: 0.85rem;
+      }
+
+      .wc-no-matching-variations {
+        display: none;
+      }
+
+      .woocommerce-variation-add-to-cart {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+      }
+
+      .button {
+        vertical-align: baseline;
+        float: none;
+        width: 100%;
+        background-color: $color-red;
+        color: $color-white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        font-family: $font-heading;
+        font-weight: bold;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background-color $transition;
+        opacity: 1;
+
+        @include mq(lg) {
+          width: 50%;
+          max-width: 350px;
+        }
+
+        &:hover {
+          background-color: color.adjust($color-red, $lightness: -10%);
+        }
+      }
+
+      .group_table {
+        td.woocommerce-grouped-product-list-item__label {
+          padding-right: 1em;
+          padding-left: 1em;
+
+          @include mq(lg) {
+            transition: color $transition;
+
+            &:hover {
+              color: $color-gray;
+            }
+          }
+        }
+
+        td {
+          vertical-align: top;
+          padding-bottom: 0.5em;
+          border: 0;
+
+          .product_type_variable {
+            font-size: 0.85rem;
+            background-color: $color-black;
+            color: $color-white;
+            border: 1px solid $color-white;
+            padding: 0.857em 1em;
+            height: 40px;
+            width: 100%;
+            font-weight: normal;
+
+            @include mq(lg) {
+              transition: background-color $transition;
+
+              &:hover {
+                background-color: $color-gray;
+              }
+            }
+          }
+
+          p.stock,
+          p.out-of-stock {
+            margin-bottom: 0;
+          }
+        }
+
+        td:first-child {
+          width: 4em;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  span.onsale {
+    display: block;
+    background-color: $color-red;
+    color: $color-white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    position: absolute;
+    top: 0.5%;
+    left: 0.5%;
+    z-index: 1;
+    min-height: 60px;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 5px;
+    border-radius: 60px;
+  }
+}
