@@ -1,0 +1,67 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce-layout.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce-layout.scss
+// ========================
+
+/**
+ * Styling begins
+ */
+.woocommerce,
+.woocommerce-page {
+  /**
+	 * Product page
+	 */
+  div.product,
+  #content div.product {
+    div.images {
+      float: none;
+      width: auto;
+    }
+
+    div.summary {
+      float: none;
+      width: auto;
+      clear: none;
+    }
+
+    .woocommerce-tabs {
+      clear: none;
+
+      ul.tabs {
+        @include reset-menu();
+      }
+    }
+
+    #reviews {
+      .comment {
+        @include reset-mediaright();
+      }
+    }
+  }
+
+  /**
+	 * Product loops
+	 */
+  ul.products {
+    clear: none;
+
+    @include reset-clearfix();
+
+    li.product {
+      float: none;
+      margin: 0;
+      padding: 0;
+      width: auto;
+    }
+
+    li.first {
+      clear: none;
+    }
+  }
+}
