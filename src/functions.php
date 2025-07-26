@@ -408,3 +408,17 @@ function remove_loop_add_to_cart_button() {
   }
 }
 add_action( 'init', 'remove_loop_add_to_cart_button' );
+
+// -----------------------------
+// WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
+// -----------------------------
+function custom_woocommerce_breadcrumbs( $defaults ) {
+	$defaults['delimiter']    = ''; // 区切り文字（>）はCSSや ::before で制御するため空に
+	$defaults['wrap_before']  = '<div class="woocommerce-breadcrumb"><ul class="breadcrumb__list">';
+	$defaults['wrap_after']   = '</ul></div>';
+	$defaults['before']       = '<li class="breadcrumb__item">';
+	$defaults['after']        = '</li>';
+
+	return $defaults;
+}
+add_filter( 'woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs' );
