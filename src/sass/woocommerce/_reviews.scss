@@ -1,0 +1,111 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Reviews
+	 */
+  #reviews {
+    h2 small {
+      font-size: 1rem;
+      color: $color-white;
+
+      a {
+        color: $color-white;
+      }
+    }
+
+    #comment {
+      min-height: 1em;
+      height: 10em;
+    }
+
+    #comments {
+      .woocommerce-noreviews {
+        padding: 1em;
+      }
+
+      ol.commentlist {
+        @include reset-clearfix();
+
+        li {
+          margin: 0 0 1rem;
+
+          .comment_container {
+            display: flex;
+          }
+
+          img.avatar {
+            float: none;
+            width: 2rem;
+            background: $color-gray;
+            border: 1px solid $color-gray;
+          }
+
+          .comment-text {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1 1 auto;
+            padding: 1em;
+            border: 1px solid $color-red;
+            background-color: $color-black;
+            @include reset-clearfix();
+
+            .star-rating {
+              margin: 0 8px 1em 0;
+              font-size: 0.5rem;
+
+              @include mq(lg) {
+                font-size: 0.75rem;
+              }
+            }
+
+            p {
+              margin: 0;
+            }
+
+            p.meta {
+              margin-bottom: 1em;
+              line-height: 1;
+              height: 1em;
+              color: $color-white;
+              font-size: 0.5rem;
+
+              @include mq(lg) {
+                font-size: 0.75rem;
+              }
+            }
+
+            .description {
+              font-size: 0.75rem;
+              width: 100%;
+
+              @include mq(lg) {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+
+        #respond {
+          border: 1px solid color.adjust($color-gray, $lightness: 3%);
+        }
+      }
+
+      .commentlist > li::before {
+        content: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,194 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Star ratings
+	 */
+  .star-rating {
+    float: none;
+    color: $color-red;
+
+    &::before {
+      color: $color-gray;
+      float: none;
+    }
+
+    span {
+      float: none;
+    }
+  }
+
+  .woocommerce-product-rating {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    @include reset-clearfix();
+
+    .star-rating {
+      margin: 0 0.5em 0 0;
+      float: none;
+    }
+  }
+
+  #review_form_wrapper {
+    padding: 1.25rem;
+    background: $color-black;
+    border: 1px solid $color-red;
+    border-radius: 4px;
+
+    @include mq(lg) {
+      padding: 3.75rem;
+    }
+  }
+
+  #review_form #respond {
+    @include reset-clearfix();
+    font-size: 0.75rem;
+
+    @include mq(lg) {
+      font-size: 1rem;
+    }
+
+    #reply-title {
+      display: block;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+
+      @include mq(lg) {
+        font-size: 1.25rem;
+      }
+    }
+
+    p.comment-notes {
+      font-size: 0.5rem;
+      text-align: center;
+      line-height: 2;
+      margin: 0 0 10px;
+
+      @include mq(lg) {
+        font-size: 0.75rem;
+      }
+
+      & > * {
+        display: block;
+      }
+    }
+
+    .required {
+      color: $color-red;
+    }
+
+    #comment-form-rating-label {
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .comment-form-rating {
+      text-align: center;
+    }
+
+    p[class^="comment-form-"],
+    p[class*=" comment-form-"] {
+      max-width: 600px;
+      margin: 0 auto 10px;
+
+      label {
+        display: block;
+        margin: 0 0 5px;
+      }
+
+      textarea,
+      input {
+        width: 100%;
+        background-color: $color-white;
+        padding: 5px;
+        border: 1px solid $color-gray;
+      }
+
+      textarea {
+        min-height: 1em;
+        height: 10em;
+      }
+
+      input {
+        min-height: 1em;
+        height: 1.8em;
+      }
+    }
+
+    p.comment-form-cookies-consent {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      margin: 0 auto 2rem;
+
+      & input {
+        display: block;
+        width: auto;
+        height: 1em;
+      }
+
+      & label {
+        margin: 0;
+        font-size: 0.5rem;
+
+        @include mq() {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .form-submit {
+      text-align: center;
+      margin: 0 auto;
+
+      input#submit {
+        width: 75%;
+        background-color: $color-red;
+        color: $color-white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        font-family: $font-heading;
+        font-weight: bold;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background-color $transition;
+
+        @include mq(lg) {
+          width: 50%;
+          max-width: 350px;
+        }
+
+        &:hover {
+          background-color: color.adjust($color-red, $lightness: -10%);
+        }
+      }
+
+      input {
+        left: auto;
+      }
+    }
+  }
+
+  p.stars {
+    a {
+      font-size: 1.25rem;
+      color: $color-red;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Tables
+	 */
+  table.shop_attributes {
+    border: none;
+    border-collapse: collapse;
+    margin-bottom: 0;
+
+    th,
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid $color-gray;
+      text-align: left;
+      color: $color-white;
+      font-size: 0.75rem;
+
+      @include mq(lg) {
+        font-size: 1rem;
+      }
+    }
+
+    th {
+      width: min(20vw, 150px);
+    }
+
+    td {
+      font-style: normal;
+
+      p {
+        padding: 0;
+      }
+    }
+
+    tr:nth-child(even) td,
+    tr:nth-child(even) th {
+      background: 0 0;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce-smallscreen.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce-smallscreen.scss
+// ========================
+
+@media screen and (max-width: 768px) {
+  /**
+  * Style begins
+  */
+  .woocommerce,
+  .woocommerce-page {
+    /**
+     * Products
+     */
+    ul.products[class*="columns-"] {
+      li.product {
+        width: auto;
+        float: none;
+        clear: none;
+        margin: 0;
+
+        &:nth-child(2n) {
+          float: none;
+        }
+      }
+    }
+  }
+}
