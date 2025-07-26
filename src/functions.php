@@ -263,3 +263,18 @@ add_action('init', 'proshopwave_insert_initial_blog_posts');
 // WPML 対応言語切り替え対応（必要に応じて）
 // -----------------------------
 // WPMLが有効な場合は、テンプレートで do_action('wpml_add_language_selector') などを使えます。
+
+// -----------------------------
+// WooCommerce サポートを有効化（ギャラリー機能も含む）
+// -----------------------------
+function proshopwave_add_woocommerce_support() {
+  // WooCommerce の基本機能（商品ページ、カートなど）をテーマに対応させる
+  add_theme_support('woocommerce');
+  // 商品画像ギャラリー：ズーム機能を有効化
+  add_theme_support('wc-product-gallery-zoom');
+  // 商品画像ギャラリー：ライトボックス（拡大表示）を有効化
+  add_theme_support('wc-product-gallery-lightbox');
+  // 商品画像ギャラリー：スライダー機能を有効化
+  add_theme_support('wc-product-gallery-slider');
+}
+add_action('after_setup_theme', 'proshopwave_add_woocommerce_support');
