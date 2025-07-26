@@ -390,3 +390,11 @@ function custom_upsells_products_heading( $heading ) {
 }
 add_filter( 'woocommerce_product_upsells_products_heading', 'custom_upsells_products_heading' );
 
+// -----------------------------
+// WooCommerce 商品ループ <li> に fadeup クラスを追加
+// -----------------------------
+function add_fadeup_class_to_product_loop_item( $classes ) {
+  $classes[] = 'fadeup';
+  return $classes;
+}
+add_filter( 'woocommerce_post_class', 'add_fadeup_class_to_product_loop_item' );
