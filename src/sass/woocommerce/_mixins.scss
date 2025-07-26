@@ -1,0 +1,41 @@
+@use '../globals/index' as *;
+@use 'sass:color';
+
+// ========================
+// WooCommerce公式の _mixins.scss からmixinをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/_mixins.scss
+// ========================
+
+// clearfix()を打ち消すmixin
+@mixin reset-clearfix() {
+  zoom: initial;
+
+  &::before,
+  &::after {
+    content: none !important;
+    display: initial !important;
+    clear: none !important;
+  }
+}
+
+// mediaright()を打ち消すmixin
+@mixin reset-mediaright() {
+
+  @include reset-clearfix();
+	img {
+		float: none !important;
+		height: auto;
+	}
+}
+
+// menu()を打ち消すmixin
+@mixin reset-menu() {
+
+  @include reset-clearfix();
+
+	li {
+		display: initial !important;
+	}
+}
