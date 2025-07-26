@@ -366,3 +366,11 @@ function proshopwave_generate_auto_sku( $post_id ) {
 }
 add_action( 'save_post_product', 'proshopwave_generate_auto_sku' );
 
+// -----------------------------
+// WooCommerceの商品メタ情報（SKU・カテゴリー・タグなど）を非表示にする
+// -----------------------------
+function proshopwave_remove_product_meta() {
+  remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+}
+add_action( 'woocommerce_before_single_product', 'proshopwave_remove_product_meta' );
+
