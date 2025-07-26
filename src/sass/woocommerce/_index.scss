@@ -1,0 +1,10 @@
+/* _index.scss WooCommerce用 グローバル管理ファイル */
+@forward './_mixins'; 
+@forward './_layout'; // WooCommerce全体のレイアウト構造
+@forward './_smallscreen'; // モバイル表示のレイアウト
+@forward './_breadcrumb'; // パンくずリスト
+@forward './_product-page'; // 商品ページ
+@forward './_product-loops'; // 商品ループ（関連商品系）
+@forward './_reviews'; // 商品レビュー
+@forward './_star-ratings'; // レビュー用の星アイコン
+@forward './_tables'; // 商品属性テーブル
