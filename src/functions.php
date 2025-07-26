@@ -344,3 +344,25 @@ function proshopwave_register_product_categories() {
   }
 }
 add_action('init', 'proshopwave_register_product_categories');
+
+
+// -----------------------------
+// WooCommerce 商品登録時にSKUを自動生成（登録日（yymmdd形式）＋投稿ID）
+// -----------------------------
+function proshopwave_generate_auto_sku( $post_id ) {
+  if ( get_post_type( $post_id ) !== 'product' ) {
+    return;
+  }
+
+  $sku = get_post_meta( $post_id, '_sku', true );
+  if ( ! empty( $sku ) ) {
+    return;
+  }
+
+  $date = date('ymd'); // 例：240701（2024年7月1日）
+  $sku  = $date . '-' . $post_id;
+
+  update_post_meta( $post_id, '_sku', $sku );
+}
+add_action( 'save_post_product', 'proshopwave_generate_auto_sku' );
+
