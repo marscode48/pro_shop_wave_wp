@@ -6,6 +6,8 @@
 // ========================
 .section {
   padding: 3rem 5vw;
+  background-color: $color-dark-gray;
+  color: $color-white;
 
   &__title {
     font-size: 2rem;
