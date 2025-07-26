@@ -374,3 +374,19 @@ function proshopwave_remove_product_meta() {
 }
 add_action( 'woocommerce_before_single_product', 'proshopwave_remove_product_meta' );
 
+// -----------------------------
+// WooCommerce 関連商品の見出しを変更
+// -----------------------------
+function custom_related_products_heading( $heading ) {
+  return 'Related';
+}
+add_filter( 'woocommerce_product_related_products_heading', 'custom_related_products_heading' );
+
+// -----------------------------
+// WooCommerce アップセル商品の見出しを英語に変更
+// -----------------------------
+function custom_upsells_products_heading( $heading ) {
+  return 'Recommended';
+}
+add_filter( 'woocommerce_product_upsells_products_heading', 'custom_upsells_products_heading' );
+
