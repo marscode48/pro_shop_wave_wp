@@ -278,3 +278,69 @@ function proshopwave_add_woocommerce_support() {
   add_theme_support('wc-product-gallery-slider');
 }
 add_action('after_setup_theme', 'proshopwave_add_woocommerce_support');
+
+// -----------------------------
+// WooCommerce 商品カテゴリの初期登録（パーツ・アパレル）
+// -----------------------------
+function proshopwave_register_product_categories() {
+  // パーツカテゴリ
+  $parts_parent_slug = 'parts';
+  $parts_parent_term = term_exists($parts_parent_slug, 'product_cat');
+
+  if (!$parts_parent_term) {
+    $parts_parent_term = wp_insert_term('パーツ', 'product_cat', [
+      'slug' => $parts_parent_slug,
+      'description' => '各種チューニング・補修用パーツのカテゴリ',
+    ]);
+  }
+
+  $parts_child_categories = [
+    ['name' => 'エンジン系',     'slug' => 'engine'],
+    ['name' => '吸排気系',     'slug' => 'intake-exhaust'],
+    ['name' => '冷却系',       'slug' => 'cooling'],
+    ['name' => '駆動系',       'slug' => 'drivetrain'],
+    ['name' => 'サスペンション', 'slug' => 'suspension'],
+    ['name' => 'ブレーキ',     'slug' => 'brake'],
+    ['name' => '電装系',       'slug' => 'electrical'],
+    ['name' => '外装エアロ',   'slug' => 'exterior'],
+    ['name' => '内装パーツ',   'slug' => 'interior'],
+  ];
+
+  foreach ($parts_child_categories as $child) {
+    if (!term_exists($child['slug'], 'product_cat')) {
+      wp_insert_term($child['name'], 'product_cat', [
+        'slug' => $child['slug'],
+        'parent' => is_array($parts_parent_term) ? $parts_parent_term['term_id'] : $parts_parent_term,
+      ]);
+    }
+  }
+
+  // アパレルカテゴリ
+  $apparel_parent_slug = 'apparel';
+  $apparel_parent_term = term_exists($apparel_parent_slug, 'product_cat');
+
+  if (!$apparel_parent_term) {
+    $apparel_parent_term = wp_insert_term('アパレル', 'product_cat', [
+      'slug' => $apparel_parent_slug,
+      'description' => 'チームグッズやウェアなどのアパレルカテゴリ',
+    ]);
+  }
+
+  $apparel_child_categories = [
+    ['name' => 'Tシャツ',    'slug' => 'tshirt'],
+    ['name' => 'パーカー',   'slug' => 'hoodie'],
+    ['name' => 'キャップ',   'slug' => 'cap'],
+    ['name' => 'ステッカー', 'slug' => 'sticker'],
+    ['name' => 'その他',     'slug' => 'other-apparel'],
+  ];
+
+  foreach ($apparel_child_categories as $child) {
+    if (!term_exists($child['slug'], 'product_cat')) {
+      wp_insert_term($child['name'], 'product_cat', [
+        'slug' => $child['slug'],
+        'parent' => is_array($apparel_parent_term) ? $apparel_parent_term['term_id'] : $apparel_parent_term,
+      ]);
+    }
+  }
+}
+add_action('init', 'proshopwave_register_product_categories');
