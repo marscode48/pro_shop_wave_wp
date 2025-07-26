@@ -398,3 +398,13 @@ function add_fadeup_class_to_product_loop_item( $classes ) {
   return $classes;
 }
 add_filter( 'woocommerce_post_class', 'add_fadeup_class_to_product_loop_item' );
+
+// -----------------------------
+// WooCommerce 商品ループから「カートに追加」ボタンを削除（商品ページでは表示）
+// -----------------------------
+function remove_loop_add_to_cart_button() {
+  if ( ! is_product() ) {
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+  }
+}
+add_action( 'init', 'remove_loop_add_to_cart_button' );
