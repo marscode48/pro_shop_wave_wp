@@ -30,8 +30,8 @@ add_action('after_setup_theme', 'proshopwave_theme_setup');
 // CSS・JS の読み込み
 // -----------------------------
 function proshopwave_enqueue_assets() {
-  // デフォルトのjQueryは不要なため削除（Vanilla JS + GSAP構成のため）
-  wp_deregister_script('jquery');
+// WooCommerceがjQueryに依存しているため、削除は行わない（GSAPなどはVanilla JSで対応）
+// wp_deregister_script('jquery');
 
   // ローディングCSS
   if(is_home() || is_front_page()) {
