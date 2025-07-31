@@ -7,6 +7,7 @@ import { HeaderMenu } from './modules/HeaderMenu.js';
 import { ToggleSearch } from './modules/toggle-search.js';
 import { SmoothScrollToTop } from './modules/smooth-scroll-to-top.js';
 import { VivusLogo } from './modules/vivus-logo.js';
+import { ProductQuantity } from './modules/product-quantity.js';
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -40,6 +41,7 @@ class Main {
     new HeaderMenu();
     new ToggleSearch();
     new SmoothScrollToTop();
+    new ProductQuantity();
   }
 
   // スクロールオブザーバーの初期化
