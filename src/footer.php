@@ -19,11 +19,11 @@
           </div>
           <nav class="footer__nav" aria-label="フッターナビゲーション">
             <ul class="footer__nav-list">
-              <li class="footer__nav-item"><a href="/parts/">Parts</a></li>
-              <li class="footer__nav-item"><a href="/apparel/">Apparel</a></li>
-              <li class="footer__nav-item"><a href="/blog/">Blog</a></li>
-              <li class="footer__nav-item"><a href="/contact/">Contact</a></li>
-              <li class="footer__nav-item"><a href="/access/">Access</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>">Parts</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>">Apparel</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
             </ul>
           </nav>
         </div>
