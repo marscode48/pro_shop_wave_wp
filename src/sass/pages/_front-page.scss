@@ -327,7 +327,7 @@ $marker-anim-duration: var(--marker-animation-duration);
 
   .swiper-pagination {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 1.2rem 0.8rem;
     justify-content: center;
     margin-top: 3.2rem;

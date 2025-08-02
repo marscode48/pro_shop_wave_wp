@@ -11,26 +11,39 @@
     <div class="swiper-area new-arrivals-swiper fadeup">
       <div class="swiper">
         <div class="swiper-wrapper">
-          <?php for ($i = 1; $i <= 7; $i++) : ?>
+          <?php
+          $args = [
+            'post_type' => 'product',
+            'posts_per_page' => 8,
+            'post_status' => 'publish',
+          ];
+          $products = new WP_Query($args);
+          if ($products->have_posts()) :
+            while ($products->have_posts()) : $products->the_post();
+              global $product;
+          ?>
             <div class="swiper-slide">
               <div class="card-item">
                 <picture>
-                  <source srcset="<?php echo get_theme_file_uri("images/card_item_0{$i}_example.webp"); ?>" type="image/webp">
-                  <img src="<?php echo get_theme_file_uri("images/card_item_0{$i}_example.jpg"); ?>" alt="Item <?php echo $i; ?>" class="card-item__image">
+                  <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php the_title_attribute(); ?>" class="card-item__image">
                 </picture>
                 <div class="card-item__content">
-                  <time class="card-item__date" datetime="2025-04-0<?php echo $i; ?>">2025.04.0<?php echo $i; ?></time>
-                  <h3 class="card-item__title">Item Title <?php echo $i; ?></h3>
-                  <p class="card-item__subtitle">Item Subtitle <?php echo $i; ?></p>
+                  <time class="card-item__date" datetime="<?php echo get_the_date('Y-m-d'); ?>"><?php echo get_the_date('Y.m.d'); ?></time>
+                  <h3 class="card-item__title"><?php the_title(); ?></h3>
+                  <p class="card-item__subtitle"><?php echo wp_trim_words(get_the_excerpt(), 35); ?></p>
                   <div class="card-item__more">
-                    <a href="#" class="card-item__more-link">
+                    <a href="<?php the_permalink(); ?>" class="card-item__more-link">
                       More<i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-          <?php endfor; ?>
+          <?php
+            endwhile;
+            wp_reset_postdata();
+          endif;
+          ?>
         </div>
       </div>
       <div class="swiper-button-prev"></div>
