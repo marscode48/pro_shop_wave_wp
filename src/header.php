@@ -76,11 +76,11 @@
         <!-- グローバルナビ -->
         <nav class="header__nav">
           <ul class="header__nav-list">
-            <li class="header__nav-item"><a href="/parts/">Parts</a></li>
-            <li class="header__nav-item"><a href="/apparel/">Apparel</a></li>
-            <li class="header__nav-item"><a href="/blog/">Blog</a></li>
-            <li class="header__nav-item"><a href="/contact/">Contact</a></li>
-            <li class="header__nav-item"><a href="/access/">Access</a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>">Parts</a></li></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>">Apparel</a></li></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
 
             <!-- 多言語切り替え（SPのみ表示） -->
             <li class="header__nav-item header__nav-lang">
