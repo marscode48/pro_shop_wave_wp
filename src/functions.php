@@ -422,3 +422,18 @@ function custom_woocommerce_breadcrumbs( $defaults ) {
 	return $defaults;
 }
 add_filter( 'woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs' );
+
+// -----------------------------
+// WooCommerce アーカイブ説明から不要な div と p タグを除去
+// -----------------------------
+remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+
+add_action( 'woocommerce_archive_description', function() {
+  if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
+    $description = term_description();
+    if ( $description ) {
+      // pタグやdivタグを除去してテキストのみ出力
+      echo esc_html( wp_strip_all_tags( $description ) );
+    }
+  }
+}, 10 );
