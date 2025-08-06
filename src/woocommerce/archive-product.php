@@ -42,32 +42,46 @@ get_header('shop'); ?>
     do_action('woocommerce_shop_loop_header');
 
     if (woocommerce_product_loop()) {
+    ?>
+      <div class="product-archive__wrapper">
+        <?php
+        // 商品ループの上に通知だけ表示
+        woocommerce_output_all_notices();
+        ?>
+        <div class="product-archive__controls">
+          <?php
+          // 商品数
+          woocommerce_result_count();
 
-      /**
-       * Hook: woocommerce_before_shop_loop.
-       *
-       * @hooked woocommerce_output_all_notices - 10
-       * @hooked woocommerce_result_count - 20
-       * @hooked woocommerce_catalog_ordering - 30
-       */
-      do_action('woocommerce_before_shop_loop');
+          // 並び替えフォーム
+          woocommerce_catalog_ordering();
+          ?>
+        </div>
 
-      woocommerce_product_loop_start();
+        <div class="product-archive__list">
+          <?php
 
-      if (wc_get_loop_prop('total')) {
-        while (have_posts()) {
-          the_post();
+          woocommerce_product_loop_start();
 
-          /**
-           * Hook: woocommerce_shop_loop.
-           */
-          do_action('woocommerce_shop_loop');
+          if (wc_get_loop_prop('total')) {
+            while (have_posts()) {
+              the_post();
 
-          wc_get_template_part('content', 'product');
-        }
-      }
+              /**
+               * Hook: woocommerce_shop_loop.
+               */
+              do_action('woocommerce_shop_loop');
 
-      woocommerce_product_loop_end();
+              wc_get_template_part('content', 'product');
+            }
+          }
+
+          woocommerce_product_loop_end();
+
+          ?>
+        </div>
+      </div>
+    <?php
 
       /**
        * Hook: woocommerce_after_shop_loop.
