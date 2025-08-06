@@ -21,7 +21,7 @@ if (! defined('ABSPATH')) {
 }
 
 ?>
-<div class="products__header">
+<div class="product-archive__header">
   <?php
   /**
    * Hook: woocommerce_show_page_title.
@@ -33,8 +33,8 @@ if (! defined('ABSPATH')) {
   if (apply_filters('woocommerce_show_page_title', true)) :
   ?>
     <h2 class="section__title fadeup">
-      <span class="products__header--top"><?php woocommerce_page_title(); ?></span>
-      <span class="products__header--bottom">
+      <span class="product-archive__header--top"><?php woocommerce_page_title(); ?></span>
+      <span class="product-archive__header--bottom">
         <?php
         /**
          * Hook: woocommerce_archive_description.
