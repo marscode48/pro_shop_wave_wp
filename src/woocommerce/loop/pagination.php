@@ -39,11 +39,11 @@ if ( $total <= 1 ) {
 				'add_args'  => false,
 				'current'   => max( 1, $current ),
 				'total'     => $total,
-				'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
-				'next_text' => is_rtl() ? '&larr;' : '&rarr;',
+				'prev_text' => '<i class="fas fa-chevron-left" aria-hidden="true"></i>',
+				'next_text' => '<i class="fas fa-chevron-right" aria-hidden="true"></i>',
 				'type'      => 'list',
-				'end_size'  => 3,
-				'mid_size'  => 3,
+				'end_size'  => 1,
+				'mid_size'  => 1,
 			)
 		)
 	);
