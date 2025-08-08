@@ -417,30 +417,7 @@ $marker-anim-duration: var(--marker-animation-duration);
       margin-top: 1rem;
 
       &-link {
-        display: inline-block;
-        font-size: 0.9rem;
-        color: $color-red;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-family: $font-heading;
-        letter-spacing: 0.3em;
-        transition: color $transition;
-        @include link-underline-animate;
-
-        i {
-          margin-left: 0.2em;
-          transition: transform $transition;
-        }
-
-        &:hover {
-          @include mq(lg) {
-            color: color.adjust($color-red, $lightness: 10%);
-  
-            i {
-              transform: translateX(4px);
-            }
-          }
-        }
+        @include more-link($color-red);
       }
     }
   }
