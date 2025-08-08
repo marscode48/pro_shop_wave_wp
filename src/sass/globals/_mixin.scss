@@ -1,5 +1,6 @@
 /* _mixin.scss 汎用mixin（アニメーション、レイアウト補助）*/
 @use 'sass:math';
+@use 'sass:color';
 @use './variables' as *;
 @use '../globals/mq' as *;
 
@@ -108,4 +109,94 @@
 /// @param $max - 最大サイズ（例: 3rem）
 @mixin clamp-font-size($min, $preferred, $max) {
   font-size: clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+// ========================
+// 共通: MOREリンク用ミックスイン
+// 使用例: @include more-link($color-red); // 既定サイズ/装飾
+// パラメータで微調整可能
+// $direction: right(デフォルト)またはleft
+// $shift: ホバー時の矢印の移動量
+// ========================
+@mixin more-link(
+  $color,
+  $font-size: 0.95rem,
+  $letter-spacing: 0.25em,
+  $uppercase: true,
+  $margin-top: auto,
+  $direction: right,
+  $shift: 4px
+) {
+  @include link-underline-animate();
+  font-size: $font-size;
+  color: $color;
+  font-family: $font-heading;
+  font-weight: bold;
+  letter-spacing: $letter-spacing;
+  text-transform: if($uppercase, uppercase, none);
+  transition: color $transition;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0 0 0.2em 0;
+  margin-top: $margin-top;
+
+  i {
+    @if $direction == right {
+      margin-left: 0.3em;
+      margin-right: 0;
+    } @else if $direction == left {
+      margin-right: 0.3em;
+      margin-left: 0;
+    } @else {
+      margin-left: 0.3em;
+      margin-right: 0;
+    }
+    transition: transform $transition;
+  }
+
+  // デスクトップ（マウス等）: hover / focus-visible
+  @media (hover: hover) and (pointer: fine) {
+    &:hover,
+    &:focus-visible {
+      color: color.adjust($color, $lightness: 10%);
+      i { transform: translateX(if($direction == right, $shift, -$shift)); }
+    }
+  }
+
+  // タッチ端末（スマホ/タブレット）: active
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+      color: color.adjust($color, $lightness: 10%);
+      i { transform: translateX(if($direction == right, $shift, -$shift)); }
+    }
+  }
+
+  // 動きを控える設定のユーザー
+  @media (prefers-reduced-motion: reduce) {
+    i { transition: none; transform: none !important; }
+  }
+}
+
+// ========================
+// 戻るリンク用ミックスイン
+// 使用例: @include back-link($color-red); // 既定サイズ/装飾
+// ========================
+@mixin back-link(
+  $color,
+  $font-size: 0.95rem,
+  $letter-spacing: 0.25em,
+  $uppercase: true,
+  $margin-top: auto,
+  $shift: 4px
+) {
+  @include more-link(
+    $color,
+    $font-size,
+    $letter-spacing,
+    $uppercase,
+    $margin-top,
+    left,
+    $shift
+  );
 }
