@@ -349,7 +349,8 @@ $marker-anim-duration: var(--marker-animation-duration);
   }
 
   .card-item {
-    background-color: rgba($color-dark-gray, 0.6);
+    position: relative;
+    @include product-card-gradient;
     border: 1px solid $color-red;
     padding: 1rem;
     border-radius: $radius-card;
