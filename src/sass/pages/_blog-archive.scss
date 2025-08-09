@@ -11,10 +11,14 @@
   }
 
   &__pagination {
-    margin-top: 2rem;
     text-align: center;
     font-family: $font-heading;
+    font-size: 1.125rem;
     
+    @include mq(lg) {
+      font-size: 1.25rem;
+    }
+
     .page-numbers {
       color: $color-white;
       margin: 0 0.5rem;
