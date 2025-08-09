@@ -1,0 +1,321 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Product loops
+	 */
+  .products {
+    padding: 2.5rem 0;
+
+    @include mq(lg) {
+      padding: 4.375rem 0;
+    }
+  }
+
+  .products + .products {
+    padding: 0 0 2.5rem;
+
+    @include mq(lg) {
+      padding: 0 0 4.375rem;
+    }
+  }
+
+  .products__header,
+  .product-archive__header {
+    &--top {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    &--bottom {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  }
+
+  .products ul,
+  ul.products {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @include mq(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    li {
+      list-style: none outside;
+    }
+  }
+
+  ul.products li.product {
+    position: relative;
+    @include product-card-gradient;
+    border: 1px solid $color-red;
+    padding: 1rem;
+    border-radius: $radius-card;
+    text-align: left;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+
+    &:hover {
+      @include mq(lg) {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    .onsale {
+      top: 3%;
+      left: 3%;
+      right: auto;
+      margin: 0;
+    }
+
+    .product-card__body {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .product-card__image-link {
+      display: block;
+      overflow: hidden;
+
+      &:hover {
+        @include mq(lg) {
+          img {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+          }
+        }
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0;
+        box-shadow: none;
+        object-fit: cover;
+        aspect-ratio: 3 / 2;
+        border-radius: $radius-image;
+        transition: transform $transition, filter $transition;
+      }
+    }
+
+    .product-card__category {
+      font-size: 0.8rem;
+      color: $color-gray;
+      margin-bottom: 0.4rem;
+
+      a {
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: $color-red;
+          }
+        }
+      }
+    }
+
+    h3,
+    .woocommerce-loop-product__title,
+    .woocommerce-loop-category__title {
+      padding: 0;
+      font-family: $font-heading;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      font-size: 1.125rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @include mq(lg) {
+        font-size: 1.25rem;
+      }
+    }
+
+    .woocommerce-placeholder {
+      border: none;
+    }
+
+    .star-rating {
+      font-size: 0.75rem;
+    }
+
+    .price {
+      font-size: 1rem;
+      color: $color-white;
+      margin-bottom: 0.6rem;
+
+      del {
+        opacity: 1;
+      }
+
+      ins {
+        font-weight: 400;
+      }
+    }
+
+    .product-card__more {
+      text-align: center;
+
+      .product-card__more-link {
+        @include more-link($color-red);
+      }
+    }
+  }
+
+  .product-archive__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.75rem;
+
+    @include mq(lg) {
+      font-size: 0.875rem;
+    }
+
+    // 商品数表示
+    .woocommerce-result-count {
+      margin: 0;
+    }
+
+    // 並び替えフォーム
+    .woocommerce-ordering {
+      width: 100%;
+
+      select.orderby {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border: 1px solid $color-red;
+        border-radius: 4px;
+        color: $color-white;
+        background-color: rgba($color-dark-gray, 0.6);
+        cursor: pointer;
+        transition: border-color $transition, color $transition;
+
+        @include mq(lg) {
+          &:hover {
+            border-color: color.adjust($color-red, $lightness: -10%);
+            color: $color-gray;
+          }
+        }
+      }
+    }
+
+    // PC時は横並び
+    @include mq(lg) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .woocommerce-ordering {
+        width: auto;
+
+        select.orderby {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .woocommerce-ordering {
+    margin: 0;
+
+    > label {
+      margin-right: 0;
+    }
+
+    select {
+      vertical-align: baseline;
+    }
+  }
+
+  nav.woocommerce-pagination {
+    margin-top: 3rem;
+    text-align: center;
+    font-family: $font-heading;
+
+    ul {
+      display: inline;
+      white-space: normal;
+      padding: 0;
+      clear: none;
+      border: none;
+      border-right: 0;
+      margin: 0;
+
+      li {
+        border-right: none;
+        padding: 0;
+        margin: 0 0.5rem;
+        float: none;
+        display: inline;
+        overflow: visible;
+
+        a,
+        span {
+          text-decoration: none;
+          line-height: normal;
+          font-size: 1.125rem;
+          font-weight: normal;
+          min-width: 1em;
+          display: inline;
+          margin: 0;
+          padding: 0;
+
+          @include mq(lg) {
+            font-size: 1.25rem;
+            transition: color $transition;
+          }
+        }
+
+        span.current,
+        a:hover,
+        a:focus {
+          background: none;
+          font-weight: bold;
+          color: $color-red;
+        }
+      }
+    }
+  }
+
+  .cart .button,
+  .cart input.button {
+    float: none;
+  }
+}
