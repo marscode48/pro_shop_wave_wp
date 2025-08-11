@@ -423,6 +423,13 @@ add_action( 'init', function() {
 });
 
 // -----------------------------
+// WooCommerce サイドバーを全ページで無効化
+// -----------------------------
+add_action( 'init', function() {
+  remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+});
+
+// -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------
 function custom_woocommerce_breadcrumbs( $defaults ) {
