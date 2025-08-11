@@ -176,7 +176,7 @@
     .price {
       font-size: 1rem;
       color: $color-white;
-      margin-bottom: 0.6rem;
+      margin: 0;
 
       del {
         opacity: 1;
@@ -189,6 +189,7 @@
 
     .product-card__more {
       text-align: center;
+      margin-top: 1rem;
 
       .product-card__more-link {
         @include more-link($color-red);
