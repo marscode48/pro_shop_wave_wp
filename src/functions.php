@@ -410,6 +410,19 @@ function remove_loop_add_to_cart_button() {
 add_action( 'init', 'remove_loop_add_to_cart_button' );
 
 // -----------------------------
+// WooCommerce 商品ループの自動リンク(<a> 開始/終了)を全体で無効化
+// 目的: ループ内の空のアンカーを出力しないようにし、明示的に用意した .product-card__more のみで詳細ページへリンクさせるため。
+// 影響範囲: 商品アーカイブ/一覧ループ全体。単一商品ページは影響なし。
+// -----------------------------
+add_action( 'init', function() {
+  // `<a href="..." class="woocommerce-LoopProduct-link ...">` の開始タグを無効化
+  remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+
+  // 上記開始タグに対応する閉じタグを無効化
+  remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+});
+
+// -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------
 function custom_woocommerce_breadcrumbs( $defaults ) {
