@@ -417,7 +417,7 @@ add_action( 'init', 'remove_loop_add_to_cart_button' );
 add_action( 'init', function() {
   // `<a href="..." class="woocommerce-LoopProduct-link ...">` の開始タグを無効化
   remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
-
+  
   // 上記開始タグに対応する閉じタグを無効化
   remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
 });
@@ -457,3 +457,10 @@ add_action( 'woocommerce_archive_description', function() {
     }
   }
 }, 10 );
+
+// -----------------------------
+// WooCommerce 商品一覧の表示件数を変更（例：12件）
+// -----------------------------
+add_filter( 'loop_shop_per_page', function( $cols ) {
+  return 12; // 表示件数を変更
+}, 20 );
