@@ -47,7 +47,10 @@ class Main {
   // スクロールオブザーバーの初期化
   #scrollInit() {
     new ScrollObserver('.nav-trigger', this.#navAnimation.bind(this), { once: false });
-    new ScrollObserver('.scroll-indicator-trigger', this.#toggleScrollIndicator.bind(this), { once: false, rootMargin: '75px'});
+    const hasScrollIndicator = this.ScrollIndicator && document.querySelector('.scroll-indicator-trigger');
+    if (hasScrollIndicator) {
+      new ScrollObserver('.scroll-indicator-trigger', this.#toggleScrollIndicator.bind(this), { once: false, rootMargin: '75px' });
+    }
     new ScrollObserver('.swiper.hero-swiper', this.#toggleHeroAnimation.bind(this), { once: false });
     new ScrollObserver('.new-arrivals-swiper .swiper', this.#toggleNewArrivalsAnimation.bind(this), { once: false });
     new ScrollObserver('.footer__brand', this.#vivusLogoAnimation.bind(this), { once: true });
@@ -87,6 +90,7 @@ class Main {
 
   // スクロールインジケータの表示制御
   #toggleScrollIndicator(el, inview) {
+    if (!this.ScrollIndicator) return;
     if (inview) {
       this.ScrollIndicator.classList.add('is-visible');
     } else {
