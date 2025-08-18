@@ -76,8 +76,16 @@
         <!-- グローバルナビ -->
         <nav class="header__nav">
           <ul class="header__nav-list">
-            <li class="header__nav-item"><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>">Parts</a></li></li>
-            <li class="header__nav-item"><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>">Apparel</a></li></li>
+            <li class="header__nav-item header__nav-item--has-children">
+              <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>">Shop</a>
+              <button class="header__nav-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="商品カテゴリを開く">
+                <span class="header__nav-toggle-icon"></span>
+              </button>
+              <ul class="header__submenu">
+                <li><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>">Parts</a></li>
+                <li><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>">Apparel</a></li>
+              </ul>
+            </li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>

@@ -8,6 +8,7 @@ import { ToggleSearch } from './modules/toggle-search.js';
 import { SmoothScrollToTop } from './modules/smooth-scroll-to-top.js';
 import { VivusLogo } from './modules/vivus-logo.js';
 import { ProductQuantity } from './modules/product-quantity.js';
+import { HeaderSubmenuToggle } from './modules/header-submenu-toggle.js';
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -39,6 +40,7 @@ class Main {
       parallaxSpeed: 30,
     });
     new HeaderMenu();
+    new HeaderSubmenuToggle();
     new ToggleSearch();
     new SmoothScrollToTop();
     new ProductQuantity();

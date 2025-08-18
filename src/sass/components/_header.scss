@@ -198,6 +198,111 @@
       }
     }
 
+    // ------------------------
+    // サブメニュー（Shop 配下の Parts / Apparel）
+    // ------------------------
+    &-item--has-children {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      // トグルボタン（PCは開閉、SPではトグルは非表示）
+      .header__nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 0.25rem;
+        line-height: 1;
+
+        @include mq(lg) {
+          display: inline-flex;
+        }
+
+        .header__nav-toggle-icon {
+          // シンプルな▼アイコン（CSS描画）
+          width: 0.6rem;
+          height: 0.6rem;
+          border-right: 2px solid $color-white;
+          border-bottom: 2px solid $color-white;
+          transform: rotate(45deg);
+          transition: transform $transition, border-color $transition;
+        }
+
+        &:hover .header__nav-toggle-icon {
+          @include mq(lg) {
+            border-color: $color-red;
+          }
+        }
+      }
+      
+      &.is-open .header__nav-toggle-icon {
+        @include mq(lg) {
+          border-color: $color-red;
+        }
+      }
+
+      // 内包サブメニュー（初期はSPではドロワー内にブロック表示、PCでは非表示（開閉））
+      .header__submenu {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        margin-left: 1rem;
+        margin-top: 0.25rem;
+        border-left: 1px solid $color-gray;
+        list-style: none;
+
+        @include mq(lg) {
+          position: absolute;
+          top: calc(100% + 8px);
+          left: 0;
+          min-width: 12rem;
+          margin: 0;
+          display: none;
+          border: 1px solid $color-red;
+          border-radius: $radius-card;
+          background: linear-gradient(180deg, rgba($color-black, 0.96), rgba($color-black, 0.76));
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        li {
+          white-space: nowrap;
+
+          a {
+            display: inline-block;
+            padding: 0.4rem 4px;
+            font-family: $font-heading;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: $color-white;
+            text-decoration: none;
+            transition: color $transition;
+            font-weight: 500;
+            font-size: 1rem;
+
+            @include mq(lg) {
+              font-size: 1.1rem;
+            }
+          }
+        }
+      }
+
+      // 開閉状態
+      &.is-open {
+        .header__nav-toggle-icon {
+          transform: rotate(225deg); // ▼ → ▲
+        }
+
+        .header__submenu {
+          @include mq(lg) {
+            display: block;
+          }
+        }
+      }
+    }
+
     &-lang {
       display: flex;
       justify-content: center;
