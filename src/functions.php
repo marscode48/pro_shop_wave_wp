@@ -464,3 +464,10 @@ add_action( 'woocommerce_archive_description', function() {
 add_filter( 'loop_shop_per_page', function( $cols ) {
   return 12; // 表示件数を変更
 }, 20 );
+// -----------------------------
+// 重複防止: before_shop_loop 標準の件数/並び替えは削除（自前のコントロール"product-archive__controls"を使用）
+// -----------------------------
+add_action('init', function () {
+  remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+  remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
+});
