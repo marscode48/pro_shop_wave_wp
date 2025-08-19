@@ -464,6 +464,73 @@ add_action( 'woocommerce_archive_description', function() {
 add_filter( 'loop_shop_per_page', function( $cols ) {
   return 12; // 表示件数を変更
 }, 20 );
+
+
+// -----------------------------
+// 商品一覧の絞り込みをメインクエリへ反映（カテゴリ / タグ / ブランド）
+// 対象: ショップ一覧 / 商品カテゴリ・タグなどの商品系アーカイブ
+// URL例: ?product_cat=slug&product_tag=slug&product_brand=slug または ?pa_brand=slug
+// -----------------------------
+add_action( 'pre_get_posts', function ( $query ) {
+  // 管理画面やメインクエリ以外は除外
+  if ( is_admin() || ! $query->is_main_query() ) {
+    return;
+  }
+
+  // ショップ一覧 or WooCommerce の商品系タクソノミーのみ対象
+  if ( ! ( is_shop() || is_product_taxonomy() ) ) {
+    return;
+  }
+
+  // 既存 tax_query を取得して配列化
+  $tax_query = (array) $query->get( 'tax_query' );
+
+  // --- 1) カテゴリ（product_cat）
+  if ( isset( $_GET['product_cat'] ) && $_GET['product_cat'] !== '' && ! is_array( $_GET['product_cat'] ) ) {
+    $cat = sanitize_text_field( wp_unslash( $_GET['product_cat'] ) );
+    $tax_query[] = [
+      'taxonomy'         => 'product_cat',
+      'field'            => 'slug',
+      'terms'            => [ $cat ],
+      'operator'         => 'IN',
+      'include_children' => true,
+    ];
+  }
+
+  // --- 2) タグ（product_tag）
+  if ( isset( $_GET['product_tag'] ) && $_GET['product_tag'] !== '' && ! is_array( $_GET['product_tag'] ) ) {
+    $tag = sanitize_text_field( wp_unslash( $_GET['product_tag'] ) );
+    $tax_query[] = [
+      'taxonomy' => 'product_tag',
+      'field'    => 'slug',
+      'terms'    => [ $tag ],
+      'operator' => 'IN',
+    ];
+  }
+
+  // --- 3) ブランド（環境により taxonomy 名が異なる想定: product_brand or pa_brand）
+  $brand_tax = taxonomy_exists( 'product_brand' ) ? 'product_brand' : ( taxonomy_exists( 'pa_brand' ) ? 'pa_brand' : '' );
+  if ( $brand_tax ) {
+    $param_key = $brand_tax; // URLキーは taxonomy 名に合わせる方針
+    if ( isset( $_GET[ $param_key ] ) && $_GET[ $param_key ] !== '' && ! is_array( $_GET[ $param_key ] ) ) {
+      $brand = sanitize_text_field( wp_unslash( $_GET[ $param_key ] ) );
+      $tax_query[] = [
+        'taxonomy' => $brand_tax,
+        'field'    => 'slug',
+        'terms'    => [ $brand ],
+        'operator' => 'IN',
+      ];
+    }
+  }
+
+  if ( ! empty( $tax_query ) ) {
+    if ( ! isset( $tax_query['relation'] ) ) {
+      $tax_query['relation'] = 'AND';
+    }
+    $query->set( 'tax_query', $tax_query );
+  }
+} );
+
 // -----------------------------
 // 重複防止: before_shop_loop 標準の件数/並び替えは削除（自前のコントロール"product-archive__controls"を使用）
 // -----------------------------
