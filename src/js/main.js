@@ -9,6 +9,7 @@ import { SmoothScrollToTop } from './modules/smooth-scroll-to-top.js';
 import { VivusLogo } from './modules/vivus-logo.js';
 import { ProductQuantity } from './modules/product-quantity.js';
 import { HeaderSubmenuToggle } from './modules/header-submenu-toggle.js';
+import { FilterbarWooCommerce } from './modules/filterbar-woocommerce.js';
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -44,6 +45,7 @@ class Main {
     new ToggleSearch();
     new SmoothScrollToTop();
     new ProductQuantity();
+    new FilterbarWooCommerce();
   }
 
   // スクロールオブザーバーの初期化
