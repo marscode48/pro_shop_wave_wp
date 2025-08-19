@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) {
 // --------------------------------------------------
 // Helper: 安全にターム配列を取得
 // --------------------------------------------------
-function psw_get_terms_safe($args)
+function get_terms_safe($args)
 {
   $terms = get_terms($args);
   return (! is_wp_error($terms) && ! empty($terms) && is_array($terms)) ? $terms : [];
@@ -23,7 +23,7 @@ function psw_get_terms_safe($args)
 // 1) カテゴリ：親=parts/apparel を優先、無ければ親カテゴリ一覧
 // --------------------------------------------------
 $parent_slugs = ['parts', 'apparel'];
-$parent_terms = psw_get_terms_safe([
+$parent_terms = get_terms_safe([
   'taxonomy'   => 'product_cat',
   'hide_empty' => true,
   'slug'       => $parent_slugs,
@@ -31,7 +31,7 @@ $parent_terms = psw_get_terms_safe([
 
 if (count($parent_terms) < 2) {
   // フォールバック：親カテゴリ（parent = 0）を列挙
-  $parent_terms = psw_get_terms_safe([
+  $parent_terms = get_terms_safe([
     'taxonomy'   => 'product_cat',
     'hide_empty' => true,
     'parent'     => 0,
@@ -43,7 +43,7 @@ if (count($parent_terms) < 2) {
 // 親→子マップを構築
 $children_map = [];
 foreach ($parent_terms as $p) {
-  $children_map[$p->slug] = psw_get_terms_safe([
+  $children_map[$p->slug] = get_terms_safe([
     'taxonomy'   => 'product_cat',
     'hide_empty' => true,
     'parent'     => (int) $p->term_id,
@@ -55,7 +55,7 @@ foreach ($parent_terms as $p) {
 // --------------------------------------------------
 // 2) タグ：人気順トップ10
 // --------------------------------------------------
-$popular_tags = psw_get_terms_safe([
+$popular_tags = get_terms_safe([
   'taxonomy'   => 'product_tag',
   'hide_empty' => true,
   'orderby'    => 'count',
@@ -69,7 +69,7 @@ $popular_tags = psw_get_terms_safe([
 $brand_tax = taxonomy_exists('product_brand') ? 'product_brand' : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
 $brand_terms = [];
 if ($brand_tax) {
-  $brand_terms = psw_get_terms_safe([
+  $brand_terms = get_terms_safe([
     'taxonomy'   => $brand_tax,
     'hide_empty' => true,
     'orderby'    => 'count',
@@ -79,11 +79,11 @@ if ($brand_tax) {
 }
 
 // 補助：表示テキスト
-function psw_term_label($t)
+function term_label($t)
 {
   return esc_html($t->name);
 }
-function psw_term_value($t)
+function term_value($t)
 {
   return esc_attr($t->slug);
 }
@@ -116,17 +116,17 @@ function psw_term_value($t)
           <h3>親カテゴリ</h3>
           <div class="filterbar__options" id="pc-cat-parent">
             <?php foreach ($parent_terms as $pt) : ?>
-              <button class="filterbar__chip" data-value="<?php echo psw_term_value($pt); ?>"><?php echo psw_term_label($pt); ?></button>
+              <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
             <?php endforeach; ?>
           </div>
         </div>
 
         <?php foreach ($parent_terms as $pt) : ?>
           <div class="filterbar__group">
-            <h3>子カテゴリ（<?php echo psw_term_label($pt); ?>）</h3>
-            <div class="filterbar__options" id="pc-cat-children-<?php echo psw_term_value($pt); ?>">
+            <h3>子カテゴリ（<?php echo term_label($pt); ?>）</h3>
+            <div class="filterbar__options" id="pc-cat-children-<?php echo term_value($pt); ?>">
               <?php foreach ($children_map[$pt->slug] as $ct) : ?>
-                <button class="filterbar__chip" data-value="<?php echo psw_term_value($ct); ?>"><?php echo psw_term_label($ct); ?></button>
+                <button class="filterbar__chip" data-value="<?php echo term_value($ct); ?>"><?php echo term_label($ct); ?></button>
               <?php endforeach; ?>
             </div>
           </div>
@@ -147,7 +147,7 @@ function psw_term_value($t)
           <h3>人気タグ</h3>
           <div class="filterbar__options" id="pc-tag-popular">
             <?php foreach ($popular_tags as $tg) : ?>
-              <button class="filterbar__chip" data-value="<?php echo psw_term_value($tg); ?>"><?php echo psw_term_label($tg); ?></button>
+              <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>"><?php echo term_label($tg); ?></button>
             <?php endforeach; ?>
           </div>
         </div>
@@ -176,7 +176,7 @@ function psw_term_value($t)
           <h3>ブランド/メーカー</h3>
           <div class="filterbar__options" id="pc-brand-maker">
             <?php foreach ($brand_terms as $bt) : ?>
-              <button class="filterbar__chip" data-value="<?php echo psw_term_value($bt); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo psw_term_label($bt); ?></button>
+              <button class="filterbar__chip" data-value="<?php echo term_value($bt); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bt); ?></button>
             <?php endforeach; ?>
             <?php if (empty($brand_terms)) : ?>
               <span class="muted">ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。</span>
@@ -208,7 +208,7 @@ function psw_term_value($t)
         <label style="display:block; margin:.3em 0 .4em">親</label>
         <div class="filterbar__options" id="sp-cat-parent">
           <?php foreach ($parent_terms as $pt) : ?>
-            <button class="filterbar__chip" data-value="<?php echo psw_term_value($pt); ?>"><?php echo psw_term_label($pt); ?></button>
+            <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
           <?php endforeach; ?>
         </div>
         <label style="display:block; margin:1em 0 .4em">子</label>
@@ -226,7 +226,7 @@ function psw_term_value($t)
         <input type="text" id="sp-tag-search" placeholder="タグ検索" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
         <div class="filterbar__options" id="sp-tag-popular" style="margin-top:8px">
           <?php foreach ($popular_tags as $tg) : ?>
-            <button class="filterbar__chip" data-value="<?php echo psw_term_value($tg); ?>"><?php echo psw_term_label($tg); ?></button>
+            <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>"><?php echo term_label($tg); ?></button>
           <?php endforeach; ?>
         </div>
         <div class="filterbar__options" id="sp-tag-selected" style="margin-top:8px"></div>
@@ -240,7 +240,7 @@ function psw_term_value($t)
           <label style="display:block; margin:.3em 0 .4em">ブランド</label>
           <div class="filterbar__options" id="sp-brand-maker">
             <?php foreach ($brand_terms as $bt) : ?>
-              <button class="filterbar__chip" data-value="<?php echo psw_term_value($bt); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo psw_term_label($bt); ?></button>
+              <button class="filterbar__chip" data-value="<?php echo term_value($bt); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bt); ?></button>
             <?php endforeach; ?>
           </div>
         </div>
