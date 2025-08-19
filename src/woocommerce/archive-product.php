@@ -47,6 +47,9 @@ get_header('shop'); ?>
         <?php
         // 商品ループの上に通知だけ表示
         woocommerce_output_all_notices();
+
+        // フィルターバーを挿入
+        get_template_part( 'template-parts/filterbar/filterbar-woocommerce' );
         ?>
         <div class="product-archive__controls">
           <?php
