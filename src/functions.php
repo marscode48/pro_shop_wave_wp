@@ -466,6 +466,34 @@ add_filter( 'loop_shop_per_page', function( $cols ) {
 }, 20 );
 
 
+// ----------------------------------------------
+// Helper: 二重URLエンコード等を考慮してクエリ文字列を安全に取得
+// 例) "%25e3%2582%25a2..." → rawurldecode 2段階で「アパレル」へ
+// ----------------------------------------------
+function get_query_slug( $key ) {
+  if ( ! isset( $_GET[ $key ] ) ) {
+    return '';
+  }
+  $raw = $_GET[ $key ];
+  if ( is_array( $raw ) ) {
+    return '';
+  }
+  // WordPressの「マジッククォート」互換の自動エスケープが残る可能性があるので、まずはアンスラッシュして素の文字に戻す
+  $val = wp_unslash( $raw );
+
+  // 1回デコード（ UTF-8 の生文字（例：「アパレル」）に戻す）
+  // ここで rawurldecode を使うのは、+ をスペースに変換しないため（urldecode は +→空白にする）。
+  $decoded = rawurldecode( $val );
+  // まだ %XX パターンが残っている（=二重エンコードの可能性）ならもう一度
+  // 「% に続く16進数2桁」＝パーセントエンコード（%HH）1バイト分を検出するための正規表現
+  if ( preg_match( '/%[0-9a-fA-F]{2}/', $decoded ) ) {
+    $decoded = rawurldecode( $decoded );
+  }
+
+  // テキストとしてサニタイズして返す（日本語スラッグも許容）
+  return sanitize_text_field( $decoded );
+}
+
 // -----------------------------
 // 商品一覧の絞り込みをメインクエリへ反映（カテゴリ / タグ / ブランド）
 // 対象: ショップ一覧 / 商品カテゴリ・タグなどの商品系アーカイブ
@@ -486,8 +514,8 @@ add_action( 'pre_get_posts', function ( $query ) {
   $tax_query = (array) $query->get( 'tax_query' );
 
   // --- 1) カテゴリ（product_cat）
-  if ( isset( $_GET['product_cat'] ) && $_GET['product_cat'] !== '' && ! is_array( $_GET['product_cat'] ) ) {
-    $cat = sanitize_text_field( wp_unslash( $_GET['product_cat'] ) );
+  $cat = get_query_slug( 'product_cat' );
+  if ( $cat !== '' ) {
     $tax_query[] = [
       'taxonomy'         => 'product_cat',
       'field'            => 'slug',
@@ -498,8 +526,8 @@ add_action( 'pre_get_posts', function ( $query ) {
   }
 
   // --- 2) タグ（product_tag）
-  if ( isset( $_GET['product_tag'] ) && $_GET['product_tag'] !== '' && ! is_array( $_GET['product_tag'] ) ) {
-    $tag = sanitize_text_field( wp_unslash( $_GET['product_tag'] ) );
+  $tag = get_query_slug( 'product_tag' );
+  if ( $tag !== '' ) {
     $tax_query[] = [
       'taxonomy' => 'product_tag',
       'field'    => 'slug',
@@ -512,8 +540,8 @@ add_action( 'pre_get_posts', function ( $query ) {
   $brand_tax = taxonomy_exists( 'product_brand' ) ? 'product_brand' : ( taxonomy_exists( 'pa_brand' ) ? 'pa_brand' : '' );
   if ( $brand_tax ) {
     $param_key = $brand_tax; // URLキーは taxonomy 名に合わせる方針
-    if ( isset( $_GET[ $param_key ] ) && $_GET[ $param_key ] !== '' && ! is_array( $_GET[ $param_key ] ) ) {
-      $brand = sanitize_text_field( wp_unslash( $_GET[ $param_key ] ) );
+    $brand = get_query_slug( $param_key );
+    if ( $brand !== '' ) {
       $tax_query[] = [
         'taxonomy' => $brand_tax,
         'field'    => 'slug',
