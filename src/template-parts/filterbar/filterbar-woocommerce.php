@@ -20,9 +20,10 @@ function get_terms_safe($args)
 }
 
 // --------------------------------------------------
-// 1) カテゴリ：親=parts/apparel を優先、無ければ親カテゴリ一覧
+// 1) カテゴリ：親=parts/apparel を優先して取得、無ければ親カテゴリ一覧を列挙
 // --------------------------------------------------
 $parent_slugs = ['parts', 'apparel'];
+// 親カテゴリ（parts/apparelを優先して取得）
 $parent_terms = get_terms_safe([
   'taxonomy'   => 'product_cat',
   'hide_empty' => true,
@@ -30,7 +31,7 @@ $parent_terms = get_terms_safe([
 ]);
 
 if (count($parent_terms) < 2) {
-  // フォールバック：親カテゴリ（parent = 0）を列挙
+  // 無ければ「親=0」（トップレベルカテゴリ一覧）を列挙してフォールバック
   $parent_terms = get_terms_safe([
     'taxonomy'   => 'product_cat',
     'hide_empty' => true,
@@ -40,12 +41,32 @@ if (count($parent_terms) < 2) {
   ]);
 }
 
-// 親→子マップを構築
+// 親ごとの子カテゴリマップを構築
 $children_map = [];
 foreach ($parent_terms as $p) {
+  // --------------------------------------------------
+  // $children_map =「キー＝親カテゴリの slug」→「値＝子カテゴリ（WP_Termオブジェクトの配列）」の連想配列を作る
+  // 
+  // $children_map = [
+  //   'parts'   => [ WP_Term(/*外装エアロ*/),
+  //                  WP_Term(/*冷却系*/),
+  //                  ... ],
+  //   'apparel' => [ WP_Term(/*Tシャツ*/),
+  //                  WP_Term(/*パーカー*/),
+  //                  ... ],
+  //    ];
+  // 
+  // 処理の順序
+  // 1.	右辺を評価（get_terms_safe([...]) を実行して、その戻り値を得る）
+  // 2.	その結果を 左辺のキー $p->slug に代入（= 配列にキーが新規作成される or 既存キーが上書きされる）
+  // 
+  // 右辺の評価が完了するまでは、そのキーはまだ作られず、右辺が返った瞬間にキーが生成される
+  // --------------------------------------------------
+
   $children_map[$p->slug] = get_terms_safe([
     'taxonomy'   => 'product_cat',
     'hide_empty' => true,
+    // 親タームID直下の“子”だけを取得（孫以降は含まれない）、(int) キャストは安全のため型を明確化
     'parent'     => (int) $p->term_id,
     'orderby'    => 'name',
     'order'      => 'ASC',
@@ -67,6 +88,7 @@ $popular_tags = get_terms_safe([
 // 3) ブランド： product_brand があれば使用、無ければ pa_brand を試す
 // --------------------------------------------------
 $brand_tax = taxonomy_exists('product_brand') ? 'product_brand' : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
+// 現在のプロジェクトでは product_brand というタクソノミーが存在しているので、$brand_tax には product_brand が返ってくる
 $brand_terms = [];
 if ($brand_tax) {
   $brand_terms = get_terms_safe([
