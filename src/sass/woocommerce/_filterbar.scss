@@ -257,20 +257,16 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 // --------------------------------------------------
 // レスポンシブ可視制御（ユーティリティ）
 // --------------------------------------------------
-.only-pc {
-  display: none !important;
-}
 @include mq(lg) {
-  .only-pc {
-    display: block !important;
+  .pc-only {
+    display: block;
   }
 }
-.only-sp {
-  display: inline-flex !important;
-}
-@include mq(lg) {
-  .only-sp {
-    display: none !important;
+.sp-only {
+  display: inline-flex;
+
+  @include mq(lg) {
+    display: none;
   }
 }
 

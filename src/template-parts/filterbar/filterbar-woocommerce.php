@@ -152,11 +152,11 @@ function term_value($t)
     <span class="filterbar__pill-label">ブランド</span>
     <span class="filterbar__pill-value" id="pill-brand">All</span>
   </button>
-  <button class="filterbar__open only-sp js-open-modal">フィルター</button>
+  <button class="filterbar__open sp-only js-open-modal">フィルター</button>
 </div>
 
 <!-- PC: ドロップダウン パネル群 -->
-<div class="only-pc">
+<div class="pc-only">
   <!-- カテゴリ -->
   <div class="filterbar__dropdown" id="cat-dd" aria-hidden="true">
     <div class="filterbar__panel" role="dialog" aria-label="カテゴリで選ぶ">
