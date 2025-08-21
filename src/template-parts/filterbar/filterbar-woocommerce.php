@@ -162,7 +162,7 @@ function term_value($t)
     <div class="filterbar__panel" role="dialog" aria-label="カテゴリで選ぶ">
       <div class="filterbar__grid">
         <div class="filterbar__group">
-          <h3>親カテゴリ</h3>
+          <h3>カテゴリを選択</h3>
           <div class="filterbar__options" id="pc-cat-parent">
             <?php foreach ($parent_terms as $pt) : ?>
               <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
@@ -172,7 +172,7 @@ function term_value($t)
 
         <?php foreach ($parent_terms as $pt) : ?>
           <div class="filterbar__group">
-            <h3>子カテゴリ（<?php echo term_label($pt); ?>）</h3>
+            <h3><?php echo term_label($pt); ?></h3>
             <div class="filterbar__options" id="pc-cat-children-<?php echo term_value($pt); ?>">
               <?php foreach ($children_map[$pt->slug] as $ct) : ?>
                 <button class="filterbar__chip" data-value="<?php echo term_value($ct); ?>"><?php echo term_label($ct); ?></button>
