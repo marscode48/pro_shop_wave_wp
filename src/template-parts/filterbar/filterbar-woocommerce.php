@@ -144,11 +144,11 @@ function term_value($t)
     <span class="filterbar__pill-label">カテゴリー</span>
     <span class="filterbar__pill-value" id="pill-cat">All</span>
   </button>
-  <button class="filterbar__pill js-open-dropdown" data-target="tag-dd" aria-expanded="false">
+  <button class="filterbar__pill js-open-dropdown" data-target="tag-dropdown" aria-expanded="false">
     <span class="filterbar__pill-label">タグ</span>
     <span class="filterbar__pill-value" id="pill-tag">All</span>
   </button>
-  <button class="filterbar__pill js-open-dropdown" data-target="brand-dd" aria-expanded="false">
+  <button class="filterbar__pill js-open-dropdown" data-target="brand-dropdown" aria-expanded="false">
     <span class="filterbar__pill-label">ブランド</span>
     <span class="filterbar__pill-value" id="pill-brand">All</span>
   </button>
@@ -189,7 +189,7 @@ function term_value($t)
   </div>
 
   <!-- タグ -->
-  <div class="filterbar__dropdown" id="tag-dd" aria-hidden="true">
+  <div class="filterbar__dropdown" id="tag-dropdown" aria-hidden="true">
     <div class="filterbar__panel" role="dialog" aria-label="タグで選ぶ">
       <div class="filterbar__grid">
         <div class="filterbar__group">
@@ -218,7 +218,7 @@ function term_value($t)
   </div>
 
   <!-- ブランド -->
-  <div class="filterbar__dropdown" id="brand-dd" aria-hidden="true">
+  <div class="filterbar__dropdown" id="brand-dropdown" aria-hidden="true">
     <div class="filterbar__panel" role="dialog" aria-label="ブランドで選ぶ">
       <div class="filterbar__grid">
         <div class="filterbar__group">
