@@ -140,7 +140,7 @@ function term_value($t)
 
 <!-- フィルターバー（ピル） -->
 <div class="filterbar">
-  <button class="filterbar__pill js-open-dropdown" data-target="cat-dd" aria-expanded="false">
+  <button class="filterbar__pill js-open-dropdown" data-target="cat-dropdown" aria-expanded="false">
     <span class="filterbar__pill-label">カテゴリー</span>
     <span class="filterbar__pill-value" id="pill-cat">All</span>
   </button>
@@ -158,7 +158,7 @@ function term_value($t)
 <!-- PC: ドロップダウン パネル群 -->
 <div class="pc-only">
   <!-- カテゴリ -->
-  <div class="filterbar__dropdown" id="cat-dd" aria-hidden="true">
+  <div class="filterbar__dropdown" id="cat-dropdown" aria-hidden="true">
     <div class="filterbar__panel" role="dialog" aria-label="カテゴリで選ぶ">
       <div class="filterbar__grid">
         <div class="filterbar__group">
