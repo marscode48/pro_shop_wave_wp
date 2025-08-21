@@ -3,7 +3,7 @@
 // - PC: ドロップダウン開閉
 // - SP: モーダル開閉
 // - 親→子カテゴリの同期
-// - タグ/ブランドの選択
+// - タグ/ブランドの選択（ブランドは 親=メーカー→子=車種→孫=型式 の3階層）
 // - 適用ボタンでURLパラメータを更新（product_cat / product_tag / product_brand or pa_brand）
 // - 初期状態は URL から復元
 // ---------------------------------
@@ -12,11 +12,17 @@ export class FilterbarWooCommerce {
   constructor(options = {}) {
     this.root = document;
     this.state = {
+      // category
       catParent: "",
       catChild: "",
+      // tag
       tag: "",
-      brand: "",
+      // brand (3階層)
+      brandParent: "", // メーカー
+      brandModel: "",  // 車種
+      brandChassis: "",// 型式
     };
+
     this.selectors = {
       openDropdownBtn: ".js-open-dropdown",
       dropdown: ".filterbar__dropdown",
@@ -24,14 +30,18 @@ export class FilterbarWooCommerce {
       pillCat: "#pill-cat",
       pillTag: "#pill-tag",
       pillBrand: "#pill-brand",
-      // PC groups
+      // PC groups (category)
       pcCatParent: "#pc-cat-parent",
       pcCatChildrenPrefix: "#pc-cat-children-", // + parent slug
+      // PC groups (tag)
       pcTagPopular: "#pc-tag-popular",
       pcTagResults: "#pc-tag-results",
       pcTagSearch: "#pc-tag-search",
       pcTagSelected: "#pc-tag-selected",
+      // PC groups (brand)
       pcBrandMaker: "#pc-brand-maker",
+      pcBrandModelBoxes: '[id^="pc-brand-model-"]',
+      pcBrandChassisBoxes: '[id^="pc-brand-chassis-"]',
       // SP groups
       modal: "#filterbar-modal",
       spCatParent: "#sp-cat-parent",
@@ -40,6 +50,8 @@ export class FilterbarWooCommerce {
       spTagPopular: "#sp-tag-popular",
       spTagSelected: "#sp-tag-selected",
       spBrandMaker: "#sp-brand-maker",
+      spBrandModelBoxes: '[id^="sp-brand-model-"]',
+      spBrandChassisBoxes: '[id^="sp-brand-chassis-"]',
       // Actions
       applyBtns: ".js-apply",
       resetCatBtn: ".js-reset",
@@ -49,8 +61,11 @@ export class FilterbarWooCommerce {
       spApplyBtn: "#sp-apply",
     };
 
+    // dataset 取得
     this.datasetEl = document.getElementById("filterbar-dataset");
-    this.brandTax = this.datasetEl?.dataset.brandTax || "";
+    this.brandTax = this.datasetEl?.dataset.brandTax || ""; // product_brand or pa_brand or ""
+
+    // category children map
     this.childrenMap = {};
     try {
       this.childrenMap = JSON.parse(this.datasetEl?.dataset.children || "{}");
@@ -58,26 +73,55 @@ export class FilterbarWooCommerce {
       this.childrenMap = {};
     }
 
+    // brand hierarchy payload
+    this.brandData = { parents: [], models: {}, chassis: {} };
+    try {
+      this.brandData = JSON.parse(this.datasetEl?.dataset.brand || "{}") || { parents: [], models: {}, chassis: {} };
+    } catch (e) {
+      this.brandData = { parents: [], models: {}, chassis: {} };
+    }
+
+    // 逆引きインデックス（model -> parent, chassis -> model）と ラベル辞書（slug -> label）
+    this.brandIndex = {
+      labelBySlug: {},
+      parentByModel: {},
+      modelByChassis: {},
+    };
+    this._buildBrandIndexes();
+
+    // 初期状態復元
     this._initFromURL();
+
+    // バインド
     this._bindPC();
     this._bindSP();
     this._bindCommon();
+
+    // 表示初期化
+    this._renderBrandVisibilityPC();
+    this._renderBrandVisibilitySP();
     this._renderPills();
   }
 
-  // ===== URL <-> state =====
+  // =====================
+  // URL <-> state
+  // =====================
   _initFromURL() {
     const a = new URL(window.location.href);
     const q = a.searchParams;
-    // カテゴリは product_cat を共通キーに
+    // category: product_cat（子優先）
     const qCat = q.get("product_cat") || "";
-    // 親か子かは不明なので、とりあえず子優先で適用
     this.state.catChild = qCat || "";
-    // タグ
+
+    // tag
     this.state.tag = q.get("product_tag") || "";
-    // ブランド（存在するタクソノミー名を採用）
+
+    // brand: brandTax が存在する場合のみ
     if (this.brandTax) {
-      this.state.brand = q.get(this.brandTax) || "";
+      const qBrand = q.get(this.brandTax) || "";
+      if (qBrand) {
+        this._initBrandFromSlug(qBrand);
+      }
     }
   }
 
@@ -85,18 +129,19 @@ export class FilterbarWooCommerce {
     const url = new URL(window.location.href);
     const sp = url.searchParams;
 
-    // カテゴリ（子を優先。無ければ親。空なら削除）
+    // category（子→親の優先）
     const catParam = this.state.catChild || this.state.catParent || "";
     if (catParam) sp.set("product_cat", catParam);
     else sp.delete("product_cat");
 
-    // タグ
+    // tag
     if (this.state.tag) sp.set("product_tag", this.state.tag);
     else sp.delete("product_tag");
 
-    // ブランド
+    // brand（型式→車種→メーカー の優先で1つだけ）
     if (this.brandTax) {
-      if (this.state.brand) sp.set(this.brandTax, this.state.brand);
+      const b = this._deriveBrandParam();
+      if (b) sp.set(this.brandTax, b);
       else sp.delete(this.brandTax);
     }
 
@@ -106,7 +151,123 @@ export class FilterbarWooCommerce {
     window.location.assign(url.toString());
   }
 
-  // ===== UI helpers =====
+  // =====================
+  // brand helpers
+  // =====================
+
+  _toArray(val) {
+    if (Array.isArray(val)) return val;
+    if (val && typeof val === 'object') return Object.values(val);
+    return [];
+  }
+
+  _buildBrandIndexes() {
+    // 親リストを配列化
+    const parents = this._toArray(this.brandData.parents || []);
+    parents.forEach(p => {
+      this.brandIndex.labelBySlug[p.value] = p.label;
+
+      // 親→子（models）を配列化して走査
+      const models = this._toArray(this.brandData.models?.[p.value]);
+      models.forEach(m => {
+        this.brandIndex.labelBySlug[m.value] = m.label;
+        this.brandIndex.parentByModel[m.value] = p.value;
+
+        // 子→孫（chassis）を配列化して走査
+        const chassis = this._toArray(this.brandData.chassis?.[m.value]);
+        chassis.forEach(c => {
+          this.brandIndex.labelBySlug[c.value] = c.label;
+          this.brandIndex.modelByChassis[c.value] = m.value;
+        });
+      });
+    });
+  }
+
+  _initBrandFromSlug(slug) {
+    if (!slug) return;
+    // slug が孫なら model->parent を辿る
+    const model = this.brandIndex.modelByChassis[slug];
+    if (model) {
+      this.state.brandChassis = slug;
+      this.state.brandModel = model;
+      this.state.brandParent = this.brandIndex.parentByModel[model] || "";
+      return;
+    }
+    // slug が子なら parent をセット
+    const parent = this.brandIndex.parentByModel[slug];
+    if (parent) {
+      this.state.brandChassis = "";
+      this.state.brandModel = slug;
+      this.state.brandParent = parent;
+      return;
+    }
+    // slug が親ならそれをセット
+    const isParent = (this.brandData.parents || []).some(p => p.value === slug);
+    if (isParent) {
+      this.state.brandChassis = "";
+      this.state.brandModel = "";
+      this.state.brandParent = slug;
+    }
+  }
+
+  _deriveBrandParam() {
+    return this.state.brandChassis || this.state.brandModel || this.state.brandParent || "";
+  }
+
+  _brandLabel() {
+    const slug = this._deriveBrandParam();
+    return this.brandIndex.labelBySlug[slug] || "All";
+  }
+
+  _resetBrand() {
+    this.state.brandParent = "";
+    this.state.brandModel = "";
+    this.state.brandChassis = "";
+    // 視覚リセット
+    this._selectBrandChips("");
+    this._renderBrandVisibilityPC();
+    this._renderBrandVisibilitySP();
+  }
+
+  _selectBrandChips(activeSlug) {
+    // ブランドドロップダウン内の全チップの選択表示を更新
+    this.$$("#brand-dd .filterbar__chip").forEach(chip => {
+      chip.dataset.selected = chip.dataset.value === activeSlug ? "true" : "false";
+    });
+  }
+
+  _renderBrandVisibilityPC() {
+    // モデルグループ（親別）
+    this.$$(this.selectors.pcBrandModelBoxes).forEach(box => {
+      const parent = box.getAttribute("data-parent");
+      box.style.display = (!this.state.brandParent || parent === this.state.brandParent) ? "grid" : "none";
+    });
+    // 型式グループ（モデル別）
+    this.$$(this.selectors.pcBrandChassisBoxes).forEach(box => {
+      const model = box.getAttribute("data-model");
+      box.style.display = (!this.state.brandModel || model === this.state.brandModel) ? "grid" : "none";
+    });
+    // 選択マーク
+    const active = this._deriveBrandParam();
+    this._selectBrandChips(active);
+  }
+
+  _renderBrandVisibilitySP() {
+    // モデル（親別）
+    this.$$(this.selectors.spBrandModelBoxes).forEach(box => {
+      const parent = box.getAttribute("data-parent");
+      box.style.display = (!this.state.brandParent || parent === this.state.brandParent) ? "grid" : "none";
+    });
+    // 型式（モデル別）
+    this.$$(this.selectors.spBrandChassisBoxes).forEach(box => {
+      const model = box.getAttribute("data-model");
+      box.style.display = (!this.state.brandModel || model === this.state.brandModel) ? "grid" : "none";
+    });
+  }
+
+  // =====================
+  // UI helpers
+  // =====================
   $(sel, ctx = this.root) {
     return ctx.querySelector(sel);
   }
@@ -117,16 +278,10 @@ export class FilterbarWooCommerce {
   _renderPills() {
     const catText = this.state.catChild || this.state.catParent || "All";
     const tagText = this.state.tag || "All";
-    const brandText = this.state.brand || "All";
-    this.$(this.selectors.pillCat)?.replaceChildren(
-      document.createTextNode(catText)
-    );
-    this.$(this.selectors.pillTag)?.replaceChildren(
-      document.createTextNode(tagText)
-    );
-    this.$(this.selectors.pillBrand)?.replaceChildren(
-      document.createTextNode(brandText)
-    );
+    const brandText = this._brandLabel();
+    this.$(this.selectors.pillCat)?.replaceChildren(document.createTextNode(catText));
+    this.$(this.selectors.pillTag)?.replaceChildren(document.createTextNode(tagText));
+    this.$(this.selectors.pillBrand)?.replaceChildren(document.createTextNode(brandText));
   }
 
   _selectChip(groupSel, value) {
@@ -136,15 +291,13 @@ export class FilterbarWooCommerce {
   }
 
   _closeAllDropdowns() {
-    this.$$(this.selectors.dropdown).forEach((el) =>
-      el.classList.remove("is-open")
-    );
-    this.$$(this.selectors.openDropdownBtn).forEach((b) =>
-      b.setAttribute("aria-expanded", "false")
-    );
+    this.$$(this.selectors.dropdown).forEach((el) => el.classList.remove("is-open"));
+    this.$$(this.selectors.openDropdownBtn).forEach((b) => b.setAttribute("aria-expanded", "false"));
   }
 
-  // ===== PC bindings =====
+  // =====================
+  // PC bindings
+  // =====================
   _bindPC() {
     // ドロップダウン開閉
     this.$$(this.selectors.openDropdownBtn).forEach((btn) => {
@@ -174,67 +327,51 @@ export class FilterbarWooCommerce {
     });
 
     // 親カテゴリ
-    this.$$(this.selectors.pcCatParent + " .filterbar__chip").forEach(
-      (chip) => {
-        chip.addEventListener("click", () => {
-          this.state.catParent = chip.dataset.value;
-          this.state.catChild = "";
-          this._selectChip(this.selectors.pcCatParent, this.state.catParent);
-          // 子のビジュアル（両方存在する前提で opacity 切替）
-          Object.keys(this.childrenMap).forEach((parentSlug) => {
-            const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
-            if (box)
-              box.style.opacity =
-                parentSlug === this.state.catParent ? 1 : 0.35;
-          });
-          this._renderPills();
+    this.$$(this.selectors.pcCatParent + " .filterbar__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        this.state.catParent = chip.dataset.value;
+        this.state.catChild = "";
+        this._selectChip(this.selectors.pcCatParent, this.state.catParent);
+        // 子のビジュアル（両方存在する前提で opacity 切替）
+        Object.keys(this.childrenMap).forEach((parentSlug) => {
+          const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
+          if (box) box.style.opacity = parentSlug === this.state.catParent ? 1 : 0.35;
         });
-      }
-    );
+        this._renderPills();
+      });
+    });
 
     // 子カテゴリ（全親分まとめて拾う）
-    this.$$(
-      this.selectors.dropdown + " .filterbar__options .filterbar__chip"
-    ).forEach((chip) => {
-      const inCatChildren =
-        chip.parentElement?.id?.startsWith("pc-cat-children-");
+    this.$$(this.selectors.dropdown + " .filterbar__options .filterbar__chip").forEach((chip) => {
+      const inCatChildren = chip.parentElement?.id?.startsWith("pc-cat-children-");
       if (!inCatChildren) return;
       chip.addEventListener("click", () => {
         this.state.catChild = chip.dataset.value;
         // すべての子グループから選択同期
         Object.keys(this.childrenMap).forEach((parentSlug) => {
-          this._selectChip(
-            this.selectors.pcCatChildrenPrefix + parentSlug,
-            this.state.catChild
-          );
+          this._selectChip(this.selectors.pcCatChildrenPrefix + parentSlug, this.state.catChild);
         });
         this._renderPills();
       });
     });
 
     // タグ（人気）
-    this.$$(this.selectors.pcTagPopular + " .filterbar__chip").forEach(
-      (chip) => {
-        chip.addEventListener("click", () => {
-          this.state.tag = chip.dataset.value;
-          this._selectChip(this.selectors.pcTagPopular, this.state.tag);
-          this._renderTagSelected();
-          this._renderPills();
-        });
-      }
-    );
+    this.$$(this.selectors.pcTagPopular + " .filterbar__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        this.state.tag = chip.dataset.value;
+        this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+        this._renderTagSelected();
+        this._renderPills();
+      });
+    });
 
-    // タグ検索（簡易：候補をその場で生成）
+    // タグ検索（簡易）
     const search = this.$(this.selectors.pcTagSearch);
     if (search) {
       search.addEventListener("input", (e) => {
         const q = e.target.value.toLowerCase().trim();
-        const pool = this.$$(
-          this.selectors.pcTagPopular + " .filterbar__chip"
-        ).map((b) => b.dataset.value);
-        const hit = Array.from(
-          new Set(pool.filter((t) => t.includes(q)))
-        ).slice(0, 10);
+        const pool = this.$$(this.selectors.pcTagPopular + " .filterbar__chip").map((b) => b.dataset.value);
+        const hit = Array.from(new Set(pool.filter((t) => t.includes(q)))).slice(0, 10);
         const res = this.$(this.selectors.pcTagResults);
         if (!res) return;
         res.innerHTML = "";
@@ -253,16 +390,49 @@ export class FilterbarWooCommerce {
       });
     }
 
-    // ブランド
-    this.$$(this.selectors.pcBrandMaker + " .filterbar__chip").forEach(
-      (chip) => {
-        chip.addEventListener("click", () => {
-          this.state.brand = chip.dataset.value;
-          this._selectChip(this.selectors.pcBrandMaker, this.state.brand);
-          this._renderPills();
-        });
-      }
-    );
+    // =====================
+    // ブランド（PC）
+    // =====================
+
+    // メーカー（親）
+    this.$$(this.selectors.pcBrandMaker + " .filterbar__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        this.state.brandParent = chip.dataset.value;
+        this.state.brandModel = "";
+        this.state.brandChassis = "";
+        this._renderBrandVisibilityPC();
+        this._renderPills();
+      });
+    });
+
+    // 車種（子）
+    this.$$(this.selectors.pcBrandModelBoxes + " .filterbar__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const model = chip.dataset.value;
+        this.state.brandModel = model;
+        this.state.brandChassis = "";
+        // 親は逆引きで確定
+        this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
+        this._renderBrandVisibilityPC();
+        this._renderPills();
+      });
+    });
+
+    // 型式（孫）
+    this.$$(this.selectors.pcBrandChassisBoxes + " .filterbar__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const chassis = chip.dataset.value;
+        this.state.brandChassis = chassis;
+        // 関連モデル/親を逆引き
+        const model = this.brandIndex.modelByChassis[chassis];
+        if (model) {
+          this.state.brandModel = model;
+          this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
+        }
+        this._renderBrandVisibilityPC();
+        this._renderPills();
+      });
+    });
 
     // リセット群
     this.$$(this.selectors.resetCatBtn).forEach((b) =>
@@ -287,8 +457,7 @@ export class FilterbarWooCommerce {
     );
     this.$$(this.selectors.resetBrandBtn).forEach((b) =>
       b.addEventListener("click", () => {
-        this.state.brand = "";
-        this._selectChip(this.selectors.pcBrandMaker, "");
+        this._resetBrand();
         this._renderPills();
       })
     );
@@ -321,7 +490,9 @@ export class FilterbarWooCommerce {
     }
   }
 
-  // ===== SP bindings =====
+  // =====================
+  // SP bindings
+  // =====================
   _bindSP() {
     const modal = this.$(this.selectors.modal);
     const openBtn = document.querySelector(".filterbar__open");
@@ -329,35 +500,27 @@ export class FilterbarWooCommerce {
 
     if (openBtn && modal) {
       openBtn.addEventListener("click", () => modal.classList.add("is-open"));
-      closeBtns.forEach((b) =>
-        b.addEventListener("click", () => modal.classList.remove("is-open"))
-      );
+      closeBtns.forEach((b) => b.addEventListener("click", () => modal.classList.remove("is-open")));
     }
 
     // 親カテゴリ（SP）
-    this.$$(this.selectors.spCatParent + " .filterbar__chip").forEach(
-      (chip) => {
-        chip.addEventListener("click", () => {
-          this.state.catParent = chip.dataset.value;
-          this.state.catChild = "";
-          this._selectChip(this.selectors.spCatParent, this.state.catParent);
-          this._renderSpChildren();
-          this._renderPills();
-        });
-      }
-    );
+    this.$$(this.selectors.spCatParent + " .filterbar__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        this.state.catParent = chip.dataset.value;
+        this.state.catChild = "";
+        this._selectChip(this.selectors.spCatParent, this.state.catParent);
+        this._renderSpChildren();
+        this._renderPills();
+      });
+    });
 
     // タグ（SP）
     const spTagSearch = this.$(this.selectors.spTagSearch);
     if (spTagSearch) {
       spTagSearch.addEventListener("input", (e) => {
         const q = e.target.value.toLowerCase().trim();
-        const pool = this.$$(
-          this.selectors.spTagPopular + " .filterbar__chip"
-        ).map((b) => b.dataset.value);
-        const hit = Array.from(
-          new Set(pool.filter((t) => t.includes(q)))
-        ).slice(0, 10);
+        const pool = this.$$(this.selectors.spTagPopular + " .filterbar__chip").map((b) => b.dataset.value);
+        const hit = Array.from(new Set(pool.filter((t) => t.includes(q)))).slice(0, 10);
         const box = this.$(this.selectors.spTagSelected);
         if (!box) return;
         box.innerHTML = "";
@@ -381,20 +544,53 @@ export class FilterbarWooCommerce {
     );
 
     // ブランド（SP）
+    // メーカー（親）
     this.$$(this.selectors.spBrandMaker + " .filterbar__chip").forEach((chip) =>
       chip.addEventListener("click", () => {
-        this.state.brand = chip.dataset.value;
+        this.state.brandParent = chip.dataset.value;
+        this.state.brandModel = "";
+        this.state.brandChassis = "";
+        this._renderBrandVisibilitySP();
+        this._renderPills();
+      })
+    );
+
+    // 車種（子）
+    this.$$(this.selectors.spBrandModelBoxes + " .filterbar__chip").forEach((chip) =>
+      chip.addEventListener("click", () => {
+        const model = chip.dataset.value;
+        this.state.brandModel = model;
+        this.state.brandChassis = "";
+        this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
+        this._renderBrandVisibilitySP();
+        this._renderPills();
+      })
+    );
+
+    // 型式（孫）
+    this.$$(this.selectors.spBrandChassisBoxes + " .filterbar__chip").forEach((chip) =>
+      chip.addEventListener("click", () => {
+        const chassis = chip.dataset.value;
+        this.state.brandChassis = chassis;
+        const model = this.brandIndex.modelByChassis[chassis];
+        if (model) {
+          this.state.brandModel = model;
+          this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
+        }
+        this._renderBrandVisibilitySP();
         this._renderPills();
       })
     );
 
     // フッター
     this.$(this.selectors.spResetBtn)?.addEventListener("click", () => {
-      this.state = { catParent: "", catChild: "", tag: "", brand: "" };
+      this.state = { ...this.state, catParent: "", catChild: "", tag: "", brandParent: "", brandModel: "", brandChassis: "" };
       this._renderSpChildren();
+      this._renderBrandVisibilitySP();
       this._renderPills();
     });
     this.$(this.selectors.spApplyBtn)?.addEventListener("click", () => {
+      const modal = this.$(this.selectors.modal);
       modal?.classList.remove("is-open");
       this._renderPills();
       this._applyToURL();
@@ -424,22 +620,23 @@ export class FilterbarWooCommerce {
     });
   }
 
-  // ===== common =====
+  // =====================
+  // common (初期選択の視覚反映など)
+  // =====================
   _bindCommon() {
-    // 初期選択の視覚反映
-    if (this.state.catParent)
-      this._selectChip(this.selectors.pcCatParent, this.state.catParent);
+    // 初期選択（カテゴリ）
+    if (this.state.catParent) this._selectChip(this.selectors.pcCatParent, this.state.catParent);
     if (this.state.catChild) {
       Object.keys(this.childrenMap).forEach((parentSlug) =>
-        this._selectChip(
-          this.selectors.pcCatChildrenPrefix + parentSlug,
-          this.state.catChild
-        )
+        this._selectChip(this.selectors.pcCatChildrenPrefix + parentSlug, this.state.catChild)
       );
     }
-    if (this.state.tag)
-      this._selectChip(this.selectors.pcTagPopular, this.state.tag);
-    if (this.state.brand)
-      this._selectChip(this.selectors.pcBrandMaker, this.state.brand);
+
+    // 初期選択（タグ）
+    if (this.state.tag) this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+
+    // 初期選択（ブランド）
+    this._renderBrandVisibilityPC();
+    this._renderBrandVisibilitySP();
   }
 }
