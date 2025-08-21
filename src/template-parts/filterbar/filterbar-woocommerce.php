@@ -88,16 +88,43 @@ $popular_tags = get_terms_safe([
 // 3) ブランド： product_brand があれば使用、無ければ pa_brand を試す
 // --------------------------------------------------
 $brand_tax = taxonomy_exists('product_brand') ? 'product_brand' : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
-// 現在のプロジェクトでは product_brand というタクソノミーが存在しているので、$brand_tax には product_brand が返ってくる
-$brand_terms = [];
+
+// ブランド階層データ
+$brand_parents      = []; // 親：メーカー
+$brand_models_map   = []; // 子：車種（キー=親slug）
+$brand_chassis_map  = []; // 孫：型式（キー=子slug）
+
 if ($brand_tax) {
-  $brand_terms = get_terms_safe([
+  // 親（メーカー）
+  $brand_parents = get_terms_safe([
     'taxonomy'   => $brand_tax,
     'hide_empty' => true,
-    'orderby'    => 'count',
-    'order'      => 'DESC',
-    'number'     => 20,
+    'parent'     => 0,
+    'orderby'    => 'name',
+    'order'      => 'ASC',
   ]);
+
+  // 親→子（車種）
+  foreach ($brand_parents as $bp) {
+    $brand_models_map[$bp->slug] = get_terms_safe([
+      'taxonomy'   => $brand_tax,
+      'hide_empty' => true,
+      'parent'     => (int)$bp->term_id,
+      'orderby'    => 'name',
+      'order'      => 'ASC',
+    ]);
+
+    // 子→孫（型式）
+    foreach ($brand_models_map[$bp->slug] as $mdl) {
+      $brand_chassis_map[$mdl->slug] = get_terms_safe([
+        'taxonomy'   => $brand_tax,
+        'hide_empty' => true,
+        'parent'     => (int)$mdl->term_id,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+      ]);
+    }
+  }
 }
 
 // 補助：表示テキスト
@@ -197,15 +224,39 @@ function term_value($t)
         <div class="filterbar__group">
           <h3>ブランド/メーカー</h3>
           <div class="filterbar__options" id="pc-brand-maker">
-            <?php foreach ($brand_terms as $bt) : ?>
-              <button class="filterbar__chip" data-value="<?php echo term_value($bt); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bt); ?></button>
-            <?php endforeach; ?>
-            <?php if (empty($brand_terms)) : ?>
+            <?php if (!empty($brand_parents)) : ?>
+              <?php foreach ($brand_parents as $bp) : ?>
+                <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bp); ?></button>
+              <?php endforeach; ?>
+            <?php else : ?>
               <span class="muted">ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。</span>
             <?php endif; ?>
           </div>
         </div>
-        <!-- もし model/chassis 等のタクソノミーがあれば同様にセクション追加 -->
+
+        <div class="filterbar__group">
+          <h3>車種</h3>
+          <?php foreach ($brand_parents as $bp) : ?>
+            <div class="filterbar__options" id="pc-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
+              <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
+                <button class="filterbar__chip" data-value="<?php echo term_value($mdl); ?>" data-parent="<?php echo term_value($bp); ?>"><?php echo term_label($mdl); ?></button>
+              <?php endforeach; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+
+        <div class="filterbar__group">
+          <h3>型式</h3>
+          <?php foreach ($brand_parents as $bp) : ?>
+            <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
+              <div class="filterbar__options" id="pc-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
+                <?php foreach (($brand_chassis_map[$mdl->slug] ?? []) as $chs) : ?>
+                  <button class="filterbar__chip" data-value="<?php echo term_value($chs); ?>" data-parent="<?php echo term_value($mdl); ?>"><?php echo term_label($chs); ?></button>
+                <?php endforeach; ?>
+              </div>
+            <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
       </div>
       <div class="filterbar__actions">
         <button class="filterbar__btn js-reset-brand">ブランドをクリア</button>
@@ -259,12 +310,32 @@ function term_value($t)
       <details class="filterbar__acc">
         <summary>ブランドで選ぶ</summary>
         <div class="filterbar__acc-panel">
-          <label style="display:block; margin:.3em 0 .4em">ブランド</label>
+          <label style="display:block; margin:.3em 0 .4em">ブランド/メーカー</label>
           <div class="filterbar__options" id="sp-brand-maker">
-            <?php foreach ($brand_terms as $bt) : ?>
-              <button class="filterbar__chip" data-value="<?php echo term_value($bt); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bt); ?></button>
+            <?php foreach ($brand_parents as $bp) : ?>
+              <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bp); ?></button>
             <?php endforeach; ?>
           </div>
+
+          <label style="display:block; margin:1em 0 .4em">車種</label>
+          <?php foreach ($brand_parents as $bp) : ?>
+            <div class="filterbar__options" id="sp-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
+              <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
+                <button class="filterbar__chip" data-value="<?php echo term_value($mdl); ?>" data-parent="<?php echo term_value($bp); ?>"><?php echo term_label($mdl); ?></button>
+              <?php endforeach; ?>
+            </div>
+          <?php endforeach; ?>
+
+          <label style="display:block; margin:1em 0 .4em">型式</label>
+          <?php foreach ($brand_parents as $bp) : ?>
+            <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
+              <div class="filterbar__options" id="sp-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
+                <?php foreach (($brand_chassis_map[$mdl->slug] ?? []) as $chs) : ?>
+                  <button class="filterbar__chip" data-value="<?php echo term_value($chs); ?>" data-parent="<?php echo term_value($mdl); ?>"><?php echo term_label($chs); ?></button>
+                <?php endforeach; ?>
+              </div>
+            <?php endforeach; ?>
+          <?php endforeach; ?>
         </div>
       </details>
     <?php endif; ?>
@@ -288,8 +359,24 @@ foreach ($parent_terms as $pt) {
     return ['value' => $ct->slug, 'label' => $ct->name];
   }, $children_map[$pt->slug]);
 }
+
+$brand_payload = ['parents' => [], 'models' => [], 'chassis' => []];
+foreach ($brand_parents as $bp) {
+  $brand_payload['parents'][] = ['value' => $bp->slug, 'label' => $bp->name];
+  $mdlList = $brand_models_map[$bp->slug] ?? [];
+  $brand_payload['models'][$bp->slug] = array_map(function ($m) {
+    return ['value' => $m->slug, 'label' => $m->name];
+  }, $mdlList);
+  foreach ($mdlList as $m) {
+    $chsList = $brand_chassis_map[$m->slug] ?? [];
+    $brand_payload['chassis'][$m->slug] = array_map(function ($c) {
+      return ['value' => $c->slug, 'label' => $c->name];
+    }, $chsList);
+  }
+}
 ?>
 <div id="filterbar-dataset"
   data-children='<?php echo wp_json_encode($children_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
   data-brand-tax="<?php echo esc_attr($brand_tax); ?>"
+  data-brand='<?php echo wp_json_encode($brand_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
   style="display:none"></div>
