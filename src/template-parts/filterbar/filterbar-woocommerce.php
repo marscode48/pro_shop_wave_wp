@@ -196,12 +196,12 @@ function term_value($t)
           <h3>人気タグ</h3>
           <div class="filterbar__options" id="pc-tag-popular">
             <?php foreach ($popular_tags as $tg) : ?>
-              <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>"><?php echo term_label($tg); ?></button>
+              <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
             <?php endforeach; ?>
           </div>
         </div>
         <div class="filterbar__group">
-          <h3>検索</h3>
+          <h3>タグを検索</h3>
           <input type="text" id="pc-tag-search" placeholder="タグ名で検索（例: drift, aero）" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
           <div class="filterbar__options" id="pc-tag-results" style="margin-top:8px"></div>
         </div>
@@ -299,7 +299,7 @@ function term_value($t)
         <input type="text" id="sp-tag-search" placeholder="タグ検索" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
         <div class="filterbar__options" id="sp-tag-popular" style="margin-top:8px">
           <?php foreach ($popular_tags as $tg) : ?>
-            <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>"><?php echo term_label($tg); ?></button>
+            <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
           <?php endforeach; ?>
         </div>
         <div class="filterbar__options" id="sp-tag-selected" style="margin-top:8px"></div>

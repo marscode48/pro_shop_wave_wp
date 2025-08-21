@@ -17,10 +17,11 @@ export class FilterbarWooCommerce {
       catChild: "",
       // tag
       tag: "",
+      tagLabel: "", // 人間向け表示用ラベル（例: "Tシャツ"）
       // brand (3階層)
       brandParent: "", // メーカー
-      brandModel: "",  // 車種
-      brandChassis: "",// 型式
+      brandModel: "", // 車種
+      brandChassis: "", // 型式
     };
 
     this.selectors = {
@@ -76,7 +77,11 @@ export class FilterbarWooCommerce {
     // brand hierarchy payload
     this.brandData = { parents: [], models: {}, chassis: {} };
     try {
-      this.brandData = JSON.parse(this.datasetEl?.dataset.brand || "{}") || { parents: [], models: {}, chassis: {} };
+      this.brandData = JSON.parse(this.datasetEl?.dataset.brand || "{}") || {
+        parents: [],
+        models: {},
+        chassis: {},
+      };
     } catch (e) {
       this.brandData = { parents: [], models: {}, chassis: {} };
     }
@@ -89,6 +94,9 @@ export class FilterbarWooCommerce {
     };
     this._buildBrandIndexes();
 
+    // タグ: スラッグ -> ラベル
+    this.tagLabelBySlug = {};
+
     // 初期状態復元
     this._initFromURL();
 
@@ -96,6 +104,9 @@ export class FilterbarWooCommerce {
     this._bindPC();
     this._bindSP();
     this._bindCommon();
+
+    // URL直叩き時の補完
+    this._inferTagLabelFromState();
 
     // 表示初期化
     this._renderBrandVisibilityPC();
@@ -157,25 +168,25 @@ export class FilterbarWooCommerce {
 
   _toArray(val) {
     if (Array.isArray(val)) return val;
-    if (val && typeof val === 'object') return Object.values(val);
+    if (val && typeof val === "object") return Object.values(val);
     return [];
   }
 
   _buildBrandIndexes() {
     // 親リストを配列化
     const parents = this._toArray(this.brandData.parents || []);
-    parents.forEach(p => {
+    parents.forEach((p) => {
       this.brandIndex.labelBySlug[p.value] = p.label;
 
       // 親→子（models）を配列化して走査
       const models = this._toArray(this.brandData.models?.[p.value]);
-      models.forEach(m => {
+      models.forEach((m) => {
         this.brandIndex.labelBySlug[m.value] = m.label;
         this.brandIndex.parentByModel[m.value] = p.value;
 
         // 子→孫（chassis）を配列化して走査
         const chassis = this._toArray(this.brandData.chassis?.[m.value]);
-        chassis.forEach(c => {
+        chassis.forEach((c) => {
           this.brandIndex.labelBySlug[c.value] = c.label;
           this.brandIndex.modelByChassis[c.value] = m.value;
         });
@@ -202,7 +213,9 @@ export class FilterbarWooCommerce {
       return;
     }
     // slug が親ならそれをセット
-    const isParent = (this.brandData.parents || []).some(p => p.value === slug);
+    const isParent = (this.brandData.parents || []).some(
+      (p) => p.value === slug
+    );
     if (isParent) {
       this.state.brandChassis = "";
       this.state.brandModel = "";
@@ -211,7 +224,12 @@ export class FilterbarWooCommerce {
   }
 
   _deriveBrandParam() {
-    return this.state.brandChassis || this.state.brandModel || this.state.brandParent || "";
+    return (
+      this.state.brandChassis ||
+      this.state.brandModel ||
+      this.state.brandParent ||
+      ""
+    );
   }
 
   _brandLabel() {
@@ -231,21 +249,28 @@ export class FilterbarWooCommerce {
 
   _selectBrandChips(activeSlug) {
     // ブランドドロップダウン内の全チップの選択表示を更新
-    this.$$("#brand-dd .filterbar__chip").forEach(chip => {
-      chip.dataset.selected = chip.dataset.value === activeSlug ? "true" : "false";
+    this.$$("#brand-dd .filterbar__chip").forEach((chip) => {
+      chip.dataset.selected =
+        chip.dataset.value === activeSlug ? "true" : "false";
     });
   }
 
   _renderBrandVisibilityPC() {
     // モデルグループ（親別）
-    this.$$(this.selectors.pcBrandModelBoxes).forEach(box => {
+    this.$$(this.selectors.pcBrandModelBoxes).forEach((box) => {
       const parent = box.getAttribute("data-parent");
-      box.style.display = (!this.state.brandParent || parent === this.state.brandParent) ? "grid" : "none";
+      box.style.display =
+        !this.state.brandParent || parent === this.state.brandParent
+          ? "grid"
+          : "none";
     });
     // 型式グループ（モデル別）
-    this.$$(this.selectors.pcBrandChassisBoxes).forEach(box => {
+    this.$$(this.selectors.pcBrandChassisBoxes).forEach((box) => {
       const model = box.getAttribute("data-model");
-      box.style.display = (!this.state.brandModel || model === this.state.brandModel) ? "grid" : "none";
+      box.style.display =
+        !this.state.brandModel || model === this.state.brandModel
+          ? "grid"
+          : "none";
     });
     // 選択マーク
     const active = this._deriveBrandParam();
@@ -254,14 +279,20 @@ export class FilterbarWooCommerce {
 
   _renderBrandVisibilitySP() {
     // モデル（親別）
-    this.$$(this.selectors.spBrandModelBoxes).forEach(box => {
+    this.$$(this.selectors.spBrandModelBoxes).forEach((box) => {
       const parent = box.getAttribute("data-parent");
-      box.style.display = (!this.state.brandParent || parent === this.state.brandParent) ? "grid" : "none";
+      box.style.display =
+        !this.state.brandParent || parent === this.state.brandParent
+          ? "grid"
+          : "none";
     });
     // 型式（モデル別）
-    this.$$(this.selectors.spBrandChassisBoxes).forEach(box => {
+    this.$$(this.selectors.spBrandChassisBoxes).forEach((box) => {
       const model = box.getAttribute("data-model");
-      box.style.display = (!this.state.brandModel || model === this.state.brandModel) ? "grid" : "none";
+      box.style.display =
+        !this.state.brandModel || model === this.state.brandModel
+          ? "grid"
+          : "none";
     });
   }
 
@@ -277,11 +308,19 @@ export class FilterbarWooCommerce {
 
   _renderPills() {
     const catText = this.state.catChild || this.state.catParent || "All";
-    const tagText = this.state.tag || "All";
+    const tagText =
+      this.state.tagLabel ||
+      (this.state.tag ? decodeURIComponent(this.state.tag) : "All");
     const brandText = this._brandLabel();
-    this.$(this.selectors.pillCat)?.replaceChildren(document.createTextNode(catText));
-    this.$(this.selectors.pillTag)?.replaceChildren(document.createTextNode(tagText));
-    this.$(this.selectors.pillBrand)?.replaceChildren(document.createTextNode(brandText));
+    this.$(this.selectors.pillCat)?.replaceChildren(
+      document.createTextNode(catText)
+    );
+    this.$(this.selectors.pillTag)?.replaceChildren(
+      document.createTextNode(tagText)
+    );
+    this.$(this.selectors.pillBrand)?.replaceChildren(
+      document.createTextNode(brandText)
+    );
   }
 
   _selectChip(groupSel, value) {
@@ -291,8 +330,12 @@ export class FilterbarWooCommerce {
   }
 
   _closeAllDropdowns() {
-    this.$$(this.selectors.dropdown).forEach((el) => el.classList.remove("is-open"));
-    this.$$(this.selectors.openDropdownBtn).forEach((b) => b.setAttribute("aria-expanded", "false"));
+    this.$$(this.selectors.dropdown).forEach((el) =>
+      el.classList.remove("is-open")
+    );
+    this.$$(this.selectors.openDropdownBtn).forEach((b) =>
+      b.setAttribute("aria-expanded", "false")
+    );
   }
 
   // =====================
@@ -327,61 +370,85 @@ export class FilterbarWooCommerce {
     });
 
     // 親カテゴリ
-    this.$$(this.selectors.pcCatParent + " .filterbar__chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        this.state.catParent = chip.dataset.value;
-        this.state.catChild = "";
-        this._selectChip(this.selectors.pcCatParent, this.state.catParent);
-        // 子のビジュアル（両方存在する前提で opacity 切替）
-        Object.keys(this.childrenMap).forEach((parentSlug) => {
-          const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
-          if (box) box.style.opacity = parentSlug === this.state.catParent ? 1 : 0.35;
+    this.$$(this.selectors.pcCatParent + " .filterbar__chip").forEach(
+      (chip) => {
+        chip.addEventListener("click", () => {
+          this.state.catParent = chip.dataset.value;
+          this.state.catChild = "";
+          this._selectChip(this.selectors.pcCatParent, this.state.catParent);
+          // 子のビジュアル（両方存在する前提で opacity 切替）
+          Object.keys(this.childrenMap).forEach((parentSlug) => {
+            const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
+            if (box)
+              box.style.opacity =
+                parentSlug === this.state.catParent ? 1 : 0.35;
+          });
+          this._renderPills();
         });
-        this._renderPills();
-      });
-    });
+      }
+    );
 
     // 子カテゴリ（全親分まとめて拾う）
-    this.$$(this.selectors.dropdown + " .filterbar__options .filterbar__chip").forEach((chip) => {
-      const inCatChildren = chip.parentElement?.id?.startsWith("pc-cat-children-");
+    this.$$(
+      this.selectors.dropdown + " .filterbar__options .filterbar__chip"
+    ).forEach((chip) => {
+      const inCatChildren =
+        chip.parentElement?.id?.startsWith("pc-cat-children-");
       if (!inCatChildren) return;
       chip.addEventListener("click", () => {
         this.state.catChild = chip.dataset.value;
         // すべての子グループから選択同期
         Object.keys(this.childrenMap).forEach((parentSlug) => {
-          this._selectChip(this.selectors.pcCatChildrenPrefix + parentSlug, this.state.catChild);
+          this._selectChip(
+            this.selectors.pcCatChildrenPrefix + parentSlug,
+            this.state.catChild
+          );
         });
         this._renderPills();
       });
     });
 
     // タグ（人気）
-    this.$$(this.selectors.pcTagPopular + " .filterbar__chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        this.state.tag = chip.dataset.value;
-        this._selectChip(this.selectors.pcTagPopular, this.state.tag);
-        this._renderTagSelected();
-        this._renderPills();
-      });
-    });
+    this.$$(this.selectors.pcTagPopular + " .filterbar__chip").forEach(
+      (chip) => {
+        const slug = chip.dataset.value;
+        const label = chip.dataset.label || chip.textContent.trim();
+        this.tagLabelBySlug[slug] = label;
+        chip.addEventListener("click", () => {
+          this.state.tag = slug;
+          this.state.tagLabel =
+            this.tagLabelBySlug[slug] || decodeURIComponent(slug);
+          this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+          this._renderTagSelected();
+          this._renderPills();
+        });
+      }
+    );
 
     // タグ検索（簡易）
     const search = this.$(this.selectors.pcTagSearch);
     if (search) {
       search.addEventListener("input", (e) => {
         const q = e.target.value.toLowerCase().trim();
-        const pool = this.$$(this.selectors.pcTagPopular + " .filterbar__chip").map((b) => b.dataset.value);
-        const hit = Array.from(new Set(pool.filter((t) => t.includes(q)))).slice(0, 10);
+        // 候補は人気タグ辞書から
+        const pool = Object.entries(this.tagLabelBySlug); // [[slug,label], ...]
+        const hit = pool
+          .filter(
+            ([slug, label]) =>
+              slug.includes(q) || label.toLowerCase().includes(q)
+          )
+          .slice(0, 10);
         const res = this.$(this.selectors.pcTagResults);
         if (!res) return;
         res.innerHTML = "";
-        hit.forEach((v) => {
+        hit.forEach(([slug, label]) => {
           const b = document.createElement("button");
           b.className = "filterbar__chip";
-          b.dataset.value = v;
-          b.textContent = v;
+          b.dataset.value = slug;
+          b.textContent = label; // ラベル表示
           b.addEventListener("click", () => {
-            this.state.tag = v;
+            this.state.tag = slug;
+            this.state.tagLabel = label;
             this._renderTagSelected();
             this._renderPills();
           });
@@ -395,44 +462,52 @@ export class FilterbarWooCommerce {
     // =====================
 
     // メーカー（親）
-    this.$$(this.selectors.pcBrandMaker + " .filterbar__chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        this.state.brandParent = chip.dataset.value;
-        this.state.brandModel = "";
-        this.state.brandChassis = "";
-        this._renderBrandVisibilityPC();
-        this._renderPills();
-      });
-    });
+    this.$$(this.selectors.pcBrandMaker + " .filterbar__chip").forEach(
+      (chip) => {
+        chip.addEventListener("click", () => {
+          this.state.brandParent = chip.dataset.value;
+          this.state.brandModel = "";
+          this.state.brandChassis = "";
+          this._renderBrandVisibilityPC();
+          this._renderPills();
+        });
+      }
+    );
 
     // 車種（子）
-    this.$$(this.selectors.pcBrandModelBoxes + " .filterbar__chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        const model = chip.dataset.value;
-        this.state.brandModel = model;
-        this.state.brandChassis = "";
-        // 親は逆引きで確定
-        this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
-        this._renderBrandVisibilityPC();
-        this._renderPills();
-      });
-    });
+    this.$$(this.selectors.pcBrandModelBoxes + " .filterbar__chip").forEach(
+      (chip) => {
+        chip.addEventListener("click", () => {
+          const model = chip.dataset.value;
+          this.state.brandModel = model;
+          this.state.brandChassis = "";
+          // 親は逆引きで確定
+          this.state.brandParent =
+            this.brandIndex.parentByModel[model] || this.state.brandParent;
+          this._renderBrandVisibilityPC();
+          this._renderPills();
+        });
+      }
+    );
 
     // 型式（孫）
-    this.$$(this.selectors.pcBrandChassisBoxes + " .filterbar__chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        const chassis = chip.dataset.value;
-        this.state.brandChassis = chassis;
-        // 関連モデル/親を逆引き
-        const model = this.brandIndex.modelByChassis[chassis];
-        if (model) {
-          this.state.brandModel = model;
-          this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
-        }
-        this._renderBrandVisibilityPC();
-        this._renderPills();
-      });
-    });
+    this.$$(this.selectors.pcBrandChassisBoxes + " .filterbar__chip").forEach(
+      (chip) => {
+        chip.addEventListener("click", () => {
+          const chassis = chip.dataset.value;
+          this.state.brandChassis = chassis;
+          // 関連モデル/親を逆引き
+          const model = this.brandIndex.modelByChassis[chassis];
+          if (model) {
+            this.state.brandModel = model;
+            this.state.brandParent =
+              this.brandIndex.parentByModel[model] || this.state.brandParent;
+          }
+          this._renderBrandVisibilityPC();
+          this._renderPills();
+        });
+      }
+    );
 
     // リセット群
     this.$$(this.selectors.resetCatBtn).forEach((b) =>
@@ -477,12 +552,17 @@ export class FilterbarWooCommerce {
     if (!box) return;
     box.innerHTML = "";
     if (this.state.tag) {
+      const label =
+        this.state.tagLabel ||
+        this.tagLabelBySlug[this.state.tag] ||
+        decodeURIComponent(this.state.tag);
       const b = document.createElement("button");
       b.className = "filterbar__chip";
       b.dataset.selected = "true";
-      b.textContent = `${this.state.tag} ×`;
+      b.textContent = `${label} ×`;
       b.addEventListener("click", () => {
         this.state.tag = "";
+        this.state.tagLabel = "";
         this._renderTagSelected();
         this._renderPills();
       });
@@ -500,47 +580,65 @@ export class FilterbarWooCommerce {
 
     if (openBtn && modal) {
       openBtn.addEventListener("click", () => modal.classList.add("is-open"));
-      closeBtns.forEach((b) => b.addEventListener("click", () => modal.classList.remove("is-open")));
+      closeBtns.forEach((b) =>
+        b.addEventListener("click", () => modal.classList.remove("is-open"))
+      );
     }
 
     // 親カテゴリ（SP）
-    this.$$(this.selectors.spCatParent + " .filterbar__chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        this.state.catParent = chip.dataset.value;
-        this.state.catChild = "";
-        this._selectChip(this.selectors.spCatParent, this.state.catParent);
-        this._renderSpChildren();
-        this._renderPills();
-      });
-    });
+    this.$$(this.selectors.spCatParent + " .filterbar__chip").forEach(
+      (chip) => {
+        chip.addEventListener("click", () => {
+          this.state.catParent = chip.dataset.value;
+          this.state.catChild = "";
+          this._selectChip(this.selectors.spCatParent, this.state.catParent);
+          this._renderSpChildren();
+          this._renderPills();
+        });
+      }
+    );
 
     // タグ（SP）
     const spTagSearch = this.$(this.selectors.spTagSearch);
     if (spTagSearch) {
       spTagSearch.addEventListener("input", (e) => {
         const q = e.target.value.toLowerCase().trim();
-        const pool = this.$$(this.selectors.spTagPopular + " .filterbar__chip").map((b) => b.dataset.value);
-        const hit = Array.from(new Set(pool.filter((t) => t.includes(q)))).slice(0, 10);
+        const pool = Object.entries(this.tagLabelBySlug);
+        const hit = pool
+          .filter(
+            ([slug, label]) =>
+              slug.includes(q) || label.toLowerCase().includes(q)
+          )
+          .slice(0, 10);
         const box = this.$(this.selectors.spTagSelected);
         if (!box) return;
         box.innerHTML = "";
-        hit.forEach((v) => {
+        hit.forEach(([slug, label]) => {
           const b = document.createElement("button");
           b.className = "filterbar__chip";
-          b.textContent = v;
+          b.dataset.value = slug;
+          b.textContent = label; // ラベル表示
           b.addEventListener("click", () => {
-            this.state.tag = v;
+            this.state.tag = slug;
+            this.state.tagLabel = label;
             this._renderPills();
           });
           box.appendChild(b);
         });
       });
     }
-    this.$$(this.selectors.spTagPopular + " .filterbar__chip").forEach((chip) =>
-      chip.addEventListener("click", () => {
-        this.state.tag = chip.dataset.value;
-        this._renderPills();
-      })
+    this.$$(this.selectors.spTagPopular + " .filterbar__chip").forEach(
+      (chip) => {
+        const slug = chip.dataset.value;
+        const label = chip.dataset.label || chip.textContent.trim();
+        this.tagLabelBySlug[slug] = this.tagLabelBySlug[slug] || label;
+        chip.addEventListener("click", () => {
+          this.state.tag = slug;
+          this.state.tagLabel =
+            this.tagLabelBySlug[slug] || decodeURIComponent(slug);
+          this._renderPills();
+        });
+      }
     );
 
     // ブランド（SP）
@@ -556,35 +654,47 @@ export class FilterbarWooCommerce {
     );
 
     // 車種（子）
-    this.$$(this.selectors.spBrandModelBoxes + " .filterbar__chip").forEach((chip) =>
-      chip.addEventListener("click", () => {
-        const model = chip.dataset.value;
-        this.state.brandModel = model;
-        this.state.brandChassis = "";
-        this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
-        this._renderBrandVisibilitySP();
-        this._renderPills();
-      })
+    this.$$(this.selectors.spBrandModelBoxes + " .filterbar__chip").forEach(
+      (chip) =>
+        chip.addEventListener("click", () => {
+          const model = chip.dataset.value;
+          this.state.brandModel = model;
+          this.state.brandChassis = "";
+          this.state.brandParent =
+            this.brandIndex.parentByModel[model] || this.state.brandParent;
+          this._renderBrandVisibilitySP();
+          this._renderPills();
+        })
     );
 
     // 型式（孫）
-    this.$$(this.selectors.spBrandChassisBoxes + " .filterbar__chip").forEach((chip) =>
-      chip.addEventListener("click", () => {
-        const chassis = chip.dataset.value;
-        this.state.brandChassis = chassis;
-        const model = this.brandIndex.modelByChassis[chassis];
-        if (model) {
-          this.state.brandModel = model;
-          this.state.brandParent = this.brandIndex.parentByModel[model] || this.state.brandParent;
-        }
-        this._renderBrandVisibilitySP();
-        this._renderPills();
-      })
+    this.$$(this.selectors.spBrandChassisBoxes + " .filterbar__chip").forEach(
+      (chip) =>
+        chip.addEventListener("click", () => {
+          const chassis = chip.dataset.value;
+          this.state.brandChassis = chassis;
+          const model = this.brandIndex.modelByChassis[chassis];
+          if (model) {
+            this.state.brandModel = model;
+            this.state.brandParent =
+              this.brandIndex.parentByModel[model] || this.state.brandParent;
+          }
+          this._renderBrandVisibilitySP();
+          this._renderPills();
+        })
     );
 
     // フッター
     this.$(this.selectors.spResetBtn)?.addEventListener("click", () => {
-      this.state = { ...this.state, catParent: "", catChild: "", tag: "", brandParent: "", brandModel: "", brandChassis: "" };
+      this.state = {
+        ...this.state,
+        catParent: "",
+        catChild: "",
+        tag: "",
+        brandParent: "",
+        brandModel: "",
+        brandChassis: "",
+      };
       this._renderSpChildren();
       this._renderBrandVisibilitySP();
       this._renderPills();
@@ -625,18 +735,33 @@ export class FilterbarWooCommerce {
   // =====================
   _bindCommon() {
     // 初期選択（カテゴリ）
-    if (this.state.catParent) this._selectChip(this.selectors.pcCatParent, this.state.catParent);
+    if (this.state.catParent)
+      this._selectChip(this.selectors.pcCatParent, this.state.catParent);
     if (this.state.catChild) {
       Object.keys(this.childrenMap).forEach((parentSlug) =>
-        this._selectChip(this.selectors.pcCatChildrenPrefix + parentSlug, this.state.catChild)
+        this._selectChip(
+          this.selectors.pcCatChildrenPrefix + parentSlug,
+          this.state.catChild
+        )
       );
     }
 
     // 初期選択（タグ）
-    if (this.state.tag) this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+    if (this.state.tag)
+      this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+    this._inferTagLabelFromState();
 
     // 初期選択（ブランド）
     this._renderBrandVisibilityPC();
     this._renderBrandVisibilitySP();
+  }
+
+  // タグ: URL直叩き時のラベル補完
+  _inferTagLabelFromState() {
+    if (this.state.tag && !this.state.tagLabel) {
+      this.state.tagLabel =
+        this.tagLabelBySlug[this.state.tag] ||
+        decodeURIComponent(this.state.tag);
+    }
   }
 }
