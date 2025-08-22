@@ -278,13 +278,11 @@ function term_value($t)
     <details class="filterbar__accordion" open>
       <summary>カテゴリーで選ぶ</summary>
       <div class="filterbar__accordion-panel">
-        <label style="display:block; margin:.3em 0 .4em">親</label>
         <div class="filterbar__options" id="sp-cat-parent">
           <?php foreach ($parent_terms as $pt) : ?>
             <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
           <?php endforeach; ?>
         </div>
-        <label style="display:block; margin:1em 0 .4em">子</label>
         <div class="filterbar__options" id="sp-cat-children">
           <!-- JSで parent 選択に応じて children を描画 -->
           <?php // 初期は空。JSで children_map を使い埋める想定 
