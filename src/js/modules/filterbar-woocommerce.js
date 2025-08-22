@@ -714,7 +714,10 @@ export class FilterbarWooCommerce {
     const box = this.$(this.selectors.spCatChildren);
     if (!box) return;
     box.innerHTML = "";
-    const list = this.childrenMap[this.state.catParent] || [];
+
+    // ★ オブジェクトでも配列でも安全に forEach できるよう配列化
+    const list = this._toArray(this.childrenMap?.[this.state.catParent]);
+
     list.forEach((item) => {
       const b = document.createElement("button");
       b.className = "filterbar__chip";
