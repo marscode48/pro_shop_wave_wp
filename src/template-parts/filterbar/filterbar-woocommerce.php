@@ -275,9 +275,9 @@ function term_value($t)
       <button class="filterbar__btn js-close-modal">閉じる</button>
     </div>
 
-    <details class="filterbar__acc" open>
+    <details class="filterbar__accordion" open>
       <summary>カテゴリーで選ぶ</summary>
-      <div class="filterbar__acc-panel">
+      <div class="filterbar__accordion-panel">
         <label style="display:block; margin:.3em 0 .4em">親</label>
         <div class="filterbar__options" id="sp-cat-parent">
           <?php foreach ($parent_terms as $pt) : ?>
@@ -293,9 +293,9 @@ function term_value($t)
       </div>
     </details>
 
-    <details class="filterbar__acc">
+    <details class="filterbar__accordion">
       <summary>タグで選ぶ</summary>
-      <div class="filterbar__acc-panel">
+      <div class="filterbar__accordion-panel">
         <input type="text" id="sp-tag-search" placeholder="タグ検索" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
         <div class="filterbar__options" id="sp-tag-popular" style="margin-top:8px">
           <?php foreach ($popular_tags as $tg) : ?>
@@ -307,9 +307,9 @@ function term_value($t)
     </details>
 
     <?php if ($brand_tax) : ?>
-      <details class="filterbar__acc">
+      <details class="filterbar__accordion">
         <summary>ブランドで選ぶ</summary>
-        <div class="filterbar__acc-panel">
+        <div class="filterbar__accordion-panel">
           <label style="display:block; margin:.3em 0 .4em">ブランド/メーカー</label>
           <div class="filterbar__options" id="sp-brand-maker">
             <?php foreach ($brand_parents as $bp) : ?>
