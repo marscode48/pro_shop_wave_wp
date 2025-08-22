@@ -249,9 +249,19 @@ export class FilterbarWooCommerce {
 
   _selectBrandChips(activeSlug) {
     // ブランドドロップダウン内の全チップの選択表示を更新
-    this.$$("#brand-dd .filterbar__chip").forEach((chip) => {
-      chip.dataset.selected =
-        chip.dataset.value === activeSlug ? "true" : "false";
+    const groups = [
+      this.selectors.pcBrandMaker,
+      this.selectors.pcBrandModelBoxes,
+      this.selectors.pcBrandChassisBoxes,
+      this.selectors.spBrandMaker,
+      this.selectors.spBrandModelBoxes,
+      this.selectors.spBrandChassisBoxes,
+    ];
+    groups.forEach((sel) => {
+      this.$$(sel + " .filterbar__chip").forEach((chip) => {
+        chip.dataset.selected =
+          chip.dataset.value === activeSlug ? "true" : "false";
+      });
     });
   }
 
@@ -293,6 +303,14 @@ export class FilterbarWooCommerce {
         !this.state.brandModel || model === this.state.brandModel
           ? "grid"
           : "none";
+    });
+    // 選択マーク（SP側）
+    this._selectChip(this.selectors.spBrandMaker, this.state.brandParent);
+    this.$$(this.selectors.spBrandModelBoxes).forEach((box) => {
+      this._selectChip("#" + box.id, this.state.brandModel);
+    });
+    this.$$(this.selectors.spBrandChassisBoxes).forEach((box) => {
+      this._selectChip("#" + box.id, this.state.brandChassis);
     });
   }
 
@@ -524,7 +542,9 @@ export class FilterbarWooCommerce {
     this.$$(this.selectors.resetTagBtn).forEach((b) =>
       b.addEventListener("click", () => {
         this.state.tag = "";
+        this.state.tagLabel = "";
         this._selectChip(this.selectors.pcTagPopular, "");
+        this._selectChip(this.selectors.spTagPopular, ""); // SP側もリセット
         const box = this.$(this.selectors.pcTagSelected);
         if (box) box.innerHTML = "";
         this._renderPills();
@@ -621,6 +641,7 @@ export class FilterbarWooCommerce {
           b.addEventListener("click", () => {
             this.state.tag = slug;
             this.state.tagLabel = label;
+            this._selectChip(this.selectors.spTagPopular, this.state.tag); // 人気タグ側の選択も同期
             this._renderPills();
           });
           box.appendChild(b);
@@ -636,6 +657,7 @@ export class FilterbarWooCommerce {
           this.state.tag = slug;
           this.state.tagLabel =
             this.tagLabelBySlug[slug] || decodeURIComponent(slug);
+          this._selectChip(this.selectors.spTagPopular, this.state.tag); // 選択表示
           this._renderPills();
         });
       }
@@ -649,6 +671,7 @@ export class FilterbarWooCommerce {
         this.state.brandModel = "";
         this.state.brandChassis = "";
         this._renderBrandVisibilitySP();
+        this._selectBrandChips(this._deriveBrandParam());
         this._renderPills();
       })
     );
@@ -663,6 +686,7 @@ export class FilterbarWooCommerce {
           this.state.brandParent =
             this.brandIndex.parentByModel[model] || this.state.brandParent;
           this._renderBrandVisibilitySP();
+          this._selectBrandChips(this._deriveBrandParam());
           this._renderPills();
         })
     );
@@ -680,6 +704,7 @@ export class FilterbarWooCommerce {
               this.brandIndex.parentByModel[model] || this.state.brandParent;
           }
           this._renderBrandVisibilitySP();
+          this._selectBrandChips(this._deriveBrandParam());
           this._renderPills();
         })
     );
@@ -691,10 +716,12 @@ export class FilterbarWooCommerce {
         catParent: "",
         catChild: "",
         tag: "",
+        tagLabel: "",
         brandParent: "",
         brandModel: "",
         brandChassis: "",
       };
+      this._selectChip(this.selectors.spTagPopular, ""); // SP人気タグの選択解除
       this._renderSpChildren();
       this._renderBrandVisibilitySP();
       this._renderPills();
@@ -750,8 +777,10 @@ export class FilterbarWooCommerce {
     }
 
     // 初期選択（タグ）
-    if (this.state.tag)
+    if (this.state.tag) {
       this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+      this._selectChip(this.selectors.spTagPopular, this.state.tag); // SP 人気タグにも選択反映
+    }
     this._inferTagLabelFromState();
 
     // 初期選択（ブランド）
