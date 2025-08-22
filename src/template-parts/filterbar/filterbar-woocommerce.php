@@ -226,7 +226,7 @@ function term_value($t)
           <div class="filterbar__options" id="pc-brand-maker">
             <?php if (!empty($brand_parents)) : ?>
               <?php foreach ($brand_parents as $bp) : ?>
-                <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bp); ?></button>
+                <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
               <?php endforeach; ?>
             <?php else : ?>
               <span class="muted">ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。</span>
@@ -311,7 +311,7 @@ function term_value($t)
           <label style="display:block; margin:.3em 0 .4em">ブランド/メーカー</label>
           <div class="filterbar__options" id="sp-brand-maker">
             <?php foreach ($brand_parents as $bp) : ?>
-              <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>" data-tax="<?php echo esc_attr($brand_tax); ?>"><?php echo term_label($bp); ?></button>
+              <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
             <?php endforeach; ?>
           </div>
 
