@@ -347,26 +347,43 @@ function term_value($t)
 
 <?php
 // --------------------------------------------------
-// JSへ children_map を渡したい場合は、以下のように data-* で埋め込む手もあります。
-// 本テンプレでは、カテゴリの子一覧を data 属性として JSON で吐き出します。
-// front側の JS で JSON.parse して利用してください。
+// PHP で用意したカテゴリ/ブランドのデータ（children_map）を JS へ渡す
+// ますは、カテゴリ/ブランドのデータを、HTMLの data-* 属性にJSONとして埋め込み、
+// それをフロントJSが JSON.parse で読み込む
 // --------------------------------------------------
+
+// 子カテゴリ用 $children_payload
 $children_payload = [];
 foreach ($parent_terms as $pt) {
+  // array_map()でWP_Term オブジェクトの配列をJSが扱いやすい最小構造の連想配列に変換（{value: スラッグ, label: 表示名}）
+  // array_map()は、array の各要素に callback を適用した後、 適用後の要素を含む array を返す
   $children_payload[$pt->slug] = array_map(function ($ct) {
     return ['value' => $ct->slug, 'label' => $ct->name];
   }, $children_map[$pt->slug]);
 }
 
+// ブランド3階層用 $brand_payload
 $brand_payload = ['parents' => [], 'models' => [], 'chassis' => []];
 foreach ($brand_parents as $bp) {
+  // 親 parents（メーカー）配列に追加
+  // ループ内で parents 配列の 末尾に新しい要素を 0,1,2,… の添字で追加
+  // array_push($brand_payload['parents'], [...]) と同義
   $brand_payload['parents'][] = ['value' => $bp->slug, 'label' => $bp->name];
+
+  // 親→子 models（車種）を格納（キー：親slug）
+  // 1キー（親メーカー slug ）につき1配列をセットするのでforeachで回す必要なし
   $mdlList = $brand_models_map[$bp->slug] ?? [];
+  // WP_Term オブジェクトの配列を、JSで扱いやすい形式の配列に変換
   $brand_payload['models'][$bp->slug] = array_map(function ($m) {
     return ['value' => $m->slug, 'label' => $m->name];
   }, $mdlList);
+
+  // 子→孫 chassis（型式）を格納（キー：子slug）
+  // 各車種（子）ごとに1配列を作って複数キー（車種 slug）へ格納する必要があるため、
+  // 車種リスト $mdlList を foreach で1件ずつ回す必要あり
   foreach ($mdlList as $m) {
     $chsList = $brand_chassis_map[$m->slug] ?? [];
+    // WP_Term オブジェクトの配列を、JSで扱いやすい形式の配列に変換
     $brand_payload['chassis'][$m->slug] = array_map(function ($c) {
       return ['value' => $c->slug, 'label' => $c->name];
     }, $chsList);
@@ -374,7 +391,16 @@ foreach ($brand_parents as $bp) {
 }
 ?>
 <div id="filterbar-dataset"
-  data-children='<?php echo wp_json_encode($children_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
+  data-children='
+  <?php
+  // wp_json_encode()で子カテゴリのデータをPHP配列（$children_payload）→ JSON文字列へ変換。
+  // JSON_UNESCAPED_UNICODE → 日本語などを \u30a2... にエスケープせずそのまま出力
+  // JSON_UNESCAPED_SLASHES → \/ のようにスラッシュをエスケープしない（URLなどが見やすい）
+  echo wp_json_encode($children_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
   data-brand-tax="<?php echo esc_attr($brand_tax); ?>"
-  data-brand='<?php echo wp_json_encode($brand_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
-  style="display:none"></div>
+  data-brand='
+  <?php
+  // wp_json_encode()でブランドの3階層データをPHP配列（$children_payload）→ JSON文字列へ変換。
+  echo wp_json_encode($brand_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
+  style="display:none">
+</div>
