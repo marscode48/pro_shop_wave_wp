@@ -566,3 +566,31 @@ add_action('init', function () {
   remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
   remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 });
+
+// -----------------------------
+// /shop/ を常に WooCommerce 側のアーカイブテンプレートで表示
+// 目的: テーマ直下の archive-product.php が拾われるケースを避け、
+//       woocommerce/archive-product.php（= フィルターバー出力版）を優先させる
+// -----------------------------
+add_filter('template_include', function ($template) {
+  // is_shop() は WooCommerce 有効時のみ
+  if ( function_exists('is_shop') && is_shop() ) {
+    // Woo のテンプレートロケータで優先解決
+    if ( function_exists('wc_locate_template') ) {
+      $wc_template = wc_locate_template('archive-product.php');
+      if ( ! empty($wc_template) ) {
+        return $wc_template;
+      }
+    }
+    // フォールバック: 子テーマ/親テーマの woocommerce/archive-product.php
+    $fallback_child = get_stylesheet_directory() . '/woocommerce/archive-product.php';
+    if ( file_exists($fallback_child) ) {
+      return $fallback_child;
+    }
+    $fallback_parent = get_template_directory() . '/woocommerce/archive-product.php';
+    if ( file_exists($fallback_parent) ) {
+      return $fallback_parent;
+    }
+  }
+  return $template;
+}, 50);
