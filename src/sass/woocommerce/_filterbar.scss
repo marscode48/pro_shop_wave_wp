@@ -71,6 +71,14 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   // SP専用「フィルター」オープンボタン（右寄せ想定なら親で調整）
   &__open {
     margin-left: auto;
+
+    &.sp-only-block {
+      display: inline-flex;
+
+      @include mq(lg) {
+        display: none;
+      }
+    }
   }
 
   // PC: ドロップダウン
@@ -257,19 +265,6 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 // --------------------------------------------------
 // レスポンシブ可視制御（ユーティリティ）
 // --------------------------------------------------
-@include mq(lg) {
-  .pc-only {
-    display: block;
-  }
-}
-.sp-only {
-  display: inline-flex;
-
-  @include mq(lg) {
-    display: none;
-  }
-}
-
 // PC: ドロップダウン有効、SP: モーダル有効
 @include mq(lg) {
   .filterbar__panel {

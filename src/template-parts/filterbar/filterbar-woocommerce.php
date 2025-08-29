@@ -152,11 +152,11 @@ function term_value($t)
     <span class="filterbar__pill-label">ブランド</span>
     <span class="filterbar__pill-value" id="pill-brand">All</span>
   </button>
-  <button class="filterbar__open sp-only js-open-modal">フィルター</button>
+  <button class="filterbar__open sp-only-block js-open-modal">フィルター</button>
 </div>
 
 <!-- PC: ドロップダウン パネル群 -->
-<div class="pc-only">
+<div class="pc-only-block">
   <!-- カテゴリ -->
   <div class="filterbar__dropdown" id="cat-dropdown" aria-hidden="true">
     <div class="filterbar__panel" role="dialog" aria-label="カテゴリで選ぶ">
@@ -267,82 +267,85 @@ function term_value($t)
 </div>
 
 <!-- SP: モーダル -->
-<div class="filterbar__modal" id="filterbar-modal" aria-hidden="true">
-  <div class="filterbar__modal-scrim js-close-modal" tabindex="-1"></div>
-  <div class="filterbar__modal-panel" role="dialog" aria-label="フィルター">
-    <div class="filterbar__modal-header">
-      <strong>絞り込み</strong>
-      <button class="filterbar__btn js-close-modal">閉じる</button>
-    </div>
-
-    <details class="filterbar__accordion" open>
-      <summary>カテゴリーで選ぶ</summary>
-      <div class="filterbar__accordion-panel">
-        <div class="filterbar__options" id="sp-cat-parent">
-          <?php foreach ($parent_terms as $pt) : ?>
-            <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
-          <?php endforeach; ?>
-        </div>
-        <div class="filterbar__options" id="sp-cat-children">
-          <!-- JSで parent 選択に応じて children を描画 -->
-          <?php // 初期は空。JSで children_map を使い埋める想定 
-          ?>
-        </div>
+<div class="sp-only-block">
+  <div class="filterbar__modal" id="filterbar-modal" aria-hidden="true">
+    <div class="filterbar__modal-scrim js-close-modal" tabindex="-1"></div>
+    <div class="filterbar__modal-panel" role="dialog" aria-label="フィルター">
+      <div class="filterbar__modal-header">
+        <strong>絞り込み</strong>
+        <button class="filterbar__btn js-close-modal">閉じる</button>
       </div>
-    </details>
 
-    <details class="filterbar__accordion">
-      <summary>タグで選ぶ</summary>
-      <div class="filterbar__accordion-panel">
-        <div class="filterbar__options" id="sp-tag-popular" style="margin-top:8px">
-          <?php foreach ($popular_tags as $tg) : ?>
-            <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
-          <?php endforeach; ?>
-        </div>
-        <input type="text" id="sp-tag-search" placeholder="タグ検索" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
-        <div class="filterbar__options" id="sp-tag-selected" style="margin-top:8px"></div>
-      </div>
-    </details>
-
-    <?php if ($brand_tax) : ?>
-      <details class="filterbar__accordion">
-        <summary>ブランドで選ぶ</summary>
+      <details class="filterbar__accordion" open>
+        <summary>カテゴリーで選ぶ</summary>
         <div class="filterbar__accordion-panel">
-          <label style="display:block; margin:.3em 0 .4em">ブランド/メーカー</label>
-          <div class="filterbar__options" id="sp-brand-maker">
-            <?php foreach ($brand_parents as $bp) : ?>
-              <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
+          <div class="filterbar__options" id="sp-cat-parent">
+            <?php foreach ($parent_terms as $pt) : ?>
+              <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
             <?php endforeach; ?>
           </div>
+          <div class="filterbar__options" id="sp-cat-children">
+            <!-- JSで parent 選択に応じて children を描画 -->
+            <?php // 初期は空。JSで children_map を使い埋める想定 
+            ?>
+          </div>
+        </div>
+      </details>
 
-          <label style="display:block; margin:1em 0 .4em">車種</label>
-          <?php foreach ($brand_parents as $bp) : ?>
-            <div class="filterbar__options" id="sp-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
-              <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
-                <button class="filterbar__chip" data-value="<?php echo term_value($mdl); ?>" data-parent="<?php echo term_value($bp); ?>"><?php echo term_label($mdl); ?></button>
+      <details class="filterbar__accordion">
+        <summary>タグで選ぶ</summary>
+        <div class="filterbar__accordion-panel">
+          <div class="filterbar__options" id="sp-tag-popular" style="margin-top:8px">
+            <?php foreach ($popular_tags as $tg) : ?>
+              <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
+            <?php endforeach; ?>
+          </div>
+          <input type="text" id="sp-tag-search" placeholder="タグ検索" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
+          <div class="filterbar__options" id="sp-tag-selected" style="margin-top:8px"></div>
+        </div>
+      </details>
+
+      <?php if ($brand_tax) : ?>
+        <details class="filterbar__accordion">
+          <summary>ブランドで選ぶ</summary>
+          <div class="filterbar__accordion-panel">
+            <label style="display:block; margin:.3em 0 .4em">ブランド/メーカー</label>
+            <div class="filterbar__options" id="sp-brand-maker">
+              <?php foreach ($brand_parents as $bp) : ?>
+                <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
               <?php endforeach; ?>
             </div>
-          <?php endforeach; ?>
 
-          <label style="display:block; margin:1em 0 .4em">型式</label>
-          <?php foreach ($brand_parents as $bp) : ?>
-            <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
-              <div class="filterbar__options" id="sp-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
-                <?php foreach (($brand_chassis_map[$mdl->slug] ?? []) as $chs) : ?>
-                  <button class="filterbar__chip" data-value="<?php echo term_value($chs); ?>" data-parent="<?php echo term_value($mdl); ?>"><?php echo term_label($chs); ?></button>
+            <label style="display:block; margin:1em 0 .4em">車種</label>
+            <?php foreach ($brand_parents as $bp) : ?>
+              <div class="filterbar__options" id="sp-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
+                <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
+                  <button class="filterbar__chip" data-value="<?php echo term_value($mdl); ?>" data-parent="<?php echo term_value($bp); ?>"><?php echo term_label($mdl); ?></button>
                 <?php endforeach; ?>
               </div>
             <?php endforeach; ?>
-          <?php endforeach; ?>
-        </div>
-      </details>
-    <?php endif; ?>
 
-    <div class="filterbar__modal-footer">
-      <button class="filterbar__btn" id="sp-reset">リセット</button>
-      <button class="filterbar__btn filterbar__btn--primary" id="sp-apply">適用</button>
+            <label style="display:block; margin:1em 0 .4em">型式</label>
+            <?php foreach ($brand_parents as $bp) : ?>
+              <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
+                <div class="filterbar__options" id="sp-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
+                  <?php foreach (($brand_chassis_map[$mdl->slug] ?? []) as $chs) : ?>
+                    <button class="filterbar__chip" data-value="<?php echo term_value($chs); ?>" data-parent="<?php echo term_value($mdl); ?>"><?php echo term_label($chs); ?></button>
+                  <?php endforeach; ?>
+                </div>
+              <?php endforeach; ?>
+            <?php endforeach; ?>
+          </div>
+        </details>
+      <?php endif; ?>
+
+      <div class="filterbar__modal-footer">
+        <button class="filterbar__btn" id="sp-reset">リセット</button>
+        <button class="filterbar__btn filterbar__btn--primary" id="sp-apply">適用</button>
+      </div>
     </div>
   </div>
+
 </div>
 
 <?php
