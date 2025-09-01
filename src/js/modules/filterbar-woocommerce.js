@@ -514,7 +514,7 @@ export class FilterbarWooCommerce {
     // this.catLabelBySlug?.[catSlug] で事前に作っておいた「slug → ラベル」辞書からラベルを引く
     // （例: "suspension" → "サスペンション"）
     const catText = catSlug
-      ? (this.catLabelBySlug?.[catSlug] || decodeURIComponent(catSlug))
+      ? this.catLabelBySlug?.[catSlug] || decodeURIComponent(catSlug)
       : "All";
     const tagText =
       this.state.tagLabel ||
@@ -543,6 +543,36 @@ export class FilterbarWooCommerce {
   _selectChip(groupSel, value) {
     this.$$(groupSel + " .filterbar__chip").forEach((c) => {
       c.dataset.selected = c.dataset.value === value ? "true" : "false";
+    });
+  }
+
+  // 子カテゴリ（PC）の見た目＆操作可否をまとめて切り替える
+  // slug が空: 全子を不可（薄く＋クリック不可）
+  // slug が文字列: その親の子だけ可（不透明＋クリック可）、他は不可
+  _setCatChildrenInteractivityPC(slug = "") {
+    // Object.keys() で引数に渡したオブジェクト自身が持つ（＝継承ではない）列挙可能なプロパティ名（キー）を
+    // 配列で返すので、すべての親スラッグ（["parts","apparel"] など）を配列で取得
+    Object.keys(this.childrenMap).forEach((parentSlug) => {
+      const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
+      if (!box) return;
+
+      const isActive = slug && parentSlug === slug;
+
+      // 見た目（不透明度）
+      box.style.opacity = isActive ? 1 : 0.35;
+
+      // 操作可否（クリック/フォーカスを止める）
+      this.$$(".filterbar__chip", box).forEach((chip) => {
+        if (isActive) {
+          chip.style.pointerEvents = "auto";
+          chip.tabIndex = 0;
+          chip.setAttribute("aria-disabled", "false");
+        } else {
+          chip.style.pointerEvents = "none";
+          chip.tabIndex = -1;
+          chip.setAttribute("aria-disabled", "true");
+        }
+      });
     });
   }
 
@@ -622,15 +652,8 @@ export class FilterbarWooCommerce {
           // 親カテゴリの選択表示を同期
           this._selectChip(this.selectors.pcCatParent, this.state.catParent);
 
-          // 子カテゴリ群の見た目調整（選択中の親だけ不透明、他は薄く）
-          // Object.keys() で引数に渡したオブジェクト自身が持つ（＝継承ではない）列挙可能なプロパティ名（キー）を
-          // 配列で返すので、すべての親スラッグ（["parts","apparel"] など）を配列で取得
-          Object.keys(this.childrenMap).forEach((parentSlug) => {
-            const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
-            if (box)
-              box.style.opacity =
-                parentSlug === this.state.catParent ? 1 : 0.35;
-          });
+          // 子カテゴリ群の見た目＆操作可否を切り替え（選択親のみ有効化）
+          this._setCatChildrenInteractivityPC(this.state.catParent);
 
           // 上部ピル表示を更新
           this._renderPills();
@@ -795,6 +818,8 @@ export class FilterbarWooCommerce {
         Object.keys(this.childrenMap).forEach((parentSlug) =>
           this._selectChip(this.selectors.pcCatChildrenPrefix + parentSlug, "")
         );
+        // リセット後は全子カテゴリを無効化（薄く＋クリック不可）
+        this._setCatChildrenInteractivityPC("");
         this._renderPills();
       })
     );
@@ -1195,6 +1220,13 @@ export class FilterbarWooCommerce {
     // 親カテゴリが URL/state に入っていれば、親チップ側の選択表示を同期
     if (this.state.catParent) {
       this._selectChip(this.selectors.pcCatParent, this.state.catParent);
+    }
+
+    // 初期：親未選択なら全子を不可、親があれば該当親の子だけ可
+    if (!this.state.catParent) {
+      this._setCatChildrenInteractivityPC("");
+    } else {
+      this._setCatChildrenInteractivityPC(this.state.catParent);
     }
 
     // 子カテゴリが入っていれば、すべての「親ごとの子グループ」に対して
