@@ -114,6 +114,9 @@ export class FilterbarWooCommerce {
 
     // タグ: スラッグ -> ラベル
     this.tagLabelBySlug = {};
+    // カテゴリ: スラッグ -> ラベル（親/子とも）
+    this.catLabelBySlug = {};
+    this._buildCategoryLabelIndex();
 
     // URL から現在値を復元（初期状態復元）
     this._initFromURL();
@@ -208,6 +211,43 @@ export class FilterbarWooCommerce {
     // 	Object.values(obj) は、オブジェクトの値を 配列 にして返す
     if (val && typeof val === "object") return Object.values(val);
     return [];
+  }
+
+  // カテゴリ用の「slug → ラベル」辞書を構築
+  // ---------------------------------
+  // 取得元:
+  //  - 親カテゴリ: PC/SP の親チップ（data-value=slug, textContent=ラベル）
+  //  - 子カテゴリ: childrenMap[{ value, label }] から value→label を収集
+  _buildCategoryLabelIndex() {
+    const dict = {};
+
+    // 親（PC）
+    this.$$(this.selectors.pcCatParent + " .filterbar__chip").forEach((b) => {
+      const slug = b.dataset.value;
+      const label = (b.textContent || "").trim();
+      if (slug) dict[slug] = label || dict[slug] || slug;
+    });
+
+    // 親（SP）
+    this.$$(this.selectors.spCatParent + " .filterbar__chip").forEach((b) => {
+      const slug = b.dataset.value;
+      const label = (b.textContent || "").trim();
+      if (slug && !dict[slug]) dict[slug] = label || slug;
+    });
+
+    // 子（childrenMap から）
+    const map = this.childrenMap || {};
+    Object.keys(map).forEach((parentSlug) => {
+      const list = this._toArray(map[parentSlug]);
+      list.forEach((item) => {
+        if (!item) return;
+        const slug = item.value;
+        const label = item.label;
+        if (slug) dict[slug] = label || dict[slug] || slug;
+      });
+    });
+
+    this.catLabelBySlug = dict;
   }
 
   // ブランド3階層（メーカー → 車種 → 型式） の関係を「逆引きしやすいインデックス（辞書）」に作り直す関数
@@ -470,7 +510,12 @@ export class FilterbarWooCommerce {
     // 1) 表示テキストの決定
     // decodeURIComponent は、URL の “クエリ値” などで使われるパーセントエンコード（%E3%81… 形式）を
     // 本来の文字列に戻すための関数（例）"t%e3%82%b7%e3%83%a3%e3%83%84" → "Tシャツ"）
-    const catText = this.state.catChild || this.state.catParent || "All";
+    const catSlug = this.state.catChild || this.state.catParent || "";
+    // this.catLabelBySlug?.[catSlug] で事前に作っておいた「slug → ラベル」辞書からラベルを引く
+    // （例: "suspension" → "サスペンション"）
+    const catText = catSlug
+      ? (this.catLabelBySlug?.[catSlug] || decodeURIComponent(catSlug))
+      : "All";
     const tagText =
       this.state.tagLabel ||
       (this.state.tag ? decodeURIComponent(this.state.tag) : "All");
