@@ -75,6 +75,7 @@ export class FilterbarWooCommerce {
     // ブランド用タクソノミー名（文字列）datasetElからdata-brand-taxを取得
     // ?.（オプショナルチェーン） null だった場合でも、エラーにならずに undefined を返す
     //  || "" 値が undefined や空の場合のフォールバックで空文字をセット
+    this.shopUrl = this.datasetEl?.dataset.shopUrl || "";
     this.brandTax = this.datasetEl?.dataset.brandTax || "";
 
     // カテゴリの親→子マップ（JSON文字列をオブジェクトに）datasetElからdata-childrenを取得
@@ -201,12 +202,14 @@ export class FilterbarWooCommerce {
   // 「適用」ボタンで現在の state を URL クエリへ正規化し、ページを再読込する
   // 方針: 「カテゴリ=1値」「タグ=1値」「ブランド=1値（型式>車種>メーカーの優先）」に統一し、未選択はパラメータを削除
   // 変更後はページング（paged）をクリアして 1 ページ目から再検索し、location.assign() で遷移する
+  // パス型アーカイブをリセットした場合は /shop/ へ遷移（残りの軸はクエリで付与）
   _applyToURL() {
     // 現在の URL をオブジェクト化（安全にクエリ編集するため）
     const url = new URL(window.location.href);
     // URLSearchParams で ?key=value を編集（set: 置換/正規化, delete: 完全削除）
     const sp = url.searchParams;
 
+    // --- 正規化（1キー=1値） ---
     // category（子優先→親→未選択）
     // 常に 1キー=1値（?product_cat=slug）に正規化。未選択なら削除。
     const catParam = this.state.catChild || this.state.catParent || "";
@@ -227,7 +230,42 @@ export class FilterbarWooCommerce {
     // ページングをリセット（フィルタ変更後に古いページ番号が残るとヒット 0 になりがち）
     sp.delete("paged");
 
-    // 生成した URL に遷移（履歴を残す）。履歴を残したくない場合は location.replace(...) を使用
+    // --- パス型アーカイブをリセットしたら /shop/ へ ---
+    // 現在のページがパス型かどうか（PHPから data-* で注入）
+    const isPathCategory = !!this.currentCatFromPath;
+    const isPathTag = !!this.currentTagFromPath;
+    const isPathBrand = !!this.currentBrandFromPath;
+
+    // 今回の操作で該当軸が「未選択（=クエリから削除）」になったか
+    const categoryCleared = !catParam;
+    const tagCleared = !this.state.tag;
+    const brandCleared = this.brandTax ? !this._deriveBrandParam() : true;
+
+    // パス型のいずれか（カテゴリ/タグ/ブランド）を“解除”したら /shop/ をベースに再生成して遷移
+    if (
+      (isPathCategory && categoryCleared) || // 例: /product-category/... でカテゴリをリセットした
+      (isPathTag && tagCleared) || // 例: /product-tag/... でタグをリセットした
+      (isPathBrand && brandCleared) // 例: /brand/... でブランドをリセットした
+    ) {
+      if (this.shopUrl) {
+        // base = /shop/ をフルURLに正規化（相対でも絶対でもOKにする保険）
+        const base = new URL(this.shopUrl, window.location.origin);
+
+        // 残っている軸だけクエリとして付与（1キー=1値に正規化）
+        if (catParam) base.searchParams.set("product_cat", catParam);
+        if (this.state.tag)
+          base.searchParams.set("product_tag", this.state.tag);
+        if (this.brandTax) {
+          const b = this._deriveBrandParam(); // 型式 > 車種 > メーカー の優先で 1 値にする
+          if (b) base.searchParams.set(this.brandTax, b); // 例: ?product_brand=s15
+        }
+
+        // /shop/?... へ遷移（これ以降の処理は不要なので return）
+        window.location.assign(base.toString());
+        return;
+      }
+    }
+    // 通常は現在URLを正規化して遷移
     window.location.assign(url.toString());
   }
 

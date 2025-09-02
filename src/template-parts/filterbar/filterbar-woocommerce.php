@@ -428,7 +428,9 @@ if ( $brand_tax && is_tax( $brand_tax ) ) {
   }
 }
 ?>
+<?php $shop_url = wc_get_page_permalink( 'shop' ); ?>
 <div id="filterbar-dataset"
+  data-shop-url="<?php echo esc_url( $shop_url ); ?>"
   data-current-cat="<?php echo esc_attr( $current_cat_slug ); ?>"
   data-current-tag="<?php echo esc_attr( $current_tag_slug ); ?>"
   data-current-brand="<?php echo esc_attr( $current_brand_slug ); ?>"
