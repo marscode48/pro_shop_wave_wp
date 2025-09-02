@@ -99,6 +99,11 @@ export class FilterbarWooCommerce {
       this.brandData = { parents: [], models: {}, chassis: {} };
     }
 
+    // パス型アーカイブ用の現在スラッグ（PHPが data-* で注入）
+    this.currentCatFromPath = this.datasetEl?.dataset.currentCat || "";
+    this.currentBrandFromPath = this.datasetEl?.dataset.currentBrand || "";
+    this.currentTagFromPath = this.datasetEl?.dataset.currentTag || "";
+
     // 逆引きインデックス（model -> parent, chassis -> model）と ラベル辞書（slug -> label）
     // 選択された slug から、親子関係や表示ラベルを即座に逆引きできる辞書をつくる
     // 型式だけが分かっても車種・メーカーまで一瞬で辿れるようにする
@@ -153,9 +158,31 @@ export class FilterbarWooCommerce {
     const qCat = q.get("product_cat") || "";
     this.state.catChild = qCat || "";
 
+    // Fallback: /product-category/... のようなパス型URLでクエリが無い場合
+    if (!this.state.catChild && this.currentCatFromPath) {
+      this.state.catChild = this.currentCatFromPath;
+      // 親も分かるなら補完（childrenMap を走査してどの親配下かを特定）
+      // childrenMap のすべての親スラッグ（"parts" / "apparel" など）を走査する
+      for (const parentSlug of Object.keys(this.childrenMap || {})) {
+        // その親に対応する子カテゴリリストを取得（配列に正規化）
+        const list = this._toArray(this.childrenMap[parentSlug]);
+        // そのリストの中に、state.catChild と一致する slug が含まれているか確認
+        // some() は「条件を満たす要素が 1つでもあれば true」を返す
+        if (list.some((it) => it && it.value === this.state.catChild)) {
+          // 見つかった場合、その子が属する親カテゴリを state にセット
+          this.state.catParent = parentSlug;
+          break; // もう親が特定できたのでループを打ち切り
+        }
+      }
+    }
+
     // tag
     // URLに ?product_tag=slug があれば =slug を取得、値が無ければ ""（空文字）
     this.state.tag = q.get("product_tag") || "";
+    // Fallback: パス型URL等でクエリが無い場合に、サーバ側が埋めた currentTagFromPath から復元
+    if (!this.state.tag && this.currentTagFromPath) {
+      this.state.tag = this.currentTagFromPath;
+    }
 
     // brand: brandTax が存在する場合のみ
     // URLに ?product_brand=slug があれば =slug を取得、値が無ければ ""（空文字）
@@ -163,6 +190,10 @@ export class FilterbarWooCommerce {
       const qBrand = q.get(this.brandTax) || "";
       if (qBrand) {
         this._initBrandFromSlug(qBrand);
+      }
+      // Fallback: /brand/... などパス型URLでクエリが無い場合も、サーバ側が埋めた currentBrandFromPath から復元
+      if (!qBrand && this.currentBrandFromPath) {
+        this._initBrandFromSlug(this.currentBrandFromPath);
       }
     }
   }

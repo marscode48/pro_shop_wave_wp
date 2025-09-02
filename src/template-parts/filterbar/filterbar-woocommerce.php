@@ -393,7 +393,45 @@ foreach ($brand_parents as $bp) {
   }
 }
 ?>
+<?php
+// --------------------------------------------------
+// 現在アーカイブ（パス型 URL）でも JS 側へ初期選択を渡すための現在値
+//  - カテゴリー: /product-category/... の最深タームの slug
+//  - タグ: /product-tag/... の最深タームの slug
+//  - ブランド: /brand/... or /pa_brand/... の最深タームの slug
+// --------------------------------------------------
+$current_cat_slug   = '';
+$current_tag_slug   = '';
+$current_brand_slug = '';
+
+// カテゴリー（product_cat）
+if ( is_tax( 'product_cat' ) ) {
+  $qo = get_queried_object();
+  if ( $qo && ! is_wp_error( $qo ) && ! empty( $qo->slug ) ) {
+    $current_cat_slug = (string) $qo->slug;
+  }
+}
+
+// タグ（product_tag）
+if ( is_tax( 'product_tag' ) ) {
+  $qo = get_queried_object();
+  if ( $qo && ! is_wp_error( $qo ) && ! empty( $qo->slug ) ) {
+    $current_tag_slug = (string) $qo->slug;
+  }
+}
+
+// ブランド（product_brand / pa_brand）— 有効なタクソノミーのみ判定
+if ( $brand_tax && is_tax( $brand_tax ) ) {
+  $qo = get_queried_object();
+  if ( $qo && ! is_wp_error( $qo ) && ! empty( $qo->slug ) ) {
+    $current_brand_slug = (string) $qo->slug;
+  }
+}
+?>
 <div id="filterbar-dataset"
+  data-current-cat="<?php echo esc_attr( $current_cat_slug ); ?>"
+  data-current-tag="<?php echo esc_attr( $current_tag_slug ); ?>"
+  data-current-brand="<?php echo esc_attr( $current_brand_slug ); ?>"
   data-children='
   <?php
   // wp_json_encode()で子カテゴリのデータをPHP配列（$children_payload）→ JSON文字列へ変換。
