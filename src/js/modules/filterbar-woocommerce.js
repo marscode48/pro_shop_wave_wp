@@ -546,7 +546,12 @@ export class FilterbarWooCommerce {
   _setBrandInteractivity() {
     // 車種（子）を有効化する条件：メーカーが選択されていること
     const modelEnabled = !!this.state.brandParent;
-    this.$$(this.selectors.pcBrandModelBoxes + " .filterbar__chip, " + this.selectors.spBrandModelBoxes + " .filterbar__chip").forEach((chip) => {
+    this.$$(
+      this.selectors.pcBrandModelBoxes +
+        " .filterbar__chip, " +
+        this.selectors.spBrandModelBoxes +
+        " .filterbar__chip"
+    ).forEach((chip) => {
       if (modelEnabled) {
         chip.style.pointerEvents = "auto";
         chip.tabIndex = 0;
@@ -560,7 +565,12 @@ export class FilterbarWooCommerce {
 
     // 型式（孫）を有効化する条件：車種が選択されていること
     const chassisEnabled = !!this.state.brandModel;
-    this.$$(this.selectors.pcBrandChassisBoxes + " .filterbar__chip, " + this.selectors.spBrandChassisBoxes + " .filterbar__chip").forEach((chip) => {
+    this.$$(
+      this.selectors.pcBrandChassisBoxes +
+        " .filterbar__chip, " +
+        this.selectors.spBrandChassisBoxes +
+        " .filterbar__chip"
+    ).forEach((chip) => {
       if (chassisEnabled) {
         chip.style.pointerEvents = "auto";
         chip.tabIndex = 0;
