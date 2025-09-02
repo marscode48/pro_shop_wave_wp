@@ -433,69 +433,105 @@ export class FilterbarWooCommerce {
 
   // ブランドの可視状態（PCドロップダウン）を state に合わせて更新
   // ----------------------------------------------------
-  // ・メーカー(親)が未選択なら「全メーカーの車種ボックス」を表示、選択済みなら該当メーカーの車種だけを表示
-  // ・車種(子)が未選択なら「全モデルの型式ボックス」を表示、選択済みなら該当モデルの型式だけを表示
+  // ・メーカー(親)が未選択なら車種・型式は非表示。メーカー選択中のみ該当車種を表示
+  // ・車種(子)が未選択なら型式は非表示。車種選択中のみ該当型式を表示
   // ・最後に現在の選択（型式>車種>メーカーの優先）に合わせて各チップの [data-selected] を更新
+  // ・操作可否も state に合わせて制御
   _renderBrandVisibilityPC() {
     // 1) 車種（子）グループの表示制御（data-parent でメーカーを識別）
     this.$$(this.selectors.pcBrandModelBoxes).forEach((box) => {
       const parent = box.getAttribute("data-parent");
       box.style.display =
-        !this.state.brandParent || parent === this.state.brandParent
-          ? "grid" // メーカー未選択 → 全表示 / 選択中メーカーと一致 → 表示
-          : "none"; // 選択中メーカーと不一致 → 非表示
+        this.state.brandParent && parent === this.state.brandParent
+          ? "grid" // メーカー選択中 → 一致メーカーだけ表示
+          : "none"; // 未選択 or 不一致 → 非表示
     });
 
     // 2) 型式（孫）グループの表示制御（data-model で車種を識別）
     this.$$(this.selectors.pcBrandChassisBoxes).forEach((box) => {
       const model = box.getAttribute("data-model");
       box.style.display =
-        !this.state.brandModel || model === this.state.brandModel
-          ? "grid" // 車種未選択 → 全表示 / 選択中車種と一致 → 表示
-          : "none"; // 選択中車種と不一致 → 非表示
+        this.state.brandModel && model === this.state.brandModel
+          ? "grid" // 車種選択中 → 一致モデルだけ表示
+          : "none"; // 未選択 or 不一致 → 非表示
     });
 
     // 3) 選択状態の視覚反映（型式>車種>メーカーの優先で 1 値を導出）
     const active = this._deriveBrandParam();
     this._selectBrandChips(active);
+
+    // 4) 操作可否（クリック/フォーカス）を state に合わせて制御
+    this._setBrandInteractivity();
   }
 
   // ブランドの可視状態（SPモーダル）を state に合わせて更新
   // ----------------------------------------------------
-  // ・メーカー(親)が未選択なら「全メーカーの車種グループ」を表示、選択済みなら該当メーカーだけを表示
-  // ・車種(子)が未選択なら「全モデルの型式グループ」を表示、選択済みなら該当モデルだけを表示
+  // ・メーカー(親)が未選択なら車種・型式は非表示。メーカー選択中のみ該当車種を表示
+  // ・車種(子)が未選択なら型式は非表示。車種選択中のみ該当型式を表示
   // ・最後に、現在の state に合わせて SP 側のチップ選択状態（[data-selected]）を同期
+  // ・操作可否も state に合わせて制御
   _renderBrandVisibilitySP() {
     // 1) 車種（子）グループの表示制御（data-parent でメーカーを識別）
     this.$$(this.selectors.spBrandModelBoxes).forEach((box) => {
       const parent = box.getAttribute("data-parent");
       box.style.display =
-        !this.state.brandParent || parent === this.state.brandParent
-          ? "grid" // メーカー未選択 → 全表示 / 一致メーカーのみ → 表示
-          : "none"; // 不一致メーカー → 非表示
+        this.state.brandParent && parent === this.state.brandParent
+          ? "grid" // メーカー選択中 → 一致メーカーだけ表示
+          : "none"; // 未選択 or 不一致 → 非表示
     });
 
     // 2) 型式（孫）グループの表示制御（data-model で車種を識別）
     this.$$(this.selectors.spBrandChassisBoxes).forEach((box) => {
       const model = box.getAttribute("data-model");
       box.style.display =
-        !this.state.brandModel || model === this.state.brandModel
-          ? "grid" // 車種未選択 → 全表示 / 一致モデルのみ → 表示
-          : "none"; // 不一致モデル → 非表示
+        this.state.brandModel && model === this.state.brandModel
+          ? "grid" // 車種選択中 → 一致モデルだけ表示
+          : "none"; // 未選択 or 不一致 → 非表示
     });
 
     // 3) 選択マーク（[data-selected]）の同期（SP側）
-    // ・メーカー（親）
     this._selectChip(this.selectors.spBrandMaker, this.state.brandParent);
-
-    // ・車種（子）: 各モデルボックスごとに、該当する value のチップへ選択を反映
     this.$$(this.selectors.spBrandModelBoxes).forEach((box) => {
       this._selectChip("#" + box.id, this.state.brandModel);
     });
-
-    // ・型式（孫）: 各型式ボックスごとに、該当する value のチップへ選択を反映
     this.$$(this.selectors.spBrandChassisBoxes).forEach((box) => {
       this._selectChip("#" + box.id, this.state.brandChassis);
+    });
+
+    // 4) 操作可否（クリック/フォーカス）を state に合わせて制御
+    this._setBrandInteractivity();
+  }
+
+  // ブランド（モデル/型式）の操作可否をまとめて切り替える
+  // - メーカー未選択: モデル/型式はクリック不可・フォーカス不可（aria-disabled="true"）
+  // - 車種未選選択: 型式のみクリック不可・フォーカス不可
+  _setBrandInteractivity() {
+    // 車種（子）を有効化する条件：メーカーが選択されていること
+    const modelEnabled = !!this.state.brandParent;
+    this.$$(this.selectors.pcBrandModelBoxes + " .filterbar__chip, " + this.selectors.spBrandModelBoxes + " .filterbar__chip").forEach((chip) => {
+      if (modelEnabled) {
+        chip.style.pointerEvents = "auto";
+        chip.tabIndex = 0;
+        chip.setAttribute("aria-disabled", "false");
+      } else {
+        chip.style.pointerEvents = "none";
+        chip.tabIndex = -1;
+        chip.setAttribute("aria-disabled", "true");
+      }
+    });
+
+    // 型式（孫）を有効化する条件：車種が選択されていること
+    const chassisEnabled = !!this.state.brandModel;
+    this.$$(this.selectors.pcBrandChassisBoxes + " .filterbar__chip, " + this.selectors.spBrandChassisBoxes + " .filterbar__chip").forEach((chip) => {
+      if (chassisEnabled) {
+        chip.style.pointerEvents = "auto";
+        chip.tabIndex = 0;
+        chip.setAttribute("aria-disabled", "false");
+      } else {
+        chip.style.pointerEvents = "none";
+        chip.tabIndex = -1;
+        chip.setAttribute("aria-disabled", "true");
+      }
     });
   }
 
