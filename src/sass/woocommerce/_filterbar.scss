@@ -51,6 +51,8 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   }
 
   &__pill {
+    flex: 0 1 auto;
+
     &-label {
       font-family: $font-heading;
       text-transform: uppercase;
@@ -68,13 +70,12 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     }
   }
 
-  // SP専用「フィルター」オープンボタン（右寄せ想定なら親で調整）
+  // SP専用「フィルター」オープンボタン
   &__open {
-    margin-left: auto;
+    flex: 0 0 100%;
+    justify-content: center;
 
     &.sp-only-block {
-      display: inline-flex;
-
       @include mq(lg) {
         display: none;
       }
