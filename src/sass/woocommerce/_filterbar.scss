@@ -248,6 +248,9 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     inset: 0;
     display: none; // .is-open で表示
     z-index: 60;
+    // 背景スクロールを抑止（パネルのみスクロール可）
+    overflow: hidden;
+    overscroll-behavior: contain; // スクロールの伝搬を止める
 
     &.is-open {
       display: block;
@@ -272,6 +275,8 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     padding: 1rem;
     box-shadow: $fb-shadow;
     overflow: auto;
+    overscroll-behavior: contain;      // パネル外へバウンドスクロールを伝搬しない
+    -webkit-overflow-scrolling: touch; // iOS 慣性スクロール
   }
 
   &__modal-header {
@@ -340,4 +345,12 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 .muted {
   color: rgba($color-white, 0.6);
   font-size: 0.92rem;
+}
+
+// 背景スクロールロック（モーダル open 時に html/body に付与）
+html.is-filterbar-open,
+body.is-filterbar-open {
+  overflow: hidden !important;
+  height: 100%;
+  touch-action: none; // タッチスクロールも抑止
 }

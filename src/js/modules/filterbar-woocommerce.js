@@ -1033,13 +1033,29 @@ export class FilterbarWooCommerce {
     const openBtn = document.querySelector(".filterbar__open");
     const closeBtns = this.$$(".js-close-modal");
 
+    // 背景スクロールのロック/解除（html, body にクラス付与）
+    const lockScroll = () => {
+      document.documentElement.classList.add("is-filterbar-open");
+      document.body.classList.add("is-filterbar-open");
+    };
+    const unlockScroll = () => {
+      document.documentElement.classList.remove("is-filterbar-open");
+      document.body.classList.remove("is-filterbar-open");
+    };
+
     // --- モーダルの開閉 ---
     if (openBtn && modal) {
-      // 開く：.filterbar__open をタップしたら is-open を付与
-      openBtn.addEventListener("click", () => modal.classList.add("is-open"));
-      // 閉じる：.js-close-modal（背景や×ボタン）をタップしたら is-open を除去
+      // 開く：.filterbar__open をタップしたら is-open を付与し、背景スクロールをロック
+      openBtn.addEventListener("click", () => {
+        modal.classList.add("is-open");
+        lockScroll();
+      });
+      // 閉じる：.js-close-modal（背景や×ボタン）をタップしたら is-open を除去し、背景ロック解除
       closeBtns.forEach((b) =>
-        b.addEventListener("click", () => modal.classList.remove("is-open"))
+        b.addEventListener("click", () => {
+          modal.classList.remove("is-open");
+          unlockScroll();
+        })
       );
     }
 
@@ -1274,8 +1290,11 @@ export class FilterbarWooCommerce {
 
     // 「適用」→ モーダルを閉じて URL へ反映（ページ遷移）
     this.$(this.selectors.spApplyBtn)?.addEventListener("click", () => {
-      const modal = this.$(this.selectors.modal);
-      modal?.classList.remove("is-open");
+      const modalEl = this.$(this.selectors.modal);
+      if (modalEl) {
+        modalEl.classList.remove("is-open");
+        unlockScroll();
+      }
       this._renderPills();
       this._applyToURL();
     });
