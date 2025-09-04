@@ -152,7 +152,9 @@ function term_value($t)
     <span class="filterbar__pill-label">ブランド</span>
     <span class="filterbar__pill-value" id="pill-brand">All</span>
   </button>
-  <button class="filterbar__open sp-only-block js-open-modal">フィルター</button>
+  <button class="filterbar__open sp-only-block js-open-modal" aria-label="フィルターを開く">
+    条件で絞り込む
+  </button>
 </div>
 
 <!-- PC: ドロップダウン パネル群 -->
@@ -182,7 +184,7 @@ function term_value($t)
         <?php endforeach; ?>
       </div>
       <div class="filterbar__actions">
-        <button class="filterbar__btn js-reset">リセット</button>
+        <button class="filterbar__btn js-reset">カテゴリーをクリア</button>
         <button class="filterbar__btn filterbar__btn--primary js-apply">適用</button>
       </div>
     </div>
@@ -202,8 +204,8 @@ function term_value($t)
         </div>
         <div class="filterbar__group">
           <h3>タグを検索</h3>
-          <input type="text" id="pc-tag-search" placeholder="タグ名で検索（例: drift, aero）" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
-          <div class="filterbar__options" id="pc-tag-results" style="margin-top:8px"></div>
+          <input type="text" id="pc-tag-search" placeholder="タグ名で検索（例: エアロ）" />
+          <div class="filterbar__options" id="pc-tag-results"></div>
         </div>
         <div class="filterbar__group">
           <h3>選択中</h3>
@@ -295,13 +297,13 @@ function term_value($t)
       <details class="filterbar__accordion">
         <summary>タグで選ぶ</summary>
         <div class="filterbar__accordion-panel">
-          <div class="filterbar__options" id="sp-tag-popular" style="margin-top:8px">
+          <div class="filterbar__options" id="sp-tag-popular">
             <?php foreach ($popular_tags as $tg) : ?>
               <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
             <?php endforeach; ?>
           </div>
-          <input type="text" id="sp-tag-search" placeholder="タグ検索" style="width:100%; padding:.6em; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:#000; color:#fff" />
-          <div class="filterbar__options" id="sp-tag-selected" style="margin-top:8px"></div>
+          <input type="text" id="sp-tag-search" placeholder="タグ名で検索（例: エアロ）" />
+          <div class="filterbar__options" id="sp-tag-selected"></div>
         </div>
       </details>
 
@@ -309,14 +311,14 @@ function term_value($t)
         <details class="filterbar__accordion">
           <summary>ブランドで選ぶ</summary>
           <div class="filterbar__accordion-panel">
-            <label style="display:block; margin:.3em 0 .4em">ブランド/メーカー</label>
+            <h4>ブランド/メーカー</h4>
             <div class="filterbar__options" id="sp-brand-maker">
               <?php foreach ($brand_parents as $bp) : ?>
                 <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
               <?php endforeach; ?>
             </div>
 
-            <label style="display:block; margin:1em 0 .4em">車種</label>
+            <h4>車種</h4>
             <?php foreach ($brand_parents as $bp) : ?>
               <div class="filterbar__options" id="sp-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
                 <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
@@ -325,7 +327,7 @@ function term_value($t)
               </div>
             <?php endforeach; ?>
 
-            <label style="display:block; margin:1em 0 .4em">型式</label>
+            <h4>型式</h4>
             <?php foreach ($brand_parents as $bp) : ?>
               <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
                 <div class="filterbar__options" id="sp-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
