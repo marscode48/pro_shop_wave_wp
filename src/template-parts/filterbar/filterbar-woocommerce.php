@@ -407,35 +407,35 @@ $current_tag_slug   = '';
 $current_brand_slug = '';
 
 // カテゴリー（product_cat）
-if ( is_tax( 'product_cat' ) ) {
+if (is_tax('product_cat')) {
   $qo = get_queried_object();
-  if ( $qo && ! is_wp_error( $qo ) && ! empty( $qo->slug ) ) {
+  if ($qo && ! is_wp_error($qo) && ! empty($qo->slug)) {
     $current_cat_slug = (string) $qo->slug;
   }
 }
 
 // タグ（product_tag）
-if ( is_tax( 'product_tag' ) ) {
+if (is_tax('product_tag')) {
   $qo = get_queried_object();
-  if ( $qo && ! is_wp_error( $qo ) && ! empty( $qo->slug ) ) {
+  if ($qo && ! is_wp_error($qo) && ! empty($qo->slug)) {
     $current_tag_slug = (string) $qo->slug;
   }
 }
 
 // ブランド（product_brand / pa_brand）— 有効なタクソノミーのみ判定
-if ( $brand_tax && is_tax( $brand_tax ) ) {
+if ($brand_tax && is_tax($brand_tax)) {
   $qo = get_queried_object();
-  if ( $qo && ! is_wp_error( $qo ) && ! empty( $qo->slug ) ) {
+  if ($qo && ! is_wp_error($qo) && ! empty($qo->slug)) {
     $current_brand_slug = (string) $qo->slug;
   }
 }
 ?>
-<?php $shop_url = wc_get_page_permalink( 'shop' ); ?>
+<?php $shop_url = wc_get_page_permalink('shop'); ?>
 <div id="filterbar-dataset"
-  data-shop-url="<?php echo esc_url( $shop_url ); ?>"
-  data-current-cat="<?php echo esc_attr( $current_cat_slug ); ?>"
-  data-current-tag="<?php echo esc_attr( $current_tag_slug ); ?>"
-  data-current-brand="<?php echo esc_attr( $current_brand_slug ); ?>"
+  data-shop-url="<?php echo esc_url($shop_url); ?>"
+  data-current-cat="<?php echo esc_attr($current_cat_slug); ?>"
+  data-current-tag="<?php echo esc_attr($current_tag_slug); ?>"
+  data-current-brand="<?php echo esc_attr($current_brand_slug); ?>"
   data-children='
   <?php
   // wp_json_encode()で子カテゴリのデータをPHP配列（$children_payload）→ JSON文字列へ変換。
