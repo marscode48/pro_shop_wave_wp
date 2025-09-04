@@ -9,8 +9,8 @@
 // =====================================================================
 
 // ベーストークン（必要に応じて _variables.scss へ昇格）
-$fb-border: 1px solid rgba($color-white, 0.18);
-$fb-border-soft: 1px solid rgba($color-white, 0.12);
+$fb-border: 1px solid rgba($color-white, 0.28);
+$fb-border-soft: 1px solid rgba($color-white, 0.22);
 $fb-card: linear-gradient(
   180deg,
   rgba($color-black, 0.96),
@@ -25,7 +25,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 .filterbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem; // 8px
+  gap: 0.5rem;
   align-items: center;
 
   // ピル（カテゴリ／タグ／ブランド）
@@ -33,9 +33,8 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   &__open {
     display: inline-flex;
     align-items: center;
-    gap: 0.5em;
-    padding: 0.55em 0.9em;
-    border: $fb-border;
+    gap: 0.25em;
+    padding: 0.55em;
     border-radius: 999px;
     background: rgba($color-white, 0.03);
     color: $color-white;
@@ -43,37 +42,61 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     transition: border-color $transition, background $transition,
       color $transition;
 
+    @include mq(lg) {
+      gap: 0.5em;
+      padding: 0.55em 0.9em;
+    }
+
     &:hover {
       @include mq(lg) {
-        border-color: rgba($color-white, 0.4);
+        border-color: rgba($color-white, 0.5);
       }
     }
   }
 
   &__pill {
+    border: $fb-border;
     flex: 0 1 auto;
 
     &-label {
       font-family: $font-heading;
       text-transform: uppercase;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
-      font-size: 0.85rem;
       opacity: 0.85;
-    }
-    &-value {
-      font-weight: 700;
+
+      @include mq(lg) {
+        font-size: 0.85rem;
+      }
     }
 
-    &.is-active {
-      box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
-      border-color: $color-red;
+    &-value {
+      font-size: 0.875rem;
+      font-weight: 700;
+
+      @include mq(lg) {
+        font-size: 1rem;
+      }
+    }
+
+    &[aria-expanded="true"] {
+      @include mq(lg) {
+        border-color: $color-red;
+        background: rgba($color-red, 0.12);
+        box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
+      }
     }
   }
 
-  // SP専用「フィルター」オープンボタン
+  // SP:「フィルター」オープンボタン
   &__open {
-    flex: 0 0 100%;
+    flex: 0 0 50%;
     justify-content: center;
+    margin-top: 0.5rem;
+    margin-left: auto;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    border: 1px solid $color-red;
 
     &.sp-only-block {
       @include mq(lg) {
@@ -93,6 +116,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     }
   }
 
+  // PC: パネル
   &__panel {
     // 初期は非表示（.filterbar__dropdown.is-open で表示）
     display: none;
@@ -108,7 +132,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     padding: 1rem;
   }
 
-  // ドロップダウン内グリッド/グループ
+  // PC:ドロップダウン内グリッド/グループ
   &__grid {
     display: grid;
     gap: 1rem;
@@ -130,6 +154,17 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
       font-family: $font-heading;
       letter-spacing: 0.06em;
       font-size: 1rem;
+      font-weight: 700;
+    }
+
+    #pc-tag-search {
+      width: 100%;
+      padding: 0.6em;
+      border-radius: $fb-radius;
+      border: $fb-border;
+      background: rgba($color-white, 0.03);
+      color: $color-white;
+      box-sizing: border-box;
     }
   }
 
@@ -137,6 +172,13 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    // ブランドは単一行で表示
+    &#sp-brand-maker,
+    &#pc-brand-maker {
+      display: grid;
+    }
   }
 
   &__chip {
@@ -151,7 +193,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 
     &:hover {
       @include mq(lg) {
-        border-color: rgba($color-white, 0.35);
+        border-color: rgba($color-white, 0.5);
       }
     }
 
@@ -159,6 +201,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     &[data-selected="true"] {
       border-color: $color-red;
       background: rgba($color-red, 0.12);
+      box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
     }
   }
 
@@ -172,17 +215,28 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   &__btn {
     padding: 0.6em 1em;
     border-radius: 0.5rem; // 8px
-    border: $fb-border;
+    border: 1px solid $color-red;
     background: $color-black;
     color: $color-white;
     cursor: pointer;
+    transition: border-color $transition, background $transition,
+      color $transition;
+
+    &:hover {
+      @include mq(lg) {
+        border-color: color.adjust($color-red, $lightness: -10%);
+        color: color.adjust($color-white, $lightness: -30%);
+      }
+    }
 
     &--primary {
+      color: $color-white;
       background: $color-red;
       border-color: $color-red;
+
       &:hover {
         @include mq(lg) {
-          background: color.adjust($color-red, $lightness: -3%);
+          background: color.adjust($color-red, $lightness: -10%);
         }
       }
     }
@@ -250,6 +304,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     border: $fb-border-soft;
     border-radius: 0.625rem;
     margin-bottom: 0.625rem;
+
     summary {
       list-style: none;
       cursor: pointer;
@@ -257,21 +312,27 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
       font-weight: 700;
     }
   }
+
   &__accordion-panel {
     padding: 0.75rem;
-    border-top: 1px solid rgba($color-white, 0.08);
+    border-top: $fb-border-soft;
+
+    > h4 {
+      margin: 0.625rem 0;
+    }
+
+    #sp-tag-search {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.6em;
+      border-radius: $fb-radius;
+      border: $fb-border-soft;
+      background: rgba($color-white, 0.03);
+      color: $color-white;
+      box-sizing: border-box;
+    }
   }
 }
-
-// --------------------------------------------------
-// レスポンシブ可視制御（ユーティリティ）
-// --------------------------------------------------
-// PC: ドロップダウン有効、SP: モーダル有効
-@include mq(lg) {
-  .filterbar__panel {
-    display: none;
-  }
-} // is-openで上書き
 
 // --------------------------------------------------
 // 小さなユーティリティ
