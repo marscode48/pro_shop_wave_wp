@@ -27,6 +27,11 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
+  margin-bottom: 1rem;
+
+  @include mq(lg) {
+    margin-bottom: 2rem;
+  }
 
   // ピル（カテゴリ／タグ／ブランド）
   &__pill,
@@ -35,7 +40,6 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     align-items: center;
     gap: 0.25em;
     padding: 0.55em;
-    border-radius: 999px;
     background: rgba($color-white, 0.03);
     color: $color-white;
     cursor: pointer;
@@ -57,6 +61,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   &__pill {
     border: $fb-border;
     flex: 0 1 auto;
+    border-radius: 999px;
 
     &-label {
       font-family: $font-heading;
@@ -79,11 +84,34 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
       }
     }
 
+    // ピル左端のフィルターアイコン（PCのみ表示）
+    &-icon {
+      display: none; // SPでは非表示
+      flex: 0 0 auto;
+
+      @include mq(lg) {
+        display: inline-flex; // PCで表示
+        align-items: center;
+        justify-content: center;
+        width: 1.1em; // 固定幅で位置を安定化
+        min-width: 1.1em;
+        margin-right: 0.4em; // ラベルとの間隔
+        opacity: 0.7; // 控えめ
+        transition: color $transition, opacity $transition,
+          transform $transition;
+      }
+    }
+
     &[aria-expanded="true"] {
       @include mq(lg) {
         border-color: $color-red;
         background: rgba($color-red, 0.12);
         box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
+
+        .filterbar__pill-icon {
+          color: $color-red;
+          opacity: 1;
+        }
       }
     }
   }
@@ -96,11 +124,27 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     margin-left: auto;
     font-size: 0.875rem;
     letter-spacing: 0.08em;
+    border-radius: $fb-radius;
     border: 1px solid $color-red;
 
+    // Font Awesome アイコンの余白とトランジション
+    i {
+      display: inline-block;
+      margin-left: 0.5em;
+      transition: color $transition;
+    }
+
+    // SP専用表示制御
     &.sp-only-block {
       @include mq(lg) {
         display: none;
+      }
+    }
+
+    // 開いている間は強調（ブランドカラーなど）
+    &.is-open {
+      i {
+        color: $color-red;
       }
     }
   }
@@ -275,7 +319,7 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     padding: 1rem;
     box-shadow: $fb-shadow;
     overflow: auto;
-    overscroll-behavior: contain;      // パネル外へバウンドスクロールを伝搬しない
+    overscroll-behavior: contain; // パネル外へバウンドスクロールを伝搬しない
     -webkit-overflow-scrolling: touch; // iOS 慣性スクロール
   }
 
@@ -309,18 +353,37 @@ $fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     border: $fb-border-soft;
     border-radius: 0.625rem;
     margin-bottom: 0.625rem;
+    transition: border-color $transition;
 
     summary {
       list-style: none;
       cursor: pointer;
       padding: 0.75rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+
+      i.fa-chevron-down {
+        transition: transform $transition, color $transition;
+      }
+    }
+
+    &[open] {
+      border-color: $color-red;
+    }
+
+    &[open] summary i.fa-chevron-down {
+      color: $color-red;
+      transform: rotate(180deg);
     }
   }
 
   &__accordion-panel {
     padding: 0.75rem;
     border-top: $fb-border-soft;
+    transition: border-color;
 
     > h4 {
       margin: 0.625rem 0;

@@ -1045,15 +1045,19 @@ export class FilterbarWooCommerce {
 
     // --- モーダルの開閉 ---
     if (openBtn && modal) {
-      // 開く：.filterbar__open をタップしたら is-open を付与し、背景スクロールをロック
+      // 開く：.filterbar__open をタップしたら is-open を付与し、背景スクロールをロック、ボタン状態も反映
       openBtn.addEventListener("click", () => {
         modal.classList.add("is-open");
+        openBtn.classList.add("is-open");
+        openBtn.setAttribute("aria-expanded", "true");
         lockScroll();
       });
-      // 閉じる：.js-close-modal（背景や×ボタン）をタップしたら is-open を除去し、背景ロック解除
+      // 閉じる：.js-close-modal（背景や×ボタン）をタップしたら is-open を除去し、ボタン状態を戻して背景ロック解除
       closeBtns.forEach((b) =>
         b.addEventListener("click", () => {
           modal.classList.remove("is-open");
+          openBtn.classList.remove("is-open");
+          openBtn.setAttribute("aria-expanded", "false");
           unlockScroll();
         })
       );

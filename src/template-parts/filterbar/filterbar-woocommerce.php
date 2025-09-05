@@ -141,19 +141,23 @@ function term_value($t)
 <!-- フィルターバー（ピル） -->
 <div class="filterbar">
   <button class="filterbar__pill js-open-dropdown" data-target="cat-dropdown" aria-expanded="false">
+    <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
     <span class="filterbar__pill-label">カテゴリー</span>
     <span class="filterbar__pill-value" id="pill-cat">All</span>
   </button>
   <button class="filterbar__pill js-open-dropdown" data-target="tag-dropdown" aria-expanded="false">
+    <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
     <span class="filterbar__pill-label">タグ</span>
     <span class="filterbar__pill-value" id="pill-tag">All</span>
   </button>
   <button class="filterbar__pill js-open-dropdown" data-target="brand-dropdown" aria-expanded="false">
+    <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
     <span class="filterbar__pill-label">ブランド</span>
     <span class="filterbar__pill-value" id="pill-brand">All</span>
   </button>
-  <button class="filterbar__open sp-only-block js-open-modal" aria-label="フィルターを開く">
-    条件で絞り込む
+  <button class="filterbar__open sp-only-block js-open-modal" aria-expanded="false">
+    フィルター
+    <i class="fa-solid fa-filter" aria-hidden="true"></i>
   </button>
 </div>
 
@@ -274,12 +278,15 @@ function term_value($t)
     <div class="filterbar__modal-scrim js-close-modal" tabindex="-1"></div>
     <div class="filterbar__modal-panel" role="dialog" aria-label="フィルター">
       <div class="filterbar__modal-header">
-        <strong>絞り込み</strong>
+        <strong>条件で絞り込み</strong>
         <button class="filterbar__btn js-close-modal">閉じる</button>
       </div>
 
       <details class="filterbar__accordion" open>
-        <summary>カテゴリーで選ぶ</summary>
+        <summary>
+          <span>カテゴリーで選ぶ</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </summary>
         <div class="filterbar__accordion-panel">
           <div class="filterbar__options" id="sp-cat-parent">
             <?php foreach ($parent_terms as $pt) : ?>
@@ -295,7 +302,10 @@ function term_value($t)
       </details>
 
       <details class="filterbar__accordion">
-        <summary>タグで選ぶ</summary>
+        <summary>
+          <span>タグで選ぶ</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </summary>
         <div class="filterbar__accordion-panel">
           <div class="filterbar__options" id="sp-tag-popular">
             <?php foreach ($popular_tags as $tg) : ?>
@@ -309,7 +319,10 @@ function term_value($t)
 
       <?php if ($brand_tax) : ?>
         <details class="filterbar__accordion">
-          <summary>ブランドで選ぶ</summary>
+          <summary>
+            <span>ブランドで選ぶ</span>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </summary>
           <div class="filterbar__accordion-panel">
             <h4>ブランド/メーカー</h4>
             <div class="filterbar__options" id="sp-brand-maker">
