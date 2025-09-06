@@ -107,6 +107,7 @@
 
   // SP:「フィルター」オープンボタン
   &__open {
+    position: relative;
     flex: 0 0 50%;
     justify-content: center;
     margin-top: 0.5rem;
@@ -116,10 +117,18 @@
     border-radius: $fb-radius;
     border: 1px solid $color-red;
 
-    // Font Awesome アイコンの余白とトランジション
-    i {
-      display: inline-block;
-      margin-left: 0.5em;
+    &::after {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      content: "\f0b0"; // fa-filter のグリフ
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 1;
+      pointer-events: none; // クリックを塞がない
+      color: $color-white;
+      opacity: 0.8;
       transition: color $transition;
     }
 
@@ -132,7 +141,7 @@
 
     // 開いている間は強調（ブランドカラーなど）
     &.is-open {
-      i {
+      &::after {
         color: $color-red;
       }
     }
