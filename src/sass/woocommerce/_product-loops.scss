@@ -244,6 +244,7 @@
         pointer-events: none; // クリックを塞がない
         color: $color-white;
         opacity: 0.8;
+        transition: color $transition;
       }
 
       select.orderby {
@@ -264,6 +265,18 @@
 
           &:hover {
             border-color: rgba($color-white, 0.5);
+          }
+        }
+      }
+
+      &.is-active {
+        &::after {
+          color: $color-red;
+        }
+
+        & select.orderby {
+          @include mq(lg) {
+            border-color: $color-red;
           }
         }
       }
