@@ -1049,7 +1049,6 @@ export class FilterbarWooCommerce {
       openBtn.addEventListener("click", () => {
         modal.classList.add("is-open");
         openBtn.classList.add("is-open");
-        openBtn.setAttribute("aria-expanded", "true");
         lockScroll();
       });
       // 閉じる：.js-close-modal（背景や×ボタン）をタップしたら is-open を除去し、ボタン状態を戻して背景ロック解除
@@ -1057,7 +1056,6 @@ export class FilterbarWooCommerce {
         b.addEventListener("click", () => {
           modal.classList.remove("is-open");
           openBtn.classList.remove("is-open");
-          openBtn.setAttribute("aria-expanded", "false");
           unlockScroll();
         })
       );

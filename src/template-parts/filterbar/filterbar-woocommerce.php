@@ -157,7 +157,6 @@ function term_value($t)
   </button>
   <button class="filterbar__open sp-only-block js-open-modal" aria-expanded="false">
     フィルター
-    <i class="fa-solid fa-filter" aria-hidden="true"></i>
   </button>
 </div>
 
