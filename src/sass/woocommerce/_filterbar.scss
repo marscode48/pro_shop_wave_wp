@@ -8,17 +8,6 @@
 //  - SP: モーダル
 // =====================================================================
 
-// ベーストークン（必要に応じて _variables.scss へ昇格）
-$fb-border: 1px solid rgba($color-white, 0.28);
-$fb-border-soft: 1px solid rgba($color-white, 0.22);
-$fb-card: linear-gradient(
-  180deg,
-  rgba($color-black, 0.96),
-  rgba($color-black, 0.86)
-);
-$fb-radius: 0.75rem; // 12px 相当
-$fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-
 // --------------------------------------------------
 // block: filterbar
 // --------------------------------------------------
