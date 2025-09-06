@@ -51,6 +51,15 @@
     border: $fb-border;
     flex: 0 1 auto;
     border-radius: 999px;
+    // SPではピルは非アクティブ（モーダルのトリガーはfilterbar__open）
+    pointer-events: none; // クリック／タップ無効
+    cursor: default; // カーソルを通常に
+
+    // PCでは従来どおり操作可能
+    @include mq(lg) {
+      pointer-events: auto;
+      cursor: pointer;
+    }
 
     &-label {
       font-family: $font-heading;
