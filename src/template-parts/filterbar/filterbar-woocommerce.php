@@ -85,6 +85,23 @@ $popular_tags = get_terms_safe([
 ]);
 
 // --------------------------------------------------
+// 2.5) タグ：全タグを検索母集団として取得（hide_empty=true, number=0 で全件）
+// --------------------------------------------------
+$all_tags = get_terms_safe([
+  'taxonomy'   => 'product_tag',
+  'hide_empty' => true,
+  'orderby'    => 'name',
+  'order'      => 'ASC',
+  'number'     => 0, // 0 = 全件
+]);
+
+// JS で使いやすいように { slug: label, ... } の連想配列に圧縮
+$tag_payload = [];
+foreach ($all_tags as $tg) {
+  $tag_payload[$tg->slug] = $tg->name; // スラッグ→人間可読ラベル
+}
+
+// --------------------------------------------------
 // 3) ブランド： product_brand があれば使用、無ければ pa_brand を試す
 // --------------------------------------------------
 $brand_tax = taxonomy_exists('product_brand') ? 'product_brand' : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
@@ -459,5 +476,10 @@ if ($brand_tax && is_tax($brand_tax)) {
   <?php
   // wp_json_encode()でブランドの3階層データをPHP配列（$children_payload）→ JSON文字列へ変換。
   echo wp_json_encode($brand_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>'
+  data-tags='
+  <?php
+  // 全タグのスラッグ→ラベル辞書を JSON で埋め込む
+  echo wp_json_encode($tag_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  ?>'
   style="display:none">
 </div>

@@ -69,6 +69,9 @@ export class FilterbarWooCommerce {
       spApplyBtn: "#sp-apply",
     };
 
+    // 最大候補件数（検索候補の上限）
+    this.TAG_SEARCH_LIMIT = 300;
+
     // dataset 取得（#filterbar-dataset から JSON形式のデータ属性を取得）
     this.datasetEl = document.getElementById("filterbar-dataset");
 
@@ -77,6 +80,16 @@ export class FilterbarWooCommerce {
     //  || "" 値が undefined や空の場合のフォールバックで空文字をセット
     this.shopUrl = this.datasetEl?.dataset.shopUrl || "";
     this.brandTax = this.datasetEl?.dataset.brandTax || "";
+
+    // 全タグ（slug→label）辞書
+    this.tagLabelBySlug = {};
+    try {
+      // PHP 側で data-tags に埋めた JSON（{ slug: label, ... }）を取り込む
+      this.tagLabelBySlug =
+        JSON.parse(this.datasetEl?.dataset.tags || "{}") || {};
+    } catch (e) {
+      this.tagLabelBySlug = {};
+    }
 
     // カテゴリの親→子マップ（JSON文字列をオブジェクトに）datasetElからdata-childrenを取得
     this.childrenMap = {};
@@ -119,7 +132,9 @@ export class FilterbarWooCommerce {
     this._buildBrandIndexes();
 
     // タグ: スラッグ -> ラベル
-    this.tagLabelBySlug = {};
+    // （this.tagLabelBySlug は上で dataset から初期化済み）
+    // this.tagLabelBySlug = {};
+
     // カテゴリ: スラッグ -> ラベル（親/子とも）
     this.catLabelBySlug = {};
     this._buildCategoryLabelIndex();
@@ -839,13 +854,13 @@ export class FilterbarWooCommerce {
         const q = e.target.value.toLowerCase().trim();
         // 候補母集団の用意
         const pool = Object.entries(this.tagLabelBySlug); // [[slug, label], ...] 形式の配列
-        // フィルタリングしてラベル辞書（slug→label）から一致候補を最大10件まで作る
+        // フィルタリングしてラベル辞書（slug→label）から一致候補を「最大 this.TAG_SEARCH_LIMIT 件（既定: 300）」まで作る
         const hit = pool
           .filter(
             ([slug, label]) =>
               slug.includes(q) || label.toLowerCase().includes(q)
           )
-          .slice(0, 10);
+          .slice(0, this.TAG_SEARCH_LIMIT);
 
         // 結果描画用ボックスにボタンを生成
         const res = this.$(this.selectors.pcTagResults);
@@ -1084,7 +1099,7 @@ export class FilterbarWooCommerce {
     );
 
     // --- タグ（SP：検索 + 人気） ---
-    // 検索ボックスの入力に応じて、候補ボタン（最大10件）を作り直す
+    // 検索ボックスの入力に応じて、候補ボタン（最大 this.TAG_SEARCH_LIMIT 件（既定: 300））を作り直す
     // SP：タグ検索の入力ボックスを取得
     const spTagSearch = this.$(this.selectors.spTagSearch);
     if (spTagSearch) {
@@ -1096,13 +1111,13 @@ export class FilterbarWooCommerce {
         // 逆引き辞書 {slug: label} → [[slug, label], ...] に変換
         const pool = Object.entries(this.tagLabelBySlug);
 
-        // slug / label のどちらかにクエリが含まれる候補を最大10件抽出
+        // slug / label のどちらかにクエリが含まれる候補を「最大 this.TAG_SEARCH_LIMIT 件（既定: 300）」抽出
         const hit = pool
           .filter(
             ([slug, label]) =>
               slug.includes(q) || label.toLowerCase().includes(q)
           )
-          .slice(0, 10);
+          .slice(0, this.TAG_SEARCH_LIMIT);
 
         // 結果描画先（候補ボタンを並べるボックス）
         const box = this.$(this.selectors.spTagSelected);
