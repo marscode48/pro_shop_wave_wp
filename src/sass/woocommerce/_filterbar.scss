@@ -256,6 +256,14 @@
     }
   }
 
+  &__nohit {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    background: rgba($color-white, 0.06);
+    color: rgba($color-white, 0.75);
+    font-size: 0.9rem;
+  }
+
   &__actions {
     display: flex;
     gap: 0.5rem;

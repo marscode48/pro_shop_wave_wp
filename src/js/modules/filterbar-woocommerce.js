@@ -872,6 +872,15 @@ export class FilterbarWooCommerce {
         const res = this.$(this.selectors.pcTagResults);
         if (!res) return;
         res.innerHTML = "";
+        // ヒットが無い場合はメッセージを表示して終了
+        if (hit.length === 0) {
+          const msg = document.createElement("div");
+          msg.className = "filterbar__nohit";
+          msg.textContent = "該当するタグはありません。";
+          res.appendChild(msg);
+          return;
+        }
+
         hit.forEach(([slug, label]) => {
           const b = document.createElement("button");
           b.className = "filterbar__chip";
@@ -1137,6 +1146,14 @@ export class FilterbarWooCommerce {
 
         // 前回の結果をクリアして差し替え
         box.innerHTML = "";
+        // ヒットが無い場合はメッセージを表示して終了
+        if (hit.length === 0) {
+          const msg = document.createElement("div");
+          msg.className = "filterbar__nohit";
+          msg.textContent = "該当するタグはありません。";
+          box.appendChild(msg);
+          return;
+        }
 
         // 候補ごとにボタンを生成 → クリックで state を更新
         hit.forEach(([slug, label]) => {
