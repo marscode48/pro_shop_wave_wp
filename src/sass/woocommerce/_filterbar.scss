@@ -121,6 +121,7 @@
     justify-content: center;
     margin-top: 0.5rem;
     margin-left: auto;
+    padding-right: calc(0.55em + 5%); // アイコン分余白
     font-size: 0.875rem;
     letter-spacing: 0.08em;
     border-radius: $fb-radius;
