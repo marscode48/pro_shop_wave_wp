@@ -852,6 +852,12 @@ export class FilterbarWooCommerce {
       search.addEventListener("input", (e) => {
         //  ユーザー入力の正規化（検索クエリを 小文字化 ＋ 前後空白除去）
         const q = e.target.value.toLowerCase().trim();
+        // 入力が空なら結果を消して終了（全件は出さない）
+        if (!q) {
+          const res = this.$(this.selectors.pcTagResults);
+          if (res) res.innerHTML = "";
+          return;
+        }
         // 候補母集団の用意
         const pool = Object.entries(this.tagLabelBySlug); // [[slug, label], ...] 形式の配列
         // フィルタリングしてラベル辞書（slug→label）から一致候補を「最大 this.TAG_SEARCH_LIMIT 件（既定: 300）」まで作る
@@ -1107,6 +1113,12 @@ export class FilterbarWooCommerce {
       spTagSearch.addEventListener("input", (e) => {
         // ユーザー入力を正規化（小文字化・前後空白除去）
         const q = e.target.value.toLowerCase().trim();
+        // 入力が空なら結果を消して終了（全件は出さない）
+        if (!q) {
+          const box = this.$(this.selectors.spTagSelected);
+          if (box) box.innerHTML = "";
+          return;
+        }
 
         // 逆引き辞書 {slug: label} → [[slug, label], ...] に変換
         const pool = Object.entries(this.tagLabelBySlug);
