@@ -840,6 +840,8 @@ export class FilterbarWooCommerce {
 
           // 人気タグ群の選択表示更新、選択済みタグ枠の描画、ピル更新
           this._selectChip(this.selectors.pcTagPopular, this.state.tag);
+          // 検索結果リストの表示更新
+          this._selectChip(this.selectors.pcTagResults, this.state.tag);
           this._renderTagSelected();
           this._renderPills();
         });
@@ -891,6 +893,7 @@ export class FilterbarWooCommerce {
             this.state.tag = slug;
             this.state.tagLabel = label;
             this._selectChip(this.selectors.pcTagResults, this.state.tag);
+            this._selectChip(this.selectors.pcTagPopular, this.state.tag);
             this._renderTagSelected(); // 「選択中タグ」枠に反映
             this._renderPills();
           });
