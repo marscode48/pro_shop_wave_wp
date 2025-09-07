@@ -1215,7 +1215,8 @@ export class FilterbarWooCommerce {
             this.tagLabelBySlug[slug] || decodeURIComponent(slug);
 
           // 見た目の選択状態を同期（SPの人気タグ群内で、選ばれたチップだけ data-selected="true"）
-          this._selectChip(this.selectors.spTagPopular, this.state.tag);
+          this._selectChip(this.selectors.spTagPopular, this.state.tag); // 視覚上の選択
+          this._selectChip(this.selectors.spTagSelected, this.state.tag); // 検索結果側も同じスラッグのみ選択に同期
 
           // 上部ピルのテキストを最新 state に合わせて描画
           this._renderPills();
