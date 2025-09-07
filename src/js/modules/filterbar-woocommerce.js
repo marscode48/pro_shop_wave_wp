@@ -885,10 +885,12 @@ export class FilterbarWooCommerce {
           const b = document.createElement("button");
           b.className = "filterbar__chip";
           b.dataset.value = slug;
+          b.dataset.selected = this.state.tag === slug ? "true" : "false";
           b.textContent = label;
           b.addEventListener("click", () => {
             this.state.tag = slug;
             this.state.tagLabel = label;
+            this._selectChip(this.selectors.pcTagResults, this.state.tag);
             this._renderTagSelected(); // 「選択中タグ」枠に反映
             this._renderPills();
           });
@@ -1160,6 +1162,7 @@ export class FilterbarWooCommerce {
           const b = document.createElement("button");
           b.className = "filterbar__chip";
           b.dataset.value = slug; // 応用（選択同期など）用に slug を保持
+          b.dataset.selected = this.state.tag === slug ? "true" : "false";
           b.textContent = label; // 表示は人間可読ラベル
 
           // 候補ボタンをクリックしたら、タグの選択を確定
@@ -1169,6 +1172,9 @@ export class FilterbarWooCommerce {
 
             // 人気タグ側の見た目も同期（[data-selected] を更新）
             this._selectChip(this.selectors.spTagPopular, this.state.tag);
+
+            // SPタグ検索エリア（#sp-tag-selected 配下）のチップ群を走査（[data-selected] を更新）
+            this._selectChip(this.selectors.spTagSelected, this.state.tag);
 
             // 上部ピル（現在の選択サマリ）を更新
             this._renderPills();
