@@ -41,6 +41,33 @@ if (count($parent_terms) < 2) {
   ]);
 }
 
+// --------------------------------------------------
+// 親カテゴリの表示順を固定（parts → apparel）
+// get_terms() の結果順に依存せず、常に希望順で並べる
+// --------------------------------------------------
+$desired_order = ['parts', 'apparel'];
+// $desired_order = ['parts', 'apparel'] を
+// array_flip() で ['parts' => 0, 'apparel' => 1] に変換。
+// これにより、slug をキーにして「希望の順番インデックス」を素早く参照できる。
+$order_index = array_flip($desired_order);
+
+// usort() で親カテゴリ配列を希望順（$desired_order）で並べ替える
+// - usort: 配列を「比較関数」に基づいて並べ替えるPHPの関数
+// - 比較関数は2つの要素($a, $b)を受け取り、順序を決める値を返す
+usort($parent_terms, function ($a, $b) use ($order_index) {
+  // $ai, $bi: 各タームのスラッグが$desired_order内で何番目か（インデックス）。未定義(slugが$desired_orderに無い)はPHP_INT_MAX（最大値）で一番後ろに。
+  $ai = $order_index[$a->slug] ?? PHP_INT_MAX;
+  $bi = $order_index[$b->slug] ?? PHP_INT_MAX;
+  // インデックスが小さい方を先に（希望順）。未定義は後ろへ。
+  // 比較結果が0なら順序は変えない（返り値0:等しい）、$ai<$biなら-1（$aが先）、$ai>$biなら1（$bが先）
+  if ($ai === $bi) {
+    // 同じインデックス（またはどちらも未定義）の場合は順序維持
+    return 0;
+  }
+  // $aiが小さいほど前に
+  return ($ai < $bi) ? -1 : 1;
+});
+
 // 親ごとの子カテゴリマップを構築
 $children_map = [];
 foreach ($parent_terms as $p) {
