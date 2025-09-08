@@ -99,9 +99,11 @@
         opacity: 0.7; // 控えめ
         transition: color $transition, opacity $transition,
           transform $transition;
+        position: relative;
       }
     }
 
+    // ピルが展開中: アイコンを「閉じる（×）」に切り替え（PC）
     &[aria-expanded="true"] {
       @include mq(lg) {
         border-color: $color-red;
@@ -111,6 +113,10 @@
         .filterbar__pill-icon {
           color: $color-red;
           opacity: 1;
+        }
+        
+        .filterbar__pill-icon::before {
+          content: "\f00d"; // fa-xmark
         }
       }
     }
