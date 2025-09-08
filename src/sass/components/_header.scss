@@ -12,10 +12,11 @@
   padding: 0 5vw;
   background-color: $color-black;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // オプションで影
+  transition: border-color $transition, background $transition;
 
   &.is-scrolled {
     background-color: rgba(0, 0, 0, 0.8);
-    transition: all $transition;
+    border-bottom: 1px solid rgba($color-gray, 0.3);
   }
 
   &__inner {
