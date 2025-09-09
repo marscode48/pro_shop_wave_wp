@@ -1,0 +1,442 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// =====================================================================
+// WooCommerce: フィルターバー（カテゴリ／タグ／ブランド）
+//  - PC: ドロップダウン
+//  - SP: モーダル
+// =====================================================================
+
+// --------------------------------------------------
+// block: filterbar
+// --------------------------------------------------
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  column-gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  @include mq(lg) {
+    margin-bottom: 2rem;
+    gap: 0.5rem;
+  }
+
+  // ピル（カテゴリ／タグ／ブランド）
+  &__pill,
+  &__open {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    padding: 0.55em;
+    background: rgba($color-white, 0.03);
+    color: $color-white;
+    cursor: pointer;
+    transition: border-color $transition, background $transition,
+      color $transition;
+
+    @include mq(lg) {
+      gap: 0.5em;
+      padding: 0.55em 0.9em;
+    }
+
+    &:hover {
+      @include mq(lg) {
+        border-color: rgba($color-white, 0.5);
+      }
+    }
+  }
+
+  &__pill {
+    border: $fb-border;
+    flex: 0 1 auto;
+    border-radius: 999px;
+    // SPではピルは非アクティブ（モーダルのトリガーはfilterbar__open）
+    pointer-events: none; // クリック／タップ無効
+    cursor: default; // カーソルを通常に
+
+    // PCでは従来どおり操作可能
+    @include mq(lg) {
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    &-label {
+      font-family: $font-heading;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+
+      @include mq(lg) {
+        font-size: 0.85rem;
+      }
+    }
+
+    &-value {
+      font-size: 0.875rem;
+      font-weight: 700;
+
+      @include mq(lg) {
+        font-size: 1rem;
+      }
+    }
+
+    // ピル左端のフィルターアイコン（PCのみ表示）
+    &-icon {
+      display: none; // SPでは非表示
+      flex: 0 0 auto;
+
+      @include mq(lg) {
+        display: inline-flex; // PCで表示
+        align-items: center;
+        justify-content: center;
+        width: 1.1em; // 固定幅で位置を安定化
+        min-width: 1.1em;
+        margin-right: 0.4em; // ラベルとの間隔
+        opacity: 0.7; // 控えめ
+        transition: color $transition, opacity $transition,
+          transform $transition;
+        position: relative;
+      }
+    }
+
+    // ピルが展開中: アイコンを「閉じる（×）」に切り替え（PC）
+    &[aria-expanded="true"] {
+      @include mq(lg) {
+        border-color: $color-red;
+        background: rgba($color-red, 0.12);
+        box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
+
+        .filterbar__pill-icon {
+          color: $color-red;
+          opacity: 1;
+        }
+        
+        .filterbar__pill-icon::before {
+          content: "\f00d"; // fa-xmark
+        }
+      }
+    }
+  }
+
+  // SP:「フィルター」オープンボタン
+  &__open {
+    position: relative;
+    flex: 0 0 50%;
+    justify-content: center;
+    margin-left: auto;
+    padding-right: calc(0.55em + 5%); // アイコン分余白
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    border-radius: $fb-radius;
+    border: 1px solid $color-red;
+
+    &::after {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      content: "\f0b0"; // fa-filter のグリフ
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 1;
+      pointer-events: none; // クリックを塞がない
+      color: $color-white;
+      opacity: 0.8;
+      transition: color $transition;
+    }
+
+    // SP専用表示制御
+    &.sp-only-block {
+      @include mq(lg) {
+        display: none;
+      }
+    }
+
+    // 開いている間は強調（ブランドカラーなど）
+    &.is-open {
+      &::after {
+        color: $color-red;
+      }
+    }
+  }
+
+  // PC: ドロップダウン
+  &__dropdown {
+    position: relative;
+
+    &.is-open {
+      .filterbar__panel {
+        display: block;
+      }
+    }
+  }
+
+  // PC: パネル
+  &__panel {
+    // 初期は非表示（.filterbar__dropdown.is-open で表示）
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.625rem); // +10px
+    left: 0;
+    z-index: 40;
+    width: min(57.5rem, 90vw); // 920px
+    background: $fb-card;
+    border: $fb-border-soft;
+    border-radius: $fb-radius;
+    box-shadow: $fb-shadow;
+    padding: 1rem;
+  }
+
+  // PC:ドロップダウン内グリッド/グループ
+  &__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  &__group {
+    background: linear-gradient(
+      180deg,
+      rgba($color-white, 0.03),
+      rgba($color-white, 0)
+    );
+    border: $fb-border-soft;
+    border-radius: 0.625rem; // 10px
+    padding: 0.75rem;
+
+    > h3 {
+      margin: 0 0 0.5rem;
+      font-family: $font-heading;
+      letter-spacing: 0.06em;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    #pc-tag-search {
+      width: 100%;
+      padding: 0.6em;
+      border-radius: $fb-radius;
+      border: $fb-border;
+      background: rgba($color-white, 0.03);
+      color: $color-white;
+      box-sizing: border-box;
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    // ブランドは単一行で表示
+    &#sp-brand-maker,
+    &#pc-brand-maker {
+      display: grid;
+    }
+  }
+
+  &__chip {
+    padding: 0.45em 0.7em;
+    border: $fb-border;
+    border-radius: 999px;
+    background: rgba($color-white, 0.04);
+    color: $color-white;
+    cursor: pointer;
+    transition: border-color $transition, background $transition,
+      color $transition;
+
+    &:hover {
+      @include mq(lg) {
+        border-color: rgba($color-white, 0.5);
+      }
+    }
+
+    // data-selected="true" で選択ビジュアル
+    &[data-selected="true"] {
+      border-color: $color-red;
+      background: rgba($color-red, 0.12);
+      box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
+    }
+  }
+
+  &__nohit {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    background: rgba($color-white, 0.06);
+    color: rgba($color-white, 0.75);
+    font-size: 0.9rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+  }
+
+  &__btn {
+    padding: 0.6em 1em;
+    border-radius: 0.5rem; // 8px
+    border: 1px solid $color-red;
+    background: $color-black;
+    color: $color-white;
+    cursor: pointer;
+    transition: border-color $transition, background $transition,
+      color $transition;
+
+    &:hover {
+      @include mq(lg) {
+        border-color: color.adjust($color-red, $lightness: -10%);
+        color: color.adjust($color-white, $lightness: -30%);
+      }
+    }
+
+    &--primary {
+      color: $color-white;
+      background: $color-red;
+      border-color: $color-red;
+
+      &:hover {
+        @include mq(lg) {
+          background: color.adjust($color-red, $lightness: -10%);
+        }
+      }
+    }
+  }
+
+  // SP: モーダル
+  &__modal {
+    position: fixed;
+    inset: 0;
+    display: none; // .is-open で表示
+    z-index: 60;
+    // 背景スクロールを抑止（パネルのみスクロール可）
+    overflow: hidden;
+    overscroll-behavior: contain; // スクロールの伝搬を止める
+
+    &.is-open {
+      display: block;
+    }
+  }
+
+  &__modal-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__modal-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 85vh;
+    background: $fb-card;
+    border-top-left-radius: 1.125rem; // 18px
+    border-top-right-radius: 1.125rem;
+    padding: 1rem;
+    box-shadow: $fb-shadow;
+    overflow: auto;
+    overscroll-behavior: contain; // パネル外へバウンドスクロールを伝搬しない
+    -webkit-overflow-scrolling: touch; // iOS 慣性スクロール
+  }
+
+  &__modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    strong {
+      font-family: $font-heading;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  &__modal-footer {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    gap: 0.5rem;
+    background: linear-gradient(
+      180deg,
+      rgba(15, 15, 15, 0),
+      rgba(15, 15, 15, 1) 35%
+    );
+    padding-top: 0.75rem;
+    padding-bottom: 0.25rem;
+  }
+
+  // アコーディオン（summary/詳細）
+  &__accordion {
+    border: $fb-border-soft;
+    border-radius: 0.625rem;
+    margin-bottom: 0.625rem;
+    transition: border-color $transition;
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+
+      i.fa-chevron-down {
+        transition: transform $transition, color $transition;
+      }
+    }
+
+    &[open] {
+      border-color: $color-red;
+    }
+
+    &[open] summary i.fa-chevron-down {
+      color: $color-red;
+      transform: rotate(180deg);
+    }
+  }
+
+  &__accordion-panel {
+    padding: 0.75rem;
+    border-top: $fb-border-soft;
+    transition: border-color;
+
+    > h4 {
+      margin: 0.625rem 0;
+    }
+
+    #sp-tag-search {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.6em;
+      border-radius: $fb-radius;
+      border: $fb-border-soft;
+      background: rgba($color-white, 0.03);
+      color: $color-white;
+      box-sizing: border-box;
+    }
+  }
+}
+
+// --------------------------------------------------
+// 小さなユーティリティ
+// --------------------------------------------------
+.muted {
+  color: rgba($color-white, 0.6);
+  font-size: 0.92rem;
+}
+
+// 背景スクロールロック（モーダル open 時に html/body に付与）
+html.is-filterbar-open,
+body.is-filterbar-open {
+  overflow: hidden !important;
+  height: 100%;
+  touch-action: none; // タッチスクロールも抑止
+}

@@ -64,4 +64,18 @@
       clear: none;
     }
   }
+
+  .woocommerce-result-count {
+    float: none;
+  }
+
+  .woocommerce-ordering {
+    float: none;
+  }
+
+  .woocommerce-pagination {
+    ul.page-numbers {
+      @include reset-menu();
+    }
+  }
 }

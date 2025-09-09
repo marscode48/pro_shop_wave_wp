@@ -1,0 +1,380 @@
+@use "../globals/index" as *;
+@use "./mixins" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Product loops
+	 */
+  .products {
+    padding: 2.5rem 0;
+
+    @include mq(lg) {
+      padding: 4.375rem 0;
+    }
+  }
+
+  .products + .products {
+    padding: 0 0 2.5rem;
+
+    @include mq(lg) {
+      padding: 0 0 4.375rem;
+    }
+  }
+
+  .products__header,
+  .product-archive__header {
+    &--top {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    &--bottom {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  }
+
+  .products ul,
+  ul.products {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @include mq(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    li {
+      list-style: none outside;
+    }
+  }
+
+  ul.products li.product {
+    position: relative;
+    @include product-card-gradient;
+    border: 1px solid $color-red;
+    padding: 1rem;
+    border-radius: $radius-card;
+    text-align: left;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+
+    &:hover {
+      @include mq(lg) {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    .onsale {
+      top: 3%;
+      left: 3%;
+      right: auto;
+      margin: 0;
+    }
+
+    .product-card__body {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .product-card__image-link {
+      display: block;
+      overflow: hidden;
+
+      &:hover {
+        @include mq(lg) {
+          img {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+          }
+        }
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0;
+        box-shadow: none;
+        object-fit: cover;
+        aspect-ratio: 3 / 2;
+        border-radius: $radius-image;
+        transition: transform $transition, filter $transition;
+      }
+    }
+
+    .product-card__topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-card__brand {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: $color-gray;
+      white-space: nowrap;
+
+      .product-card__brand-link {
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: $color-red;
+          }
+        }
+      }
+    }
+
+    .product-card__category {
+      font-size: 0.8rem;
+      color: $color-gray;
+
+      a {
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: $color-red;
+          }
+        }
+      }
+    }
+
+    h3,
+    .woocommerce-loop-product__title,
+    .woocommerce-loop-category__title {
+      padding: 0;
+      font-family: $font-heading;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      font-size: 1.125rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @include mq(lg) {
+        font-size: 1.25rem;
+      }
+    }
+
+    .woocommerce-placeholder {
+      border: none;
+    }
+
+    .star-rating {
+      font-size: 0.75rem;
+    }
+
+    .price {
+      font-size: 1rem;
+      color: $color-white;
+      margin: 0;
+
+      del {
+        opacity: 1;
+      }
+
+      ins {
+        font-weight: 400;
+      }
+    }
+
+    .product-card__more {
+      text-align: center;
+      margin-top: 1rem;
+
+      .product-card__more-link {
+        @include more-link($color-red);
+      }
+    }
+  }
+
+  .product-archive__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+
+    // PC時は横並び
+    @include mq(lg) {
+      gap: 0;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    // 商品数表示
+    .woocommerce-result-count {
+      margin: 0;
+    }
+
+    // 並び替えフォーム
+    .woocommerce-ordering {
+      width: 50%; // filterbar__open と同じ大きさ
+      position: relative;
+      display: inline-block;
+      margin-left: auto; // 右に配置
+
+      @include mq(lg) {
+        width: auto;
+        margin-left: 0;
+      }
+
+      &::after {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        content: "\f0dc"; // fa-sort のグリフ
+        position: absolute;
+        right: 6.5%; // 右端に配置
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 1;
+        pointer-events: none; // クリックを塞がない
+        color: $color-white;
+        opacity: 0.8;
+        transition: color $transition;
+      }
+
+      select.orderby {
+        width: 100%;
+        text-align: center;
+        padding: 0.55em;
+        padding-right: calc(0.55em + 6.5%); // アイコン分余白
+        border: 1px solid $color-red;
+        border-radius: $fb-radius;
+        color: $color-white;
+        background: rgba($color-white, 0.03);
+        cursor: pointer;
+        transition: border-color $transition, color $transition;
+
+        @include mq(lg) {
+          border: $fb-border;
+          width: auto;
+          padding: 0.55em 2.5em;
+          padding-right: calc(2.5em + 6.5%); // アイコン分余白
+
+          &:hover {
+            border-color: rgba($color-white, 0.5);
+          }
+        }
+      }
+
+      &.is-active {
+        &::after {
+          color: $color-red;
+        }
+
+        & select.orderby {
+          @include mq(lg) {
+            border-color: $color-red;
+          }
+        }
+      }
+    }
+  }
+
+  .woocommerce-ordering {
+    margin: 0;
+
+    > label {
+      margin-right: 0;
+    }
+
+    select {
+      vertical-align: baseline;
+    }
+  }
+
+  nav.woocommerce-pagination {
+    margin-top: 3rem;
+    text-align: center;
+    font-family: $font-heading;
+
+    ul {
+      display: inline;
+      white-space: normal;
+      padding: 0;
+      clear: none;
+      border: none;
+      border-right: 0;
+      margin: 0;
+
+      li {
+        border-right: none;
+        padding: 0;
+        margin: 0 0.5rem;
+        float: none;
+        display: inline;
+        overflow: visible;
+
+        a,
+        span {
+          text-decoration: none;
+          line-height: normal;
+          font-size: 1.125rem;
+          font-weight: normal;
+          min-width: 1em;
+          display: inline;
+          margin: 0;
+          padding: 0;
+
+          @include mq(lg) {
+            font-size: 1.25rem;
+            transition: color $transition;
+          }
+        }
+
+        span.current,
+        a:hover,
+        a:focus {
+          background: none;
+          font-weight: bold;
+          color: $color-red;
+        }
+      }
+    }
+  }
+
+  .cart .button,
+  .cart input.button {
+    float: none;
+  }
+}

@@ -5,6 +5,7 @@ $color-red: #E60012;
 $color-white: #FFFFFF;
 $color-gray: #B3B3B3;
 $color-dark-gray: #211d1d;
+$color-dark-red-gradient: linear-gradient(180deg, $color-black 0%, #330000 100%);
 
 // Fonts
 $font-heading: 'Oswald', sans-serif;
@@ -25,3 +26,14 @@ $box-shadow-red-hover: 0 0.5rem 2.5rem rgba($color-red, 1);
 
 // Text shadows
 $text-shadow-black-default: 2px 3px 3px rgba($color-black, 0.6);
+
+// filter, pill-btn
+$fb-border: 1px solid rgba($color-white, 0.28);
+$fb-border-soft: 1px solid rgba($color-white, 0.22);
+$fb-card: linear-gradient(
+  180deg,
+  rgba($color-black, 0.96),
+  rgba($color-black, 0.86)
+);
+$fb-radius: 12px;
+$fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);

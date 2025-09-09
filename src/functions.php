@@ -410,6 +410,26 @@ function remove_loop_add_to_cart_button() {
 add_action( 'init', 'remove_loop_add_to_cart_button' );
 
 // -----------------------------
+// WooCommerce 商品ループの自動リンク(<a> 開始/終了)を全体で無効化
+// 目的: ループ内の空のアンカーを出力しないようにし、明示的に用意した .product-card__more のみで詳細ページへリンクさせるため。
+// 影響範囲: 商品アーカイブ/一覧ループ全体。単一商品ページは影響なし。
+// -----------------------------
+add_action( 'init', function() {
+  // `<a href="..." class="woocommerce-LoopProduct-link ...">` の開始タグを無効化
+  remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+  
+  // 上記開始タグに対応する閉じタグを無効化
+  remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+});
+
+// -----------------------------
+// WooCommerce サイドバーを全ページで無効化
+// -----------------------------
+add_action( 'init', function() {
+  remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+});
+
+// -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------
 function custom_woocommerce_breadcrumbs( $defaults ) {
@@ -422,3 +442,155 @@ function custom_woocommerce_breadcrumbs( $defaults ) {
 	return $defaults;
 }
 add_filter( 'woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs' );
+
+// -----------------------------
+// WooCommerce アーカイブ説明から不要な div と p タグを除去
+// -----------------------------
+remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+
+add_action( 'woocommerce_archive_description', function() {
+  if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
+    $description = term_description();
+    if ( $description ) {
+      // pタグやdivタグを除去してテキストのみ出力
+      echo esc_html( wp_strip_all_tags( $description ) );
+    }
+  }
+}, 10 );
+
+// -----------------------------
+// WooCommerce 商品一覧の表示件数を変更（例：12件）
+// -----------------------------
+add_filter( 'loop_shop_per_page', function( $cols ) {
+  return 12; // 表示件数を変更
+}, 20 );
+
+
+// ----------------------------------------------
+// Helper: 二重URLエンコード等を考慮してクエリ文字列を安全に取得
+// 例) "%25e3%2582%25a2..." → rawurldecode 2段階で「アパレル」へ
+// ----------------------------------------------
+function get_query_slug( $key ) {
+  if ( ! isset( $_GET[ $key ] ) ) {
+    return '';
+  }
+  $raw = $_GET[ $key ];
+  if ( is_array( $raw ) ) {
+    return '';
+  }
+  // WordPressの「マジッククォート」互換の自動エスケープが残る可能性があるので、まずはアンスラッシュして素の文字に戻す
+  $val = wp_unslash( $raw );
+
+  // 1回デコード（ UTF-8 の生文字（例：「アパレル」）に戻す）
+  // ここで rawurldecode を使うのは、+ をスペースに変換しないため（urldecode は +→空白にする）。
+  $decoded = rawurldecode( $val );
+  // まだ %XX パターンが残っている（=二重エンコードの可能性）ならもう一度
+  // 「% に続く16進数2桁」＝パーセントエンコード（%HH）1バイト分を検出するための正規表現
+  if ( preg_match( '/%[0-9a-fA-F]{2}/', $decoded ) ) {
+    $decoded = rawurldecode( $decoded );
+  }
+
+  // テキストとしてサニタイズして返す（日本語スラッグも許容）
+  return sanitize_text_field( $decoded );
+}
+
+// -----------------------------
+// 商品一覧の絞り込みをメインクエリへ反映（カテゴリ / タグ / ブランド）
+// 対象: ショップ一覧 / 商品カテゴリ・タグなどの商品系アーカイブ
+// URL例: ?product_cat=slug&product_tag=slug&product_brand=slug または ?pa_brand=slug
+// -----------------------------
+add_action( 'pre_get_posts', function ( $query ) {
+  // 管理画面やメインクエリ以外は除外
+  if ( is_admin() || ! $query->is_main_query() ) {
+    return;
+  }
+
+  // ショップ一覧 or WooCommerce の商品系タクソノミーのみ対象
+  if ( ! ( is_shop() || is_product_taxonomy() ) ) {
+    return;
+  }
+
+  // 既存 tax_query を取得して配列化
+  $tax_query = (array) $query->get( 'tax_query' );
+
+  // --- 1) カテゴリ（product_cat）
+  $cat = get_query_slug( 'product_cat' );
+  if ( $cat !== '' ) {
+    $tax_query[] = [
+      'taxonomy'         => 'product_cat',
+      'field'            => 'slug',
+      'terms'            => [ $cat ],
+      'operator'         => 'IN',
+      'include_children' => true,
+    ];
+  }
+
+  // --- 2) タグ（product_tag）
+  $tag = get_query_slug( 'product_tag' );
+  if ( $tag !== '' ) {
+    $tax_query[] = [
+      'taxonomy' => 'product_tag',
+      'field'    => 'slug',
+      'terms'    => [ $tag ],
+      'operator' => 'IN',
+    ];
+  }
+
+  // --- 3) ブランド（環境により taxonomy 名が異なる想定: product_brand or pa_brand）
+  $brand_tax = taxonomy_exists( 'product_brand' ) ? 'product_brand' : ( taxonomy_exists( 'pa_brand' ) ? 'pa_brand' : '' );
+  if ( $brand_tax ) {
+    $param_key = $brand_tax; // URLキーは taxonomy 名に合わせる方針
+    $brand = get_query_slug( $param_key );
+    if ( $brand !== '' ) {
+      $tax_query[] = [
+        'taxonomy' => $brand_tax,
+        'field'    => 'slug',
+        'terms'    => [ $brand ],
+        'operator' => 'IN',
+      ];
+    }
+  }
+
+  if ( ! empty( $tax_query ) ) {
+    if ( ! isset( $tax_query['relation'] ) ) {
+      $tax_query['relation'] = 'AND';
+    }
+    $query->set( 'tax_query', $tax_query );
+  }
+} );
+
+// -----------------------------
+// 重複防止: before_shop_loop 標準の件数/並び替えは削除（自前のコントロール"product-archive__controls"を使用）
+// -----------------------------
+add_action('init', function () {
+  remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+  remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
+});
+
+// -----------------------------
+// /shop/ を常に WooCommerce 側のアーカイブテンプレートで表示
+// 目的: テーマ直下の archive-product.php が拾われるケースを避け、
+//       woocommerce/archive-product.php（= フィルターバー出力版）を優先させる
+// -----------------------------
+add_filter('template_include', function ($template) {
+  // is_shop() は WooCommerce 有効時のみ
+  if ( function_exists('is_shop') && is_shop() ) {
+    // Woo のテンプレートロケータで優先解決
+    if ( function_exists('wc_locate_template') ) {
+      $wc_template = wc_locate_template('archive-product.php');
+      if ( ! empty($wc_template) ) {
+        return $wc_template;
+      }
+    }
+    // フォールバック: 子テーマ/親テーマの woocommerce/archive-product.php
+    $fallback_child = get_stylesheet_directory() . '/woocommerce/archive-product.php';
+    if ( file_exists($fallback_child) ) {
+      return $fallback_child;
+    }
+    $fallback_parent = get_template_directory() . '/woocommerce/archive-product.php';
+    if ( file_exists($fallback_parent) ) {
+      return $fallback_parent;
+    }
+  }
+  return $template;
+}, 50);

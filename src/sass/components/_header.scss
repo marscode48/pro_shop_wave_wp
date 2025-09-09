@@ -1,5 +1,5 @@
-@use '../globals/index' as *;
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "sass:color";
 
 // ========================
 // HEADER 共通
@@ -12,10 +12,11 @@
   padding: 0 5vw;
   background-color: $color-black;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // オプションで影
+  transition: border-color $transition, background $transition;
 
   &.is-scrolled {
     background-color: rgba(0, 0, 0, 0.8);
-    transition: all $transition;
+    border-bottom: 1px solid rgba($color-gray, 0.3);
   }
 
   &__inner {
@@ -40,7 +41,7 @@
     padding: 0;
     z-index: 100;
     cursor: pointer;
-  
+
     span {
       position: absolute;
       height: 2px;
@@ -48,29 +49,29 @@
       left: 0;
       border-radius: 2px;
       transition: transform $transition, width $transition, top $transition;
-  
+
       &:nth-child(1) {
         top: 0;
         width: 100%;
       }
-  
+
       &:nth-child(2) {
         top: 10px;
         width: 60%;
       }
-  
+
       &:nth-child(3) {
         display: none;
       }
     }
-  
+
     &.is-open {
       span {
         &:nth-child(1) {
           top: 10px;
           transform: rotate(45deg);
         }
-  
+
         &:nth-child(2) {
           top: 10px;
           width: 100%;
@@ -78,7 +79,7 @@
         }
       }
     }
-  
+
     @include mq(lg) {
       display: none;
     }
@@ -90,16 +91,16 @@
     justify-content: center;
     height: 100%;
     width: 180px;
-  
+
     @include mq(lg) {
       width: 220px;
       justify-content: flex-start;
     }
-  
+
     a {
       display: block;
       text-decoration: none;
-  
+
       img {
         width: 100%;
         height: auto;
@@ -114,7 +115,11 @@
     left: 0;
     width: 75vw;
     height: 100svh;
-    background: linear-gradient(to bottom, rgba($color-black, 0.95), rgba($color-red, 0.8));
+    background: linear-gradient(
+      to bottom,
+      rgba($color-black, 0.95),
+      rgba($color-red, 0.8)
+    );
     z-index: 99;
     padding-top: $header-height;
     overflow-y: auto;
@@ -180,7 +185,7 @@
         pointer-events: auto;
         animation: none;
       }
-  
+
       & a {
         @include link-underline-animate();
         color: $color-white;
@@ -198,6 +203,115 @@
       }
     }
 
+    // ------------------------
+    // サブメニュー（Shop 配下の Parts / Apparel）
+    // ------------------------
+    &-item--has-children {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      // トグルボタン（PCは開閉、SPではトグルは非表示）
+      .header__nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 0.25rem;
+        line-height: 1;
+
+        @include mq(lg) {
+          display: inline-flex;
+        }
+
+        .header__nav-toggle-icon {
+          // シンプルな▼アイコン（CSS描画）
+          width: 0.6rem;
+          height: 0.6rem;
+          border-right: 2px solid $color-white;
+          border-bottom: 2px solid $color-white;
+          transform: rotate(45deg);
+          transition: transform $transition, border-color $transition;
+        }
+
+        &:hover .header__nav-toggle-icon {
+          @include mq(lg) {
+            border-color: $color-red;
+          }
+        }
+      }
+
+      &.is-open .header__nav-toggle-icon {
+        @include mq(lg) {
+          border-color: $color-red;
+        }
+      }
+
+      // 内包サブメニュー（初期はSPではドロワー内にブロック表示、PCでは非表示（開閉））
+      .header__submenu {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        margin-left: 1rem;
+        margin-top: 0.25rem;
+        border-left: 1px solid $color-gray;
+        list-style: none;
+
+        @include mq(lg) {
+          position: absolute;
+          top: calc(100% + 8px);
+          left: 0;
+          min-width: 12rem;
+          margin: 0;
+          display: none;
+          border: 1px solid $color-red;
+          border-radius: $radius-card;
+          background: linear-gradient(
+            180deg,
+            rgba($color-black, 0.96),
+            rgba($color-black, 0.76)
+          );
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        li {
+          white-space: nowrap;
+
+          a {
+            display: inline-block;
+            padding: 0.4rem 4px;
+            font-family: $font-heading;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: $color-white;
+            text-decoration: none;
+            transition: color $transition;
+            font-weight: 500;
+            font-size: 1rem;
+
+            @include mq(lg) {
+              font-size: 1.1rem;
+            }
+          }
+        }
+      }
+
+      // 開閉状態
+      &.is-open {
+        .header__nav-toggle-icon {
+          transform: rotate(225deg); // ▼ → ▲
+        }
+
+        .header__submenu {
+          @include mq(lg) {
+            display: block;
+          }
+        }
+      }
+    }
+
     &-lang {
       display: flex;
       justify-content: center;
@@ -206,22 +320,22 @@
       padding-top: 0.5rem;
       border-top: 1px solid $color-gray;
       font-size: 0.9rem;
-    
+
       a {
         color: $color-white;
         text-decoration: none;
-    
+
         &.is-active {
           // color: $color-red;
           font-weight: bold;
         }
       }
-    
+
       .header__lang-separator {
         color: $color-white;
         padding: 0 0.3rem;
       }
-    
+
       @include mq(lg) {
         display: none; // PCでは表示しない
       }
@@ -293,12 +407,12 @@
             color: $color-white;
             font-size: 1rem;
           }
-    
+
           img {
             width: 20px;
             height: 20px;
           }
-    
+
           &:hover {
             opacity: 0.8;
           }
@@ -318,14 +432,14 @@
       @include mq(lg) {
         font-size: 1.4rem;
       }
-  
+
       &:hover {
         @include mq(lg) {
           color: $color-red;
         }
       }
     }
-  
+
     i {
       pointer-events: none; // アイコンクリックでもリンクが効くように
     }
@@ -349,7 +463,7 @@
         transition: color $transition;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 0;
           left: 0;
