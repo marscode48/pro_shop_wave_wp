@@ -610,3 +610,96 @@ add_filter('template_include', function ($template) {
   }
   return $template;
 }, 50);
+
+// -----------------------------
+// 単一商品ページ：ブランド(product_brand/pa_brand)から「適合車種」を表示
+// 表示位置: シングル商品サマリー（メタの代替）優先度25
+// 表示ポリシー:
+// - 型式（孫）が存在する場合 → ブランドとブランド›車種は表示せず、ブランド›車種›型式のみ表示
+// - 型式が無く、車種まで存在する場合 → ブランド›車種を表示（ブランド単独は不要）
+// - 車種が無い場合 → ブランドのみ表示
+// -----------------------------
+add_action('woocommerce_single_product_summary', function () {
+  // 対応タクソノミー（product_brand優先、なければpa_brand）
+  $tax = taxonomy_exists('product_brand') ? 'product_brand' : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
+  if (!$tax) {
+    return;
+  }
+  $product_id = get_the_ID();
+  if (!$product_id) {
+    return;
+  }
+  $terms = wp_get_post_terms($product_id, $tax, ['hide_empty' => false]);
+  if (is_wp_error($terms) || empty($terms)) {
+    return;
+  }
+  // 各タームごとに親をたどり、[ブランド, 車種, 型式] の配列に
+  $chains = [];
+  foreach ($terms as $t) {
+    $chain = [$t];
+    $p = $t;
+    // 先祖を上へ辿る（最大3階層まで保護）
+    while (!empty($p->parent)) {
+      $p = get_term((int)$p->parent, $t->taxonomy);
+      if (!$p || is_wp_error($p)) break;
+      array_unshift($chain, $p);
+      if (count($chain) > 5) break;
+    }
+    // 1階層目: ブランド, 2: 車種, 3: 型式
+    $chains[] = $chain;
+  }
+  // 表示ポリシーに従い分類
+  $has_model = false; // 型式あり
+  $has_car = false;   // 車種まで
+  $only_brand = [];   // ブランドのみ
+  $brand_car = [];    // ブランド›車種
+  $brand_car_model = []; // ブランド›車種›型式
+  foreach ($chains as $chain) {
+    $len = count($chain);
+    if ($len >= 3) {
+      $has_model = true;
+      $brand_car_model[] = $chain;
+    } elseif ($len == 2) {
+      $has_car = true;
+      $brand_car[] = $chain;
+    } elseif ($len == 1) {
+      $only_brand[] = $chain;
+    }
+  }
+  $lines = [];
+  if ($has_model) {
+    // 型式がある場合は型式のみ表示（ブランドやブランド›車種は出さない）
+    foreach ($brand_car_model as $chain) {
+      $labels = array_map(function($t){ return esc_html($t->name); }, $chain);
+      $lines[] = implode(' › ', $labels);
+    }
+  } elseif ($has_car) {
+    // 車種まであればブランド›車種のみ
+    foreach ($brand_car as $chain) {
+      $labels = array_map(function($t){ return esc_html($t->name); }, $chain);
+      $lines[] = implode(' › ', $labels);
+    }
+  } else {
+    // ブランドのみ
+    foreach ($only_brand as $chain) {
+      $labels = array_map(function($t){ return esc_html($t->name); }, $chain);
+      $lines[] = implode(' › ', $labels);
+    }
+  }
+  // 重複除去 & 並び替え
+  $lines = array_values(array_unique($lines));
+  natcasesort($lines);
+  if (empty($lines)) {
+    return;
+  }
+  ?>
+<div class="product-fitment">
+  <p class="product-fitment__title"><?php echo esc_html__( '適合車種', 'proshopwave' ); ?></p>
+  <ul class="product-fitment__list">
+    <?php foreach ($lines as $line): ?>
+      <li class="product-fitment__item"><?php echo esc_html($line); ?></li>
+    <?php endforeach; ?>
+  </ul>
+</div>
+<?php
+}, 25);

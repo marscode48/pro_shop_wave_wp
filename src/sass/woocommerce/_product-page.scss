@@ -72,6 +72,48 @@
       }
     }
 
+    .product-fitment {
+      margin: 0 0 1rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba($color-white, 0.18);
+      background: linear-gradient(
+        180deg,
+        rgba($color-white, 0.08),
+        rgba($color-white, 0.04)
+      );
+      border-radius: $radius-card;
+      backdrop-filter: blur(0.5px);
+
+      @include mq(lg) {
+        width: auto;
+        max-width: min(36rem, 75%);
+      }
+
+      &__title {
+        margin: 0 0 0.3rem;
+        color: $color-white;
+        opacity: 0.95;
+      }
+
+      &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      &__item {
+        margin: 0;
+        padding: 0.15rem 0;
+        opacity: 0.9;
+        font-size: 0.875rem;
+        border-top: 1px dashed rgba(255, 255, 255, 0.2);
+
+        &:first-child {
+          border-top: none; // 先頭のみ区切り線なし
+        }
+      }
+    }
+
     p.stock,
     p.out-of-stock {
       font-size: 0.875rem;
