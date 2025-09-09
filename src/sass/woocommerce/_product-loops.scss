@@ -129,10 +129,36 @@
       }
     }
 
+    .product-card__topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-card__brand {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: $color-gray;
+      white-space: nowrap;
+
+      .product-card__brand-link {
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: $color-red;
+          }
+        }
+      }
+    }
+
     .product-card__category {
       font-size: 0.8rem;
       color: $color-gray;
-      margin-bottom: 0.4rem;
 
       a {
         @include mq(lg) {
