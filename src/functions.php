@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PRO SHOP WAVE テーマ関数
  *
@@ -8,7 +9,8 @@
 // -----------------------------
 // タイトルタグ、サムネイル画像を出力
 // -----------------------------
-function proshopwave_theme_setup() {
+function proshopwave_theme_setup()
+{
   // タイトルタグを自動で出力
   add_theme_support('title-tag');
 
@@ -29,12 +31,13 @@ add_action('after_setup_theme', 'proshopwave_theme_setup');
 // -----------------------------
 // CSS・JS の読み込み
 // -----------------------------
-function proshopwave_enqueue_assets() {
-// WooCommerceがjQueryに依存しているため、削除は行わない（GSAPなどはVanilla JSで対応）
-// wp_deregister_script('jquery');
+function proshopwave_enqueue_assets()
+{
+  // WooCommerceがjQueryに依存しているため、削除は行わない（GSAPなどはVanilla JSで対応）
+  // wp_deregister_script('jquery');
 
   // ローディングCSS
-  if(is_home() || is_front_page()) {
+  if (is_home() || is_front_page()) {
     wp_enqueue_style('loader', get_theme_file_uri('css/loader.css'), [], false, 'all');
   }
 
@@ -71,7 +74,8 @@ add_action('wp_enqueue_scripts', 'proshopwave_enqueue_assets');
 // -----------------------------
 // scriptタグに type="module" を追加
 // -----------------------------
-function add_type_attribute($tag, $handle, $src) {
+function add_type_attribute($tag, $handle, $src)
+{
   $module_scripts = ['main-js'];
   if (in_array($handle, $module_scripts, true)) {
     return '<script type="module" src="' . esc_url($src) . '"></script>';
@@ -83,12 +87,13 @@ add_filter('script_loader_tag', 'add_type_attribute', 10, 3);
 // -----------------------------
 // 2560px超え画像を縮小させない
 // -----------------------------
-add_filter( 'big_image_size_threshold', '__return_false' );
+add_filter('big_image_size_threshold', '__return_false');
 
 // -----------------------------
 // ブログ用初期カテゴリの自動登録
 // -----------------------------
-function proshopwave_register_default_categories() {
+function proshopwave_register_default_categories()
+{
   $categories = [
     [
       'name'        => 'お知らせ',
@@ -140,7 +145,8 @@ add_action('init', 'proshopwave_register_default_categories');
 // -----------------------------
 // 初期ブログ投稿の自動登録（1回限り）
 // -----------------------------
-function proshopwave_insert_initial_blog_posts() {
+function proshopwave_insert_initial_blog_posts()
+{
   if (get_option('proshopwave_blog_posts_inserted')) return;
 
   // post_exists() を使うために読み込む
@@ -267,7 +273,8 @@ add_action('init', 'proshopwave_insert_initial_blog_posts');
 // -----------------------------
 // WooCommerce サポートを有効化（ギャラリー機能も含む）
 // -----------------------------
-function proshopwave_add_woocommerce_support() {
+function proshopwave_add_woocommerce_support()
+{
   // WooCommerce の基本機能（商品ページ、カートなど）をテーマに対応させる
   add_theme_support('woocommerce');
   // 商品画像ギャラリー：ズーム機能を有効化
@@ -282,7 +289,8 @@ add_action('after_setup_theme', 'proshopwave_add_woocommerce_support');
 // -----------------------------
 // WooCommerce 商品カテゴリの初期登録（パーツ・アパレル）
 // -----------------------------
-function proshopwave_register_product_categories() {
+function proshopwave_register_product_categories()
+{
   // パーツカテゴリ
   $parts_parent_slug = 'parts';
   $parts_parent_term = term_exists($parts_parent_slug, 'product_cat');
@@ -349,149 +357,157 @@ add_action('init', 'proshopwave_register_product_categories');
 // -----------------------------
 // WooCommerce 商品登録時にSKUを自動生成（登録日（yymmdd形式）＋投稿ID）
 // -----------------------------
-function proshopwave_generate_auto_sku( $post_id ) {
-  if ( get_post_type( $post_id ) !== 'product' ) {
+function proshopwave_generate_auto_sku($post_id)
+{
+  if (get_post_type($post_id) !== 'product') {
     return;
   }
 
-  $sku = get_post_meta( $post_id, '_sku', true );
-  if ( ! empty( $sku ) ) {
+  $sku = get_post_meta($post_id, '_sku', true);
+  if (! empty($sku)) {
     return;
   }
 
   $date = date('ymd'); // 例：240701（2024年7月1日）
   $sku  = $date . '-' . $post_id;
 
-  update_post_meta( $post_id, '_sku', $sku );
+  update_post_meta($post_id, '_sku', $sku);
 }
-add_action( 'save_post_product', 'proshopwave_generate_auto_sku' );
+add_action('save_post_product', 'proshopwave_generate_auto_sku');
 
 // -----------------------------
 // WooCommerceの商品メタ情報（SKU・カテゴリー・タグなど）を非表示にする
 // -----------------------------
-function proshopwave_remove_product_meta() {
-  remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+function proshopwave_remove_product_meta()
+{
+  remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 }
-add_action( 'woocommerce_before_single_product', 'proshopwave_remove_product_meta' );
+add_action('woocommerce_before_single_product', 'proshopwave_remove_product_meta');
 
 // -----------------------------
 // WooCommerce 関連商品の見出しを変更
 // -----------------------------
-function custom_related_products_heading( $heading ) {
+function custom_related_products_heading($heading)
+{
   return 'Related';
 }
-add_filter( 'woocommerce_product_related_products_heading', 'custom_related_products_heading' );
+add_filter('woocommerce_product_related_products_heading', 'custom_related_products_heading');
 
 // -----------------------------
 // WooCommerce アップセル商品の見出しを英語に変更
 // -----------------------------
-function custom_upsells_products_heading( $heading ) {
+function custom_upsells_products_heading($heading)
+{
   return 'Recommended';
 }
-add_filter( 'woocommerce_product_upsells_products_heading', 'custom_upsells_products_heading' );
+add_filter('woocommerce_product_upsells_products_heading', 'custom_upsells_products_heading');
 
 // -----------------------------
 // WooCommerce 商品ループ <li> に fadeup クラスを追加
 // -----------------------------
-function add_fadeup_class_to_product_loop_item( $classes ) {
+function add_fadeup_class_to_product_loop_item($classes)
+{
   $classes[] = 'fadeup';
   return $classes;
 }
-add_filter( 'woocommerce_post_class', 'add_fadeup_class_to_product_loop_item' );
+add_filter('woocommerce_post_class', 'add_fadeup_class_to_product_loop_item');
 
 // -----------------------------
 // WooCommerce 商品ループから「カートに追加」ボタンを削除（商品ページでは表示）
 // -----------------------------
-function remove_loop_add_to_cart_button() {
-  if ( ! is_product() ) {
-    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+function remove_loop_add_to_cart_button()
+{
+  if (! is_product()) {
+    remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
   }
 }
-add_action( 'init', 'remove_loop_add_to_cart_button' );
+add_action('init', 'remove_loop_add_to_cart_button');
 
 // -----------------------------
 // WooCommerce 商品ループの自動リンク(<a> 開始/終了)を全体で無効化
 // 目的: ループ内の空のアンカーを出力しないようにし、明示的に用意した .product-card__more のみで詳細ページへリンクさせるため。
 // 影響範囲: 商品アーカイブ/一覧ループ全体。単一商品ページは影響なし。
 // -----------------------------
-add_action( 'init', function() {
+add_action('init', function () {
   // `<a href="..." class="woocommerce-LoopProduct-link ...">` の開始タグを無効化
-  remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
-  
+  remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
+
   // 上記開始タグに対応する閉じタグを無効化
-  remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+  remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
 });
 
 // -----------------------------
 // WooCommerce サイドバーを全ページで無効化
 // -----------------------------
-add_action( 'init', function() {
-  remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+add_action('init', function () {
+  remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 });
 
 // -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------
-function custom_woocommerce_breadcrumbs( $defaults ) {
-	$defaults['delimiter']    = ''; // 区切り文字（>）はCSSや ::before で制御するため空に
-	$defaults['wrap_before']  = '<div class="woocommerce-breadcrumb"><ul class="breadcrumb__list">';
-	$defaults['wrap_after']   = '</ul></div>';
-	$defaults['before']       = '<li class="breadcrumb__item">';
-	$defaults['after']        = '</li>';
+function custom_woocommerce_breadcrumbs($defaults)
+{
+  $defaults['delimiter']    = ''; // 区切り文字（>）はCSSや ::before で制御するため空に
+  $defaults['wrap_before']  = '<div class="woocommerce-breadcrumb"><ul class="breadcrumb__list">';
+  $defaults['wrap_after']   = '</ul></div>';
+  $defaults['before']       = '<li class="breadcrumb__item">';
+  $defaults['after']        = '</li>';
 
-	return $defaults;
+  return $defaults;
 }
-add_filter( 'woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs' );
+add_filter('woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs');
 
 // -----------------------------
 // WooCommerce アーカイブ説明から不要な div と p タグを除去
 // -----------------------------
-remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+remove_action('woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10);
 
-add_action( 'woocommerce_archive_description', function() {
-  if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
+add_action('woocommerce_archive_description', function () {
+  if (is_product_taxonomy() && 0 === absint(get_query_var('paged'))) {
     $description = term_description();
-    if ( $description ) {
+    if ($description) {
       // pタグやdivタグを除去してテキストのみ出力
-      echo esc_html( wp_strip_all_tags( $description ) );
+      echo esc_html(wp_strip_all_tags($description));
     }
   }
-}, 10 );
+}, 10);
 
 // -----------------------------
 // WooCommerce 商品一覧の表示件数を変更（例：12件）
 // -----------------------------
-add_filter( 'loop_shop_per_page', function( $cols ) {
+add_filter('loop_shop_per_page', function ($cols) {
   return 12; // 表示件数を変更
-}, 20 );
+}, 20);
 
 
 // ----------------------------------------------
 // Helper: 二重URLエンコード等を考慮してクエリ文字列を安全に取得
 // 例) "%25e3%2582%25a2..." → rawurldecode 2段階で「アパレル」へ
 // ----------------------------------------------
-function get_query_slug( $key ) {
-  if ( ! isset( $_GET[ $key ] ) ) {
+function get_query_slug($key)
+{
+  if (! isset($_GET[$key])) {
     return '';
   }
-  $raw = $_GET[ $key ];
-  if ( is_array( $raw ) ) {
+  $raw = $_GET[$key];
+  if (is_array($raw)) {
     return '';
   }
   // WordPressの「マジッククォート」互換の自動エスケープが残る可能性があるので、まずはアンスラッシュして素の文字に戻す
-  $val = wp_unslash( $raw );
+  $val = wp_unslash($raw);
 
   // 1回デコード（ UTF-8 の生文字（例：「アパレル」）に戻す）
   // ここで rawurldecode を使うのは、+ をスペースに変換しないため（urldecode は +→空白にする）。
-  $decoded = rawurldecode( $val );
+  $decoded = rawurldecode($val);
   // まだ %XX パターンが残っている（=二重エンコードの可能性）ならもう一度
   // 「% に続く16進数2桁」＝パーセントエンコード（%HH）1バイト分を検出するための正規表現
-  if ( preg_match( '/%[0-9a-fA-F]{2}/', $decoded ) ) {
-    $decoded = rawurldecode( $decoded );
+  if (preg_match('/%[0-9a-fA-F]{2}/', $decoded)) {
+    $decoded = rawurldecode($decoded);
   }
 
   // テキストとしてサニタイズして返す（日本語スラッグも許容）
-  return sanitize_text_field( $decoded );
+  return sanitize_text_field($decoded);
 }
 
 // -----------------------------
@@ -499,65 +515,65 @@ function get_query_slug( $key ) {
 // 対象: ショップ一覧 / 商品カテゴリ・タグなどの商品系アーカイブ
 // URL例: ?product_cat=slug&product_tag=slug&product_brand=slug または ?pa_brand=slug
 // -----------------------------
-add_action( 'pre_get_posts', function ( $query ) {
+add_action('pre_get_posts', function ($query) {
   // 管理画面やメインクエリ以外は除外
-  if ( is_admin() || ! $query->is_main_query() ) {
+  if (is_admin() || ! $query->is_main_query()) {
     return;
   }
 
   // ショップ一覧 or WooCommerce の商品系タクソノミーのみ対象
-  if ( ! ( is_shop() || is_product_taxonomy() ) ) {
+  if (! (is_shop() || is_product_taxonomy())) {
     return;
   }
 
   // 既存 tax_query を取得して配列化
-  $tax_query = (array) $query->get( 'tax_query' );
+  $tax_query = (array) $query->get('tax_query');
 
   // --- 1) カテゴリ（product_cat）
-  $cat = get_query_slug( 'product_cat' );
-  if ( $cat !== '' ) {
+  $cat = get_query_slug('product_cat');
+  if ($cat !== '') {
     $tax_query[] = [
       'taxonomy'         => 'product_cat',
       'field'            => 'slug',
-      'terms'            => [ $cat ],
+      'terms'            => [$cat],
       'operator'         => 'IN',
       'include_children' => true,
     ];
   }
 
   // --- 2) タグ（product_tag）
-  $tag = get_query_slug( 'product_tag' );
-  if ( $tag !== '' ) {
+  $tag = get_query_slug('product_tag');
+  if ($tag !== '') {
     $tax_query[] = [
       'taxonomy' => 'product_tag',
       'field'    => 'slug',
-      'terms'    => [ $tag ],
+      'terms'    => [$tag],
       'operator' => 'IN',
     ];
   }
 
   // --- 3) ブランド（環境により taxonomy 名が異なる想定: product_brand or pa_brand）
-  $brand_tax = taxonomy_exists( 'product_brand' ) ? 'product_brand' : ( taxonomy_exists( 'pa_brand' ) ? 'pa_brand' : '' );
-  if ( $brand_tax ) {
+  $brand_tax = taxonomy_exists('product_brand') ? 'product_brand' : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
+  if ($brand_tax) {
     $param_key = $brand_tax; // URLキーは taxonomy 名に合わせる方針
-    $brand = get_query_slug( $param_key );
-    if ( $brand !== '' ) {
+    $brand = get_query_slug($param_key);
+    if ($brand !== '') {
       $tax_query[] = [
         'taxonomy' => $brand_tax,
         'field'    => 'slug',
-        'terms'    => [ $brand ],
+        'terms'    => [$brand],
         'operator' => 'IN',
       ];
     }
   }
 
-  if ( ! empty( $tax_query ) ) {
-    if ( ! isset( $tax_query['relation'] ) ) {
+  if (! empty($tax_query)) {
+    if (! isset($tax_query['relation'])) {
       $tax_query['relation'] = 'AND';
     }
-    $query->set( 'tax_query', $tax_query );
+    $query->set('tax_query', $tax_query);
   }
-} );
+});
 
 // -----------------------------
 // 重複防止: before_shop_loop 標準の件数/並び替えは削除（自前のコントロール"product-archive__controls"を使用）
@@ -574,21 +590,21 @@ add_action('init', function () {
 // -----------------------------
 add_filter('template_include', function ($template) {
   // is_shop() は WooCommerce 有効時のみ
-  if ( function_exists('is_shop') && is_shop() ) {
+  if (function_exists('is_shop') && is_shop()) {
     // Woo のテンプレートロケータで優先解決
-    if ( function_exists('wc_locate_template') ) {
+    if (function_exists('wc_locate_template')) {
       $wc_template = wc_locate_template('archive-product.php');
-      if ( ! empty($wc_template) ) {
+      if (! empty($wc_template)) {
         return $wc_template;
       }
     }
     // フォールバック: 子テーマ/親テーマの woocommerce/archive-product.php
     $fallback_child = get_stylesheet_directory() . '/woocommerce/archive-product.php';
-    if ( file_exists($fallback_child) ) {
+    if (file_exists($fallback_child)) {
       return $fallback_child;
     }
     $fallback_parent = get_template_directory() . '/woocommerce/archive-product.php';
-    if ( file_exists($fallback_parent) ) {
+    if (file_exists($fallback_parent)) {
       return $fallback_parent;
     }
   }
