@@ -376,6 +376,18 @@ function proshopwave_generate_auto_sku($post_id)
 add_action('save_post_product', 'proshopwave_generate_auto_sku');
 
 // -----------------------------
+// 単一商品ページに SKU（型番）を表示
+// 位置: タイトル/価格のすぐ下（優先度 21）
+// -----------------------------
+add_action('woocommerce_single_product_summary', function () {
+  global $product;
+  if (! $product instanceof WC_Product) return;
+  $sku = $product->get_sku();
+  if (! $sku) return;
+  echo '<p class="product-sku"><span class="product-sku__label">' . esc_html__('型番:', 'proshopwave') . '</span> <span class="product-sku__value">' . esc_html($sku) . '</span></p>';
+}, 21);
+
+// -----------------------------
 // WooCommerceの商品メタ情報（SKU・カテゴリー・タグなど）を非表示にする
 // -----------------------------
 function proshopwave_remove_product_meta()
