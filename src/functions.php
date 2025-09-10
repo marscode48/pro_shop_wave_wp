@@ -635,6 +635,24 @@ add_action('woocommerce_single_product_summary', function () {
   if (is_wp_error($terms) || empty($terms)) {
     return;
   }
+
+  // --- 適合表示の制御ロジック ---
+  // 管理UIのチェックボックス（pw_show_fitment）で制御
+  // 管理画面のチェックボックス（pw_show_fitment）が '0' のものは除外し、
+  // 空文字（未設定）または '1' は表示扱い（デフォルト表示）にします。
+  $terms_showable = array_filter($terms, function ($t) {
+    $flag = get_term_meta((int)$t->term_id, 'pw_show_fitment', true);
+    return ($flag === '' || $flag === '1');
+  });
+
+  // 2) もし「表示可」タームが1つも無ければ、適合セクション自体を出力しない
+  if (empty($terms_showable)) {
+    return;
+  }
+
+  // 以降の処理は「表示可」タームを対象に進める
+  $terms = array_values($terms_showable);
+
   // 各タームごとに親をたどり、[ブランド, 車種, 型式] の配列に
   $chains = [];
   foreach ($terms as $t) {
@@ -706,8 +724,78 @@ add_action('woocommerce_single_product_summary', function () {
     <ul class="product-fitment__list">
       <?php foreach ($lines as $line): ?>
         <li class="product-fitment__item"><?php echo esc_html($line); ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-<?php
+      <?php endforeach; ?>
+    </ul>
+  </div>
+  <?php
 }, 25);
+
+
+// ==================================================
+// 管理画面: ブランドタクソノミーに「適合車種を表示」チェックを追加
+// 対応: product_brand / pa_brand（存在する方）
+// メタキー: pw_show_fitment ('1' = 表示, '0' = 非表示) ※デフォルトは '1'
+// ==================================================
+add_action('init', function () {
+  $taxes = [];
+  if (taxonomy_exists('product_brand')) $taxes[] = 'product_brand';
+  if (taxonomy_exists('pa_brand')) $taxes[] = 'pa_brand';
+  if (empty($taxes)) return;
+
+  // 追加フォーム（新規作成時）
+  foreach ($taxes as $tx) {
+    add_action("{$tx}_add_form_fields", function ($taxonomy) {
+  ?>
+      <div class="form-field term-group">
+        <label for="pw_show_fitment">適合車種を表示</label>
+        <input type="checkbox" id="pw_show_fitment" name="pw_show_fitment" value="1" checked />
+        <p class="description">このブランドのタームを商品の「適合車種」セクションに含めます。汎用ブランド（UNIVERSAL 等）やアパレルなど、適合が関係ない場合はチェックを外してください。</p>
+      </div>
+    <?php
+    });
+  }
+
+  // 編集フォーム（既存編集時）
+  foreach ($taxes as $tx) {
+    add_action("{$tx}_edit_form_fields", function ($term, $taxonomy) {
+      $checked = get_term_meta($term->term_id, 'pw_show_fitment', true);
+      $checked = ($checked === '' || $checked === '1') ? 'checked' : '';
+    ?>
+      <tr class="form-field term-group-wrap">
+        <th scope="row"><label for="pw_show_fitment">適合車種を表示</label></th>
+        <td>
+          <input type="checkbox" id="pw_show_fitment" name="pw_show_fitment" value="1" <?php echo $checked; ?> />
+          <p class="description">このブランドのタームを商品の「適合車種」セクションに含めます。汎用ブランド（UNIVERSAL 等）やアパレルなど、適合が関係ない場合はチェックを外してください。</p>
+        </td>
+      </tr>
+<?php
+    }, 10, 2);
+  }
+
+  // 保存処理（新規・編集）
+  foreach ($taxes as $tx) {
+    add_action("created_{$tx}", function ($term_id) {
+      $val = isset($_POST['pw_show_fitment']) ? '1' : '0';
+      update_term_meta((int)$term_id, 'pw_show_fitment', $val);
+    });
+    add_action("edited_{$tx}", function ($term_id) {
+      $val = isset($_POST['pw_show_fitment']) ? '1' : '0';
+      update_term_meta((int)$term_id, 'pw_show_fitment', $val);
+    });
+  }
+
+  // 管理一覧のカラムに状態を表示（任意）
+  foreach ($taxes as $tx) {
+    add_filter("manage_edit-{$tx}_columns", function ($columns) {
+      $columns['pw_show_fitment'] = '適合表示';
+      return $columns;
+    });
+    add_filter("manage_{$tx}_custom_column", function ($out, $column, $term_id) {
+      if ($column === 'pw_show_fitment') {
+        $val = get_term_meta((int)$term_id, 'pw_show_fitment', true);
+        $out = ($val === '' || $val === '1') ? '表示' : '非表示';
+      }
+      return $out;
+    }, 10, 3);
+  }
+});
