@@ -625,11 +625,13 @@ add_action('woocommerce_single_product_summary', function () {
   if (!$tax) {
     return;
   }
+
   $product_id = get_the_ID();
   if (!$product_id) {
     return;
   }
   $terms = wp_get_post_terms($product_id, $tax, ['hide_empty' => false]);
+
   if (is_wp_error($terms) || empty($terms)) {
     return;
   }
@@ -670,19 +672,25 @@ add_action('woocommerce_single_product_summary', function () {
   if ($has_model) {
     // 型式がある場合は型式のみ表示（ブランドやブランド›車種は出さない）
     foreach ($brand_car_model as $chain) {
-      $labels = array_map(function($t){ return esc_html($t->name); }, $chain);
+      $labels = array_map(function ($t) {
+        return esc_html($t->name);
+      }, $chain);
       $lines[] = implode(' › ', $labels);
     }
   } elseif ($has_car) {
     // 車種まであればブランド›車種のみ
     foreach ($brand_car as $chain) {
-      $labels = array_map(function($t){ return esc_html($t->name); }, $chain);
+      $labels = array_map(function ($t) {
+        return esc_html($t->name);
+      }, $chain);
       $lines[] = implode(' › ', $labels);
     }
   } else {
     // ブランドのみ
     foreach ($only_brand as $chain) {
-      $labels = array_map(function($t){ return esc_html($t->name); }, $chain);
+      $labels = array_map(function ($t) {
+        return esc_html($t->name);
+      }, $chain);
       $lines[] = implode(' › ', $labels);
     }
   }
@@ -692,12 +700,12 @@ add_action('woocommerce_single_product_summary', function () {
   if (empty($lines)) {
     return;
   }
-  ?>
-<div class="product-fitment">
-  <p class="product-fitment__title"><?php echo esc_html__( '適合車種', 'proshopwave' ); ?></p>
-  <ul class="product-fitment__list">
-    <?php foreach ($lines as $line): ?>
-      <li class="product-fitment__item"><?php echo esc_html($line); ?></li>
+?>
+  <div class="product-fitment">
+    <p class="product-fitment__title"><?php echo esc_html__('適合車種', 'proshopwave'); ?></p>
+    <ul class="product-fitment__list">
+      <?php foreach ($lines as $line): ?>
+        <li class="product-fitment__item"><?php echo esc_html($line); ?></li>
     <?php endforeach; ?>
   </ul>
 </div>
