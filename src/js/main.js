@@ -11,6 +11,7 @@ import { ProductQuantity } from './modules/product-quantity.js';
 import { HeaderSubmenuToggle } from './modules/header-submenu-toggle.js';
 import { FilterbarWooCommerce } from './modules/filterbar-woocommerce.js';
 import { OrderingWooCommerce } from './modules/ordering-woocommerce.js';
+import { SubmitButtonDecorator } from './modules/submit-button-decorator.js';
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -48,6 +49,7 @@ class Main {
     new ProductQuantity();
     new FilterbarWooCommerce();
     new OrderingWooCommerce();
+    new SubmitButtonDecorator();
   }
 
   // スクロールオブザーバーの初期化

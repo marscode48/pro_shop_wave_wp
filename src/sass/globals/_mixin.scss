@@ -112,6 +112,75 @@
 }
 
 // ========================
+// 共通: セクションボタン用ミックスイン
+// ========================
+@mixin section-button-styles() {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 350px;
+  padding: 0.7rem 1.5rem;
+  white-space: nowrap;
+  background: linear-gradient(135deg, color.adjust($color-red, $lightness: 15%) 0%, color.adjust($color-red, $lightness: -15%) 100%);
+  color: $color-white;
+  font-family: $font-heading;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  transform: skew(-20deg, 0deg);
+  border: 1px solid $color-black;
+  box-shadow: $box-shadow-red-default;
+  cursor: pointer;
+  transition: background-color $transition, color $transition, box-shadow $transition, border $transition;
+
+  &:hover {
+    @include mq(lg) {
+      background: linear-gradient(135deg, color.adjust($color-white, $lightness: 15%) 70%, color.adjust($color-red, $lightness: 5%) 100%);
+      color: $color-red;
+      border-color: $color-red;
+      box-shadow: $box-shadow-red-hover;
+      animation: bright-flash 0.2s linear forwards;
+    }
+  }
+
+  &-inner {
+    display: inline-block;
+    transform: skewX(15deg);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: $color-white;
+    transition: transform $transition, background-color $transition;
+  }
+
+  &::before {
+    width: 35px;
+    right: -20px;
+    top: 35%;
+  }
+
+  &::after {
+    width: 20px;
+    right: -5px;
+    top: 55%;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    @include mq(lg) {
+      transform: translateX(10px);
+      background-color: $color-red;
+    }
+  }
+}
+
+// ========================
 // 共通: MOREリンク用ミックスイン
 // 使用例: @include more-link($color-red); // 既定サイズ/装飾
 // パラメータで微調整可能

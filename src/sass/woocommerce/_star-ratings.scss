@@ -158,24 +158,16 @@
       margin: 0 auto;
 
       input#submit {
+        line-height: normal;
+        text-decoration: none;
+        text-shadow: none;
+
+        @include section-button-styles();
         width: 75%;
-        background-color: $color-red;
-        color: $color-white;
-        padding: 0.8rem 1.5rem;
-        border: none;
-        font-family: $font-heading;
-        font-weight: bold;
-        font-size: 0.8rem;
-        cursor: pointer;
-        transition: background-color $transition;
+        padding: 0.35rem 1.5rem;
 
         @include mq(lg) {
-          width: 50%;
-          max-width: 350px;
-        }
-
-        &:hover {
-          background-color: color.adjust($color-red, $lightness: -10%);
+          width: 300px;
         }
       }
 
