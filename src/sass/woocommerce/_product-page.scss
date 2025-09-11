@@ -362,13 +362,17 @@
         &__controls {
           display: flex;
           align-items: center;
-          border: 1px solid $color-white;
+          border: 1px solid rgba($color-white, 0.18);
         }
 
         &__button {
           width: 2.5em;
           height: 2.5em;
-          background-color: $color-black;
+          background: linear-gradient(
+            135deg,
+            $color-black,
+            darken($color-gray, 35%)
+          );
           display: flex;
           align-items: center;
           justify-content: center;
@@ -376,10 +380,12 @@
           user-select: none;
 
           @include mq(lg) {
-            transition: background-color $transition;
+            // グラデーションの差し替えはアニメーションできないため、filterで明るさを滑らかに変化
+            transition: filter $transition;
+            will-change: filter;
 
             &:hover {
-              background-color: $color-gray;
+              filter: brightness(0.75);
             }
           }
 
