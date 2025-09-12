@@ -54,10 +54,11 @@
 
       ins {
         text-decoration: none;
+        color: $color-red; // セール後価格は赤で強調
       }
 
       del {
-        opacity: 1;
+        opacity: 0.6; // 旧価格はやや薄く
         margin-right: 0.2em;
         text-decoration-color: $color-red;
       }
