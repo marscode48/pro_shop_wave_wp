@@ -3,15 +3,19 @@
 /* _variables.scss 変数定義（カラー、フォントなど）*/
 // Colors
 $color-black: #000000;
-$color-red: #E60012;
-$color-white: #FFFFFF;
-$color-gray: #B3B3B3;
+$color-red: #e60012;
+$color-white: #ffffff;
+$color-gray: #b3b3b3;
 $color-dark-gray: #211d1d;
-$color-dark-red-gradient: linear-gradient(180deg, $color-black 0%, #330000 100%);
+$color-dark-red-gradient: linear-gradient(
+  180deg,
+  $color-black 0%,
+  #330000 100%
+);
 
 // Fonts
-$font-heading: 'Oswald', sans-serif;
-$font-body: 'Noto Sans JP', sans-serif;
+$font-heading: "Oswald", sans-serif;
+$font-body: "Noto Sans JP", sans-serif;
 
 // Layout
 $header-height: 80px;
