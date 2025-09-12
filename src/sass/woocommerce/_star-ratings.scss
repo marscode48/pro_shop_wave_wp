@@ -44,9 +44,7 @@
 
   #review_form_wrapper {
     padding: 1.25rem;
-    background: $color-black;
-    border: 1px solid $color-red;
-    border-radius: 4px;
+    @include panel-surface-gray();
 
     @include mq(lg) {
       padding: 3.75rem;

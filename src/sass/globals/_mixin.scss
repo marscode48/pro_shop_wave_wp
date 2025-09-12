@@ -333,3 +333,45 @@
     }
   }
 }
+
+// ========================
+// パネル用グレー背景スタイルミックスイン
+// 役割: グレー系のパネル背景、境界線、影をまとめて適用します。
+// 引数:
+//   $bg - 背景グラデーション（デフォルトは $panel-gray-bg-gradient）
+//   $border-color - 境界線の色（デフォルトは $panel-gray-border-color）
+//   $radius - 角丸の半径（デフォルトは $panel-gray-border-radius）
+//   $shadow - 内側の影（デフォルトは $panel-gray-inset-shadow）
+// ========================
+@mixin panel-surface-gray(
+  $bg: $panel-gray-bg-gradient,
+  $border-color: $panel-gray-border-color,
+  $radius: $panel-gray-border-radius,
+  $shadow: $panel-gray-inset-shadow
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// ========================
+// パネル用ブラック背景スタイルミックスイン
+// 役割: ブラック系のパネル背景、境界線、影をまとめて適用します。
+// 引数:
+//   $bg - 背景グラデーション（デフォルトは $panel-black-bg-gradient）
+//   $border-color - 境界線の色（デフォルトは $panel-black-border-color）
+//   $radius - 角丸の半径（デフォルトは $panel-black-border-radius）
+//   $shadow - 内側の影（デフォルトは $panel-black-inset-shadow）
+// ========================
+@mixin panel-surface-black(
+  $bg: $panel-black-bg-gradient,
+  $border-color: $panel-black-border-color,
+  $radius: $panel-black-border-radius,
+  $shadow: $panel-black-inset-shadow
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
