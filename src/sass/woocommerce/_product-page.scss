@@ -93,13 +93,7 @@
     .product-fitment {
       margin: 0 0 1rem;
       padding: 0.75rem 1rem;
-      border: 1px solid rgba($color-white, 0.18);
-      background: linear-gradient(
-        180deg,
-        rgba($color-white, 0.08),
-        rgba($color-white, 0.04)
-      );
-      border-radius: $radius-card;
+      @include panel-surface-black($border-color: $fb-border-color);
       backdrop-filter: blur(0.5px);
       font-size: 0.875rem;
 
