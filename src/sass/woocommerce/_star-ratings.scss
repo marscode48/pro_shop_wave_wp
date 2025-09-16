@@ -53,7 +53,7 @@
 
   #review_form #respond {
     @include reset-clearfix();
-    font-size: 0.75rem;
+    font-size: 0.875rem;
 
     @include mq(lg) {
       font-size: 1rem;
@@ -73,14 +73,10 @@
     }
 
     p.comment-notes {
-      font-size: 0.5rem;
+      font-size: 0.75rem;
       text-align: center;
       line-height: 2;
       margin: 0 0 10px;
-
-      @include mq(lg) {
-        font-size: 0.75rem;
-      }
 
       & > * {
         display: block;
@@ -143,7 +139,7 @@
 
       & label {
         margin: 0;
-        font-size: 0.5rem;
+        font-size: 0.625rem;
 
         @include mq() {
           font-size: 0.75rem;
