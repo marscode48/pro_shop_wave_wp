@@ -1,16 +1,34 @@
 /* _mixin.scss 汎用mixin（アニメーション、レイアウト補助）*/
-@use 'sass:math';
-@use 'sass:color';
-@use './variables' as *;
-@use '../globals/mq' as *;
+@use "sass:math";
+@use "sass:color";
+@use "./variables" as *;
+@use "../globals/mq" as *;
 
 // アニメーション
-@mixin animation($name, $duration: 1s, $timing-function: ease, $delay: 0s, $iteration-count: 1, $direction: normal, $fill-mode: forwards) {
-  animation: $name $duration $timing-function $delay $iteration-count $direction $fill-mode;
+@mixin animation(
+  $name,
+  $duration: 1s,
+  $timing-function: ease,
+  $delay: 0s,
+  $iteration-count: 1,
+  $direction: normal,
+  $fill-mode: forwards
+) {
+  animation: $name $duration $timing-function $delay $iteration-count $direction
+    $fill-mode;
 }
 
 // 　疑似要素
-@mixin p-base($which: before, $top: 0, $left: 0, $content: "", $position: absolute, $width: 100%, $height: 100%, $display: block) {
+@mixin p-base(
+  $which: before,
+  $top: 0,
+  $left: 0,
+  $content: "",
+  $position: absolute,
+  $width: 100%,
+  $height: 100%,
+  $display: block
+) {
   &::#{$which} {
     display: $display;
     content: $content;
@@ -81,13 +99,17 @@
 }
 
 // 下線アニメーションのmixin
-@mixin link-underline-animate($color: $color-red, $height: 2px, $duration: 0.2s) {
+@mixin link-underline-animate(
+  $color: $color-red,
+  $height: 2px,
+  $duration: 0.2s
+) {
   position: relative;
   text-decoration: none;
   display: inline-block;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -109,6 +131,84 @@
 /// @param $max - 最大サイズ（例: 3rem）
 @mixin clamp-font-size($min, $preferred, $max) {
   font-size: clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+// ========================
+// 共通: セクションボタン用ミックスイン
+// ========================
+@mixin section-button-styles() {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 350px;
+  padding: 0.7rem 1.5rem;
+  white-space: nowrap;
+  background: linear-gradient(
+    135deg,
+    color.adjust($color-red, $lightness: 15%) 0%,
+    color.adjust($color-red, $lightness: -15%) 100%
+  );
+  color: $color-white;
+  font-family: $font-heading;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  transform: skew(-20deg, 0deg);
+  border: 1px solid $color-black;
+  box-shadow: $box-shadow-red-default;
+  cursor: pointer;
+  transition: background-color $transition, color $transition,
+    box-shadow $transition, border $transition;
+
+  &:hover {
+    @include mq(lg) {
+      background: linear-gradient(
+        135deg,
+        color.adjust($color-white, $lightness: 15%) 70%,
+        color.adjust($color-red, $lightness: 5%) 100%
+      );
+      color: $color-red;
+      border-color: $color-red;
+      box-shadow: $box-shadow-red-hover;
+      animation: bright-flash 0.2s linear forwards;
+    }
+  }
+
+  &-inner {
+    display: inline-block;
+    transform: skewX(15deg);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: $color-white;
+    transition: transform $transition, background-color $transition;
+  }
+
+  &::before {
+    width: 35px;
+    right: -20px;
+    top: 35%;
+  }
+
+  &::after {
+    width: 20px;
+    right: -5px;
+    top: 55%;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    @include mq(lg) {
+      transform: translateX(10px);
+      background-color: $color-red;
+    }
+  }
 }
 
 // ========================
@@ -160,7 +260,9 @@
     &:hover,
     &:focus-visible {
       color: color.adjust($color, $lightness: 10%);
-      i { transform: translateX(if($direction == right, $shift, -$shift)); }
+      i {
+        transform: translateX(if($direction == right, $shift, -$shift));
+      }
     }
   }
 
@@ -168,13 +270,18 @@
   @media (hover: none) and (pointer: coarse) {
     &:active {
       color: color.adjust($color, $lightness: 10%);
-      i { transform: translateX(if($direction == right, $shift, -$shift)); }
+      i {
+        transform: translateX(if($direction == right, $shift, -$shift));
+      }
     }
   }
 
   // 動きを控える設定のユーザー
   @media (prefers-reduced-motion: reduce) {
-    i { transition: none; transform: none !important; }
+    i {
+      transition: none;
+      transform: none !important;
+    }
   }
 }
 
@@ -207,8 +314,7 @@
 @mixin product-card-gradient {
   // ベース背景
   background-color: rgba($color-black, 0.85);
-  background-image:
-    linear-gradient(
+  background-image: linear-gradient(
       180deg,
       rgba($color-black, 0.65) 0%,
       rgba($color-black, 0.35) 100%
@@ -233,8 +339,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-      radial-gradient(
+    background: radial-gradient(
         120% 120% at 0% 0%,
         rgba($color-red, 0.28) 0%,
         rgba($color-red, 0) 55%
@@ -263,4 +368,46 @@
       opacity: 0.95;
     }
   }
+}
+
+// ========================
+// パネル用グレー背景スタイルミックスイン
+// 役割: グレー系のパネル背景、境界線、影をまとめて適用します。
+// 引数:
+//   $bg - 背景グラデーション（デフォルトは $panel-gray-bg-gradient）
+//   $border-color - 境界線の色（デフォルトは $panel-gray-border-color）
+//   $radius - 角丸の半径（デフォルトは $panel-gray-border-radius）
+//   $shadow - 内側の影（デフォルトは $panel-gray-inset-shadow）
+// ========================
+@mixin panel-surface-gray(
+  $bg: $panel-gray-bg-gradient,
+  $border-color: $panel-gray-border-color,
+  $radius: $panel-gray-border-radius,
+  $shadow: $panel-gray-inset-shadow
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// ========================
+// パネル用ブラック背景スタイルミックスイン
+// 役割: ブラック系のパネル背景、境界線、影をまとめて適用します。
+// 引数:
+//   $bg - 背景グラデーション（デフォルトは $panel-black-bg-gradient）
+//   $border-color - 境界線の色（デフォルトは $panel-black-border-color）
+//   $radius - 角丸の半径（デフォルトは $panel-black-border-radius）
+//   $shadow - 内側の影（デフォルトは $panel-black-inset-shadow）
+// ========================
+@mixin panel-surface-black(
+  $bg: $panel-black-bg-gradient,
+  $border-color: $panel-black-border-color,
+  $radius: $panel-black-border-radius,
+  $shadow: $panel-black-inset-shadow
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
 }

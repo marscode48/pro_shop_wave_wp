@@ -1,15 +1,31 @@
+@use "sass:color";
+
 /* _variables.scss 変数定義（カラー、フォントなど）*/
 // Colors
 $color-black: #000000;
-$color-red: #E60012;
-$color-white: #FFFFFF;
-$color-gray: #B3B3B3;
+$color-red: #e60012;
+$color-white: #ffffff;
+$color-gray: #b3b3b3;
 $color-dark-gray: #211d1d;
-$color-dark-red-gradient: linear-gradient(180deg, $color-black 0%, #330000 100%);
+$color-dark-red-gradient: linear-gradient(
+  180deg,
+  $color-black 0%,
+  #330000 100%
+);
+$color-bright-red-gradient: linear-gradient(
+  135deg,
+  $color-red,
+  color.adjust($color-red, $lightness: -20%)
+);
+$color-dark-gray-gradient: linear-gradient(
+  135deg,
+  $color-black,
+  color.adjust($color-gray, $lightness: -35%)
+);
 
 // Fonts
-$font-heading: 'Oswald', sans-serif;
-$font-body: 'Noto Sans JP', sans-serif;
+$font-heading: "Oswald", sans-serif;
+$font-body: "Noto Sans JP", sans-serif;
 
 // Layout
 $header-height: 80px;
@@ -26,6 +42,27 @@ $box-shadow-red-hover: 0 0.5rem 2.5rem rgba($color-red, 1);
 
 // Text shadows
 $text-shadow-black-default: 2px 3px 3px rgba($color-black, 0.6);
+
+// Surface tokens (グレイ: タブパネルやフィルター等に使用)
+$panel-gray-bg-gradient: linear-gradient(
+  135deg,
+  $color-black 0%,
+  color.scale($color-gray, $lightness: -50%) 100%
+);
+$panel-gray-border-color: color.scale($color-gray, $lightness: -30%);
+$panel-gray-border-radius: 4px;
+$panel-gray-inset-shadow: inset 0 0 8px 0 rgba($color-white, 0.5);
+
+// Surface tokens (ブラック: タブパネルやフィルター等に使用)
+$panel-black-bg-gradient: linear-gradient(
+  180deg,
+  rgba($color-black, 0.86) 0%,
+  rgba($color-black, 0.78) 55%,
+  rgba($color-gray, 0.25) 100%
+);
+$panel-black-border-color: rgba($color-red, 1);
+$panel-black-border-radius: 4px;
+$panel-black-inset-shadow: inset 0 -6px 10px 0 rgba($color-red, 0.15);
 
 // filter, pill-btn
 $fb-border: 1px solid rgba($color-white, 0.28);
