@@ -12,6 +12,16 @@ $color-dark-red-gradient: linear-gradient(
   $color-black 0%,
   #330000 100%
 );
+$color-bright-red-gradient: linear-gradient(
+  135deg,
+  $color-red,
+  color.adjust($color-red, $lightness: -20%)
+);
+$color-dark-gray-gradient: linear-gradient(
+  135deg,
+  $color-black,
+  color.adjust($color-gray, $lightness: -35%)
+);
 
 // Fonts
 $font-heading: "Oswald", sans-serif;
