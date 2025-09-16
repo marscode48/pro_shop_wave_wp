@@ -65,12 +65,14 @@ $panel-black-border-radius: 4px;
 $panel-black-inset-shadow: inset 0 -6px 10px 0 rgba($color-red, 0.15);
 
 // filter, pill-btn
-$fb-border: 1px solid rgba($color-white, 0.28);
-$fb-border-soft: 1px solid rgba($color-white, 0.22);
+$fb-border-color: rgba($color-white, 0.28);
+$fb-border-soft-color: rgba($color-white, 0.20);
 $fb-card: linear-gradient(
   180deg,
   rgba($color-black, 0.96),
   rgba($color-black, 0.86)
 );
 $fb-radius: 12px;
-$fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+$fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+$fb-selected-bg: rgba($color-red, 0.24);
+$fb-selected-shadow: 0 0 0 0.12rem rgba($color-red, 0.28);

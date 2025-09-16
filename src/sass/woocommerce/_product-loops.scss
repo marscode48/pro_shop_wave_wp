@@ -278,21 +278,23 @@
         text-align: center;
         padding: 0.55em;
         padding-right: calc(0.55em + 6.5%); // アイコン分余白
-        border: 1px solid $color-red;
-        border-radius: $fb-radius;
+        @include panel-surface-black($radius: $fb-radius);
         color: $color-white;
-        background: rgba($color-white, 0.03);
+        border: 1px solid $color-red;
         cursor: pointer;
-        transition: border-color $transition, color $transition;
+        transition: border-color $transition, filter $transition;
 
         @include mq(lg) {
-          border: $fb-border;
+          @include panel-surface-black(
+            $border-color: $fb-border-color,
+            $radius: $fb-radius
+          );
           width: auto;
           padding: 0.55em 2.5em;
           padding-right: calc(2.5em + 6.5%); // アイコン分余白
 
           &:hover {
-            border-color: rgba($color-white, 0.5);
+            filter: brightness(2);
           }
         }
       }
