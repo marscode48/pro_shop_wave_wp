@@ -378,11 +378,7 @@
         &__button {
           width: 2.5em;
           height: 2.5em;
-          background: linear-gradient(
-            135deg,
-            $color-black,
-            darken($color-gray, 35%)
-          );
+          background: $color-dark-gray-gradient;
           display: flex;
           align-items: center;
           justify-content: center;
