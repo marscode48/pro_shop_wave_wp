@@ -388,6 +388,32 @@ add_action('woocommerce_single_product_summary', function () {
 }, 21);
 
 // -----------------------------
+// 単一商品ページに product_tag を表示（ピル型リンク）
+// 位置: SKU/適合の近く（優先度 32）
+// -----------------------------
+add_action('woocommerce_single_product_summary', function () {
+  global $product;
+  if (! $product instanceof WC_Product) return;
+
+  $terms = get_the_terms($product->get_id(), 'product_tag');
+  if (empty($terms) || is_wp_error($terms)) return;
+
+  echo '<div class="product-tags" aria-label="Product tags">';
+  echo '<span class="product-tags__label">' . esc_html__('タグ:', 'proshopwave') . '</span>';
+  echo '<ul class="product-tags__list">';
+  foreach ($terms as $t) {
+    $url = get_term_link($t);
+    if (is_wp_error($url)) continue;
+    printf(
+      '<li class="product-tags__item"><a class="product-tags__link" href="%s" rel="tag">%s</a></li>',
+      esc_url($url),
+      esc_html($t->name)
+    );
+  }
+  echo '</ul></div>';
+}, 25);
+
+// -----------------------------
 // WooCommerceの商品メタ情報（SKU・カテゴリー・タグなど）を非表示にする
 // -----------------------------
 function proshopwave_remove_product_meta()
