@@ -71,6 +71,51 @@ function proshopwave_enqueue_assets()
 }
 add_action('wp_enqueue_scripts', 'proshopwave_enqueue_assets');
 
+
+// ==============================
+// WooCommerce 専用スタイルの条件読み込み（効率化版）
+// ・ブロック版: カート / チェックアウト / マイアカウント のみ Blocks CSS
+// ・従来版: WooCommerce のその他ページ（商品一覧/詳細/カテゴリ等）のみ Legacy CSS
+// ・非WooCommerceページ（ホーム/ブログ等）では何も読み込まない
+// ==============================
+function proshopwave_enqueue_woocommerce_styles() {
+  // WooCommerce が無効な環境では処理しない
+  if ( ! function_exists( 'is_woocommerce' ) ) {
+    return;
+  }
+
+  // 子テーマ優先のパス/URI
+  $base_uri = get_stylesheet_directory_uri();
+  $base_dir = get_stylesheet_directory();
+
+  $path_blocks = $base_dir . '/css/woocommerce/blocks/woocommerce-blocks.css';
+  $path_legacy = $base_dir . '/css/woocommerce/legacy/woocommerce-legacy.css';
+
+  // --- ブロック版（カート/チェックアウト/マイアカウント）
+  if ( is_cart() || is_checkout() || is_account_page() ) {
+    wp_enqueue_style(
+      'proshopwave-woocommerce-blocks',
+      $base_uri . '/css/woocommerce/blocks/woocommerce-blocks.css',
+      [],
+      file_exists( $path_blocks ) ? filemtime( $path_blocks ) : null
+    );
+    return; // ブロックCSSを読み込んだら終了（Legacyは不要）
+  }
+
+  // --- 従来版（その他の WooCommerce ページのみ）
+  if ( is_woocommerce() ) {
+    wp_enqueue_style(
+      'proshopwave-woocommerce-legacy',
+      $base_uri . '/css/woocommerce/legacy/woocommerce-legacy.css',
+      [],
+      file_exists( $path_legacy ) ? filemtime( $path_legacy ) : null
+    );
+  }
+  // それ以外（非WooCommerceページ）は読み込まない → パフォーマンス最適化
+}
+add_action( 'wp_enqueue_scripts', 'proshopwave_enqueue_woocommerce_styles', 20 );
+
+
 // -----------------------------
 // scriptタグに type="module" を追加
 // -----------------------------

@@ -35,6 +35,8 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'pages/single-blog'; // single.php 用（投稿詳細ページ）
 
 // ========================
-// WooCommerce専用スタイル（上書きのため一番最後に）
+// WooCommerce専用スタイルは別ビルドに分離
 // ========================
-@use 'woocommerce/index' as *; // WooCommerce 専用スタイルを集約
+// ・Blocks:  src/sass/woocommerce/woocommerce-blocks.scss  → css/woocommerce-blocks.css（functions.phpで条件読み込み）
+// ・Legacy:  src/sass/woocommerce/legacy/woocommerce-legacy.scss → css/woocommerce-legacy.css（functions.phpで条件読み込み）
+// ※ ここでは読み込まない（重複適用を防ぐ）
