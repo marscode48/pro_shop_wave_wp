@@ -16,7 +16,7 @@
 
   &.is-scrolled {
     background-color: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba($color-gray, 0.3);
+    border-bottom: $border-dark-gray;
   }
 
   &__inner {
