@@ -204,12 +204,15 @@
       color: $color-white;
       margin: 0;
 
-      del {
-        opacity: 1;
+      ins {
+        text-decoration: none;
+        color: $color-red; // セール後価格は赤で強調
       }
 
-      ins {
-        font-weight: 400;
+      del {
+        opacity: 0.6; // 旧価格はやや薄く
+        margin-right: 0.2em;
+        text-decoration-color: $color-red;
       }
     }
 
