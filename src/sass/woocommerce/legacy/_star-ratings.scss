@@ -21,7 +21,8 @@
     color: $color-red;
 
     &::before {
-      color: $color-gray;
+      // color: $color-gray;
+      color: $color-red;
       float: none;
     }
 
