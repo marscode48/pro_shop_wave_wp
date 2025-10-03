@@ -90,6 +90,10 @@
                     }
                   }
 
+                  &__input:focus {
+                    box-shadow: none;
+                  }
+
                   &__button:focus {
                     box-shadow: none;
                   }
@@ -259,14 +263,14 @@
       // =====================================
       &__sidebar {
         .wp-block-woocommerce-cart-order-summary-block {
-          border-bottom: $border-drak-gray;
+          border-bottom: 1px solid $color-red;
 
           .wc-block-cart__totals-title {
             font-size: 1rem;
           }
 
           .wc-block-components-totals-wrapper {
-            border-top: $border-drak-gray;
+            border-top: 1px solid $color-red;
             padding: 16px 0;
 
             .wc-block-components-panel__button {
@@ -319,7 +323,7 @@
     .is-small
       table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
       .wc-block-cart-items__row:first-child {
-      border-top: $border-drak-gray;
+      border-top: 1px solid $color-red;
     }
 
     // SP: 各行の下境界
@@ -332,16 +336,16 @@
     .is-small
       table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
       .wc-block-cart-items__row {
-      border-bottom: $border-drak-gray;
+      border-bottom: 1px solid $color-red;
     }
 
     // PC: テーブル下境界
     .is-large.wc-block-cart .wc-block-cart-items {
-      border-bottom: $border-drak-gray;
+      border-bottom: 1px solid $color-red;
     }
     // PC: 各セルの上境界
     .is-large.wc-block-cart .wc-block-cart-items td {
-      border-top: $border-drak-gray;
+      border-top: 1px solid $color-red;
     }
 
     // SP: クロスセル下余白
