@@ -55,6 +55,10 @@
     margin: 0;
     list-style: none;
 
+    @include mq(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
     @include mq(lg) {
       grid-template-columns: repeat(4, 1fr);
     }
