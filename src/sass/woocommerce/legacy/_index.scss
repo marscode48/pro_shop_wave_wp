@@ -2,7 +2,7 @@
 // 従来テンプレ用のパーシャル群をここで再エクスポートし、
 // エントリ（woocommerce-legacy.scss）からは @use 'legacy/index' as *; で取り込む。
 
-@forward "./woocommerce-mixins.scss";
+@forward ".././woocommerce-mixins";
 @forward "./layout"; // WooCommerce全体のレイアウト構造
 @forward "./smallscreen"; // モバイル表示のレイアウト
 @forward "./breadcrumb"; // パンくずリスト
