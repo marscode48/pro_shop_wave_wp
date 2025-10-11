@@ -134,9 +134,14 @@
 }
 
 // ========================
-// 共通: セクションボタン用ミックスイン
+// 共通: セクションボタン用ミックスイン（幅オプション対応）
+// 使用例:
+//   @include section-button-styles(); // 既定（幅指定なし）
+//   @include section-button-styles($width: 90%); // モバイル幅を指定
+//   @include section-button-styles($width: 240px, $width-lg: 280px); // md以上で差し替え
+//   @include section-button-styles($max-inline-size: 22rem); // 最大幅だけ変更
 // ========================
-@mixin section-button-styles() {
+@mixin section-button-styles($width: 80%, $width-lg: 240px, $max-inline-size: 24rem) {
   position: relative;
   display: flex;
   justify-content: center;
@@ -157,10 +162,18 @@
   text-transform: uppercase;
   transform: skew(-20deg, 0deg);
   border: 1px solid $color-black;
+  border-radius: 0;
+  // 可変: 最大インライン幅
+  max-inline-size: $max-inline-size;
   box-shadow: $box-shadow-red-default;
   cursor: pointer;
   transition: background-color $transition, color $transition,
     box-shadow $transition, border $transition;
+
+  // 可変: モバイル/共通の幅
+  @if $width != null {
+    width: $width;
+  }
 
   &:hover {
     @include mq(lg) {
@@ -176,7 +189,9 @@
     }
   }
 
-  &-inner {
+  // 内側テキスト要素の反スキュー（親が複合セレクタでも安全な指定）
+  > .section__button-inner,
+  .wc-block-components-button__text {
     display: inline-block;
     transform: skewX(15deg);
   }
@@ -207,6 +222,13 @@
     @include mq(lg) {
       transform: translateX(10px);
       background-color: $color-red;
+    }
+  }
+
+  // 可変: lg以上での幅
+  @include mq(lg) {
+    @if $width-lg != null {
+      width: $width-lg;
     }
   }
 }

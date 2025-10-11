@@ -31,15 +31,6 @@
     @include section-button-styles();
   }
 
-  &--categories &__button,
-  &--blog &__button {
-    width: 160px;
-
-    @include mq(lg) {
-      width: 200px;
-    }
-  }
-
   &__flex {
     display: flex;
     flex-direction: column;
