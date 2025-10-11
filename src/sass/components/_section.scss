@@ -28,7 +28,7 @@
   }
 
   &__button {
-    @include section-button-styles();
+    @include button-cta();
   }
 
   &__flex {

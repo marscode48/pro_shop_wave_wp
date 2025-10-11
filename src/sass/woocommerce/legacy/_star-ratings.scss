@@ -155,7 +155,7 @@
         line-height: normal;
         text-decoration: none;
         text-shadow: none;
-        @include section-button-styles();
+        @include button-cta();
       }
 
       input {

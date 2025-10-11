@@ -134,14 +134,14 @@
 }
 
 // ========================
-// 共通: セクションボタン用ミックスイン（幅オプション対応）
+// 共通: CTAボタン用ミックスイン（幅オプション対応）
 // 使用例:
-//   @include section-button-styles(); // 既定（幅指定なし）
-//   @include section-button-styles($width: 90%); // モバイル幅を指定
-//   @include section-button-styles($width: 240px, $width-lg: 280px); // md以上で差し替え
-//   @include section-button-styles($max-inline-size: 22rem); // 最大幅だけ変更
+//   @include button-cta(); // 既定（幅指定なし）
+//   @include button-cta($width: 90%); // モバイル幅を指定
+//   @include button-cta($width: 240px, $width-lg: 280px); // md以上で差し替え
+//   @include button-cta($max-inline-size: 22rem); // 最大幅だけ変更
 // ========================
-@mixin section-button-styles($width: 80%, $width-lg: 240px, $max-inline-size: 24rem) {
+@mixin button-cta($width: 80%, $width-lg: 240px, $max-inline-size: 24rem) {
   position: relative;
   display: flex;
   justify-content: center;

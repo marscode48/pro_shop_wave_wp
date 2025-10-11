@@ -546,7 +546,7 @@
       .button {
         vertical-align: baseline;
         float: none;
-        @include section-button-styles($width-lg: 280px);
+        @include button-cta($width-lg: 280px);
         @include mq(lg) {
           margin: 0;
         }
