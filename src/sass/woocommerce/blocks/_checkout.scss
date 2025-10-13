@@ -483,8 +483,8 @@
           padding: 1rem;
 
           @container (max-width: 699px) {
-            border-bottom: 1px solid $color-red;
-            border-top: 1px solid $color-red;
+            border-bottom: $border-dark-gray;
+            border-top: $border-dark-gray;
           }
 
           &-text {
@@ -513,7 +513,7 @@
 
         .wc-block-components-checkout-order-summary__content.is-open {
           @container (max-width: 699px) {
-            border-bottom: 1px solid $color-red;
+            border-bottom: $border-dark-gray;
           }
         }
 
@@ -526,7 +526,7 @@
       // 注文アイテム一覧
       // -------------------------------
       .wc-block-components-totals-wrapper {
-        border-top: 1px solid $color-red;
+        border-top: $border-dark-gray;
       }
 
       .wc-block-components-order-summary {
@@ -639,7 +639,7 @@
       // トータルブロック（小計/送料/税）
       // -------------------------------
       .wp-block-woocommerce-checkout-order-summary-totals-block {
-        border-top: 1px solid $color-red;
+        border-top: $border-dark-gray;
 
         .wc-block-components-totals-wrapper {
           border-top: 0;

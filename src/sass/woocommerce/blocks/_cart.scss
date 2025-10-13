@@ -263,14 +263,14 @@
       // =====================================
       &__sidebar {
         .wp-block-woocommerce-cart-order-summary-block {
-          border-bottom: 1px solid $color-red;
+          border-bottom: $border-dark-gray;
 
           .wc-block-cart__totals-title {
             font-size: 1rem;
           }
 
           .wc-block-components-totals-wrapper {
-            border-top: 1px solid $color-red;
+            border-top: $border-dark-gray;
             padding: 16px 0;
 
             .wc-block-components-panel__button {
