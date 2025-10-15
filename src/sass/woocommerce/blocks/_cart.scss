@@ -360,9 +360,9 @@
   // 空カート表示
   // =====================================
   .wp-block-woocommerce-empty-cart-block {
+
     .wc-block-cart__empty-cart {
       &__title {
-        font-size: 1rem;
         // 顔アイコン
         &.with-empty-cart-icon:before {
           background-color: $color-gray;
@@ -400,6 +400,8 @@
     // 新商品カード（4列時はgrid適用）
     // ------------------------------
     .wc-block-product-new.has-4-columns {
+      margin: 2rem 0;
+                                               
       .wc-block-grid {
         &__products {
           padding: 0;
