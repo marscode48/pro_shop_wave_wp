@@ -42,21 +42,6 @@
             margin-bottom: 0.6rem;
           }
 
-          &__title {
-            // h2要素に相当
-            font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.2;
-            color: $color-white;
-            letter-spacing: 0.02em;
-            padding-left: 0.8rem;
-            border-left: 4px solid $color-red; // 左線で視線誘導
-
-            @include mq(lg) {
-              font-size: 1.25rem;
-            }
-          }
-
           &__heading-content {
             color: $color-gray;
             font-size: 0.9rem;
@@ -619,25 +604,6 @@
 
         .wc-block-components-totals-wrapper {
           border-top: 0;
-        }
-      }
-
-      .wc-block-components-totals-item {
-        display: grid;
-        grid-template-columns: 1fr auto; // ラベル / 値
-        align-items: center;
-
-        &__label {
-          color: $color-gray;
-        }
-
-        &__value {
-          font-weight: 700;
-          color: $color-white;
-        }
-
-        &__description {
-          color: $color-white;
         }
       }
 
