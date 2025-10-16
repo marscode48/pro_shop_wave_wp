@@ -134,16 +134,48 @@
 }
 
 // ========================
-// 共通: セクションボタン用ミックスイン
+// 汎用: セクションタイトル/見出し用ミックスイン
+// 目的: 左線付きのタイトルデザインを統一的に適用
 // ========================
-@mixin section-button-styles() {
+@mixin heading-title(
+  $font-weight: 700,
+  $font-size: 1.1rem,
+  $font-size-lg: 1.25rem,
+  $line-height: 1.2,
+  $color: $color-white,
+  $letter-spacing: 0.02em,
+  $padding-left: 0.8rem,
+  $border-left: $border-title
+) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  letter-spacing: $letter-spacing;
+  padding-left: $padding-left;
+  border-left: $border-left;
+
+  @include mq(lg) {
+    font-size: $font-size-lg;
+  }
+}
+
+// ========================
+// 共通: CTAボタン用ミックスイン（幅オプション対応）
+// 使用例:
+//   @include button-cta(); // 既定（幅指定なし）
+//   @include button-cta($width: 90%); // モバイル幅を指定
+//   @include button-cta($width: 240px, $width-lg: 280px); // md以上で差し替え
+//   @include button-cta($max-inline-size: 22rem); // 最大幅だけ変更
+// ========================
+@mixin button-cta($width: 80%, $width-lg: 240px, $max-inline-size: 24rem) {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   max-width: 350px;
-  padding: 0.7rem 1.5rem;
+  padding: 0.625rem 1.5rem;
   white-space: nowrap;
   background: linear-gradient(
     135deg,
@@ -157,10 +189,18 @@
   text-transform: uppercase;
   transform: skew(-20deg, 0deg);
   border: 1px solid $color-black;
+  border-radius: 0;
+  // 可変: 最大インライン幅
+  max-inline-size: $max-inline-size;
   box-shadow: $box-shadow-red-default;
   cursor: pointer;
   transition: background-color $transition, color $transition,
     box-shadow $transition, border $transition;
+
+  // 可変: モバイル/共通の幅
+  @if $width != null {
+    width: $width;
+  }
 
   &:hover {
     @include mq(lg) {
@@ -176,7 +216,9 @@
     }
   }
 
-  &-inner {
+  // 内側テキスト要素の反スキュー（親が複合セレクタでも安全な指定）
+  > .section__button-inner,
+  .wc-block-components-button__text {
     display: inline-block;
     transform: skewX(15deg);
   }
@@ -207,6 +249,13 @@
     @include mq(lg) {
       transform: translateX(10px);
       background-color: $color-red;
+    }
+  }
+
+  // 可変: lg以上での幅
+  @include mq(lg) {
+    @if $width-lg != null {
+      width: $width-lg;
     }
   }
 }
@@ -410,4 +459,19 @@
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: $shadow;
+}
+
+// ========================
+// 共通:input タグ用グラデーションミックスイン
+// ========================
+@mixin input-base($padding: 0.55em 0.9em) {
+  background: linear-gradient(
+    145deg,
+    color.adjust($color-black, $lightness: 15%) 0%,
+    color.adjust($color-black, $lightness: 25%) 100%
+  );
+  border: 1px solid rgba($color-white, 0.1);
+  border-radius: 0.5rem;
+  padding: $padding;
+  color: $color-white;
 }

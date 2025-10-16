@@ -1,5 +1,5 @@
-@use "../globals/index" as *;
-@use "./mixins" as *;
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
 @use "sass:color";
 
 // ========================
@@ -21,7 +21,7 @@
     color: $color-red;
 
     &::before {
-      color: $color-gray;
+      color: $color-red;
       float: none;
     }
 
@@ -155,13 +155,7 @@
         line-height: normal;
         text-decoration: none;
         text-shadow: none;
-        @include section-button-styles();
-        width: 75%;
-        padding: 0.35rem 1.5rem;
-
-        @include mq(lg) {
-          width: 300px;
-        }
+        @include button-cta();
       }
 
       input {

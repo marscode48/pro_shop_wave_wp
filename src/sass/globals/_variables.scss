@@ -43,6 +43,9 @@ $box-shadow-red-hover: 0 0.5rem 2.5rem rgba($color-red, 1);
 // Text shadows
 $text-shadow-black-default: 2px 3px 3px rgba($color-black, 0.6);
 
+// borders
+$border-dark-gray: 1px solid rgba($color-gray, 0.6);
+
 // Surface tokens (グレイ: タブパネルやフィルター等に使用)
 $panel-gray-bg-gradient: linear-gradient(
   135deg,

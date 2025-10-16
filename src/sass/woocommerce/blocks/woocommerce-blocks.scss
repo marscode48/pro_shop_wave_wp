@@ -1,0 +1,30 @@
+// =============================================================
+// WooCommerce Blocks bundle — Cart / Checkout
+// -------------------------------------------------------------
+// 目的:
+//   - ブロック版 (WooCommerce Blocks) のスタイルを集約し、
+//     Cart / Checkout ページに適用する。
+// 方針:
+//   - スコープは `.section--cart` / `.section--checkout` を基本に、
+//     Blocks 固有クラス（.wc-block-*, .wp-block-woocommerce-*）配下で調整。
+//   - My Account は現在「従来版（ショートコード）」を採用 → legacy 側で管理。
+//     ※ 将来的にブロック版へ移行する場合は、本バンドルに myaccount を追加。
+// 依存:
+//   - globals/index: 変数 / mixin / 関数
+//   - woocommerce-index: WooCommerce 専用 mixin / 共通パーツ
+// =============================================================
+
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+
+// 共通（Blocks専用の横断UI: タイトル/ボタン/合計/バッジ等）
+@use "./common-blocks";
+
+// ページ別: カート
+@use "./cart";
+
+// ページ別: チェックアウト
+@use "./checkout";
+
+// 将来の拡張（例）：
+// @use './myaccount'; // ブロック版へ移行した際に有効化
