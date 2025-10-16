@@ -74,8 +74,8 @@ add_action('wp_enqueue_scripts', 'proshopwave_enqueue_assets');
 
 // ==============================
 // WooCommerce 専用スタイルの条件読み込み（効率化版）
-// ・ブロック版: カート / チェックアウト / マイアカウント のみ Blocks CSS
-// ・従来版: WooCommerce のその他ページ（商品一覧/詳細/カテゴリ等）のみ Legacy CSS
+// ・ブロック版: カート / チェックアウト のみ Blocks CSS
+// ・従来版: WooCommerce のその他ページ（商品一覧/詳細/カテゴリ/マイアカウント 等）は Legacy CSS
 // ・非WooCommerceページ（ホーム/ブログ等）では何も読み込まない
 // ==============================
 function proshopwave_enqueue_woocommerce_styles() {
@@ -91,8 +91,13 @@ function proshopwave_enqueue_woocommerce_styles() {
   $path_blocks = $base_dir . '/css/woocommerce/blocks/woocommerce-blocks.css';
   $path_legacy = $base_dir . '/css/woocommerce/legacy/woocommerce-legacy.css';
 
-  // --- ブロック版（カート/チェックアウト/マイアカウント）
-  if ( is_cart() || is_checkout() || is_account_page() ) {
+  // --- 判定: チェックアウト系エンドポイント
+  $is_thankyou = function_exists('is_order_received_page') && is_order_received_page();
+  $is_order_pay = function_exists('is_checkout') && function_exists('is_wc_endpoint_url') && is_checkout() && is_wc_endpoint_url('order-pay');
+
+  // --- ブロック版（カート / 通常のチェックアウト本体のみ）
+  // ※Thank You(注文受領)やOrder Payなどの従来テンプレは除外
+  if ( is_cart() || ( is_checkout() && ! $is_thankyou && ! $is_order_pay ) ) {
     wp_enqueue_style(
       'proshopwave-woocommerce-blocks',
       $base_uri . '/css/woocommerce/blocks/woocommerce-blocks.css',
@@ -102,8 +107,8 @@ function proshopwave_enqueue_woocommerce_styles() {
     return; // ブロックCSSを読み込んだら終了（Legacyは不要）
   }
 
-  // --- 従来版（その他の WooCommerce ページのみ）
-  if ( is_woocommerce() ) {
+  // --- 従来版（その他の WooCommerce ページ + マイアカウント + Thank You 等の従来テンプレ）
+  if ( is_woocommerce() || is_account_page() || $is_thankyou || $is_order_pay ) {
     wp_enqueue_style(
       'proshopwave-woocommerce-legacy',
       $base_uri . '/css/woocommerce/legacy/woocommerce-legacy.css',
