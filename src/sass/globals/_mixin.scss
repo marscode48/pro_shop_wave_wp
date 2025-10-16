@@ -460,3 +460,18 @@
   border-radius: $radius;
   box-shadow: $shadow;
 }
+
+// ========================
+// 共通:input タグ用グラデーションミックスイン
+// ========================
+@mixin input-base($padding: 0.55em 0.9em) {
+  background: linear-gradient(
+    145deg,
+    color.adjust($color-black, $lightness: 15%) 0%,
+    color.adjust($color-black, $lightness: 25%) 100%
+  );
+  border: 1px solid rgba($color-white, 0.1);
+  border-radius: 0.5rem;
+  padding: $padding;
+  color: $color-white;
+}
