@@ -15,17 +15,7 @@
 .section--checkout {
   // タイトル（WooCommerce Blocks の構造に合わせて wc-block-components-title を2個スタイリング）
   .wc-block-components-title.wc-block-components-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    color: $color-white;
-    letter-spacing: 0.02em;
-    padding-left: 0.8rem;
-    border-left: 4px solid $color-red; // 左線で視線誘導
-
-    @include mq(lg) {
-      font-size: 1.25rem;
-    }
+    @include heading-title();
   }
 
   // ボタン
