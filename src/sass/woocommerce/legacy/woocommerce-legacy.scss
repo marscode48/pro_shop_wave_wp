@@ -1,5 +1,36 @@
-// WooCommerce Legacy bundle (Shortcode / Classic templates)
-// 商品一覧・商品詳細・レビュー・属性テーブルなど、従来テンプレ用のスタイルを集約
+// =============================================================
+// WooCommerce Legacy bundle（Shortcode / Classic templates）
+// -------------------------------------------------------------
+// 目的:
+//   - 従来テンプレ（商品一覧・商品詳細・レビュー・属性テーブル・My Account 等）
+//     に適用するスタイルをまとめて管理する。
+// 方針:
+//   - スコープは `.woocommerce` 配下に限定し、Blocks との衝突を回避。
+//   - ページ/機能ごとに分割し、`@use` で集約（保守性とビルド時間を最適化）。
+// 依存:
+//   - globals/index: 変数 / mixin / 関数
+//   - woocommerce-index: WooCommerce 専用 mixin / 共通パーツ（woocommerce-mixins を forward）
+// 注意:
+//   - Thank You（order-received）も従来テンプレ → 本バンドルでスタイリング。
+// =============================================================
 
 @use "../../globals/index" as *;
-@use "./index" as *;
+@use "../woocommerce-index" as *;
+
+// 各モジュール（役割順）
+@use "./layout";              // WooCommerce全体のレイアウト構造
+@use "./smallscreen";         // モバイル表示のレイアウト
+@use "./breadcrumb";          // パンくずリスト
+@use "./product-page";        // 商品ページ
+@use "./product-loops";       // 商品ループ（関連商品系）
+@use "./reviews";             // 商品レビュー
+@use "./star-ratings";        // レビュー用の星アイコン
+@use "./tables";              // 商品属性テーブル
+@use "./forms";               // フォーム入力（ログイン、登録系）
+@use "./rating-filter-widget"; // レーティング、ログイン操作UI
+@use "./order-page";          // Thank You（注文完了画面）
+@use "./filterbar";           // 商品検索フィルター
+@use "./buttons";             // ボタン
+@use "./account";             // マイアカウント用
+@use "./notices";             // 通知表示
+@use "./select2";             // ドロップダウンUI
