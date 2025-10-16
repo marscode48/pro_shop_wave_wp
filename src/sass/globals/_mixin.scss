@@ -134,6 +134,33 @@
 }
 
 // ========================
+// 汎用: セクションタイトル/見出し用ミックスイン
+// 目的: 左線付きのタイトルデザインを統一的に適用
+// ========================
+@mixin heading-title(
+  $font-weight: 700,
+  $font-size: 1.1rem,
+  $font-size-lg: 1.25rem,
+  $line-height: 1.2,
+  $color: $color-white,
+  $letter-spacing: 0.02em,
+  $padding-left: 0.8rem,
+  $border-left: $border-title
+) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  letter-spacing: $letter-spacing;
+  padding-left: $padding-left;
+  border-left: $border-left;
+
+  @include mq(lg) {
+    font-size: $font-size-lg;
+  }
+}
+
+// ========================
 // 共通: CTAボタン用ミックスイン（幅オプション対応）
 // 使用例:
 //   @include button-cta(); // 既定（幅指定なし）
