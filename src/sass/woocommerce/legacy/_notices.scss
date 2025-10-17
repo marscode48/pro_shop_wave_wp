@@ -1,0 +1,57 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * WooCommerce specific styles for legacy themes.
+ */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 0.625rem;
+  @include panel-surface-gray();
+  padding: 1rem 1.25rem 1rem 3rem;
+  margin: 0 0 1.25rem;
+  position: relative;
+  color: $color-white;
+  border-left: $border-left-accent-gray;
+
+  // 既存テーマのアイコン疑似要素を上書き（フォント依存を外したい場合は消す）
+  &::before {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    color: $color-white;
+  }
+
+  &::after {
+    display: none !important;
+  }
+
+  // リスト対応（クーポンエラー等）
+  li {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+
+.woocommerce-error {
+  &::before {
+    color: $color-red;
+  }
+}
