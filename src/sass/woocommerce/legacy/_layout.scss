@@ -227,4 +227,21 @@
     }
   }
 }
+
+.woocommerce-account {
+  .woocommerce-MyAccount-navigation {
+    float: none !important;
+    width: auto !important;
+  }
+
+  .woocommerce-MyAccount-content {
+    float: none !important;
+    width: auto !important;
+
+    mark {
+      background-color: transparent;
+      color: $color-white;
+      font-weight: 700;
+    }
+  }
 }
