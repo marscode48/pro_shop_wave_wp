@@ -27,7 +27,7 @@
     border-left: $border-left-accent-gray;
   }
 
-  // 注文概要（番号・日付・メール・合計・決済方法）
+  // 完了直後の概要（注文番号/日付/メール/合計/決済方法）
   ul.order_details {
     @include reset-clearfix();
     @include panel-surface-black();
@@ -145,13 +145,15 @@
 
   .wc-block-order-confirmation-additional-fields-wrapper
     .wc-block-components-additional-fields-list {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    @include panel-surface-black();
+    color: $color-white;
+    border: $border-dark-gray;
     padding: 0;
     display: grid;
     grid-template-columns: 1fr max-content;
 
     dt {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: $border-dark-gray;
       font-style: normal;
       font-weight: bold;
       padding: 1rem;
@@ -168,7 +170,7 @@
     }
 
     dd {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: $border-dark-gray;
       padding: 1rem;
       box-sizing: border-box;
       text-align: right;
@@ -183,14 +185,10 @@
   .woocommerce-customer-details {
     .woocommerce-column__title {
       margin-top: 0;
-      font-family: $font-heading;
-      font-weight: 700;
-      font-size: 1.125rem;
-      margin: 0 0 0.6rem;
-      color: $color-white;
     }
 
     address {
+      // 住所ブロック: テーマの本文トーンに寄せる
       font-style: normal;
       margin-bottom: 0;
       text-align: left;
@@ -206,8 +204,9 @@
 
     .woocommerce-customer-details--phone,
     .woocommerce-customer-details--email {
+      // アイコン用の ::before をこの要素基準で配置
+      position: relative;
       padding-left: 1.5em;
-
       color: $color-gray;
       margin-top: 0.4rem;
 
@@ -218,13 +217,13 @@
 
     .woocommerce-customer-details--phone::before {
       margin-left: -1.5em;
-      line-height: 1.75;
+      line-height: 2;
       position: absolute;
     }
 
     .woocommerce-customer-details--email::before {
       margin-left: -1.5em;
-      line-height: 1.75;
+      line-height: 2;
       position: absolute;
     }
   }
