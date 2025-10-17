@@ -23,11 +23,13 @@
     margin: 0;
     padding: 0;
 
+    // プレースホルダー（フォーカス時にフェードアウトして読みやすさを確保）
     [placeholder]:focus::-webkit-input-placeholder {
       transition: opacity 0.5s 0.5s ease;
       opacity: 0;
     }
 
+    // ラベル基本スタイル
     label {
       font-size: 0.95rem;
       color: $color-white;
@@ -43,6 +45,7 @@
       }
     }
 
+    // 入力補足テキスト（WooCommerce標準のトグル説明）
     .woocommerce-input-wrapper .description {
       background: #1e85be;
       color: #fff;
@@ -75,6 +78,7 @@
       }
     }
 
+    // チェックボックス（垂直位置をテキストに合わせる）
     .input-checkbox {
       display: inline;
       margin: -2px 8px 0 0;
@@ -82,6 +86,7 @@
       vertical-align: middle;
     }
 
+    // 入力とセレクト（共通のベース＆フォーカス）
     .input-text,
     select {
       font-family: inherit;
@@ -98,6 +103,7 @@
     }
 
     select {
+      // ネイティブの▼を非表示にし、カスタムSVGで統一
       cursor: pointer;
       /* We hide the default chevron because it cannot be directly modified. Instead, we add a custom chevron using a background image. */
       appearance: none;
@@ -108,12 +114,14 @@
       background-position: calc(100% - 0.5em) 50%;
     }
 
+    // テキストエリア（高さ/行間）
     textarea {
       height: 4em;
       line-height: 1.5;
       box-shadow: none;
     }
 
+    // 必須/任意ラベル（視覚ノイズを抑えつつ色で強調）
     .required {
       border: 0 !important;
       text-decoration: none;
@@ -127,6 +135,7 @@
       visibility: visible;
     }
 
+    // バリデーション: エラー
     &.woocommerce-invalid {
       label {
         color: $color-red;
@@ -140,6 +149,7 @@
       }
     }
 
+    // バリデーション: 成功
     &.woocommerce-validated {
       input.input-text,
       select {
@@ -150,6 +160,7 @@
       }
     }
 
+    // 旧ブラウザ向けのプレースホルダー行間調整
     ::-webkit-input-placeholder {
       line-height: normal;
     }
@@ -203,7 +214,7 @@
         left: 0;
         margin: 0;
 
-        // デフォルトの黒から白に変更
+        // 既定の黒い矢印を白のSVGに差し替え（暗色背景での視認性を確保）
         background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
           no-repeat center;
         // 白を視認しやすくする補助
@@ -244,6 +255,7 @@
   }
 }
 
+// リスト外観（余白/ハイライト/選択状態の調整）
 .select2-results__options {
   list-style: none;
   margin: 0;
@@ -281,6 +293,7 @@
   form.login,
   form.checkout_coupon,
   form.register {
+    // グリッドで間隔を管理（枠や影はテーマ側で統合管理）
     display: grid;
     gap: 1rem;
     border: none;
@@ -291,11 +304,13 @@
   }
 
   form.checkout_coupon {
+    // クーポン入力のエラーフォーカスを明示
     .input-text.has-error:focus {
       border-color: $color-red;
     }
   }
 
+  // 配送方法一覧（ラジオ/金額の整列）
   ul#shipping_method {
     list-style: none outside;
     margin: 0;
