@@ -1,0 +1,58 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Buttons
+ */
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles)),
+:where(body:not(.woocommerce-block-theme-has-button-styles)):where(
+    :not(.edit-post-visual-editor)
+  )
+  .woocommerce {
+  a.button,
+  button.button,
+  input.button,
+  #respond input#submit {
+    margin: 0;
+    line-height: 1;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    overflow: visible;
+    left: auto;
+    border: 0;
+    box-shadow: none;
+    text-shadow: none;
+    display: inline-block;
+    color: $color-white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.5em 1em;
+    border-radius: 0.3rem;
+    background: $color-bright-red-gradient;
+    transition: filter $transition;
+
+    @include mq(lg) {
+      font-size: 0.95rem;
+    }
+
+    &:hover {
+      background-color: transparent;
+      text-decoration: none;
+      background-image: none;
+      background: $color-bright-red-gradient;
+      color: $color-white;
+      filter: brightness(1.5);
+    }
+  }
+}

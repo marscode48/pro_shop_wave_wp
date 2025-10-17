@@ -18,19 +18,18 @@
 @use "../woocommerce-index" as *;
 
 // 各モジュール（役割順）
-@use "./layout";              // WooCommerce全体のレイアウト構造
-@use "./smallscreen";         // モバイル表示のレイアウト
-@use "./breadcrumb";          // パンくずリスト
-@use "./product-page";        // 商品ページ
-@use "./product-loops";       // 商品ループ（関連商品系）
-@use "./reviews";             // 商品レビュー
-@use "./star-ratings";        // レビュー用の星アイコン
-@use "./tables";              // 商品属性テーブル
-@use "./forms";               // フォーム入力（ログイン、登録系）
-@use "./rating-filter-widget"; // レーティング、ログイン操作UI
-@use "./order-page";          // Thank You（注文完了画面）
-@use "./filterbar";           // 商品検索フィルター
-@use "./buttons";             // ボタン
-@use "./account";             // マイアカウント用
-@use "./notices";             // 通知表示
-@use "./select2";             // ドロップダウンUI
+@use "./layout"; // WooCommerce全体のレイアウト構造
+@use "./smallscreen"; // モバイル表示のレイアウト
+@use "./breadcrumb"; // パンくずリスト
+@use "./product-page"; // 商品ページ
+@use "./product-loops"; // 商品ループ（関連商品系）
+@use "./reviews"; // 商品レビュー
+@use "./star-ratings"; // レビュー用の星アイコン
+@use "./tables"; // 商品属性テーブル
+@use "./forms"; // フォーム入力（ログイン、登録系）
+@use "./order-page"; // Thank You（注文完了画面）
+@use "./_auth-login-register"; // ログイン・認証
+@use "./filterbar"; // 商品検索フィルター
+@use "./buttons"; // ボタン
+@use "./notices"; // 通知表示
+@use "./account-page"; // マイアカウント用

@@ -46,6 +46,12 @@ $text-shadow-black-default: 2px 3px 3px rgba($color-black, 0.6);
 // borders
 $border-dark-gray: 1px solid rgba($color-gray, 0.6);
 
+// heading-title
+$border-title: 0.25rem solid $color-red;
+
+// Accent border tokens
+$border-left-accent-gray: 4px solid $color-gray; // 左アクセント用（例: ステータスブロック）
+
 // Surface tokens (グレイ: タブパネルやフィルター等に使用)
 $panel-gray-bg-gradient: linear-gradient(
   135deg,

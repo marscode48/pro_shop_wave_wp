@@ -1,0 +1,54 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  .woocommerce-form-login {
+    .woocommerce-form-login__submit {
+      float: none !important;
+      font-size: 100%;
+      line-height: inherit;
+      @include button-cta();
+    }
+
+    // チェックボックス（ログイン状態を保存）
+    .woocommerce-form-login__rememberme {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: fit-content;
+      margin-inline: auto;
+      margin-bottom: 1.875rem;
+
+      input[type="checkbox"] {
+        inline-size: 1.1rem;
+        block-size: 1.1rem;
+        cursor: pointer;
+      }
+
+      span {
+        line-height: 1;
+      }
+    }
+  }
+
+  .woocommerce-form-register {
+    .woocommerce-form-register__submit {
+      font-size: 100%;
+      line-height: inherit;
+      @include button-cta();
+    }
+  }
+}

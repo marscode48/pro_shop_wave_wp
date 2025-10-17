@@ -404,11 +404,10 @@
         // -------------------------------
         // アクセシビリティ（フォーカス）
         // -------------------------------
-        input:focus,
-        select:focus,
-        textarea:focus {
-          outline: 1px solid $color-gray;
-          outline-offset: 1px;
+        input,
+        select,
+        textarea {
+          @include input-focus();
         }
       }
 
@@ -549,6 +548,12 @@
           }
 
           .wc-block-components-order-summary-item__individual-prices {
+            del {
+              opacity: 0.6;
+              margin-right: 0.2em;
+              text-decoration-color: $color-red;
+            }
+            
             .wc-block-components-product-price__value {
               font-weight: 700;
             }

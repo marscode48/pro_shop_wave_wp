@@ -1,0 +1,344 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * WooCommerce 本体のフォームスタイル（forms.scss）をもとにしたカスタマイズ。
+ * 元ファイル: plugins/woocommerce/client/legacy/css/forms.scss
+ * 本テーマでは Main WooCommerce styles 内の @import "forms" 相当の内容をここに統合。
+ */
+.woocommerce {
+  /**
+	 * Generic forms styles used in places such as my account and the shortcode based checkout.
+	 */
+  form .form-row {
+    @include reset-clearfix();
+    margin: 0;
+    padding: 0;
+
+    // プレースホルダー（フォーカス時にフェードアウトして読みやすさを確保）
+    [placeholder]:focus::-webkit-input-placeholder {
+      transition: opacity 0.5s 0.5s ease;
+      opacity: 0;
+    }
+
+    // ラベル基本スタイル
+    label {
+      font-size: 0.95rem;
+      color: $color-white;
+      line-height: 2;
+      margin-bottom: 0.25rem;
+
+      &.hidden {
+        visibility: hidden;
+      }
+
+      &.inline {
+        display: inline;
+      }
+    }
+
+    // 入力補足テキスト（WooCommerce標準のトグル説明）
+    .woocommerce-input-wrapper .description {
+      @include panel-surface-gray();
+      color: $color-white;
+      border: $border-dark-gray;
+      border-left: $border-left-accent-gray;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0 0;
+      clear: both;
+      display: none;
+      position: relative;
+
+      a {
+        color: $color-white;
+        text-decoration: underline;
+        border: 0;
+        box-shadow: none;
+      }
+
+      // 先端三角形はアクセント色に合わせて描画
+      &::before {
+        left: 1.25rem;
+        top: 0;
+        transform: translateY(-100%);
+        content: "";
+        position: absolute;
+        border-width: 6px 6px 0 6px;
+        border-style: solid;
+        border-color: rgba($color-gray, 0.6);
+        z-index: 1;
+        display: block;
+      }
+    }
+
+    // チェックボックス（垂直位置をテキストに合わせる）
+    .input-checkbox {
+      display: inline;
+      margin: -2px 8px 0 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    // 入力とセレクト（共通のベース＆フォーカス）
+    .input-text,
+    select {
+      font-family: inherit;
+      font-weight: normal;
+      letter-spacing: normal;
+      display: block;
+      box-sizing: border-box;
+      margin: 0;
+      line-height: normal;
+      height: auto;
+      @include input-base(0.8em 1em);
+      @include input-focus();
+      width: 100%;
+    }
+
+    select {
+      // ネイティブの▼を非表示にし、カスタムSVGで統一
+      cursor: pointer;
+      /* We hide the default chevron because it cannot be directly modified. Instead, we add a custom chevron using a background image. */
+      appearance: none;
+      padding-right: 3em;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY2hldnJvbi1kb3duIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSI+PC9wb2x5bGluZT48L3N2Zz4=);
+      background-repeat: no-repeat;
+      background-size: 16px;
+      background-position: calc(100% - 0.5em) 50%;
+    }
+
+    // テキストエリア（高さ/行間）
+    textarea {
+      height: 4em;
+      line-height: 1.5;
+      box-shadow: none;
+    }
+
+    // 必須/任意ラベル（視覚ノイズを抑えつつ色で強調）
+    .required {
+      border: 0 !important;
+      text-decoration: none;
+      visibility: hidden;
+      color: $color-red;
+      font-weight: 700;
+      margin-left: 0.25em;
+    }
+
+    .optional {
+      visibility: visible;
+    }
+
+    // バリデーション: エラー
+    &.woocommerce-invalid {
+      label {
+        color: $color-red;
+      }
+      input.input-text,
+      select {
+        border-color: $color-red;
+      }
+      .select2-container:not(.select2-container--open) .select2-selection {
+        border-color: $color-red;
+      }
+    }
+
+    // バリデーション: 成功
+    &.woocommerce-validated {
+      input.input-text,
+      select {
+        border-color: var(--wc-green);
+      }
+      .select2-container:not(.select2-container--open) .select2-selection {
+        border-color: var(--wc-green);
+      }
+    }
+
+    // 旧ブラウザ向けのプレースホルダー行間調整
+    ::-webkit-input-placeholder {
+      line-height: normal;
+    }
+
+    :-moz-placeholder {
+      line-height: normal;
+    }
+
+    :-ms-input-placeholder {
+      line-height: normal;
+    }
+  }
+}
+
+// 選択リスト
+.select2-container {
+  width: 100%;
+
+  .select2-selection--single {
+    height: auto;
+    @include input-focus();
+
+    .select2-selection__rendered {
+      line-height: normal;
+      box-sizing: border-box;
+      font-weight: normal;
+      color: $color-white;
+      padding: 0;
+    }
+
+    .select2-selection__placeholder {
+      color: $color-gray;
+    }
+
+    .select2-selection__arrow {
+      position: absolute;
+      top: 2px;
+      right: 0.5em;
+      height: 100%;
+      width: 1rem;
+
+      b {
+        border: none;
+        display: block;
+        background-size: 1rem;
+        width: 1rem;
+        height: 1rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        margin: 0;
+
+        // 既定の黒い矢印を白のSVGに差し替え（暗色背景での視認性を確保）
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
+          no-repeat center;
+        // 白を視認しやすくする補助
+        filter: drop-shadow(0 0 1px rgba($color-black, 0.3));
+      }
+    }
+  }
+
+  .select2-selection {
+    @include input-base(0.8em 1em);
+    line-height: 1.5;
+    transition: border-color $transition, box-shadow $transition;
+  }
+
+  // ドロップダウンリスト
+  .select2-dropdown {
+    background: rgba($color-black, 0.9);
+    border: 1px solid rgba($color-white, 0.2);
+    border-radius: 0.4rem;
+    color: $color-white;
+    box-shadow: 0 4px 10px rgba($color-black, 0.4);
+
+    .select2-search__field {
+      @include input-base(0.5em 0.75em);
+    }
+  }
+
+  &.select2-container--open .select2-dropdown--above {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.select2-container--open .select2-dropdown--below {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+// リスト外観（余白/ハイライト/選択状態の調整）
+.select2-results__options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.select2-results__option {
+  margin: 0;
+  padding: 0.5em 1em;
+  transition: background-color $transition, color $transition;
+
+  .select2-container--default &[data-selected="true"],
+  .select2-container--default &[aria-selected="true"] {
+    background-color: rgba($color-red, 0.5);
+    color: $color-white;
+  }
+
+  .select2-container--default &--highlighted[aria-selected],
+  .select2-container--default &--highlighted[aria-selected] {
+    background-color: $color-red;
+    color: $color-white;
+  }
+}
+
+/**
+ * Main WooCommerce styles
+ * WooCommerce 本体のメインスタイル部分のカスタマイズ。
+ * （@import "forms" ではなく、woocommerce.scss 内に直接定義されているフォーム以外の
+ * レイアウト関連スタイルをテーマ用に上書きしています）
+ */
+.woocommerce {
+  /**
+	 * Forms
+	 */
+  form.login,
+  form.checkout_coupon,
+  form.register {
+    // グリッドで間隔を管理（枠や影はテーマ側で統合管理）
+    display: grid;
+    gap: 1rem;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    border-radius: 0;
+  }
+
+  form.checkout_coupon {
+    // クーポン入力のエラーフォーカスを明示
+    .input-text.has-error:focus {
+      border-color: $color-red;
+    }
+  }
+
+  // 配送方法一覧（ラジオ/金額の整列）
+  ul#shipping_method {
+    list-style: none outside;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0 0 0.5em;
+      line-height: 1.5em;
+      list-style: none outside;
+
+      input {
+        margin: 3px 0.4375em 0 0;
+        vertical-align: top;
+      }
+
+      label {
+        display: inline;
+      }
+    }
+
+    .amount {
+      font-weight: 700;
+    }
+  }
+
+  p.woocommerce-shipping-contents {
+    margin: 0;
+  }
+}
