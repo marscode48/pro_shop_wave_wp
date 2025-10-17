@@ -548,6 +548,12 @@
           }
 
           .wc-block-components-order-summary-item__individual-prices {
+            del {
+              opacity: 0.6;
+              margin-right: 0.2em;
+              text-decoration-color: $color-red;
+            }
+            
             .wc-block-components-product-price__value {
               font-weight: 700;
             }

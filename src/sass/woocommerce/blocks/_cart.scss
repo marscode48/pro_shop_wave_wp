@@ -74,6 +74,12 @@
               }
 
               &__prices {
+                del {
+                  opacity: 0.6;
+                  margin-right: 0.2em;
+                  text-decoration-color: $color-red;
+                }
+
                 .wc-block-components-product-price__value {
                   font-weight: 700;
                 }
@@ -361,7 +367,6 @@
   // 空カート表示
   // =====================================
   .wp-block-woocommerce-empty-cart-block {
-
     .wc-block-cart__empty-cart {
       &__title {
         // 顔アイコン
@@ -402,7 +407,7 @@
     // ------------------------------
     .wc-block-product-new.has-4-columns {
       margin: 2rem 0;
-                                               
+
       .wc-block-grid {
         &__products {
           padding: 0;
