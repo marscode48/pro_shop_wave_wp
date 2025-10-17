@@ -404,11 +404,10 @@
         // -------------------------------
         // アクセシビリティ（フォーカス）
         // -------------------------------
-        input:focus,
-        select:focus,
-        textarea:focus {
-          outline: 1px solid $color-gray;
-          outline-offset: 1px;
+        input,
+        select,
+        textarea {
+          @include input-focus();
         }
       }
 
