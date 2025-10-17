@@ -14,6 +14,49 @@
  */
 .woocommerce,
 .woocommerce-page {
+  .woocommerce-message,
+  .woocommerce-error,
+  .woocommerce-info {
+    .button {
+      float: none !important;
+    }
+  }
+
+  /**
+	 * General layout styles
+	 */
+  .col2-set {
+    @include reset-clearfix();
+    width: auto !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @include mq(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.4rem;
+    }
+
+    .col-1,
+    .col-2 {
+      width: auto !important;
+      float: none !important;
+
+      @include panel-surface-black();
+      padding: 1rem;
+      color: $color-white;
+
+      @include mq(md) {
+        padding: 1.25rem;
+      }
+    }
+  }
+
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+
   /**
 	 * Product page
 	 */
