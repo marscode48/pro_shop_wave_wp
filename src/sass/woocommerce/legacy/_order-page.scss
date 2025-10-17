@@ -1,0 +1,231 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Order page
+	 */
+
+  // 成功メッセージ
+  .woocommerce-notice--success {
+    @include panel-surface-gray();
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    color: $color-white;
+    font-weight: 700;
+    border-left: $border-left-accent-gray;
+  }
+
+  // 注文概要（番号・日付・メール・合計・決済方法）
+  ul.order_details {
+    @include reset-clearfix();
+    @include panel-surface-black();
+    padding: 1rem;
+    margin: 0 0 1.5rem;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+
+    li {
+      float: none !important;
+      margin-right: 0;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      line-height: 1;
+      border-right: none;
+      padding-right: 0;
+      margin-left: 0;
+      padding-left: 0;
+      list-style-type: none;
+
+      display: grid;
+      grid-template-columns: 5rem 1fr; // ラベル / 値
+      gap: 0.75rem;
+      align-items: baseline;
+      color: $color-white;
+
+      @include mq(lg) {
+        grid-template-columns: 9rem 1fr;
+      }
+
+      strong {
+        display: block;
+        font-size: 1rem;
+        text-transform: none;
+        line-height: 1.5;
+        font-weight: 700;
+      }
+
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
+
+  .wc-bacs-bank-details-account-name {
+    font-weight: bold;
+  }
+
+  // 注文詳細（テーブル）
+  .woocommerce-order-downloads,
+  .woocommerce-customer-details,
+  .woocommerce-order-details {
+    margin-bottom: 2rem;
+
+    .woocommerce-order-details__title {
+      @include heading-title();
+      margin: 0 0 0.75rem;
+    }
+
+    .order-actions--heading {
+      vertical-align: middle;
+    }
+
+    .order-actions-button {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .woocommerce-customer-details .addresses,
+  .woocommerce-customer-details .additional-fields {
+    margin-bottom: 2em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .addresses .wc-block-components-additional-fields-list {
+    margin: 0;
+    padding: 0;
+
+    dt {
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      font-weight: bold;
+      display: inline;
+
+      &::after {
+        content: ": ";
+      }
+
+      &::before {
+        content: "";
+        display: block;
+      }
+    }
+
+    dd {
+      margin: 0;
+      padding: 0;
+      font-style: normal;
+      display: inline;
+    }
+  }
+
+  .wc-block-order-confirmation-additional-fields-wrapper
+    .wc-block-components-additional-fields-list {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+
+    dt {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      font-style: normal;
+      font-weight: bold;
+      padding: 1rem;
+      box-sizing: border-box;
+      margin: 0 !important;
+
+      &::after {
+        display: none;
+      }
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+    }
+
+    dd {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      box-sizing: border-box;
+      text-align: right;
+      margin: 0 !important;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .woocommerce-customer-details {
+    .woocommerce-column__title {
+      margin-top: 0;
+      font-family: $font-heading;
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin: 0 0 0.6rem;
+      color: $color-white;
+    }
+
+    address {
+      font-style: normal;
+      margin-bottom: 0;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 0;
+      color: $color-white;
+      padding: 0;
+      font-style: normal;
+      line-height: 1.7;
+    }
+
+    .woocommerce-customer-details--phone,
+    .woocommerce-customer-details--email {
+      padding-left: 1.5em;
+
+      color: $color-gray;
+      margin-top: 0.4rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .woocommerce-customer-details--phone::before {
+      margin-left: -1.5em;
+      line-height: 1.75;
+      position: absolute;
+    }
+
+    .woocommerce-customer-details--email::before {
+      margin-left: -1.5em;
+      line-height: 1.75;
+      position: absolute;
+    }
+  }
+}
