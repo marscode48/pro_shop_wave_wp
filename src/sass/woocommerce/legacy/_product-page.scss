@@ -369,30 +369,8 @@
         }
 
         h2 {
-          font-family: $font-body;
-          font-size: 1rem;
-          font-weight: bold;
+          @include heading-title();
           margin-bottom: 1rem;
-          border-left: 4px solid $color-red;
-          padding-left: 0.75em;
-          background: linear-gradient(
-            90deg,
-            rgba($color-gray, 0.5) 0%,
-            rgba($color-gray, 0) 50%,
-            transparent 50%,
-            transparent 100%
-          );
-
-          @include mq(lg) {
-            font-size: 1.25rem;
-            background: linear-gradient(
-              90deg,
-              rgba($color-gray, 0.5) 0%,
-              rgba($color-gray, 0) 25%,
-              transparent 25%,
-              transparent 100%
-            );
-          }
         }
 
         p {

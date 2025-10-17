@@ -1,0 +1,430 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Account page
+ */
+.woocommerce-account {
+  .section--myaccount {
+    color: $color-white;
+
+    // 内側ラッパー
+    .myaccount__inner {
+      display: block;
+      max-width: 72rem;
+      margin: 0 auto;
+      padding-inline: 1rem;
+
+      @include mq(md) {
+        padding-inline: 2rem;
+      }
+
+      .woocommerce {
+        @include reset-clearfix();
+
+        // =============================================================
+        // ログイン & 登録画面
+        // =============================================================
+        #customer_login {
+          // 見出し（h2）
+          h2 {
+            @include heading-title();
+            margin: 0 0 0.75rem;
+          }
+
+          // 補助リンク
+          .woocommerce-LostPassword {
+            text-align: center;
+
+            a {
+              @include link-underline-animate();
+              padding-bottom: 4px;
+              color: $color-white;
+              font-size: 0.95rem;
+            }
+          }
+
+          // 規約/ポリシー（登録側の注意文）
+          .woocommerce-privacy-policy-text {
+            color: $color-gray;
+            font-size: 0.95rem;
+            line-height: 1.7;
+
+            a {
+              color: $color-red;
+              text-decoration: underline;
+            }
+          }
+        }
+
+        // =============================================================
+        // パスワード再発行（Lost / Reset Password）
+        // =============================================================
+        .woocommerce-ResetPassword.lost_reset_password {
+          @include panel-surface-black();
+          padding: 1rem;
+          color: $color-white;
+          display: grid;
+          gap: 1.25rem;
+
+          @include mq(md) {
+            padding: 1.875rem;
+            gap: 2rem;
+          }
+
+          @include mq(lg) {
+            padding: 1.875rem 15rem;
+          }
+
+          // 冒頭説明
+          > p:first-of-type {
+            color: $color-white;
+            line-height: 1.7;
+          }
+
+          // 送信ボタン
+          .woocommerce-Button.button,
+          button[type="submit"] {
+            @include button-cta();
+          }
+        }
+
+        // =============================================================
+        // マイアカウント ダッシュボード（Dashboard）リスト（上段）
+        // =============================================================
+        .woocommerce-MyAccount-navigation {
+          @include panel-surface-black();
+          padding: 1rem;
+          margin-bottom: 2rem;
+
+          @include mq(md) {
+            padding: 1.25rem;
+          }
+
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+              a {
+                display: inline-block;
+                color: $color-white;
+                font-weight: 600;
+                font-size: 0.95rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                padding: 0.5em 1em;
+                border-radius: 0.3rem;
+                background-color: $color-dark-gray;
+                transition: background-color $transition, color $transition;
+
+                @include mq(lg) {
+                  &:hover,
+                  &:focus {
+                    background-color: rgba($color-red, 0.5);
+                    color: $color-white;
+                  }
+                  &:focus-visible {
+                    outline: 2px solid rgba($color-red, 0.9);
+                    outline-offset: 2px;
+                    background-color: rgba($color-red, 0.5);
+                    color: $color-white;
+                  }
+                }
+              }
+
+              &.is-active a {
+                background: $color-bright-red-gradient;
+                color: $color-white;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+
+        // =============================================================
+        // マイアカウント ダッシュボード（Dashboard）内容（下段）
+        // =============================================================
+        .woocommerce-MyAccount-content {
+          @include panel-surface-black();
+          padding: 1.25rem;
+          color: $color-white;
+
+          @include mq(md) {
+            padding: 1.75rem;
+          }
+
+          // =============================================================
+          // ダッシュボード内容: 注文詳細 & 顧客情報（Order Details / Customer Details）
+          // =============================================================
+          // 注文詳細
+          .woocommerce-order-details {
+            *:last-child {
+              margin-bottom: 0;
+            }
+
+            .woocommerce-order-details__title {
+              @include heading-title();
+              margin: 0 0 1rem;
+            }
+          }
+
+          // 顧客情報（住所2カラムレイアウト）
+          .woocommerce-customer-details {
+            .woocommerce-columns.addresses {
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
+
+              @include mq(md) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+              }
+
+              .woocommerce-column {
+                @include panel-surface-black();
+                padding: 1rem;
+
+                @include mq(md) {
+                  padding: 1.25rem;
+                }
+
+                .woocommerce-column__title {
+                  @include heading-title();
+                  margin: 0 0 0.75rem;
+                }
+
+                address {
+                  margin: 0;
+                  color: $color-white;
+                  font-style: normal;
+                  line-height: 1.8;
+
+                  .woocommerce-customer-details--phone,
+                  .woocommerce-customer-details--email {
+                    margin: 0.4rem 0 0;
+                    color: $color-gray;
+                    word-break: break-word;
+                  }
+                }
+              }
+            }
+          }
+
+          // =============================================================
+          // ダッシュボード内容: ダウンロード
+          // =============================================================
+          ul.digital-downloads {
+            li {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 0.75rem;
+
+              // ダウンロード名のリンクは可変幅、折り返しに強く
+              a {
+                flex: 1 1 auto;
+                min-width: 0;
+              }
+
+              // ダウンロード数は右側に固定配置
+              .count {
+                float: none !important;
+                flex: 0 0 auto;
+                margin-left: 1rem;
+              }
+            }
+          }
+
+          // =============================================================
+          // ダッシュボード内容: 住所（請求先 / お届け先）
+          // =============================================================
+          .woocommerce-Addresses.addresses {
+            // 各アドレスカード
+            .woocommerce-Address {
+              // カードヘッダー（見出し + 編集リンク）
+              .woocommerce-Address-title.title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                row-gap: 1rem;
+                margin: 0 0 0.75rem;
+                @include reset-clearfix();
+
+                h2 {
+                  @include heading-title();
+                  margin: 0;
+                }
+
+                h3 {
+                  float: none !important;
+                }
+
+                // 「住所を編集」リンクを小ボタン化
+                .edit {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 0.45em 0.9em;
+                  color: $color-white;
+                  text-decoration: none;
+                  font-weight: 700;
+                  font-size: 0.9rem;
+                  letter-spacing: 0.03em;
+                  @include panel-surface-black($radius: 999px);
+                  transition: filter $transition;
+                  float: none !important;
+
+                  &:hover {
+                    @include mq(lg) {
+                      filter: brightness(2);
+                    }
+                  }
+                }
+              }
+
+              // 住所テキスト
+              address {
+                margin: 0;
+                color: $color-white;
+                font-style: normal;
+                line-height: 1.8;
+                word-break: break-word;
+              }
+            }
+          }
+
+          // =============================================================
+          // ダッシュボード内容: 住所編集（請求先 / お届け先）
+          // =============================================================
+          form[method="post"] {
+            color: $color-white;
+
+            // 見出し
+            > h2 {
+              @include heading-title();
+              margin: 0 0 1rem;
+            }
+
+            .woocommerce-address-fields {
+              display: grid;
+              gap: 2.5rem;
+
+              .woocommerce-address-fields__field-wrapper {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+
+                @include mq(md) {
+                  // デフォルトclassの first/last を2列に
+                  grid-template-columns: repeat(2, 1fr);
+                }
+
+                // 共通行
+                .form-row,
+                .woocommerce-form-row {
+                  margin-bottom: 0;
+                }
+
+                // フル幅行（国/地域、住所1/2、電話、メール）
+                .form-row-wide {
+                  grid-column: 1 / -1;
+                }
+
+                // first / last は自動で2列に入る
+                .form-row-first,
+                .form-row-last {
+                  grid-column: auto;
+                }
+
+                // 国/地域の noscript 更新ボタンは非表示（JS前提）
+                noscript {
+                  display: none;
+                }
+              }
+
+              // フッター（住所を保存ボタン）
+              > p:last-child {
+                margin: 0;
+
+                .button,
+                button[type="submit"],
+                .woocommerce-Button.button {
+                  @include button-cta();
+                }
+
+                input[type="hidden"] {
+                  display: none;
+                }
+              }
+            }
+          }
+
+          // =============================================================
+          // ダッシュボード内容: アカウント詳細編集（氏名 / メール / パスワード変更）
+          // =============================================================
+          form.woocommerce-EditAccountForm.edit-account {
+            display: grid;
+            color: $color-white;
+
+            // パスワード変更フィールドセット
+            fieldset {
+              border: 0;
+              margin: 1.5rem 0;
+
+              // 「パスワードの変更」タイトル
+              legend {
+                @include heading-title();
+                margin: 0 0 0.75rem;
+              }
+            }
+
+            // 送信行（最終行）
+            > p:last-child {
+              margin: 0;
+
+              .woocommerce-Button.button,
+              button[type="submit"],
+              .button {
+                @include button-cta();
+              }
+            }
+          }
+
+          p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+
+            strong {
+              font-weight: 700;
+            }
+
+            a {
+              color: $color-red;
+              text-decoration: underline;
+              transition: color $transition;
+
+              &:hover {
+                color: color.scale($color-red, $lightness: 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

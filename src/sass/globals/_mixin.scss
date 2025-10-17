@@ -147,6 +147,7 @@
   $padding-left: 0.8rem,
   $border-left: $border-title
 ) {
+  font-family: $font-heading;
   font-weight: $font-weight;
   font-size: $font-size;
   line-height: $line-height;
@@ -461,6 +462,7 @@
   box-shadow: $shadow;
 }
 
+
 // ========================
 // 共通:input タグ用グラデーションミックスイン
 // ========================
@@ -474,4 +476,32 @@
   border-radius: 0.5rem;
   padding: $padding;
   color: $color-white;
+}
+
+// ========================
+// 共通: input / textarea / select のフォーカススタイル
+// WooCommerce / ContactForm7 / カスタムフォーム共通で利用可
+// 引数で配色や線幅を調整可能（既定はテーマトーン）
+// 使用例:
+//   input, textarea, select { @include input-focus(); }
+//   .c-form__input { @include input-focus($outline-color: $color-red); }
+// ========================
+@mixin input-focus(
+  $border-color: rgba($color-white, 0.18),
+  $outline-color: color.scale($color-red, $lightness: 15%),
+  $outline-width: 0.125rem,
+  $outline-offset: 0.125rem
+) {
+  &:focus {
+    border-color: $border-color; // input-base のボーダーと整合
+    outline: $outline-width solid $outline-color;
+    outline-offset: $outline-offset;
+  }
+
+  // キーボード操作時の視認性を高める
+  &:focus-visible {
+    border-color: $border-color;
+    outline: $outline-width solid $outline-color;
+    outline-offset: $outline-offset;
+  }
 }
