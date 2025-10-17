@@ -47,33 +47,35 @@
 
     // 入力補足テキスト（WooCommerce標準のトグル説明）
     .woocommerce-input-wrapper .description {
-      background: #1e85be;
-      color: #fff;
-      border-radius: 3px;
-      padding: 1em;
-      margin: 0.5em 0 0;
+      @include panel-surface-gray();
+      color: $color-white;
+      border: $border-dark-gray;
+      border-left: $border-left-accent-gray;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0 0;
       clear: both;
       display: none;
       position: relative;
 
       a {
-        color: #fff;
+        color: $color-white;
         text-decoration: underline;
         border: 0;
         box-shadow: none;
       }
 
+      // 先端三角形はアクセント色に合わせて描画
       &::before {
-        left: 50%;
-        top: 0%;
-        margin-top: -4px;
-        transform: translateX(-50%) rotate(180deg);
+        left: 1.25rem;
+        top: 0;
+        transform: translateY(-100%);
         content: "";
         position: absolute;
-        border-width: 4px 6px 0 6px;
+        border-width: 6px 6px 0 6px;
         border-style: solid;
-        border-color: #1e85be transparent transparent transparent;
-        z-index: 100;
+        border-color: rgba($color-gray, 0.6);
+        z-index: 1;
         display: block;
       }
     }
@@ -192,7 +194,7 @@
     }
 
     .select2-selection__placeholder {
-      color: #999;
+      color: $color-gray;
     }
 
     .select2-selection__arrow {
@@ -238,7 +240,7 @@
     box-shadow: 0 4px 10px rgba($color-black, 0.4);
 
     .select2-search__field {
-      border: 1px solid rgba($color-white, 0.2);
+      @include input-base(0.5em 0.75em);
     }
   }
 
