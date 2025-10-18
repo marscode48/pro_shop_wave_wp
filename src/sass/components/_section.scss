@@ -43,6 +43,10 @@
     }
   }
 
+  &__content {
+    flex-grow: 1;
+  }
+
   &__link {
     display: block;
     text-decoration: none;
