@@ -11,22 +11,22 @@
  */
 
 get_header();
-
-// Breadcrumb navigation
-if (function_exists('woocommerce_breadcrumb')) {
-    woocommerce_breadcrumb();
-}
 ?>
 
 <section class="section section--cart" role="region" aria-label="Cart">
-    <div class="cart__inner">
-        <?php
-        // ブロックエディタで配置したコンテンツ（カートブロック）をそのまま出力
-        if (function_exists('the_content')) {
-            the_content();
-        }
-        ?>
-    </div>
+  <div class="cart__inner">
+    <?php
+    // Breadcrumb navigation
+    if (function_exists('woocommerce_breadcrumb')) {
+      woocommerce_breadcrumb();
+    }
+
+    // ブロックエディタで配置したコンテンツ（カートブロック）をそのまま出力
+    if (function_exists('the_content')) {
+      the_content();
+    }
+    ?>
+  </div>
 </section>
 
 <?php get_footer();

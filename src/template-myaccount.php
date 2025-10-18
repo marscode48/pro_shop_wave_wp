@@ -13,15 +13,17 @@
 
 get_header();
 
-// Breadcrumb navigation
-if (function_exists('woocommerce_breadcrumb')) {
-  woocommerce_breadcrumb();
-}
+
 ?>
 
 <section class="section section--myaccount" role="region" aria-label="my-account">
   <div class="myaccount__inner">
     <?php
+    // Breadcrumb navigation
+    if (function_exists('woocommerce_breadcrumb')) {
+      woocommerce_breadcrumb();
+    }
+
     // WooCommerce マイアカウントページをショートコード経由で出力
     if (class_exists('WC_Shortcodes')) {
       echo do_shortcode('[woocommerce_my_account]');
