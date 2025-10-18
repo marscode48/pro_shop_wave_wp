@@ -26,7 +26,7 @@
   // 使用例: <div class="l-container l-container--with-padding"> ... </div>
   // ----------------------------------------------------------
   &--with-padding {
-    padding-inline: 5vw;
+    padding-inline: $space-inline-container;
   }
 }
 

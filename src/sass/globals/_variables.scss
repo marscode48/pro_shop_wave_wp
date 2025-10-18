@@ -29,6 +29,12 @@ $font-body: "Noto Sans JP", sans-serif;
 
 // Layout
 $header-height: 80px;
+$space-inline-section: 5vw; // セクションなどの左右パディング
+$space-inline-container: 5vw; // l-container用の内側余白（必要な場合）
+$space-inline-header: 5vw;
+$space-inline-footer: 5vw;
+
+// Card
 $radius-card: 8px;
 $radius-image: 10px;
 

@@ -5,7 +5,7 @@
 // セクション共通
 // ========================
 .section {
-  padding: 3rem 5vw;
+  padding: 3rem $space-inline-section;
   background-color: $color-dark-red-gradient;
   color: $color-white;
 
