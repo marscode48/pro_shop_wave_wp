@@ -17,6 +17,9 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
 
+// パンくずリスト（components へ共通化）
+@use "../../components/breadcrumb";
+
 // 共通（Blocks専用の横断UI: タイトル/ボタン/合計/バッジ等）
 @use "./common-blocks";
 
