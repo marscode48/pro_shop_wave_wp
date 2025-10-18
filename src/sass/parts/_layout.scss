@@ -6,11 +6,7 @@
 .l-container {
   display: block;
   max-width: 72rem; // 約1152px
-  margin-inline: auto;
-
-  @include mq(md) {
-    padding-inline: 2rem;
-  }
+  margin-inline: auto; // 中央寄せ（余白はセクション側で管理）
 
   // 幅バリエーション
   &--narrow {
@@ -23,10 +19,14 @@
 
   &--full {
     max-width: none;
+  }
 
-    @include mq(md) {
-      padding-inline: 0;
-    }
+  // ----------------------------------------------------------
+  // オプトインで内側余白を付与したいページ用（例: 固定ページ的UI）
+  // 使用例: <div class="l-container l-container--with-padding"> ... </div>
+  // ----------------------------------------------------------
+  &--with-padding {
+    padding-inline: 5vw;
   }
 }
 
