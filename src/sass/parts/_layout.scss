@@ -27,3 +27,46 @@
     padding-inline: 0;
   }
 }
+
+// ========================
+// 表示制御・レスポンシブユーティリティ
+// ========================
+
+// スクロール固定（モーダル/メニュー開閉時など）
+.no-scroll {
+  overflow: hidden;
+}
+
+// テキスト/インライン要素向け（改行調整など）
+.sp-only {
+  display: inline;
+
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.pc-only {
+  display: none;
+
+  @include mq(lg) {
+    display: inline;
+  }
+}
+
+// ブロック要素向け（div/section/button 等）
+.sp-only-block {
+  display: block;
+
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.pc-only-block {
+  display: none;
+
+  @include mq(lg) {
+    display: block;
+  }
+}
