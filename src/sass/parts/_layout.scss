@@ -7,7 +7,6 @@
   display: block;
   max-width: 72rem; // 約1152px
   margin-inline: auto;
-  padding-inline: 1rem;
 
   @include mq(md) {
     padding-inline: 2rem;
@@ -24,7 +23,10 @@
 
   &--full {
     max-width: none;
-    padding-inline: 0;
+
+    @include mq(md) {
+      padding-inline: 0;
+    }
   }
 }
 
