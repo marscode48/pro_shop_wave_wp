@@ -17,10 +17,12 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
 
+ // パンくずリスト（components へ共通化）
+@use "../../components/breadcrumb";
+
 // 各モジュール（役割順）
 @use "./layout"; // WooCommerce全体のレイアウト構造
 @use "./smallscreen"; // モバイル表示のレイアウト
-@use "./breadcrumb"; // パンくずリスト
 @use "./product-page"; // 商品ページ
 @use "./product-loops"; // 商品ループ（関連商品系）
 @use "./reviews"; // 商品レビュー
