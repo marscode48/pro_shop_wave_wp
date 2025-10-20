@@ -127,6 +127,11 @@
       }
     }
 
+    tbody,
+    tfoot {
+      background-color: $color-black;
+    }
+    
     tfoot {
       th,
       td {
