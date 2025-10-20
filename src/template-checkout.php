@@ -14,7 +14,7 @@ get_header();
 ?>
 
 <section class="section section--checkout" role="region" aria-label="Checkout">
-  <div class="checkout__inner">
+  <div class="checkout__inner l-container">
     <?php
     // Breadcrumb navigation
     if (function_exists('woocommerce_breadcrumb')) {

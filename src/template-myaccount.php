@@ -17,7 +17,7 @@ get_header();
 ?>
 
 <section class="section section--myaccount" role="region" aria-label="my-account">
-  <div class="myaccount__inner">
+  <div class="myaccount__inner l-container">
     <?php
     // Breadcrumb navigation
     if (function_exists('woocommerce_breadcrumb')) {
