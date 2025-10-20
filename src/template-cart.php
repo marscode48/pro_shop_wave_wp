@@ -14,7 +14,7 @@ get_header();
 ?>
 
 <section class="section section--cart" role="region" aria-label="Cart">
-  <div class="cart__inner">
+  <div class="cart__inner l-container">
     <?php
     // Breadcrumb navigation
     if (function_exists('woocommerce_breadcrumb')) {

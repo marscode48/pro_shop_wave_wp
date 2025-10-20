@@ -15,6 +15,7 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 // ========================
 @use 'parts/blog-card'; // ブログカード（card-blog）共通パーツ
 @use 'parts/base'; // ベーススタイル（body、img、ul、aなど）
+@use 'parts/layout'; // レイアウトユーティリティ（.l-container / 表示制御）
 @use 'parts/vivus-logo'; // Vivusアニメーションロゴ用
 
 // ========================
@@ -25,7 +26,6 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'components/footer'; // フッター（.footerなど）
 @use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
 @use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
-@use 'components/layout-main'; // メインレイアウト（.layout-main）
 
 // ========================
 // ページ別スタイル

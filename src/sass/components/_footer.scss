@@ -10,7 +10,7 @@
   background-size: cover;
   background-position: center;
   color: $color-white;
-  padding: 3rem 5vw;
+  padding: 3rem $space-inline-footer;
   font-size: 0.8rem;
 
   @include mq(lg) {

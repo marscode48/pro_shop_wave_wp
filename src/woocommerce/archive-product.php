@@ -21,7 +21,7 @@ defined('ABSPATH') || exit;
 get_header('shop'); ?>
 
 <div class="product-archive section">
-  <div class="product-archive__inner">
+  <div class="product-archive__inner l-container l-container--wide">
     <?php
     /**
      * Hook: woocommerce_before_main_content.

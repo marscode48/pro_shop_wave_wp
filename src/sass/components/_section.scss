@@ -5,8 +5,8 @@
 // セクション共通
 // ========================
 .section {
-  padding: 3rem 5vw;
-  background-color: $color-dark-red-gradient;
+  padding: 3rem $space-inline-section;
+  background: $color-dark-red-gradient;
   color: $color-white;
 
   &__title {
@@ -41,6 +41,10 @@
       flex-direction: row;
       justify-content: space-between;
     }
+  }
+
+  &__content {
+    flex-grow: 1;
   }
 
   &__link {

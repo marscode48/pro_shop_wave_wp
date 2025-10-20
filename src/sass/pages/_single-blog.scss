@@ -4,12 +4,16 @@
 // ブログ投稿ページ（single.php）
 // ========================
 .single-blog {
-
   &__inner {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1.5rem;
+    padding: 0.75rem;
     background-color: $color-dark-gray;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 20px rgba($color-black, 0.6), 0 0 10px rgba($color-red, 0.2);
+    backdrop-filter: blur(4px);
+
+    @include mq(lg) {
+      padding: 1.5rem;
+    }
   }
 
   &__header {

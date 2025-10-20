@@ -28,39 +28,3 @@ ol {
     display: none;
   }
 }
-
-.no-scroll {
-  overflow: hidden;
-}
-
-// テキスト/改行向け（br）
-.sp-only {
-  display: inline;
-
-  @include mq(lg) {
-    display: none;
-  }
-}
-
-.pc-only {
-  display: none;
-
-  @include mq(lg) {
-    display: inline;
-  }
-}
-
-// ブロック要素向け（div/section/button 等）
-.sp-only-block {
-  display: block; // ブロック要素用
-  @include mq(lg) {
-    display: none;
-  }
-}
-
-.pc-only-block {
-  display: none;
-  @include mq(lg) {
-    display: block; // ブロック要素用
-  }
-}

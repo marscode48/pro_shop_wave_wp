@@ -23,7 +23,7 @@ if (! defined('ABSPATH')) {
 get_header('shop'); ?>
 
 <div class="product-single section">
-  <div class="product-single__inner">
+  <div class="product-single__inner l-container l-container--wide">
     <?php
     /**
      * woocommerce_before_main_content hook.
