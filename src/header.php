@@ -67,6 +67,11 @@
           : esc_url(home_url('/my-account/'));
         $is_logged_in = is_user_logged_in();
         $account_label = $is_logged_in ? 'My Account' : 'Log In / Register';
+
+        // WooCommerce カートURLへのリンク（多言語・スラッグ変更に追従／WooCommerce無効時はフォールバック）
+        $cart_url = function_exists('wc_get_cart_url')
+          ? wc_get_cart_url()
+          : esc_url(home_url('/cart/'));
         ?>
 
         <!-- ハンバーガーボタン（SPのみ表示） -->
@@ -147,7 +152,7 @@
 
           <!-- カートアイコン -->
           <div class="header__cart">
-            <a href="/cart" aria-label="カート">
+            <a href="<?php echo esc_url($cart_url); ?>" aria-label="カート">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </div>
