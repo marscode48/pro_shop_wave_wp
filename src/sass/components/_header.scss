@@ -341,6 +341,13 @@
       }
     }
 
+    // SPドロワー専用のアカウントリンク（PCでは非表示）
+    &-account {
+      @include mq(lg) {
+        display: none;
+      }
+    }
+
     .header__logo {
       @include mq(lg) {
         display: none; // PCでは表示しない
@@ -421,6 +428,7 @@
     }
   }
 
+  &__account,
   &__cart {
     a {
       display: flex;
@@ -442,6 +450,14 @@
 
     i {
       pointer-events: none; // アイコンクリックでもリンクが効くように
+    }
+  }
+
+  &__account {
+    display: none; // SPでは非表示
+    
+    @include mq(lg) {
+      display: block;
     }
   }
 

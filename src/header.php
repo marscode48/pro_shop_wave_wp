@@ -60,6 +60,15 @@
     <header class="header">
       <div class="header__inner">
 
+        <?php
+        // WooCommerce マイアカウントへのリンク（ログイン状態でラベルを出し分け）
+        $account_url = function_exists('wc_get_page_permalink')
+          ? wc_get_page_permalink('myaccount')
+          : esc_url(home_url('/my-account/'));
+        $is_logged_in = is_user_logged_in();
+        $account_label = $is_logged_in ? 'My Account' : 'Log In / Register';
+        ?>
+
         <!-- ハンバーガーボタン（SPのみ表示） -->
         <button class="header__toggle" aria-label="メニューを開く">
           <span></span><span></span><span></span>
@@ -92,6 +101,13 @@
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
 
+            <!-- アカウント出し分け（SPのみ表示） -->
+            <li class="header__nav-item header__nav-account">
+              <a href="<?php echo esc_url($account_url); ?>">
+                <?php echo esc_html($account_label); ?>
+              </a>
+            </li>
+
             <!-- 多言語切り替え（SPのみ表示） -->
             <li class="header__nav-item header__nav-lang">
               <a href="#" class="is-active">🇯🇵 JP</a>
@@ -121,6 +137,13 @@
             <input type="text" name="s" placeholder="パーツやブログを検索">
             <button type="submit" aria-label="検索"><i class="fas fa-search"></i></button>
           </form>
+
+          <!-- アカウントアイコン（PCのみ表示） -->
+          <div class="header__account">
+            <a href="<?php echo esc_url($account_url); ?>" class="header__account-link" aria-label="<?php echo esc_attr($account_label); ?>">
+              <i class="fas fa-user" aria-hidden="true"></i>
+            </a>
+          </div>
 
           <!-- カートアイコン -->
           <div class="header__cart">
