@@ -451,11 +451,41 @@
     i {
       pointer-events: none; // アイコンクリックでもリンクが効くように
     }
+
+    // カート数量バッジ
+    position: relative;
+
+    .header__cart-count {
+      position: absolute;
+      top: -0.4rem;
+      right: -0.5rem;
+      display: none; // カートが空のときは非表示
+      align-items: center;
+      justify-content: center;
+      min-inline-size: 1.25rem;
+      min-block-size: 1.25rem;
+      padding: 0 0.25rem;
+      border-radius: 9999px;
+      background: $color-bright-red-gradient;
+      color: $color-white;
+      font-family: $font-heading;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 0 0 2px $color-black; // 背景が暗くても視認性確保
+      transition: opacity $transition, transform $transition;
+
+      &.is-active {
+        display: inline-flex;
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   }
 
   &__account {
     display: none; // SPでは非表示
-    
+
     @include mq(lg) {
       display: block;
     }

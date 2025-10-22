@@ -150,10 +150,15 @@
             </a>
           </div>
 
-          <!-- カートアイコン -->
+          <!-- カートアイコン（数量バッジ付き） -->
           <div class="header__cart">
             <a href="<?php echo esc_url($cart_url); ?>" aria-label="カート">
-              <i class="fas fa-shopping-cart"></i>
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <?php
+              $cart_count = (function_exists('WC') && WC()->cart) ? (int) WC()->cart->get_cart_contents_count() : 0;
+              $count_class = $cart_count > 0 ? ' is-active' : '';
+              ?>
+              <span class="header__cart-count<?php echo esc_attr($count_class); ?>" aria-live="polite" aria-atomic="true"><?php echo esc_html($cart_count); ?></span>
             </a>
           </div>
 
