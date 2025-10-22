@@ -375,7 +375,7 @@
 
   &__search {
     display: flex;
-    width: 100%;
+    width: fit-content;
     max-width: 280px;
 
     &-toggle {
@@ -394,21 +394,23 @@
         align-items: center;
 
         input {
+          height: 35px;
           padding: 0.4rem 0.8rem;
-          border: 1px solid $color-gray;
           border-radius: 4px 0 0 4px;
           font-size: 0.9rem;
-          color: $color-white;
+          @include input-base(0.4rem 0.8rem);
+          border-radius: 4px 0 0 4px;
         }
 
         button {
-          background: $color-red;
+          height: 35px;
+          background: $color-bright-red-gradient;
           color: $color-white;
           font-size: 1rem;
           padding: 0.4rem 0.8rem;
-          border: none;
           border-radius: 0 4px 4px 0;
           cursor: pointer;
+          transition: filter $transition;
 
           i {
             color: $color-white;
@@ -420,8 +422,12 @@
             height: 20px;
           }
 
-          &:hover {
-            opacity: 0.8;
+          @include mq(lg) {
+            &:hover,
+            &:focus,
+            &:focus-visible {
+              filter: brightness(1.5);
+            }
           }
         }
       }

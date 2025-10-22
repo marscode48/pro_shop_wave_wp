@@ -20,15 +20,19 @@
   transition: opacity $transition, transform $transition;
 
   input {
+    height: 40px;
     flex: 1;
     padding: 0.5rem 1rem;
     background: $color-white;
     color: $color-black;
     border: 1px solid $color-gray;
+    @include input-base(0.5rem 1rem);
+    border-radius: 0;
   }
 
   button {
-    background: $color-red;
+    height: 40px;
+    background: $color-bright-red-gradient;
     color: $color-white;
     border: none;
     padding: 0.5rem 1rem;
