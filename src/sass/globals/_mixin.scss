@@ -476,6 +476,9 @@
   border-radius: 0.5rem;
   padding: $padding;
   color: $color-white;
+  &::placeholder {
+    color: rgba($color-white, 0.6);
+  }
 }
 
 // ========================

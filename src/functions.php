@@ -887,3 +887,30 @@ add_action('init', function () {
     }, 10, 3);
   }
 });
+
+
+// ---------------------------------------------
+// WooCommerce: ヘッダーのカート数量バッジをAJAXで更新
+// （wc-ajax=add_to_cart 後のフラグメントで .header__cart-count を差し替え）
+// ---------------------------------------------
+if ( function_exists( 'add_filter' ) ) {
+  add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
+    if ( function_exists( 'WC' ) && WC()->cart ) {
+      $count = (int) WC()->cart->get_cart_contents_count();
+      $class = $count > 0 ? ' is-active' : '';
+    } else {
+      $count = 0;
+      $class = '';
+    }
+
+      // 出力バッファ開始（画面には、まだ header__cart-count は表示させない）
+      ob_start();
+    ?>
+    <span class="header__cart-count<?php echo esc_attr( $class ); ?>" aria-live="polite" aria-atomic="true"><?php echo esc_html( $count ); ?></span>
+    <?php
+      // バッファの中身を取り出して変数に代入し、バッファをクリア
+      $fragments['span.header__cart-count'] = ob_get_clean();
+
+    return $fragments;
+  } );
+}

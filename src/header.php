@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the header
  *
@@ -7,6 +8,7 @@
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
+
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +60,20 @@
     <header class="header">
       <div class="header__inner">
 
+        <?php
+        // WooCommerce マイアカウントへのリンク（ログイン状態でラベルを出し分け）
+        $account_url = function_exists('wc_get_page_permalink')
+          ? wc_get_page_permalink('myaccount')
+          : esc_url(home_url('/my-account/'));
+        $is_logged_in = is_user_logged_in();
+        $account_label = $is_logged_in ? 'My Account' : 'Log In / Register';
+
+        // WooCommerce カートURLへのリンク（多言語・スラッグ変更に追従／WooCommerce無効時はフォールバック）
+        $cart_url = function_exists('wc_get_cart_url')
+          ? wc_get_cart_url()
+          : esc_url(home_url('/cart/'));
+        ?>
+
         <!-- ハンバーガーボタン（SPのみ表示） -->
         <button class="header__toggle" aria-label="メニューを開く">
           <span></span><span></span><span></span>
@@ -65,7 +81,7 @@
 
         <!-- ロゴエリア -->
         <div class="header__logo">
-        <?php $html_tag = (is_home() || is_front_page()) ? 'h1' : 'div'; ?>
+          <?php $html_tag = (is_home() || is_front_page()) ? 'h1' : 'div'; ?>
           <<?php echo $html_tag; ?>>
             <a href="<?php echo esc_url(home_url('/')); ?>">
               <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="PRO SHOP WAVE ロゴ" />
@@ -89,6 +105,13 @@
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
+
+            <!-- アカウント出し分け（SPのみ表示） -->
+            <li class="header__nav-item header__nav-account">
+              <a href="<?php echo esc_url($account_url); ?>">
+                <?php echo esc_html($account_label); ?>
+              </a>
+            </li>
 
             <!-- 多言語切り替え（SPのみ表示） -->
             <li class="header__nav-item header__nav-lang">
@@ -120,10 +143,22 @@
             <button type="submit" aria-label="検索"><i class="fas fa-search"></i></button>
           </form>
 
-          <!-- カートアイコン -->
+          <!-- アカウントアイコン（PCのみ表示） -->
+          <div class="header__account">
+            <a href="<?php echo esc_url($account_url); ?>" class="header__account-link" aria-label="<?php echo esc_attr($account_label); ?>">
+              <i class="fas fa-user" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- カートアイコン（数量バッジ付き） -->
           <div class="header__cart">
-            <a href="/cart" aria-label="カート">
-              <i class="fas fa-shopping-cart"></i>
+            <a href="<?php echo esc_url($cart_url); ?>" aria-label="カート">
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <?php
+              $cart_count = (function_exists('WC') && WC()->cart) ? (int) WC()->cart->get_cart_contents_count() : 0;
+              $count_class = $cart_count > 0 ? ' is-active' : '';
+              ?>
+              <span class="header__cart-count<?php echo esc_attr($count_class); ?>" aria-live="polite" aria-atomic="true"><?php echo esc_html($cart_count); ?></span>
             </a>
           </div>
 
