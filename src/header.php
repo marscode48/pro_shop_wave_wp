@@ -140,7 +140,7 @@
 
             <!-- PC用：検索フォーム（All検索／ショップ内は自動で商品スコープ） -->
             <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="header__search-form" role="search">
-              <label class="screen-reader-text" for="global-search"><?php echo esc_html__('サイト内検索'); ?></label>
+              <label class="screen-reader-text" for="global-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
               <?php
               $placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
                 ? 'ショップ内検索'
@@ -193,7 +193,7 @@
 
     <!-- SP検索フォーム（All検索／ショップ内は自動で商品スコープ） -->
     <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="search-form-sp" role="search">
-      <label class="screen-reader-text" for="sp-search"><?php echo esc_html__('サイト内検索'); ?></label>
+      <label class="screen-reader-text" for="sp-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
       <?php
       $sp_placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
         ? 'ショップ内検索'
