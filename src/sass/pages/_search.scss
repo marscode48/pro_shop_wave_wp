@@ -1,0 +1,105 @@
+@use '../globals/index' as *;
+@use '../components/search-tabs';
+@use '../components/search-card';
+@use 'sass:color';
+
+// ========================
+// Search Page Styles
+// 検索結果ページ（商品 / 記事タブ付き）
+// ========================
+
+.search {
+  padding-block: 4rem;
+  color: $color-white;
+  background-color: $color-black;
+
+  &__inner {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @include mq(md) {
+      padding-inline: 2rem;
+    }
+  }
+
+  // 検索ヘッダー
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .search__title {
+      @include heading-title();
+      margin-bottom: 1rem;
+    }
+
+    .search__query {
+      font-size: 1rem;
+      color: rgba($color-white, 0.75);
+    }
+  }
+
+  // タブナビゲーション（search-tabs.scssで上書き想定）
+  .search-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba($color-white, 0.15);
+
+    &__tab {
+      cursor: pointer;
+      padding: 0.6em 1.2em;
+      font-weight: 700;
+      color: rgba($color-white, 0.8);
+      border-bottom: 3px solid transparent;
+      transition: all $transition;
+
+      &.is-active {
+        color: $color-red;
+        border-color: $color-red;
+      }
+
+      &:hover {
+        color: $color-red;
+      }
+    }
+  }
+
+  // 検索結果パネル
+  .search-results {
+    display: none;
+
+    &.is-active {
+      display: grid;
+      gap: 2rem;
+    }
+
+    // 商品カード・記事カード（search-card.scssで上書き想定）
+    .search-card,
+    .search-item {
+      background: rgba($color-white, 0.05);
+      border: 1px solid rgba($color-white, 0.1);
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      transition: background-color $transition, transform $transition;
+
+      &:hover {
+        background: rgba($color-white, 0.1);
+        transform: translateY(-2px);
+      }
+
+      &__title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: $color-white;
+      }
+
+      &__excerpt {
+        font-size: 0.95rem;
+        color: rgba($color-white, 0.75);
+      }
+    }
+  }
+}
