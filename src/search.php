@@ -75,10 +75,10 @@ $products_panel_id = 'search-panel-products';
 $posts_panel_id    = 'search-panel-posts';
 ?>
 
-<main id="primary" class="site-main search" aria-labelledby="search-heading">
-  <div class="search__inner">
-    <header class="search__header">
-      <h1 id="search-heading" class="search__title">
+<main id="primary" class="search section">
+  <div class="search__inner l-container">
+    <div class="search__header">
+      <h1 class="search__title  section__title">
         <?php echo esc_html__('検索結果', 'proshopwave'); ?>
       </h1>
       <?php if ($q) : ?>
@@ -87,71 +87,117 @@ $posts_panel_id    = 'search-panel-posts';
           <mark class="search__keyword-mark"><?php echo esc_html($q); ?></mark>
         </p>
       <?php endif; ?>
-    </header>
-
-    <!-- タブヘッダー -->
-    <div class="search-tabs" role="tablist" aria-label="<?php echo esc_attr__('検索結果タブ', 'proshopwave'); ?>">
-      <?php if (class_exists('WooCommerce')) : ?>
-        <?php $is_products_active = ($default_tab === 'products'); ?>
-        <button
-          class="search-tabs__tab<?php echo $is_products_active ? ' is-active' : ''; ?>"
-          id="tab-products"
-          role="tab"
-          aria-selected="<?php echo $is_products_active ? 'true' : 'false'; ?>"
-          aria-controls="<?php echo esc_attr($products_panel_id); ?>"
-          data-tab-target="<?php echo esc_attr($products_panel_id); ?>"
-          type="button">
-          <?php echo esc_html__('商品', 'proshopwave'); ?>
-          <span class="search-tabs__count"><?php echo esc_html($products_count); ?></span>
-        </button>
-      <?php endif; ?>
-
-      <?php $is_posts_active = ($default_tab === 'posts' || (! class_exists('WooCommerce'))); ?>
-      <button
-        class="search-tabs__tab<?php echo $is_posts_active ? ' is-active' : ''; ?>"
-        id="tab-posts"
-        role="tab"
-        aria-selected="<?php echo $is_posts_active ? 'true' : 'false'; ?>"
-        aria-controls="<?php echo esc_attr($posts_panel_id); ?>"
-        data-tab-target="<?php echo esc_attr($posts_panel_id); ?>"
-        type="button">
-        <?php echo esc_html__('記事', 'proshopwave'); ?>
-        <span class="search-tabs__count"><?php echo esc_html($posts_count); ?></span>
-      </button>
     </div>
 
-    <!-- タブパネル: 商品 -->
-    <?php if (class_exists('WooCommerce')) : ?>
+    <div class="search__wrapper">
+      <!-- タブヘッダー -->
+      <div class="search-tabs" role="tablist" aria-label="<?php echo esc_attr__('検索結果タブ', 'proshopwave'); ?>">
+        <?php if (class_exists('WooCommerce')) : ?>
+          <?php $is_products_active = ($default_tab === 'products'); ?>
+          <button
+            class="search-tabs__tab<?php echo $is_products_active ? ' is-active' : ''; ?>"
+            id="tab-products"
+            role="tab"
+            aria-selected="<?php echo $is_products_active ? 'true' : 'false'; ?>"
+            aria-controls="<?php echo esc_attr($products_panel_id); ?>"
+            data-tab-target="<?php echo esc_attr($products_panel_id); ?>"
+            type="button">
+            <?php echo esc_html__('商品', 'proshopwave'); ?>
+            <span class="search-tabs__count"><?php echo esc_html($products_count); ?></span>
+          </button>
+        <?php endif; ?>
+
+        <?php $is_posts_active = ($default_tab === 'posts' || (! class_exists('WooCommerce'))); ?>
+        <button
+          class="search-tabs__tab<?php echo $is_posts_active ? ' is-active' : ''; ?>"
+          id="tab-posts"
+          role="tab"
+          aria-selected="<?php echo $is_posts_active ? 'true' : 'false'; ?>"
+          aria-controls="<?php echo esc_attr($posts_panel_id); ?>"
+          data-tab-target="<?php echo esc_attr($posts_panel_id); ?>"
+          type="button">
+          <?php echo esc_html__('記事', 'proshopwave'); ?>
+          <span class="search-tabs__count"><?php echo esc_html($posts_count); ?></span>
+        </button>
+      </div>
+
+      <!-- タブパネル: 商品 -->
+      <?php if (class_exists('WooCommerce')) : ?>
+        <section
+          id="<?php echo esc_attr($products_panel_id); ?>"
+          class="search-results search-results--products<?php echo ($default_tab === 'products' ? ' is-active' : ''); ?>"
+          role="tabpanel"
+          aria-labelledby="tab-products"
+          tabindex="0">
+
+          <?php if ($products_query && $products_query->have_posts()) : ?>
+            <ul class="search-grid search-grid--products">
+              <?php while ($products_query->have_posts()) : $products_query->the_post(); ?>
+                <?php
+                $product = wc_get_product(get_the_ID());
+                if (! $product) {
+                  continue;
+                }
+                $price_html = $product->get_price_html();
+                $permalink  = get_permalink($product->get_id());
+                $title      = get_the_title($product->get_id());
+                $thumb      = get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail', ['class' => 'search-card__thumb', 'alt' => esc_attr($title)]);
+                ?>
+                <li class="search-card search-card--product">
+                  <a class="search-card__link" href="<?php echo esc_url($permalink); ?>">
+                    <figure class="search-card__figure">
+                      <?php echo $thumb ? $thumb : '<div class="search-card__placeholder" aria-hidden="true"></div>'; ?>
+                    </figure>
+                    <div class="search-card__body">
+                      <h3 class="search-card__title"><?php echo esc_html($title); ?></h3>
+                      <?php if ($price_html) : ?>
+                        <div class="search-card__price"><?php echo wp_kses_post($price_html); ?></div>
+                      <?php endif; ?>
+                    </div>
+                  </a>
+                </li>
+              <?php endwhile;
+              wp_reset_postdata(); ?>
+            </ul>
+
+            <?php if ($products_count > $products_per_page) : ?>
+              <div class="search-results__more">
+                <a class="section__button" href="<?php echo esc_url(add_query_arg(['s' => $q, 'post_type' => 'product'], home_url('/'))); ?>">
+                  <span class="section__button-inner"><?php echo esc_html__('さらに商品を表示', 'proshopwave'); ?></span>
+                </a>
+              </div>
+            <?php endif; ?>
+
+          <?php else : ?>
+            <p class="search-results__empty"><?php echo esc_html__('該当する商品は見つかりませんでした。', 'proshopwave'); ?></p>
+          <?php endif; ?>
+        </section>
+      <?php endif; ?>
+
+      <!-- タブパネル: 記事 -->
       <section
-        id="<?php echo esc_attr($products_panel_id); ?>"
-        class="search-results search-results--products<?php echo ($default_tab === 'products' ? ' is-active' : ''); ?>"
+        id="<?php echo esc_attr($posts_panel_id); ?>"
+        class="search-results search-results--posts<?php echo ($default_tab === 'posts' || (! class_exists('WooCommerce')) ? ' is-active' : ''); ?>"
         role="tabpanel"
-        aria-labelledby="tab-products"
+        aria-labelledby="tab-posts"
         tabindex="0">
 
-        <?php if ($products_query && $products_query->have_posts()) : ?>
-          <ul class="search-grid search-grid--products">
-            <?php while ($products_query->have_posts()) : $products_query->the_post(); ?>
-              <?php
-              $product = wc_get_product(get_the_ID());
-              if (! $product) {
-                continue;
-              }
-              $price_html = $product->get_price_html();
-              $permalink  = get_permalink($product->get_id());
-              $title      = get_the_title($product->get_id());
-              $thumb      = get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail', ['class' => 'search-card__thumb', 'alt' => esc_attr($title)]);
-              ?>
-              <li class="search-card search-card--product">
-                <a class="search-card__link" href="<?php echo esc_url($permalink); ?>">
-                  <figure class="search-card__figure">
-                    <?php echo $thumb ? $thumb : '<div class="search-card__placeholder" aria-hidden="true"></div>'; ?>
+        <?php if ($posts_query->have_posts()) : ?>
+          <ul class="search-list search-list--posts">
+            <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
+              <li class="search-item search-item--post">
+                <a class="search-item__link" href="<?php the_permalink(); ?>">
+                  <figure class="search-item__figure">
+                    <?php if (has_post_thumbnail()) {
+                      the_post_thumbnail('medium', ['class' => 'search-item__thumb', 'alt' => the_title_attribute(['echo' => false])]);
+                    } else {
+                      echo '<div class="search-item__placeholder" aria-hidden="true"></div>';
+                    } ?>
                   </figure>
-                  <div class="search-card__body">
-                    <h3 class="search-card__title"><?php echo esc_html($title); ?></h3>
-                    <?php if ($price_html) : ?>
-                      <div class="search-card__price"><?php echo wp_kses_post($price_html); ?></div>
-                    <?php endif; ?>
+                  <div class="search-item__body">
+                    <h3 class="search-item__title"><?php the_title(); ?></h3>
+                    <p class="search-item__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 26)); ?></p>
+                    <time class="search-item__date" datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>"><?php echo esc_html(get_the_date()); ?></time>
                   </div>
                 </a>
               </li>
@@ -159,64 +205,19 @@ $posts_panel_id    = 'search-panel-posts';
             wp_reset_postdata(); ?>
           </ul>
 
-          <?php if ($products_count > $products_per_page) : ?>
+          <?php if ($posts_count > $posts_per_page) : ?>
             <div class="search-results__more">
-              <a class="section__button" href="<?php echo esc_url(add_query_arg(['s' => $q, 'post_type' => 'product'], home_url('/'))); ?>">
-                <span class="section__button-inner"><?php echo esc_html__('さらに商品を表示', 'proshopwave'); ?></span>
+              <a class="section__button" href="<?php echo esc_url(add_query_arg(['s' => $q, 'post_type' => 'post'], home_url('/'))); ?>">
+                <span class="section__button-inner"><?php echo esc_html__('さらに記事を表示', 'proshopwave'); ?></span>
               </a>
             </div>
           <?php endif; ?>
 
         <?php else : ?>
-          <p class="search-results__empty"><?php echo esc_html__('該当する商品は見つかりませんでした。', 'proshopwave'); ?></p>
+          <p class="search-results__empty"><?php echo esc_html__('該当する記事は見つかりませんでした。', 'proshopwave'); ?></p>
         <?php endif; ?>
       </section>
-    <?php endif; ?>
-
-    <!-- タブパネル: 記事 -->
-    <section
-      id="<?php echo esc_attr($posts_panel_id); ?>"
-      class="search-results search-results--posts<?php echo ($default_tab === 'posts' || (! class_exists('WooCommerce')) ? ' is-active' : ''); ?>"
-      role="tabpanel"
-      aria-labelledby="tab-posts"
-      tabindex="0">
-
-      <?php if ($posts_query->have_posts()) : ?>
-        <ul class="search-list search-list--posts">
-          <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
-            <li class="search-item search-item--post">
-              <a class="search-item__link" href="<?php the_permalink(); ?>">
-                <figure class="search-item__figure">
-                  <?php if (has_post_thumbnail()) {
-                    the_post_thumbnail('medium', ['class' => 'search-item__thumb', 'alt' => the_title_attribute(['echo' => false])]);
-                  } else {
-                    echo '<div class="search-item__placeholder" aria-hidden="true"></div>';
-                  } ?>
-                </figure>
-                <div class="search-item__body">
-                  <h3 class="search-item__title"><?php the_title(); ?></h3>
-                  <p class="search-item__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 26)); ?></p>
-                  <time class="search-item__date" datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>"><?php echo esc_html(get_the_date()); ?></time>
-                </div>
-              </a>
-            </li>
-          <?php endwhile;
-          wp_reset_postdata(); ?>
-        </ul>
-
-        <?php if ($posts_count > $posts_per_page) : ?>
-          <div class="search-results__more">
-            <a class="section__button" href="<?php echo esc_url(add_query_arg(['s' => $q, 'post_type' => 'post'], home_url('/'))); ?>">
-              <span class="section__button-inner"><?php echo esc_html__('さらに記事を表示', 'proshopwave'); ?></span>
-            </a>
-          </div>
-        <?php endif; ?>
-
-      <?php else : ?>
-        <p class="search-results__empty"><?php echo esc_html__('該当する記事は見つかりませんでした。', 'proshopwave'); ?></p>
-      <?php endif; ?>
-    </section>
-
+    </div>
   </div>
 </main>
 
