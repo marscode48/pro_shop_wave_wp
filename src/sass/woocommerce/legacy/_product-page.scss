@@ -1,5 +1,6 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
+@use "../../components/badge-sale" as *;
 @use "sass:color";
 
 // ========================
@@ -498,7 +499,7 @@
           border: 1px solid $border-dark-gray;
           // WooCommerceデフォルトの矢印アイコンを白に変更
           background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jaGV2cm9uLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ii8+PC9zdmc+")
-          no-repeat;
+            no-repeat;
           background-color: rgba($color-white, 0.35);
           background-size: 16px;
           background-position: calc(100% - 12px) 50%;
@@ -589,21 +590,6 @@
   }
 
   span.onsale {
-    display: block;
-    background: $color-bright-red-gradient;
-    color: $color-white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-align: center;
-    position: absolute;
-    top: 0.5%;
-    left: 0.5%;
-    z-index: 1;
-    min-height: 60px;
-    min-width: 60px;
-    height: 60px;
-    line-height: 60px;
-    padding: 0 5px;
-    border-radius: 60px;
+    @include badge-sale();
   }
 }
