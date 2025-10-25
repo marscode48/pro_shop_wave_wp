@@ -132,16 +132,34 @@
         <!-- ユーティリティエリア -->
         <div class="header__utils">
 
-          <!-- SP用: 検索アイコン -->
-          <button class="header__search-toggle" aria-label="検索">
-            <i class="fas fa-search"></i>
-          </button>
+          <div class="header__search">
+            <!-- SP用: 検索アイコン -->
+            <button class="header__search-toggle" aria-label="検索">
+              <i class="fas fa-search"></i>
+            </button>
 
-          <!-- PC用：検索フォーム -->
-          <form action="/search" method="get" class="header__search-form">
-            <input type="text" name="s" placeholder="パーツやブログを検索">
-            <button type="submit" aria-label="検索"><i class="fas fa-search"></i></button>
-          </form>
+            <!-- PC用：検索フォーム（All検索／ショップ内は自動で商品スコープ） -->
+            <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="header__search-form" role="search">
+              <label class="screen-reader-text" for="global-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
+              <?php
+              $placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
+                ? 'ショップ内検索'
+                : '商品・ブログを検索';
+              ?>
+              <input
+                id="global-search"
+                type="search"
+                name="s"
+                placeholder="<?php echo esc_attr($placeholder_text); ?>">
+              <?php if (function_exists('is_woocommerce') && is_woocommerce()) : ?>
+                <!-- post_type が product の場合は archive-product.php に移動-->
+                <input type="hidden" name="post_type" value="product">
+              <?php endif; ?>
+              <button type="submit" aria-label="<?php echo esc_attr__('検索'); ?>">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
 
           <!-- アカウントアイコン（PCのみ表示） -->
           <div class="header__account">
@@ -173,8 +191,24 @@
       </div>
     </header>
 
-    <!-- SP検索フォーム -->
-    <form action="/search" method="get" class="search-form-sp">
-      <input type="text" name="s" placeholder="キーワードを検索">
-      <button type="submit"><i class="fas fa-search"></i></button>
+    <!-- SP検索フォーム（All検索／ショップ内は自動で商品スコープ） -->
+    <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="search-form-sp" role="search">
+      <label class="screen-reader-text" for="sp-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
+      <?php
+      $sp_placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
+        ? 'ショップ内検索'
+        : 'サイト内検索（商品・ブログ）';
+      ?>
+      <input
+        id="sp-search"
+        type="search"
+        name="s"
+        placeholder="<?php echo esc_attr($sp_placeholder_text); ?>">
+      <?php if (function_exists('is_woocommerce') && is_woocommerce()) : ?>
+        <!-- post_type が product の場合は archive-product.php に移動-->
+        <input type="hidden" name="post_type" value="product">
+      <?php endif; ?>
+      <button type="submit" aria-label="<?php echo esc_attr__('検索'); ?>">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
     </form>

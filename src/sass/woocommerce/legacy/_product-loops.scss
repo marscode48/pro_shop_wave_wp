@@ -1,5 +1,7 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
+@use "../../components/product-grid" as *;
+@use "../../components/product-card" as *;
 @use "sass:color";
 
 // ========================
@@ -48,186 +50,13 @@
 
   .products ul,
   ul.products {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    @include mq(md) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @include mq(lg) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    &::before,
-    &::after {
-      display: none;
-    }
-
-    li {
-      list-style: none outside;
-    }
+    // 商品グリッドレイアウトをミックスインで適用
+    @include product-grid();
   }
 
   ul.products li.product {
-    position: relative;
-    @include product-card-gradient;
-    border: 1px solid $color-red;
-    padding: 1rem;
-    border-radius: $radius-card;
-    text-align: left;
-    color: $color-white;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    box-shadow: $box-shadow-red-default;
-    transition: box-shadow $transition;
-
-    &:hover {
-      @include mq(lg) {
-        box-shadow: $box-shadow-red-hover;
-      }
-    }
-
-    .onsale {
-      top: 3%;
-      left: 3%;
-      right: auto;
-      margin: 0;
-    }
-
-    .product-card__body {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      flex: 1;
-    }
-
-    .product-card__image-link {
-      display: block;
-      overflow: hidden;
-
-      &:hover {
-        @include mq(lg) {
-          img {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-          }
-        }
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 0;
-        box-shadow: none;
-        object-fit: cover;
-        aspect-ratio: 3 / 2;
-        border-radius: $radius-image;
-        transition: transform $transition, filter $transition;
-      }
-    }
-
-    .product-card__topline {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .product-card__brand {
-      margin-left: auto;
-      font-size: 0.8rem;
-      color: $color-gray;
-      white-space: nowrap;
-
-      .product-card__brand-link {
-        @include mq(lg) {
-          transition: color $transition;
-        }
-
-        &:hover {
-          @include mq(lg) {
-            color: $color-red;
-          }
-        }
-      }
-    }
-
-    .product-card__category {
-      font-size: 0.8rem;
-      color: $color-gray;
-
-      a {
-        @include mq(lg) {
-          transition: color $transition;
-        }
-
-        &:hover {
-          @include mq(lg) {
-            color: $color-red;
-          }
-        }
-      }
-    }
-
-    h3,
-    .woocommerce-loop-product__title,
-    .woocommerce-loop-category__title {
-      padding: 0;
-      font-family: $font-heading;
-      margin-bottom: 0.6rem;
-      line-height: 1.2;
-      letter-spacing: 0.06em;
-      font-size: 1.125rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      @include mq(lg) {
-        font-size: 1.25rem;
-      }
-    }
-
-    .woocommerce-placeholder {
-      border: none;
-    }
-
-    .star-rating {
-      font-size: 0.75rem;
-    }
-
-    .price {
-      font-size: 1rem;
-      color: $color-white;
-      margin: 0;
-
-      ins {
-        text-decoration: none;
-        color: $color-red; // セール後価格は赤で強調
-      }
-
-      del {
-        opacity: 0.6; // 旧価格はやや薄く
-        margin-right: 0.2em;
-        text-decoration-color: $color-red;
-      }
-    }
-
-    .product-card__more {
-      text-align: center;
-      margin-top: 1rem;
-
-      .product-card__more-link {
-        @include more-link($color-red);
-      }
-    }
+    // 共通のproduct-cardミックスインを利用
+    @include product-card();
   }
 
   .product-archive__controls {
