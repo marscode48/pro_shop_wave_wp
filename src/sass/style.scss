@@ -25,6 +25,7 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'components/footer'; // フッター（.footerなど）
 @use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
 @use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
+@use 'components/breadcrumb';  // パンくずリスト（front-page以外の全体）
 
 // ========================
 // ページ別スタイル

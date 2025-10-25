@@ -531,6 +531,16 @@ add_action('init', function () {
   remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 });
 
+// ---------------------------------------------
+// WooCommerce: 標準パンくず出力を無効化（テーマ側で統一）
+// ---------------------------------------------
+add_action('init', function () {
+  // WooCommerce が有効な場合のみ実行
+  if (function_exists('remove_action')) {
+    remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+  }
+}, 99);
+
 // -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------

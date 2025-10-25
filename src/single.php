@@ -10,6 +10,7 @@
 
 <main class="single-blog section">
   <div class="single-blog__inner l-container l-container--narrow">
+    <?php get_template_part('template-parts/breadcrumb/breadcrumb'); ?>
     <header class="single-blog__header">
       <h1 class="single-blog__title section__title"><?php the_title(); ?></h1>
       <div class="single-blog__meta">
