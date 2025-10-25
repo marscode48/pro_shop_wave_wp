@@ -161,27 +161,12 @@ $posts_panel_id    = 'search-panel-posts';
         tabindex="0">
 
         <?php if ($posts_query->have_posts()) : ?>
-          <ul class="search-list search-list--posts">
+          <div class="card-list card-list--blog">
             <?php while ($posts_query->have_posts()) : $posts_query->the_post(); ?>
-              <li class="search-item search-item--post">
-                <a class="search-item__link" href="<?php the_permalink(); ?>">
-                  <figure class="search-item__figure">
-                    <?php if (has_post_thumbnail()) {
-                      the_post_thumbnail('medium', ['class' => 'search-item__thumb', 'alt' => the_title_attribute(['echo' => false])]);
-                    } else {
-                      echo '<div class="search-item__placeholder" aria-hidden="true"></div>';
-                    } ?>
-                  </figure>
-                  <div class="search-item__body">
-                    <h3 class="search-item__title"><?php the_title(); ?></h3>
-                    <p class="search-item__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 26)); ?></p>
-                    <time class="search-item__date" datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>"><?php echo esc_html(get_the_date()); ?></time>
-                  </div>
-                </a>
-              </li>
-            <?php endwhile;
-            wp_reset_postdata(); ?>
-          </ul>
+              <?php get_template_part('template-parts/card/card-blog'); ?>
+            <?php endwhile; ?>
+          </div>
+          <?php wp_reset_postdata(); ?>
 
           <?php if ($posts_count > $posts_per_page) : ?>
             <div class="search-results__more">
