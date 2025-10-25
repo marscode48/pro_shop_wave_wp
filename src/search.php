@@ -131,31 +131,9 @@ $posts_panel_id    = 'search-panel-posts';
           tabindex="0">
 
           <?php if ($products_query && $products_query->have_posts()) : ?>
-            <ul class="search-grid search-grid--products">
+            <ul class="products search-grid search-grid--products">
               <?php while ($products_query->have_posts()) : $products_query->the_post(); ?>
-                <?php
-                $product = wc_get_product(get_the_ID());
-                if (! $product) {
-                  continue;
-                }
-                $price_html = $product->get_price_html();
-                $permalink  = get_permalink($product->get_id());
-                $title      = get_the_title($product->get_id());
-                $thumb      = get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail', ['class' => 'search-card__thumb', 'alt' => esc_attr($title)]);
-                ?>
-                <li class="search-card search-card--product">
-                  <a class="search-card__link" href="<?php echo esc_url($permalink); ?>">
-                    <figure class="search-card__figure">
-                      <?php echo $thumb ? $thumb : '<div class="search-card__placeholder" aria-hidden="true"></div>'; ?>
-                    </figure>
-                    <div class="search-card__body">
-                      <h3 class="search-card__title"><?php echo esc_html($title); ?></h3>
-                      <?php if ($price_html) : ?>
-                        <div class="search-card__price"><?php echo wp_kses_post($price_html); ?></div>
-                      <?php endif; ?>
-                    </div>
-                  </a>
-                </li>
+                <?php wc_get_template_part('content', 'product'); ?>
               <?php endwhile;
               wp_reset_postdata(); ?>
             </ul>
