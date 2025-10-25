@@ -5,7 +5,6 @@
 // 目的: 商品グリッドレイアウトUIの共通スタイルを再利用可能にする
 // 用途: Wooの商品ループ、検索結果カード、レコメンド等で横断利用
 // ========================
-
 @mixin product-grid {
   display: grid;
   grid-template-columns: 1fr;
