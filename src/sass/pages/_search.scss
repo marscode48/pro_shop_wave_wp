@@ -1,67 +1,94 @@
-@use '../globals/index' as *;
-@use '../components/search-tabs';
-@use '../components/search-card';
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "../components/product-grid" as *;
+@use "../components/product-card" as *;
+@use "../components/blog-grid" as *;
+@use "../components/blog-card" as *;
+@use "../components/badge-sale" as *;
+@use "sass:color";
 
 // ========================
-// Search Page Styles
 // 検索結果ページ（商品 / 記事タブ付き）
 // ========================
-
 .search {
-  padding-block: 4rem;
-  color: $color-white;
-  background-color: $color-black;
-
-  &__inner {
-    max-width: 72rem;
-    margin-inline: auto;
-    padding-inline: 1rem;
-
-    @include mq(md) {
-      padding-inline: 2rem;
-    }
-  }
-
-  // 検索ヘッダー
+  // 検索ヘッダーのタイトルとキーワード
   &__header {
     text-align: center;
     margin-bottom: 2rem;
 
-    .search__title {
-      @include heading-title();
-      margin-bottom: 1rem;
-    }
-
-    .search__query {
-      font-size: 1rem;
-      color: rgba($color-white, 0.75);
+    .search__keyword {
+      font-size: 1.125rem;
+      letter-spacing: 0.02em;
+      color: $color-gray;
     }
   }
 
-  // タブナビゲーション（search-tabs.scssで上書き想定）
+  // タブナビゲーション
   .search-tabs {
     display: flex;
+    align-items: flex-end;
     justify-content: center;
     gap: 1rem;
+    padding-bottom: 0.75rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid rgba($color-white, 0.15);
+    overflow-x: auto; // タブが多い場合に横スクロール
+
+    // スクロールバーの見た目を抑制（対応ブラウザのみ）
+    scrollbar-width: thin;
+    scrollbar-color: rgba($color-white, 0.3) transparent;
 
     &__tab {
-      cursor: pointer;
+      // buttonリセット相当
+      appearance: none;
+      background: transparent;
+      border: 0;
+      margin: 0;
       padding: 0.6em 1.2em;
+      cursor: pointer;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: $font-heading;
       font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
       color: rgba($color-white, 0.8);
       border-bottom: 3px solid transparent;
-      transition: all $transition;
+      transition: color $transition, border-color $transition,
+        background-color $transition;
 
+      // ホバー/フォーカス時のアクセント
+      @include mq(lg) {
+        &:hover {
+          color: $color-red;
+          border-color: $color-red;
+        }
+      }
+
+      // アクティブタブ
       &.is-active {
         color: $color-red;
         border-color: $color-red;
+        pointer-events: none; // 既に選択中のタブはクリック無効
       }
 
-      &:hover {
-        color: $color-red;
+      // 件数バッジ
+      & .search-tabs__count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.6em;
+        padding: 0.1em 0.5em;
+        border-radius: 999px;
+        font-size: 0.85em;
+        font-weight: 700;
+        line-height: 1.2;
+        color: $color-white;
+        background: $color-bright-red-gradient;
+        border: 1px solid color.scale($color-red, $lightness: -15%);
+        box-shadow: 0 0 6px rgba($color-red, 0.4);
       }
     }
   }
@@ -75,31 +102,38 @@
       gap: 2rem;
     }
 
-    // 商品カード・記事カード（search-card.scssで上書き想定）
-    .search-card,
-    .search-item {
-      background: rgba($color-white, 0.05);
-      border: 1px solid rgba($color-white, 0.1);
-      border-radius: 0.5rem;
-      padding: 1.25rem;
-      transition: background-color $transition, transform $transition;
+    // 検索結果が空の場合のメッセージ
+    .search-results__empty {
+      text-align: center;
+      color: $color-gray;
+      font-size: 1.1rem;
+      padding: 4rem 3rem;
 
-      &:hover {
-        background: rgba($color-white, 0.1);
-        transform: translateY(-2px);
+      @include mq(lg) {
+        font-size: 1.25rem;
+        padding: 5rem 3rem;
       }
+    }
 
-      &__title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        color: $color-white;
-      }
+    // 商品グリッドレイアウト
+    .search-grid--products {
+      @include product-grid();
 
-      &__excerpt {
-        font-size: 0.95rem;
-        color: rgba($color-white, 0.75);
+      li {
+        @include product-card();
+
+        span.onsale {
+          @include badge-sale();
+          top: 3%;
+          left: 3%;
+        }
       }
+    }
+
+    // 記事グリッドレイアウト
+    .card-list--blog {
+      @include blog-grid();
+      @include blog-card();
     }
   }
 }
