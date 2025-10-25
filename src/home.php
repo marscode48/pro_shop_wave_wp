@@ -10,6 +10,7 @@
 
 <main class="blog-archive section">
   <div class="blog-archive__inner  l-container l-container--wide">
+    <?php get_template_part('template-parts/breadcrumb/breadcrumb'); ?>
     <h1 class="blog-archive__title section__title">BLOG</h1>
 
     <div class="card-list--blog">

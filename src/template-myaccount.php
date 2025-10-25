@@ -20,9 +20,7 @@ get_header();
   <div class="myaccount__inner l-container">
     <?php
     // Breadcrumb navigation
-    if (function_exists('woocommerce_breadcrumb')) {
-      woocommerce_breadcrumb();
-    }
+    get_template_part('template-parts/breadcrumb/breadcrumb');
 
     // WooCommerce マイアカウントページをショートコード経由で出力
     if (class_exists('WC_Shortcodes')) {
