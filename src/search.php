@@ -184,43 +184,4 @@ $posts_panel_id    = 'search-panel-posts';
   </div>
 </main>
 
-<script>
-  // アクセシビリティ対応タブ切替（最小JS）
-  (function() {
-    const root = document.currentScript.closest('.search') || document;
-    const tabs = root.querySelectorAll('.search-tabs__tab');
-    const panels = root.querySelectorAll('.search-results');
-
-    function activate(targetId) {
-      tabs.forEach(btn => {
-        const active = btn.getAttribute('data-tab-target') === targetId;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-      panels.forEach(p => {
-        const active = p.id === targetId;
-        p.classList.toggle('is-active', active);
-        if (active) {
-          p.focus({
-            preventScroll: false
-          });
-        }
-      });
-    }
-
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => activate(btn.getAttribute('data-tab-target')));
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const arr = Array.from(tabs);
-          const idx = arr.indexOf(btn);
-          const next = e.key === 'ArrowRight' ? (idx + 1) % arr.length : (idx - 1 + arr.length) % arr.length;
-          arr[next].focus();
-        }
-      });
-    });
-  })();
-</script>
-
 <?php get_footer();

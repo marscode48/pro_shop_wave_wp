@@ -12,6 +12,7 @@ import { HeaderSubmenuToggle } from './modules/header-submenu-toggle.js';
 import { FilterbarWooCommerce } from './modules/filterbar-woocommerce.js';
 import { OrderingWooCommerce } from './modules/ordering-woocommerce.js';
 import { SubmitButtonDecorator } from './modules/submit-button-decorator.js';
+import { SearchTabs } from './modules/search-tabs.js';
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -50,6 +51,7 @@ class Main {
     new FilterbarWooCommerce();
     new OrderingWooCommerce();
     new SubmitButtonDecorator();
+    new SearchTabs();
   }
 
   // スクロールオブザーバーの初期化
