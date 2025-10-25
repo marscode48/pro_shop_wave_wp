@@ -76,7 +76,7 @@ $posts_panel_id    = 'search-panel-posts';
 ?>
 
 <main id="primary" class="search section">
-  <div class="search__inner l-container">
+  <div class="search__inner l-container l-container--wide">
     <div class="search__header">
       <h1 class="search__title  section__title">
         <?php echo esc_html__('検索結果', 'proshopwave'); ?>
