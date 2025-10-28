@@ -26,9 +26,9 @@
           </div>
         <?php endif; ?>
       </header>
-    </div>
-    <div class="single-blog__content">
-      <?php the_content(); ?>
+      <div class="single-blog__content">
+        <?php the_content(); ?>
+      </div>
     </div>
   </div>
 </main>
