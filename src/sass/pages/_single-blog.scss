@@ -1,4 +1,4 @@
-@use '../globals/index' as *;
+@use "../globals/index" as *;
 
 // ========================
 // ブログ投稿ページ（single.php）
@@ -59,7 +59,9 @@
       }
     }
 
-    h2, h3, h4 {
+    h2,
+    h3,
+    h4 {
       color: $color-white;
       margin-top: 2em;
       margin-bottom: 1em;
@@ -84,7 +86,8 @@
       margin-bottom: 1.5em;
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin-left: 1.5rem;
       margin-bottom: 1.5rem;
     }
@@ -119,7 +122,8 @@
       border-collapse: collapse;
       margin-bottom: 2rem;
 
-      th, td {
+      th,
+      td {
         border: 1px solid $color-gray;
         padding: 0.75rem;
         text-align: left;
