@@ -135,3 +135,147 @@
     }
   }
 }
+
+// ========================
+// 追記: シングル記事 付随UI（ナビ / 関連 / シェア / 著者 / フッター）
+// ========================
+.single-blog {
+  // 次/前ナビ
+  &__nav {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.75rem;
+
+    @include mq(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    a {
+      @include more-link($color-red);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+  }
+
+  // 関連記事
+  &__related {
+    margin-top: 3rem;
+
+    &-title {
+      @include heading-title();
+      margin-bottom: 1rem;
+    }
+
+    &-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+
+      @include mq(md) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
+  // シェア
+  &__share {
+    margin-top: 2rem;
+    padding: 1rem;
+    @include panel-surface-gray();
+
+    &-title {
+      @include heading-title();
+      margin-bottom: 0.75rem;
+    }
+
+    &-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .share__native {
+      @include button-cta();
+    }
+
+    .share__link {
+      @include more-link($color-red);
+    }
+  }
+
+  // 著者ボックス
+  &__author {
+    margin-top: 2.5rem;
+    padding: 1rem;
+    @include panel-surface-gray();
+
+    &-title {
+      @include heading-title();
+      margin-bottom: 0.75rem;
+    }
+
+    .author {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+
+      @include mq(md) {
+        grid-template-columns: 72px 1fr;
+      }
+
+      &__avatar img {
+        border-radius: 50%;
+      }
+
+      &__name {
+        font-weight: 700;
+        color: $color-white;
+        margin: 0 0 0.25rem;
+      }
+
+      &__bio {
+        color: $color-gray;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0 0 0.5rem;
+      }
+
+      &__more {
+        @include more-link($color-red);
+      }
+    }
+  }
+
+  // フッターメタ（カテゴリ / タグ）
+  &__footer {
+    margin-top: 2.5rem;
+
+    .post-meta {
+      display: grid;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+
+      &__label {
+        color: $color-gray;
+        margin-right: 0.25rem;
+      }
+
+      a {
+        color: $color-white;
+
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: $color-red;
+          }
+        }
+      }
+    }
+  }
+}

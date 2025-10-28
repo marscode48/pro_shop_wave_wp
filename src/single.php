@@ -26,9 +26,27 @@
           </div>
         <?php endif; ?>
       </header>
+
       <div class="single-blog__content">
         <?php the_content(); ?>
       </div>
+
+      <?php
+      // 次/前ナビ（同カテゴリ優先）
+      get_template_part('template-parts/single/single-nav');
+
+      // 関連記事（6件）
+      get_template_part('template-parts/single/single-related');
+
+      // シェア
+      get_template_part('template-parts/single/single-share');
+
+      // 著者（プロフィールがあれば）
+      get_template_part('template-parts/single/single-author');
+
+      // フッターメタ（カテゴリ / タグ）
+      get_template_part('template-parts/single/single-footer-meta');
+      ?>
     </div>
   </div>
 </main>
