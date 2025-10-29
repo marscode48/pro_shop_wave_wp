@@ -36,6 +36,9 @@
 
       // フッターメタ（カテゴリ / タグ）
       get_template_part('template-parts/single/single-footer-meta');
+      <?php
+      // サイドバー（おすすめ / カテゴリ / アーカイブ）
+      get_template_part('template-parts/blog/blog-sidebar');
       ?>
     </div>
   </div>
