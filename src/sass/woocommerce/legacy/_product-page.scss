@@ -121,20 +121,12 @@
       &__link {
         display: inline-flex;
         align-items: center;
-        padding: 0.35em 0.7em;
-        font-size: 0.8125rem; // 13px
-        line-height: 1;
-        color: $color-white;
-        @include panel-surface-black($border-color: $fb-border-color);
-        border-radius: 999px;
-        text-decoration: none;
-        transition: filter $transition;
 
-        @include mq(lg) {
-          &:hover {
-            filter: brightness(2);
-          }
-        }
+        @include pill(
+          $padding: 0.35em 0.7em,
+          $font-size: 0.8125rem,
+          $with-selected: false
+        );
       }
     }
 

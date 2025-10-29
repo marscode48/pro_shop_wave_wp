@@ -462,7 +462,6 @@
   box-shadow: $shadow;
 }
 
-
 // ========================
 // 共通:input タグ用グラデーションミックスイン
 // ========================
@@ -506,5 +505,56 @@
     border-color: $border-color;
     outline: $outline-width solid $outline-color;
     outline-offset: $outline-offset;
+  }
+}
+
+// ========================
+// 汎用: Pill（チップ/ピル型リンク/カテゴリタグ）用ミックスイン
+// 用途: chip, link, category など丸 pill 形状のUIを統一
+// ========================
+@mixin pill(
+  $padding: 0.45em 0.7em,
+  $font-size: 1rem,
+  $radius: 999px,
+  $border-color: $fb-border-color,
+  $fg: $color-white,
+  $bg: null,
+  // null の場合は panel-surface-black を適用
+  $hover-filter: brightness(2),
+  $with-selected: true // [data-selected="true"] スタイルを付与するか
+) {
+  padding: $padding;
+  font-size: $font-size;
+  line-height: 1;
+  color: $fg;
+  border-radius: $radius;
+  transition: border-color $transition, filter $transition;
+  text-decoration: none; // aにも使える
+
+  // ベース背景（指定がなければ黒パネルのmixin）
+  @if $bg == null {
+    @include panel-surface-black(
+      $border-color: $border-color,
+      $radius: $radius
+    );
+  } @else {
+    border: 1px solid $border-color;
+    background: $bg;
+  }
+
+  // hover（デスクトップ）
+  @include mq(lg) {
+    &:hover {
+      filter: $hover-filter;
+    }
+  }
+
+  // 選択時の見た目（chip等）
+  @if $with-selected == true {
+    &[data-selected="true"] {
+      border-color: $color-red;
+      background: $fb-selected-bg;
+      box-shadow: $fb-selected-shadow;
+    }
   }
 }
