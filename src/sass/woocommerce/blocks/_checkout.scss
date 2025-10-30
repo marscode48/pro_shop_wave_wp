@@ -10,9 +10,10 @@
 //  - サイドバー（注文概要 / クーポン / 小計・送料・税 / 最終合計）
 // 方針:
 //  - 共通化できるものは後で _common-blocks.scss に抽出
-//  - .section--checkout 配下に限定してスコープ
+//  - .section--checkout / .section--commerce-ui 配下に限定してスコープ（カート/チェックアウト共通UI領域）
 // =============================================================
-.section--checkout {
+.section--checkout,
+.section--commerce-ui {
   .wp-block-woocommerce-checkout {
     .wc-block-checkout {
       color: $color-white;

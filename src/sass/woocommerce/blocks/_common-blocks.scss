@@ -8,11 +8,11 @@
 //  - WooCommerce Blocks（Cart / Checkout）間で共有するUIトーンの統一
 //  - ページ固有ではない「共通部品」のみを定義（タイトル、ボタン、合計、バッジ等）
 // 方針:
-//  - スコープは .section--cart / .section--checkout 配下に限定して衝突回避
 //  - 具体ページの調整は _cart.scss / checkout.scss 側で行う
 // =============================================================
 .section--cart,
-.section--checkout {
+.section--checkout,
+.section--commerce-ui {
   // タイトル（WooCommerce Blocks の構造に合わせて wc-block-components-title を2個スタイリング）
   .wc-block-components-title.wc-block-components-title {
     @include heading-title();

@@ -13,7 +13,7 @@
 get_header();
 ?>
 
-<section class="section section--checkout" role="region" aria-label="Checkout">
+<section class="section section--checkout section--commerce-ui" role="region" aria-label="Checkout">
   <div class="checkout__inner l-container">
     <?php
     // Breadcrumb navigation
