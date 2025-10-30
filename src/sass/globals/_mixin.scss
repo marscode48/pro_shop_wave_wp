@@ -134,6 +134,29 @@
 }
 
 // ========================
+// 汎用: セクション大見出し (ヒーロー/LP系)
+// 主に .section__title で使用。中央寄せ・大文字・白文字・シャドウ強め。
+// 可変にしたい値は引数で上書き可能。
+// ========================
+@mixin section-title(
+  $font-size: 2rem,
+  $color: $color-white,
+  $margin-bottom: 2rem,
+  $text-align: center,
+  $text-transform: uppercase,
+  $font-family: $font-heading,
+  $text-shadow: $text-shadow-black-default
+) {
+  font-size: $font-size;
+  font-family: $font-family;
+  text-align: $text-align;
+  color: $color;
+  margin-bottom: $margin-bottom;
+  text-transform: $text-transform;
+  text-shadow: $text-shadow;
+}
+
+// ========================
 // 汎用: セクションタイトル/見出し用ミックスイン
 // 目的: 左線付きのタイトルデザインを統一的に適用
 // ========================
