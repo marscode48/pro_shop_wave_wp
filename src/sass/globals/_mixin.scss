@@ -581,3 +581,43 @@
     }
   }
 }
+
+// ========================
+// Mixin: メタ日付（ブログカード・記事ページ共通）
+// ========================
+@mixin meta-date($font-size: 0.85rem, $icon: "\f017", $color: $color-gray) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $color;
+  font-size: $font-size;
+  font-family: $font-body;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  // アイコン（Font Awesome）
+  &::before {
+    content: $icon;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: 0.8;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(1px);
+  }
+
+  // 更新日のバッジ化
+  &.is-updated {
+    .is-updated-label {
+      content: "";
+      display: inline-block;
+      margin-left: 0.4rem;
+      @include pill($font-size: 0.75rem, $padding: 0.15em 0.5em);
+    }
+  }
+
+  @include mq(lg) {
+    font-size: 0.9rem;
+  }
+}

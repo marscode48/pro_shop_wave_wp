@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for Blog Card
  *
@@ -22,7 +23,7 @@
       <?php endif; ?>
     </picture>
     <div class="card-blog__content">
-      <time class="card-blog__date" datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date('Y.m.d'); ?></time>
+      <?php get_template_part('template-parts/meta/meta', 'date', ['class' => 'card-blog__date']); ?>
       <h3 class="card-blog__title"><?php the_title(); ?></h3>
       <p class="card-blog__text"><?php echo wp_trim_words(get_the_excerpt(), 20, '…'); ?></p>
       <?php

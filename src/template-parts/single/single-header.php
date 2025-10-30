@@ -17,8 +17,6 @@
       <?php the_category(' '); ?>
     </div>
     <h1 class="single-blog__title"><?php the_title(); ?></h1>
-    <time class="single-blog__date" datetime="<?php echo esc_attr(get_the_date('c')); ?>">
-      <?php echo esc_html(get_the_date()); ?>
-    </time>
+    <?php get_template_part('template-parts/meta/meta', 'date', ['class' => 'single-blog__date']); ?>
   </div>
 </header>

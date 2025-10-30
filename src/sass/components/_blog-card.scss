@@ -93,12 +93,8 @@
     }
 
     &__date {
-      font-size: 0.85rem;
-      color: $color-gray;
+      @include meta-date();
       margin-bottom: 0.4rem;
-      font-family: $font-body;
-      letter-spacing: 0.05em;
-      display: inline-block;
     }
 
     &__title {
