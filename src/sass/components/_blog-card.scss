@@ -1,10 +1,31 @@
 @use "../globals/index" as *;
 
 // ========================
-// Mixin: ブログカード（共通UI）
-// - ブログ一覧・検索結果ページなどで再利用
+// ブログカード一覧＆カードUI（共通コンポーネント）
+//
+// .card-list--blog
+//   - 一覧レイアウト（グリッド）
+//   - ホーム、ブログ一覧、検索結果などで再利用
+//
+// .card-blog
+//   - 単一カード本体
+//   - サムネ / 日付 / タイトル / 抜粋 / MOREリンク
 // ========================
-@mixin blog-card() {
+
+.card-list--blog {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @include mq(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .card-blog {
     position: relative;
     overflow: hidden;

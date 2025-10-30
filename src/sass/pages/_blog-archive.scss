@@ -1,17 +1,10 @@
 @use "../globals/index" as *;
-@use "../components/blog-grid" as *;
-@use "../components/blog-card" as *;
 @use "sass:color";
 
 // ========================
 // 投稿ページ（ブログ一覧 / home.php 用）
 // ========================
 .blog-archive {
-  .card-list--blog {
-    @include blog-grid();
-    @include blog-card();
-  }
-
   &__pagination {
     text-align: center;
     font-family: $font-heading;
