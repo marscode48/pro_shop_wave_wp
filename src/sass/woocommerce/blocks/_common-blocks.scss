@@ -27,7 +27,7 @@
     @include heading-title();
   }
 
-  // ボタン
+  // ボタン（例: 購入手続きへ進む / 注文を確定）
   .wc-block-components-button:not(.is-link) {
     background: $color-bright-red-gradient;
     color: $color-white;
@@ -74,7 +74,7 @@
     }
   }
 
-  // 商品バッジ（例: セール / 新商品）
+  // 商品バッジ（例: 値引き / 新商品）
   .wc-block-components-product-badge {
     display: block; // 縦方向のレイアウトを確保
     inline-size: max-content; // テキスト内容に応じた最小幅に調整
