@@ -22,6 +22,12 @@
     font-size: 0.875rem !important;
   }
 
+  // 税区分の表示制御（WooCommerceの価格サフィックス）
+  // 商品一覧（ブロック / グリッドなど）では非表示
+  .woocommerce-price-suffix {
+    display: none;
+  }
+
   // タイトル（WooCommerce Blocks の構造に合わせて wc-block-components-title を2個スタイリング）
   .wc-block-components-title.wc-block-components-title {
     @include heading-title();

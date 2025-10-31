@@ -162,6 +162,12 @@
       margin-right: 0.2em;
       text-decoration-color: $color-red;
     }
+
+    // 税区分の表示制御（WooCommerceの価格サフィックス）
+    // 商品一覧（ブロック / グリッドなど）では非表示
+    .woocommerce-price-suffix {
+      display: none;
+    }
   }
 
   // ---- もっと見るリンク等
