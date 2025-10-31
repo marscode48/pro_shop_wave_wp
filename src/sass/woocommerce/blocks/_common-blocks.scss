@@ -93,4 +93,176 @@
       }
     }
   }
+  // ブロック商品のカードUI（WooCommerce Blocks用）
+  .wc-block-product,
+  .wc-block-grid__product,
+  .cross-sells-product {
+    // カードそのもの
+    width: auto !important;
+    max-width: none !important;
+    margin: 0;
+    float: none;
+    text-align: center;
+    list-style: none;
+    @include product-card-gradient;
+    padding: 1rem !important;
+    border: 1px solid $color-red;
+    border-radius: $radius-card;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+    box-sizing: border-box !important;
+    vertical-align: baseline;
+    text-align: center;
+
+    @include mq(lg) {
+      &:hover {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    // リンク全体
+    .wc-block-grid__product-link {
+      display: block;
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    // セールバッジ
+    .wc-block-grid__product-onsale,
+    .wc-block-components-product-sale-badge {
+      display: grid;
+      place-items: center;
+      inset: 0 auto auto 0;
+      // inset: -5% auto auto -5%;
+      border: none;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 600;
+      width: 60px;
+      height: 60px;
+      color: $color-white;
+      background: $color-bright-red-gradient;
+    }
+
+    // 画像
+    .wc-block-components-product-image,
+    .wc-block-grid__product-image {
+      margin-bottom: 1rem !important;
+      display: block;
+      overflow: hidden;
+      border-radius: $radius-image;
+
+      @include mq(lg) {
+        &:hover img {
+          transform: scale(1.05);
+          filter: brightness(1.2);
+        }
+      }
+
+      a {
+        display: block;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0;
+        box-shadow: none;
+        object-fit: cover;
+        aspect-ratio: 3 / 2;
+        border-radius: $radius-image;
+        transition: transform $transition, filter $transition;
+
+        &[alt=""] {
+          border: none;
+        }
+      }
+    }
+
+    // タイトル
+    .wp-block-post-title,
+    .wc-block-components-product-title,
+    .wc-block-grid__product-title {
+      font-family: $font-heading;
+      font-weight: 700;
+      color: $color-white;
+      margin: 0 0 0.625rem !important;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      font-size: 1.125rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      & > a {
+        display: inline; // 省略記号 ellipsis ('…'）を表示
+      }
+
+      .wc-block-components-product-name {
+        font-weight: 700 !important;
+      }
+
+      @include mq(lg) {
+        font-size: 1.25rem;
+      }
+    }
+
+    // 価格
+    .wc-block-components-product-price,
+    .wc-block-grid__product-price {
+      font-size: 1rem;
+      color: $color-white;
+      margin: 0 auto;
+      overflow: hidden;
+      text-overflow: clip;
+      text-overflow: "";
+      white-space: nowrap;
+
+      ins {
+        font-weight: 400;
+        text-decoration: none;
+        color: $color-red;
+      }
+
+      del {
+        opacity: 0.6;
+        margin-right: 0.2em;
+        text-decoration-color: $color-red;
+      }
+    }
+
+    // レーティング（今回は非表示）
+    .wc-block-components-product-rating-stars,
+    .wc-block-grid__product-rating {
+      display: none;
+    }
+
+    // カートに追加ボタン
+    .wc-block-components-product-button,
+    .wc-block-grid__product-add-to-cart {
+      margin-bottom: 0.625rem !important;
+      width: 100%;
+
+      .wc-block-components-product-button__button,
+      .wp-block-button__link {
+        width: 100%;
+        font-size: 0.75rem !important;
+        line-height: 1.2;
+        background: $color-bright-red-gradient;
+        transition: filter $transition;
+        padding: calc(0.667em + 2px) calc(0.1em + 2px);
+
+        @include mq(lg) {
+          &:hover {
+            filter: brightness(1.5);
+          }
+        }
+      }
+    }
+  }
 }
