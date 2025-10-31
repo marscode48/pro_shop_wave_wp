@@ -22,6 +22,12 @@
     font-size: 0.875rem !important;
   }
 
+  // 税区分の表示制御（WooCommerceの価格サフィックス）
+  // 商品一覧（ブロック / グリッドなど）では非表示
+  .woocommerce-price-suffix {
+    display: none;
+  }
+
   // タイトル（WooCommerce Blocks の構造に合わせて wc-block-components-title を2個スタイリング）
   .wc-block-components-title.wc-block-components-title {
     @include heading-title();
@@ -229,15 +235,15 @@
     }
 
     // 価格
+    .wp-block-woocommerce-product-price {
+      margin-bottom: 0;
+    }
+
     .wc-block-components-product-price,
     .wc-block-grid__product-price {
       font-size: 1rem;
       color: $color-white;
       margin: 0 auto;
-      overflow: hidden;
-      text-overflow: clip;
-      text-overflow: "";
-      white-space: nowrap;
 
       ins {
         font-weight: 400;
@@ -261,6 +267,7 @@
     // カートに追加ボタン
     .wc-block-components-product-button,
     .wc-block-grid__product-add-to-cart {
+      margin-top: 0.625rem !important;
       margin-bottom: 0.625rem !important;
       width: 100%;
 
