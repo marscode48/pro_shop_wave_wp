@@ -1,0 +1,559 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// =============================================================
+// WooCommerce Blocks — Cart
+// ページ: カート（/cart/）
+// 役割:
+//  - カートアイテム一覧（main）
+//  - クロスセル
+//  - 合計サイドバー（sidebar）
+//  - 空カート表示
+//  - 追従ボタン（SP）
+// ルール:
+//  - 共有化できるものは後で _common-blocks.scss に抽出
+//  - .section--cart / .section--commerce-ui 配下に限定してスコープ（カート/チェックアウト共通UI領域）
+// =============================================================
+.section--cart,
+.section--commerce-ui {
+  // -----------------------------------------------------------
+  // レイアウトベース
+  // -----------------------------------------------------------
+  .wp-block-woocommerce-cart {
+    .wc-block-cart {
+      color: $color-white;
+
+      // =====================================
+      // メイン（カートアイテム／クロスセル）
+      // =====================================
+      &__main {
+        // ------------------------------
+        // カートアイテムテーブル
+        // ------------------------------
+        .wc-block-cart-items {
+          td {
+            margin: 0;
+          }
+
+          &__header {
+            font-size: 1rem;
+          }
+
+          &__row {
+            .wc-block-cart-item {
+              // 商品画像
+              &__image {
+                a {
+                  display: block;
+                  width: auto;
+                  height: fit-content;
+                  aspect-ratio: 1;
+                }
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: $radius-card;
+                  overflow: hidden;
+                }
+              }
+
+              // 商品名・価格・数量など
+              &__product {
+                .wc-block-components-product-name {
+                  font-family: $font-heading;
+                  font-weight: 700;
+                  color: $color-white;
+                  padding-bottom: 4px;
+                  @include link-underline-animate();
+
+                  @include mq(md) {
+                    font-size: 1.2rem;
+                  }
+                }
+              }
+
+              &__prices {
+                del {
+                  opacity: 0.6;
+                  margin-right: 0.2em;
+                  text-decoration-color: $color-red;
+                }
+
+                .wc-block-components-product-price__value {
+                  font-weight: 700;
+                }
+              }
+
+              // 数量セレクタ
+              &__quantity {
+                .wc-block-components-quantity-selector {
+                  @include panel-surface-black($radius: 100vmax);
+                  transition: border-color $transition, filter $transition;
+
+                  @include mq(lg) {
+                    &:hover {
+                      filter: brightness(2);
+                    }
+                  }
+
+                  &__input:focus {
+                    box-shadow: none;
+                  }
+
+                  &__button:focus {
+                    box-shadow: none;
+                  }
+                  &:after {
+                    display: none;
+                  }
+                }
+              }
+
+              // 行合計
+              &__total {
+                padding-left: 16px;
+              }
+            }
+          }
+        }
+
+        // ------------------------------
+        // クロスセル
+        // ------------------------------
+        .wp-block-woocommerce-cart-cross-sells-block {
+          .wp-block-heading {
+            font-size: 1.25rem !important;
+            @include mq(lg) {
+              font-size: 1.5rem !important;
+            }
+          }
+
+          // カードグリッド
+          > div {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+
+            @include mq(md) {
+              grid-template-columns: repeat(2, 1fr);
+            }
+            @include mq(lg) {
+              grid-template-columns: repeat(3, 1fr);
+            }
+
+            // クロスセルカード
+            > .cross-sells-product {
+              width: auto !important;
+              margin: 0;
+              padding: 1rem !important;
+              @include product-card-gradient;
+              border: 1px solid $color-red;
+              border-radius: $radius-card;
+              color: $color-white;
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+              box-shadow: $box-shadow-red-default;
+              transition: box-shadow $transition;
+              box-sizing: border-box !important;
+              vertical-align: baseline;
+              text-align: center;
+
+              @include mq(lg) {
+                &:hover {
+                  box-shadow: $box-shadow-red-hover;
+                }
+              }
+
+              .wp-block-cart-cross-sells-product {
+                // 画像
+                &__product-image {
+                  margin-bottom: 2rem !important;
+                  display: block;
+                  overflow: hidden;
+                  border-radius: $radius-image;
+
+                  a {
+                    display: block;
+                  }
+                  img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    margin: 0;
+                    box-shadow: none;
+                    object-fit: cover;
+                    aspect-ratio: 3 / 2;
+                    border-radius: $radius-image;
+                    transition: transform $transition, filter $transition;
+                  }
+
+                  @include mq(lg) {
+                    &:hover img {
+                      transform: scale(1.05);
+                      filter: brightness(1.2);
+                    }
+                  }
+                }
+
+                // タイトル
+                &__product-title {
+                  font-family: $font-heading;
+                  font-weight: 700;
+                  color: $color-white;
+                  margin-bottom: 0.625rem !important;
+                  line-height: 1.2;
+                  letter-spacing: 0.06em;
+                  font-size: 1.125rem;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  @include mq(lg) {
+                    font-size: 1.25rem;
+                  }
+
+                  .wc-block-components-product-name {
+                    font-weight: 700;
+                  }
+                }
+
+                // レーティング（非表示）
+                &__product-rating {
+                  display: none;
+                }
+
+                // 価格
+                &__product-price {
+                  font-size: 1rem;
+                  color: $color-white;
+                  margin: 0 auto 1.25rem;
+
+                  ins {
+                    font-weight: 400;
+                    text-decoration: none;
+                    color: $color-red;
+                  }
+                  del {
+                    opacity: 0.6;
+                    margin-right: 0.2em;
+                    text-decoration-color: $color-red;
+                  }
+                }
+
+                // カートに追加
+                &__product-add-to-cart {
+                  .wc-block-components-product-button__button {
+                    font-size: 0.875rem;
+                    line-height: 1;
+                    margin: 0;
+                    background: $color-bright-red-gradient;
+                    transition: filter $transition;
+                    @include mq(lg) {
+                      &:hover {
+                        filter: brightness(1.5);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // =====================================
+      // サイドバー（合計・クーポン等）
+      // =====================================
+      &__sidebar {
+        .wp-block-woocommerce-cart-order-summary-block {
+          border-bottom: $border-dark-gray;
+
+          .wc-block-cart__totals-title {
+            font-size: 1rem;
+          }
+
+          .wc-block-components-totals-wrapper {
+            border-top: $border-dark-gray;
+            padding: 16px 0;
+
+            .wc-block-components-panel__button {
+              color: $color-gray;
+              &[aria-expanded="true"] {
+                color: $color-white;
+              }
+            }
+          }
+
+          .wp-block-woocommerce-cart-order-summary-totals-block {
+            border-top: none;
+            padding-bottom: 0;
+          }
+        }
+      }
+
+      // =====================================
+      // 支払いオプション
+      // =====================================
+      &__payment-options {
+        font-size: inherit;
+      }
+
+      // =====================================
+      // 購入手続きボタン
+      // =====================================
+      &__submit {
+        // SP: 画面下の追従ボタン
+        @media (max-width: 782px) {
+          &-container--sticky {
+            background-color: $color-black;
+            &::before {
+              color: $color-red;
+              opacity: 0.3;
+            }
+          }
+        }
+      }
+    }
+
+    // ---------- テーブル境界（ブレイクポイント別最適化） ----------
+    // SP: 一番上の境界線
+    .is-medium
+      table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
+      .wc-block-cart-items__row:first-child,
+    .is-mobile
+      table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
+      .wc-block-cart-items__row:first-child,
+    .is-small
+      table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
+      .wc-block-cart-items__row:first-child {
+      border-top: 1px solid $color-red;
+    }
+
+    // SP: 各行の下境界
+    .is-medium
+      table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
+      .wc-block-cart-items__row,
+    .is-mobile
+      table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
+      .wc-block-cart-items__row,
+    .is-small
+      table.wc-block-cart-items:not(.wc-block-mini-cart-items):not(:last-child)
+      .wc-block-cart-items__row {
+      border-bottom: 1px solid $color-red;
+    }
+
+    // PC: テーブル下境界
+    .is-large.wc-block-cart .wc-block-cart-items {
+      border-bottom: 1px solid $color-red;
+    }
+    // PC: 各セルの上境界
+    .is-large.wc-block-cart .wc-block-cart-items td {
+      border-top: 1px solid $color-red;
+    }
+
+    // SP: クロスセル下余白
+    .is-medium .wp-block-woocommerce-cart-cross-sells-block,
+    .is-mobile .wp-block-woocommerce-cart-cross-sells-block,
+    .is-small .wp-block-woocommerce-cart-cross-sells-block {
+      margin-bottom: 40px;
+    }
+  }
+
+  // =====================================
+  // 空カート表示
+  // =====================================
+  .wp-block-woocommerce-empty-cart-block {
+    .wc-block-cart__empty-cart {
+      &__title {
+        // 顔アイコン
+        &.with-empty-cart-icon:before {
+          background-color: $color-gray;
+        }
+      }
+    }
+
+    // 空メッセージ
+    .editor-styles-wrapper .wc-block-cart__empty-cart__title,
+    .wc-block-cart__empty-cart__title {
+      font-size: 1rem;
+      font-weight: normal;
+      font-family: $font-body;
+      text-align: center;
+      color: $color-white;
+      text-transform: none;
+      text-shadow: none;
+    }
+
+    // 「ストアを閲覧」
+    > p {
+      margin-bottom: 2rem;
+    }
+    > p > a {
+      padding-bottom: 4px;
+      @include link-underline-animate();
+    }
+
+    // 区切り（非表示）
+    .wc-block-cart__empty-cart__title ~ .wp-block-separator {
+      display: none;
+    }
+
+    // ------------------------------
+    // 新商品カード（4列時はgrid適用）
+    // ------------------------------
+    .wc-block-product-new.has-4-columns {
+      margin: 2rem 0;
+
+      .wc-block-grid {
+        &__products {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+
+          @include mq(md) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          @include mq(lg) {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        &__product {
+          width: auto;
+          max-width: none;
+          margin: 0;
+          float: none;
+          text-align: center;
+          list-style: none;
+          @include product-card-gradient;
+          padding: 1rem;
+          border: 1px solid $color-red;
+          border-radius: $radius-card;
+          color: $color-white;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          box-shadow: $box-shadow-red-default;
+          transition: box-shadow $transition;
+          @include mq(lg) {
+            &:hover {
+              box-shadow: $box-shadow-red-hover;
+            }
+          }
+
+          &-link {
+            display: block;
+            color: $color-white;
+            text-decoration: none;
+          }
+
+          // セールバッジ
+          &-onsale {
+            display: grid;
+            place-items: center;
+            inset: 20px auto auto 20px;
+            border: none;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            width: 60px;
+            height: 60px;
+            color: $color-white;
+            background: $color-bright-red-gradient;
+          }
+
+          // 画像
+          &-image {
+            margin-bottom: 2rem !important;
+            display: block;
+            overflow: hidden;
+            border-radius: $radius-image;
+            @include mq(lg) {
+              &:hover img {
+                transform: scale(1.05);
+                filter: brightness(1.2);
+              }
+            }
+          }
+          &-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            box-shadow: none;
+            object-fit: cover;
+            aspect-ratio: 3 / 2;
+            border-radius: $radius-image;
+            transition: transform $transition, filter $transition;
+          }
+          &-image img[alt=""] {
+            border: none;
+          }
+
+          // タイトル
+          &-title {
+            font-family: $font-heading;
+            font-weight: 700;
+            color: $color-white;
+            margin-bottom: 0.625rem !important;
+            line-height: 1.2;
+            letter-spacing: 0.06em;
+            font-size: 1.125rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            @include mq(lg) {
+              font-size: 1.25rem;
+            }
+          }
+
+          // 価格
+          &-price {
+            font-size: 1rem;
+            color: $color-white;
+            margin: 0 auto 1.25rem;
+            ins {
+              font-weight: 400;
+              text-decoration: none;
+              color: $color-red;
+            }
+            del {
+              opacity: 0.6;
+              margin-right: 0.2em;
+              text-decoration-color: $color-red;
+            }
+          }
+
+          // レビュー（非表示）
+          &-rating {
+            display: none;
+          }
+
+          // カートに追加
+          &-add-to-cart {
+            margin-bottom: 0.625rem !important;
+            .wp-block-button__link {
+              font-size: 0.875rem;
+              line-height: 1;
+              background: $color-bright-red-gradient;
+              transition: filter $transition;
+              @include mq(lg) {
+                &:hover {
+                  filter: brightness(1.5);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

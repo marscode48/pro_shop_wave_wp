@@ -13,8 +13,8 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 // ========================
 // パーツ（共通パーツなど）
 // ========================
-@use 'parts/blog-card'; // ブログカード（card-blog）共通パーツ
 @use 'parts/base'; // ベーススタイル（body、img、ul、aなど）
+@use 'parts/layout'; // レイアウトユーティリティ（.l-container / 表示制御）
 @use 'parts/vivus-logo'; // Vivusアニメーションロゴ用
 
 // ========================
@@ -25,7 +25,9 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'components/footer'; // フッター（.footerなど）
 @use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
 @use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
-@use 'components/layout-main'; // メインレイアウト（.layout-main）
+@use 'components/breadcrumb';  // パンくずリスト（front-page以外の全体）
+@use 'components/blog-card'; // ブログカード
+@use 'components/blog-sidebar'; // 記事サイドバー
 
 // ========================
 // ページ別スタイル
@@ -33,8 +35,11 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'pages/front-page'; // front-page.php 用（トップページ）
 @use 'pages/blog-archive'; // home.php 用（投稿一覧ページ）
 @use 'pages/single-blog'; // single.php 用（投稿詳細ページ）
+@use 'pages/search'; // search.php 用（検索結果ページ）
 
 // ========================
-// WooCommerce専用スタイル（上書きのため一番最後に）
+// WooCommerce専用スタイルは別ビルドに分離
 // ========================
-@use 'woocommerce/index' as *; // WooCommerce 専用スタイルを集約
+// ・Blocks:  src/sass/woocommerce/woocommerce-blocks.scss  → css/woocommerce-blocks.css（functions.phpで条件読み込み）
+// ・Legacy:  src/sass/woocommerce/legacy/woocommerce-legacy.scss → css/woocommerce-legacy.css（functions.phpで条件読み込み）
+// ※ ここでは読み込まない（重複適用を防ぐ）

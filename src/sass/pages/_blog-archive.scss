@@ -1,20 +1,15 @@
-@use '../globals/index' as *;
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "sass:color";
 
 // ========================
 // 投稿ページ（ブログ一覧 / home.php 用）
 // ========================
 .blog-archive {
-  
-  .card-list--blog {
-    margin-bottom: 3rem;
-  }
-
   &__pagination {
     text-align: center;
     font-family: $font-heading;
     font-size: 1.125rem;
-    
+
     @include mq(lg) {
       font-size: 1.25rem;
     }

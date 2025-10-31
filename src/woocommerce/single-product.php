@@ -23,7 +23,7 @@ if (! defined('ABSPATH')) {
 get_header('shop'); ?>
 
 <div class="product-single section">
-  <div class="product-single__inner">
+  <div class="product-single__inner l-container l-container--wide">
     <?php
     /**
      * woocommerce_before_main_content hook.
@@ -32,6 +32,8 @@ get_header('shop'); ?>
      * @hooked woocommerce_breadcrumb - 20
      */
     do_action('woocommerce_before_main_content');
+    // デフォルトのWooCommerceパンくずリストを無効化し、テーマの統一パンくずリストを挿入
+    get_template_part('template-parts/breadcrumb/breadcrumb');
     ?>
 
     <?php

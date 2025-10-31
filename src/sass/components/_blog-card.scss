@@ -1,0 +1,153 @@
+@use "../globals/index" as *;
+
+// ========================
+// ブログカード一覧＆カードUI（共通コンポーネント）
+//
+// .card-list--blog
+//   - 一覧レイアウト（グリッド）
+//   - ホーム、ブログ一覧、検索結果などで再利用
+//
+// .card-blog
+//   - 単一カード本体
+//   - サムネ / 日付 / タイトル / 抜粋 / MOREリンク
+// ========================
+
+.card-list--blog {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @include mq(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-blog {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid $color-red;
+    border-radius: $radius-card;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+
+    &:hover {
+      @include mq(lg) {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("./images/bg_blog_card_sp.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      z-index: -1;
+
+      @include mq(lg) {
+        background-image: url("./images/bg_blog_card_pc.webp");
+      }
+    }
+
+    &__link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
+
+      &:hover {
+        @include mq(lg) {
+          .card-blog__image {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+          }
+
+          .card-blog__more {
+            &::after {
+              width: 100%;
+            }
+
+            i {
+              transform: translateX(4px);
+            }
+          }
+        }
+      }
+    }
+
+    &__picture {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition, filter $transition;
+      display: block;
+    }
+
+    &__tags {
+      font-size: 0.75rem;
+      color: $color-red;
+      margin-bottom: 0.4rem;
+      font-family: $font-body;
+      letter-spacing: 0.05em;
+    }
+
+    &__date {
+      @include meta-date();
+      margin-bottom: 0.4rem;
+    }
+
+    &__title {
+      font-size: 1.25rem;
+      font-family: $font-heading;
+      color: $color-white;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @include mq(lg) {
+        font-size: 1.3rem;
+      }
+    }
+
+    &__text {
+      font-size: 1rem;
+      color: $color-white;
+      margin-bottom: 1.2rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      min-height: 3.9em;
+    }
+
+    &__more {
+      @include more-link($color-red);
+    }
+  }
+}

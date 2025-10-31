@@ -1,5 +1,5 @@
-@use "../globals/index" as *;
-@use "./mixins" as *;
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
 @use "sass:color";
 
 // ========================
@@ -21,7 +21,7 @@
     color: $color-red;
 
     &::before {
-      color: $color-gray;
+      color: $color-red;
       float: none;
     }
 
@@ -42,12 +42,19 @@
     }
   }
 
+  #reviews > #comments {
+    margin-bottom: 2rem;
+  }
+  
   #review_form_wrapper {
     padding: 1.25rem;
     @include panel-surface-gray();
 
+    max-inline-size: 800px;
+    margin-inline: auto;
+
     @include mq(lg) {
-      padding: 3.75rem;
+      padding: 2.5rem;
     }
   }
 
@@ -99,7 +106,7 @@
     p[class^="comment-form-"],
     p[class*=" comment-form-"] {
       max-width: 600px;
-      margin: 0 auto 10px;
+      margin: 0 auto 2rem;
 
       label {
         display: block;
@@ -155,13 +162,7 @@
         line-height: normal;
         text-decoration: none;
         text-shadow: none;
-        @include section-button-styles();
-        width: 75%;
-        padding: 0.35rem 1.5rem;
-
-        @include mq(lg) {
-          width: 300px;
-        }
+        @include button-cta();
       }
 
       input {

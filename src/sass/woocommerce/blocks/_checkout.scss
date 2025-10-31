@@ -1,0 +1,661 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// =============================================================
+// WooCommerce Blocks — Checkout
+// ページ: チェックアウト（/checkout/）
+// 役割:
+//  - メイン（連絡先 / 住所 / 配送 / 支払い / 注文メモ / 規約 / アクション）
+//  - サイドバー（注文概要 / クーポン / 小計・送料・税 / 最終合計）
+// 方針:
+//  - 共通化できるものは後で _common-blocks.scss に抽出
+//  - .section--checkout / .section--commerce-ui 配下に限定してスコープ（カート/チェックアウト共通UI領域）
+// =============================================================
+.section--checkout,
+.section--commerce-ui {
+  .wp-block-woocommerce-checkout {
+    .wc-block-checkout {
+      color: $color-white;
+
+      // =====================================
+      // メインカラム
+      // =====================================
+      &__main {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        @include mq(md) {
+          gap: 2.4rem;
+        }
+
+        // -------------------------------
+        // 各ステップ共通
+        // -------------------------------
+        .wc-block-components-checkout-step {
+          // 見出し行（タイトル＋右側の補助情報）
+          &__heading {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 1fr auto;
+            align-items: end;
+            gap: 1rem;
+            margin-bottom: 0.6rem;
+          }
+
+          &__heading-content {
+            color: $color-gray;
+            font-size: 0.9rem;
+          }
+
+          &__container {
+            @include panel-surface-black();
+            padding: 1rem;
+            @include mq(md) {
+              padding: 1.25rem;
+            }
+          }
+
+          &__description {
+            color: $color-white;
+            font-size: 0.95rem;
+          }
+
+          &__content {
+            display: grid;
+          }
+        }
+
+        // -------------------------------
+        // 連絡先情報（Email）
+        // -------------------------------
+        #contact {
+          .wc-block-components-address-form {
+            display: grid;
+            gap: 1rem;
+
+            &__email {
+              margin-top: 0;
+              input[type="email"] {
+                @include input-base(1.5em 0.5em 0.5em);
+                width: 100%;
+              }
+
+              label {
+                display: inline-block;
+                margin-top: 0.35rem;
+                font-size: 0.85rem;
+                color: $color-gray;
+              }
+            }
+          }
+        }
+
+        // -------------------------------
+        // お届け先住所 / 請求先住所
+        // -------------------------------
+        #shipping-fields,
+        #billing-fields {
+          .wc-block-components-address-address-wrapper {
+            display: grid;
+          }
+
+          .wc-block-components-address-card {
+            @include input-base(1.5em 0.5em 0.5em);
+            padding: 0.8rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: start;
+            gap: 1rem;
+
+            address {
+              color: $color-white;
+              font-style: normal;
+            }
+
+            .wc-block-components-address-card__edit {
+              color: $color-gray;
+              text-decoration: underline;
+              cursor: pointer;
+              @include mq(lg) {
+                &:hover {
+                  color: $color-white;
+                }
+              }
+            }
+          }
+
+          // テキスト入力
+          .wc-block-components-text-input {
+            position: relative;
+
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
+              @include input-base(1.5em 0.5em 0.5em);
+              width: 100%;
+            }
+
+            label {
+              display: inline-block;
+              margin-top: 0.35rem;
+              font-size: 0.85rem;
+              color: $color-gray;
+            }
+          }
+
+          // セレクトボックス
+          .wc-blocks-components-select {
+            &__container {
+              position: relative;
+              background: none;
+              border-radius: 0;
+            }
+
+            &__select {
+              @include input-base(1em 0.5em 0); // 右側にアイコン分の余白
+              width: 100%;
+              appearance: none;
+            }
+
+            &__expand {
+              fill: $color-gray;
+              position: absolute;
+              right: 0.6rem;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            &__label {
+              display: inline-block;
+              font-size: 0.85rem;
+              color: $color-gray;
+            }
+          }
+
+          // 住所2（トグル）
+          .wc-block-components-address-form__address_2-toggle {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: $color-gray;
+            cursor: pointer;
+            padding: 0.25rem 0;
+            @include mq(lg) {
+              &:hover {
+                color: $color-white;
+              }
+            }
+          }
+        }
+
+        // -------------------------------
+        // 配送オプション（Shipping Option）
+        // -------------------------------
+        #shipping-option {
+          .wc-block-components-checkout-step__content {
+            padding-top: 0;
+          }
+          .wc-block-components-checkout-step__container {
+            @include panel-surface-black();
+            padding: 1rem;
+            @include mq(md) {
+              padding: 1.25rem;
+            }
+          }
+
+          // ラジオグループ
+          .wc-block-components-shipping-rates-control {
+            display: grid;
+            gap: 0.75rem;
+          }
+
+          // ラジオ
+          .wc-block-components-radio-control {
+            &__option {
+              @include panel-surface-black(
+                $bg: $color-dark-gray,
+                $shadow: none
+              );
+              border: $border-dark-gray;
+
+              &-layout {
+                display: contents;
+              }
+
+              // 選択中の強調
+              &.wc-block-components-radio-control__option-checked,
+              &--checked-option-highlighted {
+                @include input-base($padding: 0.875em 0.875em 0.875em 3.5em);
+                border: 1px solid $color-gray;
+              }
+            }
+
+            &__input {
+              width: 1.25rem;
+              height: 1.25rem;
+              cursor: pointer;
+            }
+
+            &__label-group {
+              align-items: center;
+            }
+
+            &__label {
+              color: $color-white;
+              font-weight: 600;
+            }
+
+            &__secondary-label {
+              color: $color-gray;
+            }
+          }
+
+          // 「無料」ラベル
+          .wc-block-checkout__shipping-option--free {
+            color: $color-red;
+            font-weight: 700;
+          }
+        }
+
+        // -------------------------------
+        // 支払いオプション（Payment Method）
+        // -------------------------------
+        #payment-method {
+          .wc-block-components-checkout-step__container {
+            @include panel-surface-black();
+            padding: 1rem;
+            @include mq(md) {
+              padding: 1.25rem;
+            }
+          }
+
+          // ラジオアコーディオン
+          .wc-block-components-radio-control {
+            display: grid;
+            gap: 0.75rem;
+
+            &-accordion-option {
+              // チェック時の強調
+              &--checked-option-highlighted {
+                box-shadow: none;
+
+                .wc-block-components-radio-control__option {
+                  @include input-base($padding: 0.875em 0.875em 0.875em 3.5em);
+                  border: 1px solid $color-gray;
+                }
+              }
+            }
+
+            &__option {
+              @include input-base($padding: 0.875em 0.875em 0.875em 3.5em);
+            }
+
+            &__input {
+              width: 1.25rem;
+              height: 1.25rem;
+              cursor: pointer;
+            }
+
+            &__label-group {
+              align-items: center;
+            }
+
+            &__label {
+              color: $color-white;
+              font-weight: 700;
+            }
+          }
+
+          // 支払い説明エリア
+          .wc-block-components-radio-control-accordion-content {
+            padding-top: 0.6rem;
+            margin-top: 0;
+            line-height: 1.7;
+          }
+        }
+
+        // -------------------------------
+        // 通知/スナックバー
+        // -------------------------------
+        .wc-block-components-notices__snackbar {
+          outline: none;
+        }
+
+        // -------------------------------
+        // 共通: チェックボックス行（例: 請求先にも同じ住所
+        // -------------------------------
+        .wc-block-components-checkbox {
+          &__input {
+            cursor: pointer;
+          }
+          &__label {
+            color: $color-white;
+          }
+        }
+
+        // -------------------------------
+        // 注文メモ（Order Notes）
+        // -------------------------------
+        #order-notes {
+          .wc-block-components-checkout-step__container {
+            @include panel-surface-black();
+            padding: 1rem;
+            @include mq(md) {
+              padding: 1.25rem;
+            }
+          }
+
+          .wc-block-checkout__add-note {
+            display: grid;
+            gap: 0.75rem;
+
+            .wc-block-components-checkbox__label {
+              color: $color-white;
+              font-weight: 600;
+            }
+
+            textarea {
+              @include input-base(0.8em 1em);
+              margin-top: 0;
+              width: 100%;
+              min-height: 6rem;
+              resize: vertical;
+            }
+          }
+        }
+
+        // -------------------------------
+        // 規約同意（Terms & Conditions）
+        // -------------------------------
+        .wp-block-woocommerce-checkout-terms-block {
+          border-top: $border-dark-gray;
+
+          .wc-block-components-checkbox {
+            &__label {
+              color: $color-white;
+              font-size: 0.9rem;
+
+              a {
+                color: $color-red;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        // -------------------------------
+        // 購入アクション（戻る / 注文確定）
+        // -------------------------------
+        .wp-block-woocommerce-checkout-actions-block {
+          text-align: center;
+
+          .wc-block-components-checkout-return-to-cart-button {
+            @include link-underline-animate();
+            color: $color-white;
+            text-decoration: none;
+            padding-bottom: 4px;
+            font-size: 0.9rem;
+          }
+
+          .wc-block-components-checkout-place-order-button {
+            padding: 0.8em 1.2em;
+          }
+        }
+
+        // -------------------------------
+        // アクセシビリティ（フォーカス）
+        // -------------------------------
+        input,
+        select,
+        textarea {
+          @include input-focus();
+        }
+      }
+
+      // =====================================
+      // サイドバー（右カラム）＆ SP表示時の注文概要（メイン最下部）
+      // =====================================
+      &__sidebar {
+        // PC: サイドバー画面追従
+        @container (min-width: 700px) {
+          &.is-sticky {
+            position: sticky;
+            top: calc($header-height + 0.625rem); // ヘッダー分の余白 + 余白
+          }
+        }
+      }
+
+      // -------------------------------
+      // 注文概要（タイトル行 + コンテンツ）
+      // -------------------------------
+      .wp-block-woocommerce-checkout-order-summary-block {
+        @include panel-surface-black();
+
+        @container (max-width: 699px) {
+          border: none;
+          margin-top: 0;
+          background: none;
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        .wc-block-components-checkout-order-summary__title {
+          margin: 0;
+          padding: 1rem;
+
+          @container (max-width: 699px) {
+            border-bottom: $border-dark-gray;
+            border-top: $border-dark-gray;
+          }
+
+          &-text {
+            font-weight: 700;
+            color: $color-white;
+            letter-spacing: 0.02em;
+            font-size: 1.05rem;
+            margin: 0;
+          }
+
+          &-price {
+            font-weight: 700;
+            font-size: 1.05rem;
+          }
+
+          &-icon {
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            svg {
+              display: block;
+            }
+          }
+        }
+
+        .wc-block-components-checkout-order-summary__content.is-open {
+          @container (max-width: 699px) {
+            border-bottom: $border-dark-gray;
+          }
+        }
+
+        .checkout-order-summary-block-fill {
+          @include panel-surface-black();
+        }
+      }
+
+      // -------------------------------
+      // 注文アイテム一覧
+      // -------------------------------
+      .wc-block-components-totals-wrapper {
+        border-top: $border-dark-gray;
+      }
+
+      .wc-block-components-order-summary {
+        &__content {
+          display: grid;
+          gap: 1rem;
+        }
+      }
+
+      .wc-block-components-order-summary-item {
+        display: grid;
+        grid-template-columns: auto 1fr auto; // 画像 / 詳細 / 行合計
+        column-gap: 5%;
+        align-items: center;
+
+        &__image {
+          position: relative;
+          width: 4.5rem;
+          height: 4.5rem;
+          margin-top: 0;
+          padding-bottom: 0;
+
+          img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+            display: block;
+          }
+
+          .wc-block-components-order-summary-item__quantity {
+            position: absolute;
+            right: -0.4rem;
+            top: -0.4rem;
+            display: grid;
+            place-items: center;
+            width: 1.2rem;
+            height: 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            line-height: 1;
+            color: $color-white;
+            background: $color-bright-red-gradient;
+            border-radius: 50%;
+            transform: none;
+            border: none;
+          }
+        }
+
+        &__description {
+          min-width: 0;
+          padding: 0;
+
+          .wc-block-components-product-name {
+            font-family: $font-heading;
+            font-weight: 700;
+            color: $color-white;
+            line-height: 1.2;
+          }
+
+          .wc-block-components-order-summary-item__individual-prices {
+            del {
+              opacity: 0.6;
+              margin-right: 0.2em;
+              text-decoration-color: $color-red;
+            }
+            
+            .wc-block-components-product-price__value {
+              font-weight: 700;
+            }
+          }
+
+          .wc-block-components-product-metadata {
+            color: $color-gray;
+            font-size: 0.9rem;
+          }
+        }
+
+        &__total-price {
+          text-align: right;
+          .wc-block-components-product-price__value {
+            font-weight: 700;
+          }
+        }
+      }
+
+      // -------------------------------
+      // クーポン
+      // -------------------------------
+      .wp-block-woocommerce-checkout-order-summary-coupon-form-block {
+        .wc-block-components-panel__button {
+          cursor: pointer;
+          color: $color-white;
+
+          &-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+          }
+        }
+
+        .wc-block-components-totals-coupon__input {
+          input[type="text"] {
+            @include input-base(1.5em 0.5em 0.5em);
+            width: 100%;
+          }
+
+          label {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: $color-gray;
+          }
+        }
+      }
+
+      // -------------------------------
+      // トータルブロック（小計/送料/税）
+      // -------------------------------
+      .wp-block-woocommerce-checkout-order-summary-totals-block {
+        border-top: $border-dark-gray;
+
+        .wc-block-components-totals-wrapper {
+          border-top: 0;
+        }
+      }
+
+      // -------------------------------
+      // 送料ブロックの「無料」強調
+      // -------------------------------
+      .wp-block-woocommerce-checkout-order-summary-shipping-block {
+        .wc-block-components-totals-item__value strong {
+          color: $color-red;
+        }
+      }
+
+      // -------------------------------
+      // フッター合計（税含む最終額）
+      // -------------------------------
+      .wc-block-components-totals-footer-item {
+        .wc-block-components-totals-item__label {
+          color: $color-white;
+          font-weight: 700;
+        }
+        .wc-block-components-totals-item__value {
+          font-weight: 800;
+          font-size: 1.15rem;
+        }
+      }
+    }
+
+    // ---------- モバイル調整 ----------
+    // 規約同意の一番上の境界線
+    .is-medium
+      .wc-block-checkout__terms.wc-block-checkout__terms--with-separator,
+    .is-mobile
+      .wc-block-checkout__terms.wc-block-checkout__terms--with-separator,
+    .is-small
+      .wc-block-checkout__terms.wc-block-checkout__terms--with-separator {
+      border-top: 0;
+    }
+
+    // 各fieldsetのボーダーを消す
+    .is-mobile
+      .wc-block-components-form
+      .wc-block-components-checkout-step:after,
+    .is-small
+      .wc-block-components-form
+      .wc-block-components-checkout-step:after {
+      display: none !important;
+    }
+  }
+}

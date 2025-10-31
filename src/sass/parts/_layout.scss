@@ -1,0 +1,81 @@
+@use "../globals/index" as *;
+
+// ========================
+// 汎用レイアウトコンテナ
+// ========================
+.l-container {
+  display: block;
+  max-width: 72rem; // 約1152px
+  margin-inline: auto; // 中央寄せ（余白はセクション側で管理）
+
+  // 幅バリエーション
+  &--narrow {
+    max-width: 56rem; // 約896px
+  }
+
+  &--wide {
+    max-width: 80rem; // 約1280px
+  }
+
+  &--full {
+    max-width: none;
+  }
+
+  // ----------------------------------------------------------
+  // オプトインで内側余白を付与したいページ用（例: 固定ページ的UI）
+  // 使用例: <div class="l-container l-container--with-padding"> ... </div>
+  // ----------------------------------------------------------
+  &--with-padding {
+    padding-inline: $space-inline-container;
+  }
+}
+
+// ========================
+// 表示制御・レスポンシブユーティリティ
+// ========================
+
+// スクロール固定（モーダル/メニュー開閉時など）
+.no-scroll {
+  overflow: hidden;
+}
+
+// テキスト/インライン要素向け（改行調整など）
+.sp-only {
+  display: inline;
+
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.pc-only {
+  display: none;
+
+  @include mq(lg) {
+    display: inline;
+  }
+}
+
+// ブロック要素向け（div/section/button 等）
+.sp-only-block {
+  display: block;
+
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.pc-only-block {
+  display: none;
+
+  @include mq(lg) {
+    display: block;
+  }
+}
+
+// ========================
+// メインレイアウト調整
+// ========================
+.main {
+  overflow: hidden;
+}

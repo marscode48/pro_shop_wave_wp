@@ -1,0 +1,176 @@
+@use "../globals/index" as *;
+
+// ========================
+// Mixin: product-card
+// 目的: 商品カードUIの共通スタイルを再利用可能にする
+// 用途: Wooの商品ループ、検索結果カード、レコメンド等で横断利用
+// ========================
+@mixin product-card(
+  $use-gradient: true,
+  $border-color: $color-red,
+  $padding: 1rem,
+  $radius: $radius-card,
+  $text-color: $color-white
+) {
+  position: relative;
+  @if $use-gradient {
+    @include product-card-gradient;
+  }
+  border: 1px solid $border-color;
+  padding: $padding;
+  border-radius: $radius;
+  text-align: left;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: $box-shadow-red-default;
+  transition: box-shadow $transition;
+
+  &:hover {
+    @include mq(lg) {
+      box-shadow: $box-shadow-red-hover;
+    }
+  }
+
+  // ---- バッジ（セール等）
+  .onsale {
+    top: 3%;
+    left: 3%;
+    right: auto;
+    margin: 0;
+  }
+
+  // ---- 本文ラッパー
+  .product-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex: 1;
+  }
+
+  // ---- 画像リンクとホバー演出
+  .product-card__image-link {
+    display: block;
+    overflow: hidden;
+
+    &:hover {
+      @include mq(lg) {
+        img {
+          transform: scale(1.05);
+          filter: brightness(1.2);
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0;
+      box-shadow: none;
+      object-fit: cover;
+      aspect-ratio: 3 / 2;
+      border-radius: $radius-image;
+      transition: transform $transition, filter $transition;
+    }
+  }
+
+  // ---- タイトル上の行（カテゴリ・ブランド等）
+  .product-card__topline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .product-card__brand {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: $color-gray;
+    white-space: nowrap;
+
+    .product-card__brand-link {
+      @include mq(lg) {
+        transition: color $transition;
+      }
+      &:hover {
+        @include mq(lg) {
+          color: $color-red;
+        }
+      }
+    }
+  }
+
+  .product-card__category {
+    font-size: 0.8rem;
+    color: $color-gray;
+
+    a {
+      @include mq(lg) {
+        transition: color $transition;
+      }
+      &:hover {
+        @include mq(lg) {
+          color: $color-red;
+        }
+      }
+    }
+  }
+
+  // ---- 見出し
+  h3,
+  .woocommerce-loop-product__title,
+  .woocommerce-loop-category__title {
+    padding: 0;
+    font-family: $font-heading;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    font-size: 1.125rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include mq(lg) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .woocommerce-placeholder {
+    border: none;
+  }
+
+  .star-rating {
+    font-size: 0.75rem;
+  }
+
+  // ---- 価格
+  .price {
+    font-size: 1rem;
+    color: $color-white;
+    margin: 0;
+
+    ins {
+      text-decoration: none;
+      color: $color-red; // セール後価格は赤で強調
+    }
+
+    del {
+      opacity: 0.6; // 旧価格はやや薄く
+      margin-right: 0.2em;
+      text-decoration-color: $color-red;
+    }
+  }
+
+  // ---- もっと見るリンク等
+  .product-card__more {
+    text-align: center;
+    margin-top: 1rem;
+
+    .product-card__more-link {
+      @include more-link($color-red);
+    }
+  }
+}

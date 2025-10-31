@@ -134,16 +134,72 @@
 }
 
 // ========================
-// 共通: セクションボタン用ミックスイン
+// 汎用: セクション大見出し (ヒーロー/LP系)
+// 主に .section__title で使用。中央寄せ・大文字・白文字・シャドウ強め。
+// 可変にしたい値は引数で上書き可能。
 // ========================
-@mixin section-button-styles() {
+@mixin section-title(
+  $font-size: 2rem,
+  $color: $color-white,
+  $margin-bottom: 2rem,
+  $text-align: center,
+  $text-transform: uppercase,
+  $font-family: $font-heading,
+  $text-shadow: $text-shadow-black-default
+) {
+  font-size: $font-size;
+  font-family: $font-family;
+  text-align: $text-align;
+  color: $color;
+  margin-bottom: $margin-bottom;
+  text-transform: $text-transform;
+  text-shadow: $text-shadow;
+}
+
+// ========================
+// 汎用: セクションタイトル/見出し用ミックスイン
+// 目的: 左線付きのタイトルデザインを統一的に適用
+// ========================
+@mixin heading-title(
+  $font-weight: 700,
+  $font-size: 1.1rem,
+  $font-size-lg: 1.25rem,
+  $line-height: 1.2,
+  $color: $color-white,
+  $letter-spacing: 0.02em,
+  $padding-left: 0.8rem,
+  $border-left: $border-title
+) {
+  font-family: $font-heading;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  letter-spacing: $letter-spacing;
+  padding-left: $padding-left;
+  border-left: $border-left;
+
+  @include mq(lg) {
+    font-size: $font-size-lg;
+  }
+}
+
+// ========================
+// 共通: CTAボタン用ミックスイン（幅オプション対応）
+// 使用例:
+//   @include button-cta(); // 既定（幅指定なし）
+//   @include button-cta($width: 90%); // モバイル幅を指定
+//   @include button-cta($width: 240px, $width-lg: 280px); // md以上で差し替え
+//   @include button-cta($max-inline-size: 22rem); // 最大幅だけ変更
+// ========================
+@mixin button-cta($width: 80%, $width-lg: 240px, $max-inline-size: 24rem) {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   max-width: 350px;
-  padding: 0.7rem 1.5rem;
+  padding: 0.625rem 1.5rem;
   white-space: nowrap;
   background: linear-gradient(
     135deg,
@@ -157,10 +213,18 @@
   text-transform: uppercase;
   transform: skew(-20deg, 0deg);
   border: 1px solid $color-black;
+  border-radius: 0;
+  // 可変: 最大インライン幅
+  max-inline-size: $max-inline-size;
   box-shadow: $box-shadow-red-default;
   cursor: pointer;
   transition: background-color $transition, color $transition,
     box-shadow $transition, border $transition;
+
+  // 可変: モバイル/共通の幅
+  @if $width != null {
+    width: $width;
+  }
 
   &:hover {
     @include mq(lg) {
@@ -176,7 +240,9 @@
     }
   }
 
-  &-inner {
+  // 内側テキスト要素の反スキュー（親が複合セレクタでも安全な指定）
+  > .section__button-inner,
+  .wc-block-components-button__text {
     display: inline-block;
     transform: skewX(15deg);
   }
@@ -207,6 +273,13 @@
     @include mq(lg) {
       transform: translateX(10px);
       background-color: $color-red;
+    }
+  }
+
+  // 可変: lg以上での幅
+  @include mq(lg) {
+    @if $width-lg != null {
+      width: $width-lg;
     }
   }
 }
@@ -410,4 +483,151 @@
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: $shadow;
+}
+
+// ========================
+// 共通:input タグ用グラデーションミックスイン
+// ========================
+@mixin input-base($padding: 0.55em 0.9em) {
+  background: linear-gradient(
+    145deg,
+    color.adjust($color-black, $lightness: 15%) 0%,
+    color.adjust($color-black, $lightness: 25%) 100%
+  );
+  border: 1px solid rgba($color-white, 0.1);
+  border-radius: 0.5rem;
+  padding: $padding;
+  color: $color-white;
+  &::placeholder {
+    color: rgba($color-white, 0.6);
+  }
+}
+
+// ========================
+// 共通: input / textarea / select のフォーカススタイル
+// WooCommerce / ContactForm7 / カスタムフォーム共通で利用可
+// 引数で配色や線幅を調整可能（既定はテーマトーン）
+// 使用例:
+//   input, textarea, select { @include input-focus(); }
+//   .c-form__input { @include input-focus($outline-color: $color-red); }
+// ========================
+@mixin input-focus(
+  $border-color: rgba($color-white, 0.18),
+  $outline-color: color.scale($color-red, $lightness: 15%),
+  $outline-width: 0.125rem,
+  $outline-offset: 0.125rem
+) {
+  &:focus {
+    border-color: $border-color; // input-base のボーダーと整合
+    outline: $outline-width solid $outline-color;
+    outline-offset: $outline-offset;
+  }
+
+  // キーボード操作時の視認性を高める
+  &:focus-visible {
+    border-color: $border-color;
+    outline: $outline-width solid $outline-color;
+    outline-offset: $outline-offset;
+  }
+}
+
+// ========================
+// 汎用: Pill（チップ/ピル型リンク/カテゴリタグ）用ミックスイン
+// 用途: chip, link, category など丸 pill 形状のUIを統一
+// ========================
+@mixin pill(
+  $padding: 0.45em 0.7em,
+  $font-size: 1rem,
+  $radius: 999px,
+  $border-color: $fb-border-color,
+  $fg: $color-white,
+  $bg: null,
+  // null の場合は panel-surface-black を適用
+  $hover-filter: brightness(2),
+  $with-selected: true // [data-selected="true"] スタイルを付与するか
+) {
+  padding: $padding;
+  font-size: $font-size;
+  line-height: 1;
+  color: $fg;
+  border-radius: $radius;
+  transition: border-color $transition, filter $transition;
+  text-decoration: none; // aにも使える
+
+  // ベース背景（指定がなければ黒パネルのmixin）
+  @if $bg == null {
+    @include panel-surface-black(
+      $border-color: $border-color,
+      $radius: $radius
+    );
+  } @else {
+    border: 1px solid $border-color;
+    background: $bg;
+  }
+
+  // hover（デスクトップ）
+  @include mq(lg) {
+    &:hover {
+      filter: $hover-filter;
+    }
+  }
+
+  // 選択時の見た目（chip等）
+  @if $with-selected == true {
+    &[data-selected="true"] {
+      border-color: $color-red;
+      background: $fb-selected-bg;
+      box-shadow: $fb-selected-shadow;
+    }
+  }
+}
+
+// ========================
+// Mixin: メタ日付（ブログカード・記事ページ共通）
+// ========================
+@mixin meta-date($font-size: 0.85rem, $icon: "\f017", $color: $color-gray) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $color;
+  font-size: $font-size;
+  font-family: $font-body;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  // アイコン（Font Awesome）
+  &::before {
+    content: $icon;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: 0.8;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(1px);
+  }
+
+  // 更新日のバッジ化
+  &.is-updated {
+    .is-updated-label {
+      content: "";
+      display: inline-block;
+      margin-left: 0.4rem;
+      @include pill(
+        $font-size: 0.75rem,
+        $padding: 0.15em 1em,
+        $border-color: $color-red
+      );
+
+      @include mq(lg) {
+        &:hover {
+          filter: none;
+        }
+      }
+    }
+  }
+
+  @include mq(lg) {
+    font-size: 0.9rem;
+  }
 }

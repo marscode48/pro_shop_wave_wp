@@ -1,0 +1,168 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  /**
+	 * Tables
+	 */
+  // 商品属性テーブル（製品仕様）
+  table.shop_attributes {
+    border: none;
+    border-collapse: collapse;
+    margin-bottom: 0;
+
+    th,
+    td {
+      padding: 0.75rem;
+      border-bottom: $border-dark-gray;
+      text-align: left;
+      color: $color-white;
+      font-size: 0.75rem;
+
+      @include mq(lg) {
+        font-size: 1rem;
+      }
+    }
+
+    th {
+      width: min(20vw, 150px);
+    }
+
+    td {
+      font-style: normal;
+
+      p {
+        padding: 0;
+      }
+    }
+
+    tr:nth-child(even) td,
+    tr:nth-child(even) th {
+      background: 0 0;
+    }
+  }
+
+  // ダッシュボード内の各注文テーブル
+  table.shop_table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: rgba($color-white, 0.04);
+    border: $border-dark-gray;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    thead {
+      // ヘッダーは面で区切り、暗色トーンで可読性を確保
+      background: $color-dark-gray;
+
+      th {
+        text-align: left;
+        color: $color-white;
+        font-weight: 700;
+        padding: 0.8rem 1rem;
+        line-height: normal;
+        border-bottom: $border-dark-gray;
+      }
+    }
+
+    tbody {
+      th,
+      td {
+        padding: 0.9rem 1rem;
+        vertical-align: middle;
+        color: $color-white;
+        line-height: normal;
+        border-top: 0;
+        border-bottom: $border-dark-gray;
+        font-weight: 700;
+      }
+
+      th {
+        &.woocommerce-orders-table__cell-order-number a {
+          color: $color-white;
+          @include link-underline-animate();
+        }
+      }
+
+      td {
+        &.product-name a {
+          color: $color-white;
+
+          @include link-underline-animate();
+        }
+
+        .product-quantity {
+          color: $color-gray;
+          font-weight: 700;
+        }
+
+        small {
+          font-weight: normal;
+        }
+
+        del {
+          font-weight: normal;
+          opacity: 0.6;
+          margin-right: 0.2em;
+          text-decoration-color: $color-red;
+        }
+      }
+
+      tr:last-child th,
+      tr:last-child td {
+        border-bottom: 0;
+      }
+    }
+
+    tbody,
+    tfoot {
+      background-color: $color-black;
+    }
+    
+    tfoot {
+      th,
+      td {
+        padding: 0.8rem 1rem;
+        border-top: $border-dark-gray;
+      }
+      th {
+        text-align: left;
+        color: $color-gray;
+        font-weight: 700;
+      }
+      td {
+        text-align: left;
+        color: $color-white;
+        font-weight: 700;
+      }
+    }
+  }
+
+  // ダッシュボード内の注文リスト（一覧テーブルの簡易版）
+  table.my_account_orders {
+    font-size: 0.95rem;
+
+    th,
+    td {
+      vertical-align: middle;
+      color: $color-white;
+    }
+
+    .button {
+      white-space: nowrap;
+    }
+  }
+}

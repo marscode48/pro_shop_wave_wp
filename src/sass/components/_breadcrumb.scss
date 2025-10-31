@@ -1,0 +1,93 @@
+@use "../globals/index" as *;
+@use "../woocommerce/woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+/**
+ * Main WooCommerce styles
+ */
+// =============================================================
+// Breadcrumbs (global component)
+// -------------------------------------------------------------
+// 目的:
+//  - WooCommerce 以外の固定ページ/投稿/アーカイブでも同一トーンで使用できる共通コンポーネント化。
+// 互換:
+//  - WooCommerce: `.woocommerce-breadcrumb`（Blocks/Legacy どちらも）
+//  - 汎用: `.breadcrumb`, `.breadcrumbs`, `nav[aria-label="Breadcrumb"]`
+// 設計:
+//  - :where() で特異性を抑え、後追い上書きしやすくする。
+//  - 直接子の `.breadcrumb__list` が無いテーマでも `> ol` / `> ul` をフォールバック。
+// =============================================================
+// NOTE: WooCommerce のデフォルト（.woocommerce:where(body:not(.woocommerce-uses-block-theme)) .woocommerce-breadcrumb）より
+// 詳細度が低くならないように、`.woocommerce .woocommerce-breadcrumb` / `.woocommerce-page .woocommerce-breadcrumb` を明示し、
+// さらに汎用のフォールバックも維持する。
+.woocommerce .woocommerce-breadcrumb,
+.woocommerce-page .woocommerce-breadcrumb,
+:is(.woocommerce, .woocommerce-page) .woocommerce-breadcrumb,
+.woocommerce-breadcrumb,
+.breadcrumb,
+.breadcrumbs,
+nav[aria-label="Breadcrumb"] {
+  @include reset-clearfix();
+  margin: 0 0 3rem;
+  padding: 0;
+  font-size: 0.875rem;
+  color: $color-white;
+
+  @include mq(lg) {
+    font-size: 0.95rem;
+  }
+
+  // 内部リスト：BEM の .breadcrumb__list を優先、無い場合に ol/ul を受け入れる
+  > .breadcrumb__list,
+  > ol,
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5em;
+
+    @include mq(lg) {
+      gap: 0.75em;
+    }
+
+    // 各アイテム
+    > li,
+    .breadcrumb__item {
+      position: relative;
+      color: $color-white;
+
+      a {
+        text-decoration: none;
+        color: $color-white;
+        padding-bottom: 4px;
+
+        @include mq(lg) {
+          @include link-underline-animate();
+        }
+      }
+
+      // 区切り（>）。BEM と汎用 li 双方に対応
+      & + li::before,
+      & + .breadcrumb__item::before {
+        content: ">";
+        color: $color-gray;
+        margin: 0 0.5em;
+        display: inline-block;
+      }
+
+      // リストの最後は色を変更
+      & + li:last-child,
+      & + .breadcrumb__item:last-child {
+        color: $color-gray;
+      }
+    }
+  }
+}

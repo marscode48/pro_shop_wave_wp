@@ -21,7 +21,7 @@ defined('ABSPATH') || exit;
 get_header('shop'); ?>
 
 <div class="product-archive section">
-  <div class="product-archive__inner">
+  <div class="product-archive__inner l-container l-container--wide">
     <?php
     /**
      * Hook: woocommerce_before_main_content.
@@ -31,6 +31,8 @@ get_header('shop'); ?>
      * @hooked WC_Structured_Data::generate_website_data() - 30
      */
     do_action('woocommerce_before_main_content');
+    // デフォルトのWooCommerceパンくずリストを無効化し、テーマの統一パンくずリストを挿入
+    get_template_part('template-parts/breadcrumb/breadcrumb');
 
     /**
      * Hook: woocommerce_shop_loop_header.

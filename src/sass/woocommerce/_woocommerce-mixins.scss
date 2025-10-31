@@ -1,5 +1,5 @@
-@use '../globals/index' as *;
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "sass:color";
 
 // ========================
 // WooCommerce公式の _mixins.scss からmixinをコピーし、
@@ -22,20 +22,18 @@
 
 // mediaright()を打ち消すmixin
 @mixin reset-mediaright() {
-
   @include reset-clearfix();
-	img {
-		float: none !important;
-		height: auto;
-	}
+  img {
+    float: none !important;
+    height: auto;
+  }
 }
 
 // menu()を打ち消すmixin
 @mixin reset-menu() {
-
   @include reset-clearfix();
 
-	li {
-		display: initial !important;
-	}
+  li {
+    display: initial !important;
+  }
 }

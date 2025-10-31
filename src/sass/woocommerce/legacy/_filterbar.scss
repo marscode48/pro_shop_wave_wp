@@ -1,5 +1,5 @@
-@use "../globals/index" as *;
-@use "./mixins" as *;
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
 @use "sass:color";
 
 // =====================================================================
@@ -31,11 +31,10 @@
     align-items: center;
     gap: 0.25em;
     padding: 0.55em;
-    background: rgba($color-white, 0.03);
     color: $color-white;
     cursor: pointer;
-    transition: border-color $transition, background $transition,
-      color $transition;
+    transition: border-color $transition, filter $transition;
+    @include panel-surface-black($border-color: $fb-border-color);
 
     @include mq(lg) {
       gap: 0.5em;
@@ -44,13 +43,12 @@
 
     &:hover {
       @include mq(lg) {
-        border-color: rgba($color-white, 0.5);
+        filter: brightness(2);
       }
     }
   }
 
   &__pill {
-    border: $fb-border;
     flex: 0 1 auto;
     border-radius: 999px;
     // SPではピルは非アクティブ（モーダルのトリガーはfilterbar__open）
@@ -107,14 +105,13 @@
     &[aria-expanded="true"] {
       @include mq(lg) {
         border-color: $color-red;
-        background: rgba($color-red, 0.12);
-        box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
-
+        background: $fb-selected-bg;
+        box-shadow: $fb-selected-shadow;
         .filterbar__pill-icon {
           color: $color-red;
           opacity: 1;
         }
-        
+
         .filterbar__pill-icon::before {
           content: "\f00d"; // fa-xmark
         }
@@ -184,10 +181,8 @@
     left: 0;
     z-index: 40;
     width: min(57.5rem, 90vw); // 920px
-    background: $fb-card;
-    border: $fb-border-soft;
-    border-radius: $fb-radius;
-    box-shadow: $fb-shadow;
+    @include panel-surface-gray($radius: $fb-radius);
+    box-shadow: $panel-gray-inset-shadow, $fb-shadow;
     padding: 1rem;
   }
 
@@ -199,14 +194,13 @@
   }
 
   &__group {
-    background: linear-gradient(
-      180deg,
-      rgba($color-white, 0.03),
-      rgba($color-white, 0)
-    );
-    border: $fb-border-soft;
-    border-radius: 0.625rem; // 10px
     padding: 0.75rem;
+
+    @include panel-surface-black(
+      $border-color: $fb-border-soft-color,
+      $radius: $fb-radius,
+      $shadow: inset 0 -6px 10px 0 rgba($color-gray, 0.05)
+    );
 
     > h3 {
       margin: 0 0 0.5rem;
@@ -220,7 +214,7 @@
       width: 100%;
       padding: 0.6em;
       border-radius: $fb-radius;
-      border: $fb-border;
+      border: 1px solid $fb-border-color;
       background: rgba($color-white, 0.03);
       color: $color-white;
       box-sizing: border-box;
@@ -241,27 +235,8 @@
   }
 
   &__chip {
-    padding: 0.45em 0.7em;
-    border: $fb-border;
-    border-radius: 999px;
-    background: rgba($color-white, 0.04);
-    color: $color-white;
+    @include pill($with-selected: true);
     cursor: pointer;
-    transition: border-color $transition, background $transition,
-      color $transition;
-
-    &:hover {
-      @include mq(lg) {
-        border-color: rgba($color-white, 0.5);
-      }
-    }
-
-    // data-selected="true" で選択ビジュアル
-    &[data-selected="true"] {
-      border-color: $color-red;
-      background: rgba($color-red, 0.12);
-      box-shadow: 0 0 0 0.12rem rgba($color-red, 0.18);
-    }
   }
 
   &__nohit {
@@ -281,13 +256,12 @@
 
   &__btn {
     padding: 0.6em 1em;
-    border-radius: 0.5rem; // 8px
-    border: 1px solid $color-red;
     background: $color-black;
     color: $color-white;
     cursor: pointer;
-    transition: border-color $transition, background $transition,
-      color $transition;
+    transition: border-color $transition, filter $transition, color $transition;
+
+    @include panel-surface-black($radius: 8px);
 
     &:hover {
       @include mq(lg) {
@@ -300,10 +274,12 @@
       color: $color-white;
       background: $color-red;
       border-color: $color-red;
+      background: $color-bright-red-gradient;
 
       &:hover {
         @include mq(lg) {
-          background: color.adjust($color-red, $lightness: -10%);
+          filter: brightness(1.25);
+          box-shadow: 0 0 10px rgba($color-red, 0.15);
         }
       }
     }
@@ -340,7 +316,7 @@
     border-top-left-radius: 1.125rem; // 18px
     border-top-right-radius: 1.125rem;
     padding: 1rem;
-    box-shadow: $fb-shadow;
+    box-shadow: inset 0px 5px 30px rgba($color-white, 0.35), $fb-shadow;
     overflow: auto;
     overscroll-behavior: contain; // パネル外へバウンドスクロールを伝搬しない
     -webkit-overflow-scrolling: touch; // iOS 慣性スクロール
@@ -373,7 +349,7 @@
 
   // アコーディオン（summary/詳細）
   &__accordion {
-    border: $fb-border-soft;
+    border: 1px solid $fb-border-soft-color;
     border-radius: 0.625rem;
     margin-bottom: 0.625rem;
     transition: border-color $transition;
@@ -405,7 +381,7 @@
 
   &__accordion-panel {
     padding: 0.75rem;
-    border-top: $fb-border-soft;
+    border: 1px solid $fb-border-soft-color;
     transition: border-color;
 
     > h4 {
@@ -417,7 +393,7 @@
       width: 100%;
       padding: 0.6em;
       border-radius: $fb-radius;
-      border: $fb-border-soft;
+      border: 1px solid $fb-border-soft-color;
       background: rgba($color-white, 0.03);
       color: $color-white;
       box-sizing: border-box;

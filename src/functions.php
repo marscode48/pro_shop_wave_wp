@@ -71,6 +71,56 @@ function proshopwave_enqueue_assets()
 }
 add_action('wp_enqueue_scripts', 'proshopwave_enqueue_assets');
 
+
+// ==============================
+// WooCommerce 専用スタイルの条件読み込み（効率化版）
+// ・ブロック版: カート / チェックアウト のみ Blocks CSS
+// ・従来版: WooCommerce のその他ページ（商品一覧/詳細/カテゴリ/マイアカウント 等）は Legacy CSS
+// ・非WooCommerceページ（ホーム/ブログ等）では何も読み込まない
+// ==============================
+function proshopwave_enqueue_woocommerce_styles() {
+  // WooCommerce が無効な環境では処理しない
+  if ( ! function_exists( 'is_woocommerce' ) ) {
+    return;
+  }
+
+  // 子テーマ優先のパス/URI
+  $base_uri = get_stylesheet_directory_uri();
+  $base_dir = get_stylesheet_directory();
+
+  $path_blocks = $base_dir . '/css/woocommerce/blocks/woocommerce-blocks.css';
+  $path_legacy = $base_dir . '/css/woocommerce/legacy/woocommerce-legacy.css';
+
+  // --- 判定: チェックアウト系エンドポイント
+  $is_thankyou = function_exists('is_order_received_page') && is_order_received_page();
+  $is_order_pay = function_exists('is_checkout') && function_exists('is_wc_endpoint_url') && is_checkout() && is_wc_endpoint_url('order-pay');
+
+  // --- ブロック版（カート / 通常のチェックアウト本体のみ）
+  // ※Thank You(注文受領)やOrder Payなどの従来テンプレは除外
+  if ( is_cart() || ( is_checkout() && ! $is_thankyou && ! $is_order_pay ) ) {
+    wp_enqueue_style(
+      'proshopwave-woocommerce-blocks',
+      $base_uri . '/css/woocommerce/blocks/woocommerce-blocks.css',
+      [],
+      file_exists( $path_blocks ) ? filemtime( $path_blocks ) : null
+    );
+    return; // ブロックCSSを読み込んだら終了（Legacyは不要）
+  }
+
+  // --- 従来版（その他の WooCommerce ページ + マイアカウント + Thank You 等の従来テンプレ）
+  if ( is_woocommerce() || is_account_page() || $is_thankyou || $is_order_pay ) {
+    wp_enqueue_style(
+      'proshopwave-woocommerce-legacy',
+      $base_uri . '/css/woocommerce/legacy/woocommerce-legacy.css',
+      [],
+      file_exists( $path_legacy ) ? filemtime( $path_legacy ) : null
+    );
+  }
+  // それ以外（非WooCommerceページ）は読み込まない → パフォーマンス最適化
+}
+add_action( 'wp_enqueue_scripts', 'proshopwave_enqueue_woocommerce_styles', 20 );
+
+
 // -----------------------------
 // scriptタグに type="module" を追加
 // -----------------------------
@@ -481,6 +531,16 @@ add_action('init', function () {
   remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 });
 
+// ---------------------------------------------
+// WooCommerce: 標準パンくず出力を無効化（テーマ側で統一）
+// ---------------------------------------------
+add_action('init', function () {
+  // WooCommerce が有効な場合のみ実行
+  if (function_exists('remove_action')) {
+    remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+  }
+}, 99);
+
 // -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------
@@ -837,3 +897,30 @@ add_action('init', function () {
     }, 10, 3);
   }
 });
+
+
+// ---------------------------------------------
+// WooCommerce: ヘッダーのカート数量バッジをAJAXで更新
+// （wc-ajax=add_to_cart 後のフラグメントで .header__cart-count を差し替え）
+// ---------------------------------------------
+if ( function_exists( 'add_filter' ) ) {
+  add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
+    if ( function_exists( 'WC' ) && WC()->cart ) {
+      $count = (int) WC()->cart->get_cart_contents_count();
+      $class = $count > 0 ? ' is-active' : '';
+    } else {
+      $count = 0;
+      $class = '';
+    }
+
+      // 出力バッファ開始（画面には、まだ header__cart-count は表示させない）
+      ob_start();
+    ?>
+    <span class="header__cart-count<?php echo esc_attr( $class ); ?>" aria-live="polite" aria-atomic="true"><?php echo esc_html( $count ); ?></span>
+    <?php
+      // バッファの中身を取り出して変数に代入し、バッファをクリア
+      $fragments['span.header__cart-count'] = ob_get_clean();
+
+    return $fragments;
+  } );
+}
