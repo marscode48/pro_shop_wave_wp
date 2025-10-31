@@ -1,10 +1,10 @@
-@use '../globals/index' as *;
+@use "../globals/index" as *;
 
 // ========================
 // ブログ投稿ページ（single.php）
 // ========================
 .single-blog {
-  &__inner {
+  &__body {
     padding: 0.75rem;
     background-color: $color-dark-gray;
     border-radius: 0.75rem;
@@ -59,7 +59,9 @@
       }
     }
 
-    h2, h3, h4 {
+    h2,
+    h3,
+    h4 {
       color: $color-white;
       margin-top: 2em;
       margin-bottom: 1em;
@@ -84,7 +86,8 @@
       margin-bottom: 1.5em;
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin-left: 1.5rem;
       margin-bottom: 1.5rem;
     }
@@ -119,7 +122,8 @@
       border-collapse: collapse;
       margin-bottom: 2rem;
 
-      th, td {
+      th,
+      td {
         border: 1px solid $color-gray;
         padding: 0.75rem;
         text-align: left;
@@ -128,6 +132,226 @@
       th {
         background-color: $color-black;
       }
+    }
+  }
+}
+
+// ========================
+// 追記: シングル記事 付随UI（ナビ / 関連 / シェア / 著者 / フッター）
+// ========================
+.single-blog {
+  // 次/前ナビ
+  &__nav {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.75rem;
+
+    @include mq(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    a {
+      @include more-link($color-red);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+  }
+
+  // 関連記事
+  &__related {
+    margin-top: 3rem;
+
+    &-title {
+      @include heading-title();
+      margin-bottom: 1rem;
+    }
+
+    &-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+
+      @include mq(md) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
+  // シェア
+  &__share {
+    margin-top: 2rem;
+    padding: 1rem;
+    @include panel-surface-gray();
+
+    &-title {
+      @include heading-title();
+      margin-bottom: 0.75rem;
+    }
+
+    &-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .share__native {
+      @include button-cta();
+    }
+
+    .share__link {
+      @include more-link($color-red);
+    }
+  }
+
+  // 著者ボックス
+  &__author {
+    margin-top: 2.5rem;
+    padding: 1rem;
+    @include panel-surface-gray();
+
+    &-title {
+      @include heading-title();
+      margin-bottom: 0.75rem;
+    }
+
+    .author {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+
+      @include mq(md) {
+        grid-template-columns: 72px 1fr;
+      }
+
+      &__avatar img {
+        border-radius: 50%;
+      }
+
+      &__name {
+        font-weight: 700;
+        color: $color-white;
+        margin: 0 0 0.25rem;
+      }
+
+      &__bio {
+        color: $color-gray;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0 0 0.5rem;
+      }
+
+      &__more {
+        @include more-link($color-red);
+      }
+    }
+  }
+
+  // フッターメタ（カテゴリ / タグ）
+  &__footer {
+    margin-top: 2.5rem;
+
+    .post-meta {
+      display: grid;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+
+      &__label {
+        color: $color-gray;
+        margin-right: 0.25rem;
+      }
+
+      a {
+        color: $color-white;
+
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover {
+          @include mq(lg) {
+            color: $color-red;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ========================
+// ブログ投稿ページ: サイドバー読み込み用レイアウト
+// PC: 右サイドに固定（sticky） / SP: 後段に配置しつつ折りたたみ対応の下地
+// ※ .blog-sidebar は template-parts/blog/blog-sidebar.php で出力される想定
+// ========================
+
+// 1) レイアウトコンテナ検出（推奨クラス: .single-blog-layout）
+//    既存レイアウトに .single-blog と .blog-sidebar が同一コンテナ内にあれば、
+//    :has() によるフォールバック的なグリッド化も可能（主要ブラウザ対応済）。
+.single-blog-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 1fr) 320px; // 本文 / 右サイドバー
+    align-items: start;
+  }
+}
+
+// 2) 並び順（SP: 後段、PC: 右）
+.single-blog {
+  order: 1;
+}
+.blog-sidebar {
+  order: 2;
+}
+
+@include mq(lg) {
+  .single-blog {
+    order: 1;
+  }
+  .blog-sidebar {
+    order: 2;
+    position: sticky; // PCは右に固定
+    top: 2rem;
+  }
+}
+
+// 3) サイドバーのベーススタイル（後で components/_blog-sidebar.scss を拡張予定）
+.blog-sidebar {
+  // SP は「折りたたみ」を想定（トグルが未実装の場合は常時展開でもOK）
+  margin-top: 2rem;
+
+  @include mq(lg) {
+    margin-top: 0; // 右サイドに上詰め
+  }
+
+  &__inner {
+    // とりあえずのベース（テーマ共通トーン）
+    @include panel-surface-gray();
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  // 折りたたみ用のトグル（任意。後でJSや<details>対応と連携）
+  &__toggle {
+    display: block;
+    width: 100%;
+    text-align: left;
+    @include button-cta($width: 100%, $width-lg: 100%);
+    margin-bottom: 0.75rem;
+
+    @include mq(lg) {
+      display: none; // PCではトグル非表示（常時展開）
+    }
+  }
+
+  // SP: デフォルトは展開。JSで .is-collapsed を付与すれば折りたたみ可能
+  &.is-collapsed {
+    .blog-sidebar__inner {
+      display: none;
     }
   }
 }

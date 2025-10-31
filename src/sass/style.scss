@@ -26,6 +26,8 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
 @use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
 @use 'components/breadcrumb';  // パンくずリスト（front-page以外の全体）
+@use 'components/blog-card'; // ブログカード
+@use 'components/blog-sidebar'; // 記事サイドバー
 
 // ========================
 // ページ別スタイル

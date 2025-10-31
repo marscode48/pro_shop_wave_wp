@@ -1,8 +1,6 @@
 @use "../globals/index" as *;
 @use "../components/product-grid" as *;
 @use "../components/product-card" as *;
-@use "../components/blog-grid" as *;
-@use "../components/blog-card" as *;
 @use "../components/badge-sale" as *;
 @use "sass:color";
 
@@ -128,12 +126,6 @@
           left: 3%;
         }
       }
-    }
-
-    // 記事グリッドレイアウト
-    .card-list--blog {
-      @include blog-grid();
-      @include blog-card();
     }
   }
 }

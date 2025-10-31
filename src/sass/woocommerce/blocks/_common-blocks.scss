@@ -8,17 +8,26 @@
 //  - WooCommerce Blocks（Cart / Checkout）間で共有するUIトーンの統一
 //  - ページ固有ではない「共通部品」のみを定義（タイトル、ボタン、合計、バッジ等）
 // 方針:
-//  - スコープは .section--cart / .section--checkout 配下に限定して衝突回避
 //  - 具体ページの調整は _cart.scss / checkout.scss 側で行う
 // =============================================================
 .section--cart,
-.section--checkout {
+.section--checkout,
+.section--commerce-ui {
+  // Gutenberg側が吐く汎用ユーティリティ（.has-*-font-size）
+  // WooCommerce Blocks内でも文字サイズがバラつかないように再指定して揃える
+  .has-medium-font-size {
+    font-size: 1.125rem !important;
+  }
+  .has-small-font-size {
+    font-size: 0.875rem !important;
+  }
+
   // タイトル（WooCommerce Blocks の構造に合わせて wc-block-components-title を2個スタイリング）
   .wc-block-components-title.wc-block-components-title {
     @include heading-title();
   }
 
-  // ボタン
+  // ボタン（例: 購入手続きへ進む / 注文を確定）
   .wc-block-components-button:not(.is-link) {
     background: $color-bright-red-gradient;
     color: $color-white;
@@ -65,7 +74,7 @@
     }
   }
 
-  // 商品バッジ（例: セール / 新商品）
+  // 商品バッジ（例: 値引き / 新商品）
   .wc-block-components-product-badge {
     display: block; // 縦方向のレイアウトを確保
     inline-size: max-content; // テキスト内容に応じた最小幅に調整
@@ -90,6 +99,185 @@
         background: $color-red;
         color: $color-white;
         box-shadow: $box-shadow-red-hover;
+      }
+    }
+  }
+
+  // 単品購入（CTA）ボタン（商品詳細ページなど）
+  .single_add_to_cart_button.button.alt {
+    @include button-cta($width-lg: 280px);
+    margin-top: 1.5em;
+  }
+
+  // ブロック商品のカードUI（WooCommerce Blocks用）
+  .wc-block-product,
+  .wc-block-grid__product,
+  .cross-sells-product {
+    // カードそのもの
+    width: auto !important;
+    max-width: none !important;
+    margin: 0;
+    float: none;
+    text-align: center;
+    list-style: none;
+    @include product-card-gradient;
+    padding: 1rem !important;
+    border: 1px solid $color-red;
+    border-radius: $radius-card;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: $box-shadow-red-default;
+    transition: box-shadow $transition;
+    box-sizing: border-box !important;
+    vertical-align: baseline;
+    text-align: center;
+
+    @include mq(lg) {
+      &:hover {
+        box-shadow: $box-shadow-red-hover;
+      }
+    }
+
+    // リンク全体
+    .wc-block-grid__product-link {
+      display: block;
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    // セールバッジ
+    .wc-block-grid__product-onsale,
+    .wc-block-components-product-sale-badge {
+      display: grid;
+      place-items: center;
+      inset: 0 auto auto 0;
+      // inset: -5% auto auto -5%;
+      border: none;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 600;
+      width: 60px;
+      height: 60px;
+      color: $color-white;
+      background: $color-bright-red-gradient;
+    }
+
+    // 画像
+    .wc-block-components-product-image,
+    .wc-block-grid__product-image {
+      margin-bottom: 1rem !important;
+      display: block;
+      overflow: hidden;
+      border-radius: $radius-image;
+
+      @include mq(lg) {
+        &:hover img {
+          transform: scale(1.05);
+          filter: brightness(1.2);
+        }
+      }
+
+      a {
+        display: block;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0;
+        box-shadow: none;
+        object-fit: cover;
+        aspect-ratio: 3 / 2;
+        border-radius: $radius-image;
+        transition: transform $transition, filter $transition;
+
+        &[alt=""] {
+          border: none;
+        }
+      }
+    }
+
+    // タイトル
+    .wp-block-post-title,
+    .wc-block-components-product-title,
+    .wc-block-grid__product-title {
+      font-family: $font-heading;
+      font-weight: 700;
+      color: $color-white;
+      margin: 0 0 0.625rem !important;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      font-size: 1.125rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      & > a {
+        display: inline; // 省略記号 ellipsis ('…'）を表示
+      }
+
+      .wc-block-components-product-name {
+        font-weight: 700 !important;
+      }
+
+      @include mq(lg) {
+        font-size: 1.25rem;
+      }
+    }
+
+    // 価格
+    .wc-block-components-product-price,
+    .wc-block-grid__product-price {
+      font-size: 1rem;
+      color: $color-white;
+      margin: 0 auto;
+      overflow: hidden;
+      text-overflow: clip;
+      text-overflow: "";
+      white-space: nowrap;
+
+      ins {
+        font-weight: 400;
+        text-decoration: none;
+        color: $color-red;
+      }
+
+      del {
+        opacity: 0.6;
+        margin-right: 0.2em;
+        text-decoration-color: $color-red;
+      }
+    }
+
+    // レーティング（今回は非表示）
+    .wc-block-components-product-rating-stars,
+    .wc-block-grid__product-rating {
+      display: none;
+    }
+
+    // カートに追加ボタン
+    .wc-block-components-product-button,
+    .wc-block-grid__product-add-to-cart {
+      margin-bottom: 0.625rem !important;
+      width: 100%;
+
+      .wc-block-components-product-button__button,
+      .wp-block-button__link {
+        width: 100%;
+        font-size: 0.75rem !important;
+        line-height: 1.2;
+        background: $color-bright-red-gradient;
+        transition: filter $transition;
+        padding: calc(0.667em + 2px) calc(0.1em + 2px);
+
+        @include mq(lg) {
+          &:hover {
+            filter: brightness(1.5);
+          }
+        }
       }
     }
   }

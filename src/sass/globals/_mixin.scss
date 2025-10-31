@@ -134,6 +134,29 @@
 }
 
 // ========================
+// 汎用: セクション大見出し (ヒーロー/LP系)
+// 主に .section__title で使用。中央寄せ・大文字・白文字・シャドウ強め。
+// 可変にしたい値は引数で上書き可能。
+// ========================
+@mixin section-title(
+  $font-size: 2rem,
+  $color: $color-white,
+  $margin-bottom: 2rem,
+  $text-align: center,
+  $text-transform: uppercase,
+  $font-family: $font-heading,
+  $text-shadow: $text-shadow-black-default
+) {
+  font-size: $font-size;
+  font-family: $font-family;
+  text-align: $text-align;
+  color: $color;
+  margin-bottom: $margin-bottom;
+  text-transform: $text-transform;
+  text-shadow: $text-shadow;
+}
+
+// ========================
 // 汎用: セクションタイトル/見出し用ミックスイン
 // 目的: 左線付きのタイトルデザインを統一的に適用
 // ========================
@@ -462,7 +485,6 @@
   box-shadow: $shadow;
 }
 
-
 // ========================
 // 共通:input タグ用グラデーションミックスイン
 // ========================
@@ -506,5 +528,106 @@
     border-color: $border-color;
     outline: $outline-width solid $outline-color;
     outline-offset: $outline-offset;
+  }
+}
+
+// ========================
+// 汎用: Pill（チップ/ピル型リンク/カテゴリタグ）用ミックスイン
+// 用途: chip, link, category など丸 pill 形状のUIを統一
+// ========================
+@mixin pill(
+  $padding: 0.45em 0.7em,
+  $font-size: 1rem,
+  $radius: 999px,
+  $border-color: $fb-border-color,
+  $fg: $color-white,
+  $bg: null,
+  // null の場合は panel-surface-black を適用
+  $hover-filter: brightness(2),
+  $with-selected: true // [data-selected="true"] スタイルを付与するか
+) {
+  padding: $padding;
+  font-size: $font-size;
+  line-height: 1;
+  color: $fg;
+  border-radius: $radius;
+  transition: border-color $transition, filter $transition;
+  text-decoration: none; // aにも使える
+
+  // ベース背景（指定がなければ黒パネルのmixin）
+  @if $bg == null {
+    @include panel-surface-black(
+      $border-color: $border-color,
+      $radius: $radius
+    );
+  } @else {
+    border: 1px solid $border-color;
+    background: $bg;
+  }
+
+  // hover（デスクトップ）
+  @include mq(lg) {
+    &:hover {
+      filter: $hover-filter;
+    }
+  }
+
+  // 選択時の見た目（chip等）
+  @if $with-selected == true {
+    &[data-selected="true"] {
+      border-color: $color-red;
+      background: $fb-selected-bg;
+      box-shadow: $fb-selected-shadow;
+    }
+  }
+}
+
+// ========================
+// Mixin: メタ日付（ブログカード・記事ページ共通）
+// ========================
+@mixin meta-date($font-size: 0.85rem, $icon: "\f017", $color: $color-gray) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $color;
+  font-size: $font-size;
+  font-family: $font-body;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  // アイコン（Font Awesome）
+  &::before {
+    content: $icon;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: 0.8;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(1px);
+  }
+
+  // 更新日のバッジ化
+  &.is-updated {
+    .is-updated-label {
+      content: "";
+      display: inline-block;
+      margin-left: 0.4rem;
+      @include pill(
+        $font-size: 0.75rem,
+        $padding: 0.15em 1em,
+        $border-color: $color-red
+      );
+
+      @include mq(lg) {
+        &:hover {
+          filter: none;
+        }
+      }
+    }
+  }
+
+  @include mq(lg) {
+    font-size: 0.9rem;
   }
 }
