@@ -235,15 +235,15 @@
     }
 
     // 価格
+    .wp-block-woocommerce-product-price {
+      margin-bottom: 0;
+    }
+
     .wc-block-components-product-price,
     .wc-block-grid__product-price {
       font-size: 1rem;
       color: $color-white;
       margin: 0 auto;
-      overflow: hidden;
-      text-overflow: clip;
-      text-overflow: "";
-      white-space: nowrap;
 
       ins {
         font-weight: 400;
@@ -267,6 +267,7 @@
     // カートに追加ボタン
     .wc-block-components-product-button,
     .wc-block-grid__product-add-to-cart {
+      margin-top: 0.625rem !important;
       margin-bottom: 0.625rem !important;
       width: 100%;
 
