@@ -551,11 +551,11 @@
           padding-bottom: 0.5em;
           border: 0;
 
-          .product_type_variable {
+          .button.product_type_variable.add_to_cart_button.product_type_variable {
             font-size: 0.85rem;
-            background-color: $color-black;
+            background: $color-dark-gray-gradient;
             color: $color-white;
-            border: 1px solid $color-white;
+            border: $border-dark-gray;
             padding: 0.857em 1em;
             height: 40px;
             width: 100%;
