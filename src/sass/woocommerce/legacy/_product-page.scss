@@ -488,11 +488,11 @@
           height: 2.5em;
           padding-left: 0.5em;
           color: $color-white;
-          border: 1px solid $border-dark-gray;
+          border: $border-dark-gray;
           // WooCommerceデフォルトの矢印アイコンを白に変更
           background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jaGV2cm9uLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ii8+PC9zdmc+")
             no-repeat;
-          background-color: rgba($color-white, 0.35);
+          background-color: $color-dark-gray;
           background-size: 16px;
           background-position: calc(100% - 12px) 50%;
         }
