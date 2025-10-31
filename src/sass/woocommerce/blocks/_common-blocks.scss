@@ -102,6 +102,13 @@
       }
     }
   }
+
+  // 単品購入（CTA）ボタン（商品詳細ページなど）
+  .single_add_to_cart_button.button.alt {
+    @include button-cta($width-lg: 280px);
+    margin-top: 1.5em;
+  }
+
   // ブロック商品のカードUI（WooCommerce Blocks用）
   .wc-block-product,
   .wc-block-grid__product,
