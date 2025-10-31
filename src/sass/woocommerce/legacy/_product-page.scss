@@ -488,11 +488,11 @@
           height: 2.5em;
           padding-left: 0.5em;
           color: $color-white;
-          border: 1px solid $border-dark-gray;
+          border: $border-dark-gray;
           // WooCommerceデフォルトの矢印アイコンを白に変更
           background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jaGV2cm9uLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ii8+PC9zdmc+")
             no-repeat;
-          background-color: rgba($color-white, 0.35);
+          background-color: $color-dark-gray;
           background-size: 16px;
           background-position: calc(100% - 12px) 50%;
         }
@@ -523,6 +523,9 @@
       .button {
         vertical-align: baseline;
         float: none;
+      }
+
+      .single_add_to_cart_button.button.alt {
         @include button-cta($width-lg: 280px);
         @include mq(lg) {
           margin: 0;
@@ -548,11 +551,11 @@
           padding-bottom: 0.5em;
           border: 0;
 
-          .product_type_variable {
+          .button.product_type_variable.add_to_cart_button.product_type_variable {
             font-size: 0.85rem;
-            background-color: $color-black;
+            background: $color-dark-gray-gradient;
             color: $color-white;
-            border: 1px solid $color-white;
+            border: $border-dark-gray;
             padding: 0.857em 1em;
             height: 40px;
             width: 100%;
