@@ -523,6 +523,9 @@
       .button {
         vertical-align: baseline;
         float: none;
+      }
+
+      .single_add_to_cart_button.button.alt {
         @include button-cta($width-lg: 280px);
         @include mq(lg) {
           margin: 0;
