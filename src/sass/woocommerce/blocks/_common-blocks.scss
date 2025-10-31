@@ -13,6 +13,15 @@
 .section--cart,
 .section--checkout,
 .section--commerce-ui {
+  // Gutenberg側が吐く汎用ユーティリティ（.has-*-font-size）
+  // WooCommerce Blocks内でも文字サイズがバラつかないように再指定して揃える
+  .has-medium-font-size {
+    font-size: 1.125rem !important;
+  }
+  .has-small-font-size {
+    font-size: 0.875rem !important;
+  }
+
   // タイトル（WooCommerce Blocks の構造に合わせて wc-block-components-title を2個スタイリング）
   .wc-block-components-title.wc-block-components-title {
     @include heading-title();
