@@ -29,8 +29,6 @@ $encoded_title = rawurlencode($title);
 $x_share_url         = "https://twitter.com/intent/tweet?url={$encoded_url}&text={$encoded_title}";
 $facebook_share_url  = "https://www.facebook.com/sharer/sharer.php?u={$encoded_url}";
 $line_share_url      = "https://social-plugins.line.me/lineit/share?url={$encoded_url}";
-// Instagram は公式のWeb共有エンドポイントが無いため、案内用URLを使用（Web Share/コピー併用想定）
-$instagram_url       = "https://www.instagram.com/?url={$encoded_url}";
 ?>
 <div class="single-blog__share" role="region" aria-labelledby="single-share-title">
   <h2 id="single-share-title" class="single-blog__share-title">
@@ -78,15 +76,6 @@ $instagram_url       = "https://www.instagram.com/?url={$encoded_url}";
       <?php echo esc_html__('LINE で共有', 'proshopwave'); ?>
     </a>
 
-    <!-- Instagram (案内用) -->
-    <a
-      class="share__link share__link--instagram"
-      href="<?php echo esc_url($instagram_url); ?>"
-      target="_blank"
-      rel="noopener nofollow"
-      aria-label="<?php echo esc_attr__('Instagram へ', 'proshopwave'); ?>">
-      <?php echo esc_html__('Instagram へ', 'proshopwave'); ?>
-    </a>
 
     <!-- URL コピー -->
     <button
