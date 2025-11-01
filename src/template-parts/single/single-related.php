@@ -75,7 +75,7 @@ if (! $related->have_posts()) {
       <?php echo esc_html__('関連記事', 'proshopwave'); ?>
     </h2>
 
-    <div class="single-blog__related-list blog-grid">
+    <div class="single-blog__related-list blog-grid card-list--blog">
       <?php while ($related->have_posts()) : $related->the_post(); ?>
         <?php get_template_part('template-parts/card/card-blog'); ?>
       <?php endwhile; ?>
