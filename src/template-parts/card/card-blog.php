@@ -25,7 +25,7 @@
     <div class="card-blog__content">
       <?php get_template_part('template-parts/meta/meta', 'date', ['class' => 'card-blog__date']); ?>
       <h3 class="card-blog__title"><?php the_title(); ?></h3>
-      <p class="card-blog__text"><?php echo wp_trim_words(get_the_excerpt(), 20, '…'); ?></p>
+      <p class="card-blog__text"><?php echo wp_trim_words(get_the_excerpt(), 35, '…'); ?></p>
       <?php
       $post_tags = get_the_tags();
       if ($post_tags) :
