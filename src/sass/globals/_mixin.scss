@@ -382,6 +382,47 @@
 }
 
 // ========================
+// 丸い矢印ボタン
+// 丸い矢印ボタン（スライダーや記事ナビで使い回す）
+// ========================
+@mixin circle-arrow-button($size: 2.8rem) {
+  display: grid;
+  place-content: center;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  color: $color-red;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid $color-red;
+    background-color: rgba($color-dark-gray, 0.6);
+    box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.05),
+      -0.4rem -0.3rem 3rem $color-red;
+    transition: transform $transition;
+  }
+
+  &:hover::before {
+    @include mq(lg) {
+      transform: scale(1.2);
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    border: solid $color-red;
+    border-width: 3px 3px 0 0;
+  }
+}
+
+// ========================
 // 商品カード用グラデーション背景ミックスイン
 // ========================
 @mixin product-card-gradient {
