@@ -251,7 +251,7 @@ $marker-anim-duration: var(--marker-animation-duration);
 
     .swiper-button-prev,
     .swiper-button-next {
-      @include circle-arrow-button(2.8rem);
+      @include circle-icon-button();
       position: absolute;
       z-index: 1;
       top: 0;
@@ -269,11 +269,6 @@ $marker-anim-duration: var(--marker-animation-duration);
       @include mq(md) {
         right: calc(100% - 5vw);
       }
-
-      &::after {
-        margin-left: 0.4rem;
-        transform: rotate(-135deg);
-      }
     }
 
     .swiper-button-next {
@@ -281,11 +276,6 @@ $marker-anim-duration: var(--marker-animation-duration);
 
       @include mq(md) {
         left: calc(100% - 5vw);
-      }
-
-      &::after {
-        margin-right: 0.4rem;
-        transform: rotate(45deg);
       }
     }
   }

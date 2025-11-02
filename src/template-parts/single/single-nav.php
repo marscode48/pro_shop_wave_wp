@@ -25,7 +25,9 @@ $next_post = $next_same ?: $next_any;
     <?php if ($prev_post): ?>
       <a class="single-blog__nav-link single-blog__nav-link--prev"
         href="<?php echo esc_url(get_permalink($prev_post)); ?>">
-        <span class="single-blog__nav-arrow single-blog__nav-arrow--prev" aria-hidden="true"></span>
+        <span class="single-blog__nav-arrow single-blog__nav-arrow--prev" aria-hidden="true">
+          <i class="fa-solid fa-chevron-left"></i>
+        </span>
         <span class="single-blog__nav-title">
           <?php echo esc_html(get_the_title($prev_post)); ?>
         </span>
@@ -37,7 +39,9 @@ $next_post = $next_same ?: $next_any;
     <?php if ($next_post): ?>
       <a class="single-blog__nav-link single-blog__nav-link--next"
         href="<?php echo esc_url(get_permalink($next_post)); ?>">
-        <span class="single-blog__nav-arrow single-blog__nav-arrow--next" aria-hidden="true"></span>
+        <span class="single-blog__nav-arrow single-blog__nav-arrow--next" aria-hidden="true">
+          <i class="fa-solid fa-chevron-right"></i>
+        </span>
         <span class="single-blog__nav-title">
           <?php echo esc_html(get_the_title($next_post)); ?>
         </span>
