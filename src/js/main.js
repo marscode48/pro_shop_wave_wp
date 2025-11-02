@@ -13,6 +13,7 @@ import { FilterbarWooCommerce } from './modules/filterbar-woocommerce.js';
 import { OrderingWooCommerce } from './modules/ordering-woocommerce.js';
 import { SubmitButtonDecorator } from './modules/submit-button-decorator.js';
 import { SearchTabs } from './modules/search-tabs.js';
+import { ShareButtons } from './modules/share-buttons.js';
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -52,6 +53,7 @@ class Main {
     new OrderingWooCommerce();
     new SubmitButtonDecorator();
     new SearchTabs();
+    ShareButtons.bootAll();
   }
 
   // スクロールオブザーバーの初期化
