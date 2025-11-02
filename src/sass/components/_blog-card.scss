@@ -144,7 +144,7 @@
 
     &__text {
       font-size: 1rem;
-      color: $color-white;
+      color: $color-gray;
       margin-bottom: 1.2rem;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -153,7 +153,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
-      min-height: 3.2em;
+      min-height: 3.7em;
     }
 
     &__more {
