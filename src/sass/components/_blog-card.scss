@@ -31,7 +31,17 @@
     overflow: hidden;
     border: 1px solid $color-red;
     border-radius: $radius-card;
-    padding: 1.5rem;
+    // 余白はブレークポイントごとに段階調整
+    padding: 1rem;
+
+    @include mq(md) {
+      padding: 5%;
+    }
+
+    @include mq(lg) {
+      padding: 7%;
+    }
+
     text-align: center;
     display: flex;
     flex-direction: column;

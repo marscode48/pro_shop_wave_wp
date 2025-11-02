@@ -317,7 +317,17 @@ $marker-anim-duration: var(--marker-animation-duration);
     position: relative;
     @include product-card-gradient;
     border: 1px solid $color-red;
+    // 余白はブレークポイントごとに段階調整
     padding: 1rem;
+
+    @include mq(md) {
+      padding: 5%;
+    }
+
+    @include mq(lg) {
+      padding: 7%;
+    }
+    
     border-radius: $radius-card;
     overflow: hidden;
     text-align: center;
