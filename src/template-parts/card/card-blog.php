@@ -26,16 +26,23 @@
       <?php get_template_part('template-parts/meta/meta', 'date', ['class' => 'card-blog__date']); ?>
       <h3 class="card-blog__title"><?php the_title(); ?></h3>
       <p class="card-blog__text"><?php echo wp_trim_words(get_the_excerpt(), 35, '…'); ?></p>
-      <?php
-      $post_tags = get_the_tags();
-      if ($post_tags) :
-        $tags = array_map(fn($tag) => '#' . esc_html($tag->name), $post_tags);
-      ?>
-        <div class="card-blog__tags"><?php echo implode(' ', $tags); ?></div>
-      <?php endif; ?>
-      <div class="card-blog__more">
-        <span class="card-blog__more-link">Read More<i class="fas fa-arrow-right"></i></span>
-      </div>
     </div>
   </a>
+
+  <div class="card-blog__meta">
+    <?php
+    $post_tags = get_the_tags();
+    if ($post_tags) :
+      $tags_html = array_map(function ($tag) {
+        $url  = get_tag_link($tag->term_id);
+        $name = '#' . $tag->name;
+        return '<a class="card-blog__tag" href="' . esc_url($url) . '">' . esc_html($name) . '</a>';
+      }, $post_tags);
+    ?>
+      <div class="card-blog__tags"><?php echo implode(' ', $tags_html); ?></div>
+    <?php endif; ?>
+    <div class="card-blog__more">
+      <span class="card-blog__more-link">Read More<i class="fas fa-arrow-right"></i></span>
+    </div>
+  </div>
 </article>

@@ -75,7 +75,6 @@
       display: block;
       color: inherit;
       text-decoration: none;
-      height: 100%;
 
       &:hover {
         @include mq(lg) {
@@ -116,11 +115,26 @@
     }
 
     &__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+      justify-content: center;
+      margin-bottom: 0.6rem;
       font-size: 0.75rem;
-      color: $color-red;
-      margin-bottom: 0.4rem;
       font-family: $font-body;
       letter-spacing: 0.05em;
+    }
+
+    &__tag {
+      color: $color-red;
+      text-decoration: none;
+      transition: color $transition;
+
+      &:hover {
+        @include mq(lg) {
+          color: $color-white;
+        }
+      }
     }
 
     &__date {
