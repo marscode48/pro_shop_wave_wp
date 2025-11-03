@@ -42,7 +42,9 @@
       <div class="card-blog__tags"><?php echo implode(' ', $tags_html); ?></div>
     <?php endif; ?>
     <div class="card-blog__more">
-      <span class="card-blog__more-link">Read More<i class="fas fa-arrow-right"></i></span>
+      <a href="<?php the_permalink(); ?>" class="card-blog__more-link">
+        Read More<i class="fas fa-arrow-right"></i>
+      </a>
     </div>
   </div>
 </article>
