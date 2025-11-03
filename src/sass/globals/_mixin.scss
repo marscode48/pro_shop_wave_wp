@@ -622,11 +622,19 @@
   @include mq(lg) {
     &:hover {
       filter: $hover-filter;
+      border-color: $color-red;
     }
   }
 
   // 選択時の見た目（chip等）
   @if $with-selected == true {
+    // 選択モードのときは、hoverで枠を赤にし直さない
+    @include mq(lg) {
+      &:hover {
+        border-color: $fb-border-color;
+      }
+    }
+
     &[data-selected="true"] {
       border-color: $color-red;
       background: $fb-selected-bg;
