@@ -9,33 +9,37 @@
 
 <?php get_header(); ?>
 
-<main class="single-blog section">
-  <div class="single-blog__inner l-container l-container--narrow">
+<main class="single-blog section section--commerce-ui">
+  <div class="single-blog__inner l-container l-container--wide">
     <?php get_template_part('template-parts/breadcrumb/breadcrumb'); ?>
-    <div class="single-blog__body">
-      <?php
-      // ヘッダー（タイトル / 日付 / カテゴリ / サムネイル）
-      get_template_part('template-parts/single/single-header');
+    <div class="single-blog-layout">
+      <div class="single-blog__body">
+        <?php
+        // ヘッダー（タイトル / 日付 / カテゴリ / サムネイル）
+        get_template_part('template-parts/single/single-header');
 
-      // コンテンツ本文
-      get_template_part('template-parts/single/single-content');
-      ?>
+        // コンテンツ本文
+        get_template_part('template-parts/single/single-content');
+        ?>
 
-      <?php
-      // 次/前ナビ（同カテゴリ優先）
-      get_template_part('template-parts/single/single-nav');
+        <?php
+        // シェア
+        get_template_part('template-parts/single/single-share');
 
-      // 関連記事（6件）
-      get_template_part('template-parts/single/single-related');
+        // 次/前ナビ（同カテゴリ優先）
+        get_template_part('template-parts/single/single-nav');
 
-      // シェア
-      get_template_part('template-parts/single/single-share');
+        // 関連記事（6件）
+        get_template_part('template-parts/single/single-related');
 
-      // 著者（プロフィールがあれば）
-      get_template_part('template-parts/single/single-author');
+        // 著者（プロフィールがあれば）
+        get_template_part('template-parts/single/single-author');
 
-      // フッターメタ（カテゴリ / タグ）
-      get_template_part('template-parts/single/single-footer-meta');
+        // フッターメタ（カテゴリ / タグ）
+        get_template_part('template-parts/single/single-footer-meta');
+        ?>
+      </div>
+
       <?php
       // サイドバー（おすすめ / カテゴリ / アーカイブ）
       get_template_part('template-parts/blog/blog-sidebar');
