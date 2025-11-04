@@ -107,6 +107,17 @@ function proshopwave_enqueue_woocommerce_styles() {
     return; // ブロックCSSを読み込んだら終了（Legacyは不要）
   }
 
+  // --- ブログ記事ページ（投稿タイプ: post のシングルページ）では WooCommerce Blocks のCSSを読み込む
+  if ( is_singular( 'post' ) ) {
+    wp_enqueue_style(
+      'proshopwave-woocommerce-blocks',
+      $base_uri . '/css/woocommerce/blocks/woocommerce-blocks.css',
+      [],
+      file_exists( $path_blocks ) ? filemtime( $path_blocks ) : null
+    );
+    return;
+  }
+
   // --- 従来版（その他の WooCommerce ページ + マイアカウント + Thank You 等の従来テンプレ）
   if ( is_woocommerce() || is_account_page() || $is_thankyou || $is_order_pay ) {
     wp_enqueue_style(
