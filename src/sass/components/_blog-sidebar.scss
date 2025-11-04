@@ -1,21 +1,11 @@
 @use "../globals/index" as *;
 
 // ========================
-// Blog Sidebar: Archives
-// 月別アーカイブ（list / select）の見た目を統一
-// ・.blog-sidebar__archives …… セクション全体
-// ・.blog-sidebar__archives-title …… セクション見出し（heading-title を使用）
-// ・.blog-sidebar__archives-list …… UL リスト表示
-// ・.blog-sidebar__archives-form / -select …… セレクト表示
+// ブログ・サイドバー全体
+// （PCは右カラム / SPは本文下に縦積み）
 // ========================
-
-// ========================
-// Root / Inner layout
-// ========================
-// ルート: サイドバー全体（PCは右カラム想定 / SPは本文下に縦積み）
 .blog-sidebar {
   display: block;
-  margin-top: 2rem;
 
   // 内側ラッパー: セクション間の余白をグリッドで管理
   &__inner {
@@ -32,38 +22,18 @@
     }
   }
 
-  // オプション: スクロール追従させたい場合に `.blog-sidebar--sticky` を付与
-  &--sticky {
-    position: sticky;
-    top: var(
-      --sidebar-sticky-top,
-      1.25rem
-    ); // 必要に応じてカスタムプロパティで上部余白を調整
-  }
-
-  // セクション間の縦余白（`__inner` が grid-gap を持たない場面のフォールバック）
-  > * + * {
-    margin-top: 1rem;
-
-    @include mq(lg) {
-      margin-top: 1.25rem;
-    }
-  }
-
   // セクション（共通のパネル表現）
-  &__archives {
+  &__section {
     @include panel-surface-gray();
     padding: 1rem;
-    border-radius: $radius-card;
-    border: 1px solid rgba($color-white, 0.08);
 
     @include mq(md) {
       padding: 1.25rem 1.5rem;
     }
   }
 
-  // 見出し
-  &__archives-title {
+  // タイトル（各セクションごと共通）
+  &__title {
     @include heading-title();
     margin-bottom: 0.75rem;
 
@@ -72,7 +42,82 @@
     }
   }
 
-  // --- リスト表示（wp_get_archives format: html → li をそのまま描画）
+  // ========================
+  // ブログ・サイドバー: Recommend (おすすめ記事)
+  // ========================
+  &__recommend-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem; // サイドバー用にやや詰める
+
+    @include mq(md) {
+      gap: 1rem;
+      grid-template-columns: repeat(2, 1fr); // タブレットは2列
+    }
+
+    @include mq(lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__recommend-item {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  &__empty {
+    margin: 0.25rem 0 0;
+    color: $color-gray;
+    font-size: 0.95rem;
+  }
+
+  // ========================
+  // ブログ・サイドバー: Categories（カテゴリー別一覧）
+  // ========================
+  &__categories-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+      padding: 0.4rem 0;
+      border-bottom: 1px dotted rgba($color-white, 0.12);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__categories-link {
+    display: inline-block; // クリック領域を確保
+    color: $color-white;
+    text-decoration: none;
+    line-height: 1.4;
+
+    @include mq(lg) {
+      transition: color $transition;
+    }
+
+    &:hover,
+    &:focus {
+      color: $color-red;
+      outline: none;
+    }
+  }
+
+  // ========================
+  // ブログ・サイドバー: Archives（月別一覧）
+  // 月別アーカイブ（list / select）の見た目を統一
+  // blog-sidebar-archives.phpで（list / select）を切り替え
+  // ========================
+
+  // --- リスト表示
   &__archives-list {
     margin: 0;
     padding: 0;
@@ -110,168 +155,36 @@
     margin: 0.25rem 0 0;
   }
 
+  &__select-wrap {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    i {
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba($color-white, 0.6);
+      pointer-events: none; // クリック操作を妨げない
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+  }
+
   &__archives-select {
     display: block;
     width: 100%;
-    @include input-base(0.6em 0.9em); // 共通インプット見た目
-    @include input-focus(); // フォーカス見た目
+    @include input-base(0.6em 0.9em);
+    @include input-focus();
 
-    // 右端に余白（既定の矢印を考慮）
+    // 右端に余白（カスタム矢印アイコン分）
     padding-right: 2.25rem;
 
-    // デフォルト矢印は環境によって描画が異なるため最小限の調整のみ
+    // ネイティブ矢印は環境によって描画が異なるため非表示にし、テーマ側の矢印に統一
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: none; // 既定の背景は使わない（テーマのダーク面を保つ）
-  }
-
-  // ========================
-  // Blog Sidebar: Recommend (おすすめ記事)
-  // ・.blog-sidebar__recommend …… セクション全体（カードの集合）
-  // ・.blog-sidebar__title …… セクション見出し（heading-title を使用）
-  // ・.blog-sidebar__recommend-list …… UL リスト（カードのラッパー）
-  // ・.blog-sidebar__recommend-item …… LI 各アイテム
-  // ・.blog-sidebar__empty …… 空状態のテキスト
-  // ========================
-  &__recommend {
-    @include panel-surface-gray();
-    padding: 1rem;
-    border-radius: $radius-card;
-    border: 1px solid rgba($color-white, 0.08);
-    color: $color-white;
-
-    @include mq(md) {
-      padding: 1.25rem 1.5rem;
-    }
-  }
-
-  &__title {
-    @include heading-title();
-    margin-bottom: 0.75rem;
-
-    @include mq(lg) {
-      margin-bottom: 1rem;
-    }
-  }
-
-  &__recommend-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.75rem; // サイドバー用にやや詰める
-
-    @include mq(md) {
-      gap: 1rem;
-    }
-  }
-
-  &__recommend-item {
-    margin: 0;
-    padding: 0;
-
-    // サイドバー内のブログカードはコンパクト版に
-    .card-blog {
-      // 余白を詰める
-      padding: 0.6rem;
-
-      &__image {
-        // サイドバーに収まるよう比率を少し縦長に調整
-        img {
-          aspect-ratio: 16 / 10;
-        }
-      }
-
-      &__title {
-        font-size: 0.95rem;
-        margin-top: 0.4rem;
-        margin-bottom: 0.25rem;
-      }
-
-      &__meta {
-        font-size: 0.8rem;
-        opacity: 0.9;
-      }
-
-      &__excerpt {
-        display: none; // サイドバーでは抜粋は省略
-      }
-    }
-  }
-
-  &__empty {
-    margin: 0.25rem 0 0;
-    color: $color-gray;
-    font-size: 0.95rem;
-  }
-
-  // ========================
-  // Blog Sidebar: Categories
-  // ・.blog-sidebar__categories …… セクション全体（パネル）
-  // ・.blog-sidebar__title …… セクション見出し（heading-title を使用）
-  // ・.blog-sidebar__categories-list …… UL リスト
-  // ・.blog-sidebar__categories-item …… LI 各アイテム
-  // ・.blog-sidebar__categories-link …… アンカー（ホバー/フォーカス対応）
-  // ========================
-  &__categories {
-    @include panel-surface-gray();
-    padding: 1rem;
-    border-radius: $radius-card;
-    border: 1px solid rgba($color-white, 0.08);
-
-    @include mq(md) {
-      padding: 1.25rem 1.5rem;
-    }
-  }
-
-  // 見出し（テンプレ側は .blog-sidebar__title を使用）
-  // 念のため `&__categories-title` も受け付けられるよう同等スタイルに
-  &__title,
-  &__categories-title {
-    @include heading-title();
-    margin-bottom: 0.75rem;
-
-    @include mq(lg) {
-      margin-bottom: 1rem;
-    }
-  }
-
-  &__categories-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-      margin: 0;
-      padding: 0.4rem 0;
-      border-bottom: 1px dotted rgba($color-white, 0.12);
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-  }
-
-  // &__categories-item {
-  //   // 追加の個別調整が必要になった場合に備えてフックのみ用意
-  // }
-
-  &__categories-link {
-    display: inline-block; // クリック領域を確保
-    color: $color-white;
-    text-decoration: none;
-    line-height: 1.4;
-
-    @include mq(lg) {
-      transition: color $transition;
-    }
-
-    &:hover,
-    &:focus {
-      color: $color-red;
-      outline: none;
-    }
+    background-image: none;
   }
 }
