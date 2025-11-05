@@ -116,12 +116,19 @@
     font-family: $font-heading;
     color: $color-white;
     margin-bottom: 0.5rem;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    // スマホ等では2行まで表示し、それ以上は省略
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
 
     @include mq(lg) {
       font-size: 1.3rem;
+      // PCなどでは1行に収める
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
     }
   }
 
