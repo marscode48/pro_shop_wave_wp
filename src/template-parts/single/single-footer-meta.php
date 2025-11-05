@@ -3,7 +3,6 @@
 /**
  * 投稿フッターメタ（カテゴリ / タグ）
  *
- * - single.php から読み込まれる想定のテンプレート
  * - BEM: .single-blog__footer 配下に .post-meta を配置
  * - カテゴリ・タグが存在しない場合は該当ブロックを非表示
  */
@@ -13,12 +12,11 @@ if (! defined('ABSPATH')) {
   exit;
 }
 
-// 現在投稿のカテゴリとタグを取得
-$category_list = get_the_category_list(', '); // 例: <a>Cat1</a>, <a>Cat2</a>
-$tag_list      = get_the_tag_list('', ', ');  // 例: <a>tag1</a>, <a>tag2</a>
+// 現在投稿のカテゴリを取得（タグは $tags_html 側で出力）
+$category_list = get_the_category_list(' '); // スペース区切り
 
-// 何もなければ出力しない
-if (empty($category_list) && empty($tag_list)) {
+// カテゴリもタグも存在しない場合は出力しない
+if (empty($category_list) && empty(get_the_tags())) {
   return;
 }
 ?>
@@ -33,10 +31,20 @@ if (empty($category_list) && empty($tag_list)) {
     </div>
   <?php endif; ?>
 
-  <?php if (! empty($tag_list)) : ?>
+  <?php
+  $post_tags = get_the_tags();
+  if ($post_tags) :
+    $tags_html = array_map(function ($tag) {
+      $url  = get_tag_link($tag->term_id);
+      $name = '#' . $tag->name;
+      return '<a class="post-meta__tag" href="' . esc_url($url) . '">' . esc_html($name) . '</a>';
+    }, $post_tags);
+  ?>
     <div class="post-meta post-meta--tags">
       <span class="post-meta__label"><?php echo esc_html__('タグ', 'proshopwave'); ?>:</span>
-      <span class="post-meta__items"><?php echo wp_kses_post($tag_list); ?></span>
+      <span class="post-meta__items">
+        <?php echo implode(' ', $tags_html); ?>
+      </span>
     </div>
   <?php endif; ?>
 </section>

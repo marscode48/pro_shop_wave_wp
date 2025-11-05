@@ -12,7 +12,7 @@
 ?>
 
 <aside class="blog-sidebar" role="complementary" aria-label="サイドバー">
-  <div class="blog-sidebar__inner l-container--narrow">
+  <div class="blog-sidebar__inner">
     <?php
     // -----------------------------
     // おすすめ記事（手動ピック or 人気記事など）

@@ -1,15 +1,11 @@
 <?php
 
 /**
- * Single: Share block
+ * Single: Share block (icon version)
  *
  * 出力対象:
+ * - X(Twitter) / Facebook / LINE / コピー のアイコンリンク
  * - Web Share API ボタン（対応ブラウザのみ）
- * - X(Twitter) / Facebook 共有リンク
- * - リンクコピー（Clipboard API）
- *
- * マークアップは `src/sass/pages/_single-blog.scss` の
- * `.single-blog__share` スタイルに対応しています。
  *
  * @package PRO_SHOP_WAVE
  */
@@ -25,134 +21,65 @@ $title     = get_the_title();
 $encoded_url   = rawurlencode($permalink);
 $encoded_title = rawurlencode($title);
 
-// X(Twitter) intent・Facebook sharer
-$x_share_url         = "https://twitter.com/intent/tweet?url={$encoded_url}&text={$encoded_title}";
-$facebook_share_url  = "https://www.facebook.com/sharer/sharer.php?u={$encoded_url}";
-$line_share_url      = "https://social-plugins.line.me/lineit/share?url={$encoded_url}";
-// Instagram は公式のWeb共有エンドポイントが無いため、案内用URLを使用（Web Share/コピー併用想定）
-$instagram_url       = "https://www.instagram.com/?url={$encoded_url}";
+// 各SNS共有URL
+$x_share_url        = "https://twitter.com/intent/tweet?url={$encoded_url}&text={$encoded_title}";
+$facebook_share_url = "https://www.facebook.com/sharer/sharer.php?u={$encoded_url}";
+$line_share_url     = "https://social-plugins.line.me/lineit/share?url={$encoded_url}";
 ?>
+
 <div class="single-blog__share" role="region" aria-labelledby="single-share-title">
   <h2 id="single-share-title" class="single-blog__share-title">
-    <?php echo esc_html__('この記事をシェア', 'proshopwave'); ?>
+    <?php echo esc_html__('＼ この記事をシェア ／', 'proshopwave'); ?>
   </h2>
 
   <div class="single-blog__share-actions">
-    <!-- Web Share API（対応ブラウザのみ） -->
-    <button
-      type="button"
-      class="share__native"
-      data-share-title="<?php echo esc_attr($title); ?>"
-      data-share-url="<?php echo esc_url($permalink); ?>"
-      aria-label="<?php echo esc_attr__('ネイティブ共有メニューを開く', 'proshopwave'); ?>">
-      <?php echo esc_html__('今すぐシェア', 'proshopwave'); ?>
-    </button>
-
     <!-- X (Twitter) -->
     <a
-      class="share__link share__link--x"
+      class="share__icon share__icon--x"
       href="<?php echo esc_url($x_share_url); ?>"
       target="_blank"
       rel="noopener nofollow"
-      aria-label="<?php echo esc_attr__('X (Twitter) で共有', 'proshopwave'); ?>">
-      <?php echo esc_html__('X で共有', 'proshopwave'); ?>
+      aria-label="<?php echo esc_attr__('Share on X (Twitter)', 'proshopwave'); ?>">
+      <i class="fab fa-x-twitter" aria-hidden="true"></i>
     </a>
 
     <!-- Facebook -->
     <a
-      class="share__link share__link--facebook"
+      class="share__icon share__icon--facebook"
       href="<?php echo esc_url($facebook_share_url); ?>"
       target="_blank"
       rel="noopener nofollow"
-      aria-label="<?php echo esc_attr__('Facebook で共有', 'proshopwave'); ?>">
-      <?php echo esc_html__('Facebook で共有', 'proshopwave'); ?>
+      aria-label="<?php echo esc_attr__('Share on Facebook', 'proshopwave'); ?>">
+      <i class="fab fa-facebook-f" aria-hidden="true"></i>
     </a>
 
     <!-- LINE -->
     <a
-      class="share__link share__link--line"
+      class="share__icon share__icon--line"
       href="<?php echo esc_url($line_share_url); ?>"
       target="_blank"
       rel="noopener nofollow"
-      aria-label="<?php echo esc_attr__('LINE で共有', 'proshopwave'); ?>">
-      <?php echo esc_html__('LINE で共有', 'proshopwave'); ?>
+      aria-label="<?php echo esc_attr__('Share on LINE', 'proshopwave'); ?>">
+      <i class="fab fa-line" aria-hidden="true"></i>
     </a>
 
-    <!-- Instagram (案内用) -->
-    <a
-      class="share__link share__link--instagram"
-      href="<?php echo esc_url($instagram_url); ?>"
-      target="_blank"
-      rel="noopener nofollow"
-      aria-label="<?php echo esc_attr__('Instagram へ', 'proshopwave'); ?>">
-      <?php echo esc_html__('Instagram へ', 'proshopwave'); ?>
-    </a>
-
-    <!-- URL コピー -->
+    <!-- コピー -->
     <button
       type="button"
-      class="share__link share__link--copy"
+      class="share__icon share__icon--copy"
       data-copy-url="<?php echo esc_url($permalink); ?>"
-      aria-label="<?php echo esc_attr__('記事URLをコピー', 'proshopwave'); ?>">
-      <?php echo esc_html__('リンクをコピー', 'proshopwave'); ?>
+      aria-label="<?php echo esc_attr__('Copy article URL', 'proshopwave'); ?>">
+      <i class="fas fa-link" aria-hidden="true"></i>
+    </button>
+
+    <!-- Web Share API（対応ブラウザのみ） -->
+    <button
+      type="button"
+      class="share__icon share__icon--native"
+      data-share-title="<?php echo esc_attr($title); ?>"
+      data-share-url="<?php echo esc_url($permalink); ?>"
+      aria-label="<?php echo esc_attr__('Open native share menu', 'proshopwave'); ?>">
+      <i class="fas fa-share-alt" aria-hidden="true"></i>
     </button>
   </div>
 </div>
-
-<script>
-  // 単一記事のシェアUI（テンプレ内限定）
-  (() => {
-    const shareBtn = document.currentScript?.previousElementSibling?.querySelector?.('.share__native');
-    const copyBtn = document.currentScript?.previousElementSibling?.querySelector?.('.share__link--copy');
-
-    // ネイティブ共有（対応していない環境ではボタンを隠す）
-    if (shareBtn) {
-      if (!('share' in navigator)) {
-        shareBtn.style.display = 'none';
-      } else {
-        shareBtn.addEventListener('click', () => {
-          const title = shareBtn.getAttribute('data-share-title') || document.title;
-          const url = shareBtn.getAttribute('data-share-url') || location.href;
-          navigator.share({
-            title,
-            url
-          }).catch(() => {
-            /* キャンセル時は何もしない */ });
-        });
-      }
-    }
-
-    // リンクコピー（Clipboard API）
-    if (copyBtn) {
-      copyBtn.addEventListener('click', async () => {
-        const url = copyBtn.getAttribute('data-copy-url') || location.href;
-        try {
-          await navigator.clipboard.writeText(url);
-          copyBtn.classList.add('is-copied');
-          copyBtn.textContent = '<?php echo esc_js(__('コピーしました', 'proshopwave')); ?>';
-          setTimeout(() => {
-            copyBtn.classList.remove('is-copied');
-            copyBtn.textContent = '<?php echo esc_js(__('リンクをコピー', 'proshopwave')); ?>';
-          }, 1600);
-        } catch (_) {
-          // フォールバック（非対応環境）
-          const textArea = document.createElement('textarea');
-          textArea.value = url;
-          textArea.setAttribute('readonly', '');
-          textArea.style.position = 'absolute';
-          textArea.style.left = '-9999px';
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textArea);
-          copyBtn.classList.add('is-copied');
-          copyBtn.textContent = '<?php echo esc_js(__('コピーしました', 'proshopwave')); ?>';
-          setTimeout(() => {
-            copyBtn.classList.remove('is-copied');
-            copyBtn.textContent = '<?php echo esc_js(__('リンクをコピー', 'proshopwave')); ?>';
-          }, 1600);
-        }
-      });
-    }
-  })();
-</script>
