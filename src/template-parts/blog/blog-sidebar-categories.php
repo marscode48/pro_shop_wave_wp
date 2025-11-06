@@ -24,6 +24,7 @@ $categories = get_categories([
   'order'      => 'ASC',
   'number'     => $count,
   'hide_empty' => true,
+  'exclude'    => 1, // “未分類”(Uncategorized, ID=1) を除外
 ]);
 ?>
 
