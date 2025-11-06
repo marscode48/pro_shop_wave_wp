@@ -8,6 +8,9 @@
 if (! get_the_author_meta('description')) {
   return; // 著者情報が無ければ出力しない
 }
+
+$author_id          = (int) get_the_author_meta('ID');
+$author_archive_url = get_author_posts_url($author_id);
 ?>
 
 <section class="single-blog__author" aria-labelledby="author-heading">
@@ -17,26 +20,35 @@ if (! get_the_author_meta('description')) {
 
   <div class="author">
     <div class="author__avatar">
-      <?php echo get_avatar(get_the_author_meta('ID'), 96); ?>
+      <a href="<?php echo esc_url($author_archive_url); ?>" class="author__link" aria-label="<?php echo esc_attr(sprintf(__('著者アーカイブ: %s', 'proshopwave'), get_the_author())); ?>">
+        <?php echo get_avatar($author_id, 96); ?>
+      </a>
     </div>
 
     <div class="author__info">
-      <p class="author__name"><?php the_author(); ?></p>
-      <p class="author__bio"><?php the_author_meta('description'); ?></p>
+      <p class="author__name">
+        <a href="<?php echo esc_url($author_archive_url); ?>" class="author__name-link">
+          <?php the_author(); ?>
+        </a>
+      </p>
+      <p class="author__bio">
+        <a href="<?php echo esc_url($author_archive_url); ?>" class="author__bio-link">
+          <?php the_author_meta('description'); ?>
+        </a>
+      </p>
 
       <?php
       // SNSリンク（管理画面「ユーザー」プロフィールに Webサイト / Twitter / Instagram / Facebook / YouTube を登録しておく想定）
       // ※ URL でも「@ハンドル」でも入力OK。get_author_social_url() で正規化してから出力する。
-      $user_id = (int) get_the_author_meta('ID');
 
       // WebサイトはフルURL想定（WPデフォルトの user_url）。空や不正URLは後段の empty() 判定で弾かれる。
       $author_url    = esc_url((string) get_the_author_meta('user_url'));
 
       // SNSは URL / ドメインのみ / @handle いずれも許容 → 正規化
-      $twitter_url   = function_exists('get_author_social_url') ? get_author_social_url($user_id, 'twitter')   : '';
-      $instagram_url = function_exists('get_author_social_url') ? get_author_social_url($user_id, 'instagram') : '';
-      $facebook_url  = function_exists('get_author_social_url') ? get_author_social_url($user_id, 'facebook')  : '';
-      $youtube_url   = function_exists('get_author_social_url') ? get_author_social_url($user_id, 'youtube')   : '';
+      $twitter_url   = function_exists('get_author_social_url') ? get_author_social_url($author_id, 'twitter')   : '';
+      $instagram_url = function_exists('get_author_social_url') ? get_author_social_url($author_id, 'instagram') : '';
+      $facebook_url  = function_exists('get_author_social_url') ? get_author_social_url($author_id, 'facebook')  : '';
+      $youtube_url   = function_exists('get_author_social_url') ? get_author_social_url($author_id, 'youtube')   : '';
       ?>
 
       <?php if ($author_url || $twitter_url || $instagram_url || $facebook_url || $youtube_url) : ?>
