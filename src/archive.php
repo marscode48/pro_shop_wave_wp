@@ -1,16 +1,19 @@
 <?php
 
 /**
- * The template for displaying the blog index (home.php)
+ * The template for displaying post archives
  *
- * @package PRO_SHOP_WAVE
+ * Handles category, tag, date, author, and generic post archives.
+ *
+ * @package proshopwave
  */
+
+get_header();
 ?>
 
-<?php get_header(); ?>
+<main id="primary" class="blog-archive section">
+  <div class="blog-archive__inner l-container l-container--wide">
 
-<main class="blog-archive section">
-  <div class="blog-archive__inner  l-container l-container--wide">
     <?php
     // パンくず
     get_template_part('template-parts/breadcrumb/breadcrumb');
@@ -21,7 +24,9 @@
     // 投稿ループ＋ページネーション
     get_template_part('template-parts/blog/blog-archive-loop');
     ?>
+
   </div>
 </main>
 
-<?php get_footer(); ?>
+<?php
+get_footer();
