@@ -14,6 +14,7 @@ import { OrderingWooCommerce } from './modules/ordering-woocommerce.js';
 import { SubmitButtonDecorator } from './modules/submit-button-decorator.js';
 import { SearchTabs } from './modules/search-tabs.js';
 import { ShareButtons } from './modules/share-buttons.js';
+import { ContactFormController } from "./modules/contact.js";
 
 // ========================
 // ページ固有機能（トップページなどで使用）
@@ -54,6 +55,7 @@ class Main {
     new SubmitButtonDecorator();
     new SearchTabs();
     ShareButtons.bootAll();
+    new ContactFormController();
   }
 
   // スクロールオブザーバーの初期化
