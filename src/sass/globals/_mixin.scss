@@ -758,7 +758,7 @@
       @include mq(lg) {
         &:hover {
           filter: none;
-          $border-color: $color-red
+          $border-color: $color-red;
         }
       }
     }
