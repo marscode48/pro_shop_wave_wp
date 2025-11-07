@@ -1,0 +1,347 @@
+@use "../globals/index" as *;
+@use "sass:color";
+
+// ========================
+// Contact Page
+// お問い合わせページ全体レイアウト
+// ========================
+.contact {
+  padding-block: 3rem 4rem;
+
+  @include mq(lg) {
+    padding-block: 4rem 6rem;
+  }
+
+  &__lead {
+    color: $color-gray;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    max-width: 32rem;
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+
+    @include mq(md) {
+      margin-inline: 0;
+      font-size: 1rem;
+    }
+  }
+
+  &__content {
+    font-size: 0.875rem;
+    line-height: 1.9;
+    color: $color-gray;
+
+    @include mq(lg) {
+      font-size: 0.95rem;
+    }
+
+    p {
+      &:not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    a {
+      @include link-underline-animate();
+    }
+
+    strong {
+      font-weight: 700;
+      color: $color-white;
+    }
+
+    ul,
+    ol {
+      margin: 1rem 0 1.5rem 1.25rem;
+      padding: 0;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+// ========================
+// Contact Form Block
+// Contact Form 7 用のスタイルベース
+// ========================
+.contact-form {
+  margin-top: 2.5rem;
+
+  @include mq(lg) {
+    margin-top: 3rem;
+  }
+
+  &__inner {
+    @include panel-surface-gray();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  }
+
+  &__header {
+    margin-bottom: 1.5rem;
+
+    @include mq(md) {
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  &__title {
+    @include heading-title($font-size: 1.2rem, $font-size-lg: 1.4rem);
+    margin-bottom: 0.75rem;
+  }
+
+  &__description {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: $color-gray;
+    margin: 0;
+
+    @include mq(lg) {
+      font-size: 0.95rem;
+    }
+  }
+
+  &__note {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: $color-gray;
+  }
+
+  // ========================
+  // Contact Form 7 base
+  // ========================
+  .wpcf7 {
+    width: 100%;
+
+    form {
+      display: grid;
+      gap: 1.25rem;
+
+      @include mq(md) {
+        gap: 1.5rem;
+      }
+    }
+
+    .wpcf7-form-control-wrap {
+      display: block;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $color-white;
+      margin-bottom: 0.45rem;
+
+      .is-required,
+      .required {
+        color: $color-red;
+        margin-left: 0.25rem;
+        font-size: 0.85em;
+      }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      font-family: $font-body;
+      font-size: 0.95rem;
+      line-height: 1.5;
+
+      @include input-base();
+      @include input-focus();
+    }
+
+    textarea {
+      min-height: 8rem;
+
+      @include mq(md) {
+        min-height: 10rem;
+      }
+      resize: vertical;
+    }
+
+    // ラジオ・チェックボックス類
+    .wpcf7-radio {
+      display: flex;
+      flex-wrap: wrap; // レイアウト: SPは縦 / PCは横並び
+      flex-direction: column;
+      gap: 0.625rem;
+
+      @include mq(md) {
+        flex-direction: row;
+      }
+    }
+
+    .wpcf7-list-item {
+      display: flex;
+      align-items: center;
+      margin-left: 0.875rem;
+
+      label,
+      .wpcf7-list-item-label {
+        font-size: 0.95rem;
+        color: $color-white;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid $color-gray;
+        margin-right: 0.5rem;
+        position: relative;
+        cursor: pointer;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &:focus-visible {
+          outline: 2px solid color.scale($color-red, $lightness: 15%);
+          outline-offset: 2px;
+        }
+      }
+
+      // ラジオ専用の丸形
+      input[type="radio"] {
+        border-radius: 50%;
+
+        &:checked {
+          border-color: $color-red;
+        }
+
+        &:checked::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 0.45rem;
+          height: 0.45rem;
+          border-radius: 50%;
+          background-color: $color-red;
+        }
+      }
+
+      // チェックボックス専用の四角形
+      input[type="checkbox"] {
+        border-radius: 0.25rem;
+
+        &:checked {
+          border-color: $color-red;
+          background-color: $color-red;
+        }
+
+        &:checked::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -55%) rotate(45deg);
+          width: 0.25rem;
+          height: 0.5rem;
+          border-right: 2px solid $color-white;
+          border-bottom: 2px solid $color-white;
+        }
+      }
+    }
+
+    // 送信ボタン
+    .wpcf7-submit {
+      @include button-cta($width: 90%, $width-lg: 18rem);
+    }
+
+    // Contact専用: 送信ボタンのトーン制御 (プライバシー同意が入るまで暗くする)
+    .contact-form__submit {
+      &.is-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        filter: grayscale(40%);
+      }
+    }
+
+    // 送信中インジケーター
+    .wpcf7-spinner {
+      margin-left: 0.75rem;
+      filter: brightness(1.2);
+    }
+
+    // バリデーションメッセージ
+    .wpcf7-not-valid-tip {
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+      color: $color-red;
+    }
+
+    .wpcf7-response-output {
+      margin: 1.25rem 0 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      border-radius: 0.5rem;
+      border-width: 1px;
+
+      &.wpcf7-mail-sent-ok {
+        border-color: color.scale($color-red, $lightness: 20%);
+        background-color: rgba($color-red, 0.1);
+        color: $color-white;
+      }
+
+      &.wpcf7-validation-errors,
+      &.wpcf7-acceptance-missing {
+        border-color: $color-red;
+        background-color: rgba($color-red, 0.05);
+        color: $color-red;
+      }
+    }
+
+    // ========================
+    // BEM helper layout
+    // ========================
+    .contact-form__fields {
+      display: grid;
+      gap: 1.25rem;
+
+      @include mq(md) {
+        gap: 1.5rem;
+      }
+    }
+
+    .contact-form__field {
+      // &--name,
+      // &--company,
+      // &--email,
+      // &--tel,
+      // &--type,
+      // &--product,
+      // &--message,
+      &--privacy {
+        a {
+          color: $color-red;
+          text-decoration: underline;
+          transition: color $transition;
+
+          &:hover {
+            color: color.scale($color-red, $lightness: 10%);
+          }
+        }
+
+        @include mq(md) {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

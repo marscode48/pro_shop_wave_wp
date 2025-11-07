@@ -1002,3 +1002,9 @@ function get_author_social_url($user_id, $service) {
   // 5) ハンドルをURLエンコードして整形
   return sprintf($bases[$service], rawurlencode($handle));
 }
+// ---------------------------------------------
+// Contact Form 7: 自動 <p> / <br> 生成を無効化
+// ---------------------------------------------
+// フォームタグ内のテキストから自動で <p> や <br> を挿入する機能をOFFにし、
+// テンプレート側で記述したBEM構造のマークアップをそのまま出力させる。
+add_filter('wpcf7_autop_or_not', '__return_false');
