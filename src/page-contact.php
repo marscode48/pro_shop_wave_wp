@@ -33,7 +33,7 @@ get_header();
           <?php endif; ?>
         </header>
 
-        <div class="contact__content section__text">
+        <div class="contact__content">
           <?php
           // 固定ページ本文（説明テキストなど）
           the_content();
