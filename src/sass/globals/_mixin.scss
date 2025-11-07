@@ -185,6 +185,80 @@
 }
 
 // ========================
+// 汎用: ページリード文スタイル
+// Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
+// 固定ページ上部の説明テキストで共通利用するスタイル。
+// ========================
+@mixin page-lead {
+  color: $color-gray;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 32rem;
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+
+  @include mq(md) {
+    margin-inline: 0;
+    font-size: 1rem;
+  }
+}
+
+// ========================
+// 汎用: ページ本文ブロックスタイル
+// Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
+// テキスト主体の固定ページ本文の見た目を共通化するためのスタイル。
+// ========================
+@mixin page-content-body {
+  font-size: 0.875rem;
+  line-height: 1.9;
+  color: $color-gray;
+
+  @include mq(lg) {
+    font-size: 0.95rem;
+  }
+
+  // ★ 規約系を想定した見出しのマージン
+  h2 {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  a {
+    @include link-underline-animate();
+  }
+
+  strong {
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0 1.5rem 1.25rem;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+// ========================
 // 共通: CTAボタン用ミックスイン（幅オプション対応）
 // 使用例:
 //   @include button-cta(); // 既定（幅指定なし）
