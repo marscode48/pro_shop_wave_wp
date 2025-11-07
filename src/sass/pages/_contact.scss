@@ -12,6 +12,10 @@
 
   &__content {
     @include page-content-body();
+
+    @include mq(md) {
+     text-align: center; 
+    }
   }
 }
 
