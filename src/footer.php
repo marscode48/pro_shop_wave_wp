@@ -51,7 +51,7 @@
         <!-- ポリシーなど -->
         <div class="footer__legal">
           <a href="<?php echo esc_url(home_url('/terms/')); ?>">利用規約</a>
-          <a href="#">プライバシーポリシー</a>
+          <a href="<?php echo esc_url(home_url('/privacy/')); ?>">プライバシーポリシー</a>
           <a href="#">特商法表記</a>
         </div>
 

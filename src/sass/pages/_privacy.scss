@@ -1,0 +1,16 @@
+@use "../globals/index" as *;
+@use "sass:color";
+
+// ========================
+// Privacy Page (プライバシーポリシー)
+// ========================
+.privacy {
+  &__lead {
+    @include page-lead();
+  }
+
+  &__content {
+    @include page-content-body();
+    @include legal-content-structure();
+  }
+}
