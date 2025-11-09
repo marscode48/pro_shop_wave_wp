@@ -259,6 +259,103 @@
 }
 
 // ========================
+// 規約・ポリシー系ページ向け: 見出し・リスト・テーブル共通スタイル
+// 使用例:
+//   .terms__content     { @include legal-content-structure(); }
+//   .privacy__content   { @include legal-content-structure(); }
+//   .tokushoho__content { @include legal-content-structure(); }
+// ========================
+@mixin legal-content-structure {
+  // h2〜h4見出し
+  h2 {
+    margin: 2rem 0 0.75rem;
+    @include heading-title($font-size: 1.05rem, $padding-left: 0.5rem);
+    font-family: $font-body;
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  h4 {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: $color-white;
+  }
+
+  // 定義リスト
+  dl {
+    margin: 1rem 0 1.5rem;
+  }
+
+  dt {
+    font-weight: 600;
+    color: $color-white;
+    margin-bottom: 0.25rem;
+  }
+
+  dd {
+    margin: 0 0 0.75rem;
+    color: $color-gray;
+  }
+
+  // 番号付きリスト / 箇条書き
+  ol,
+  ul {
+    margin: 1rem 0 1.5rem 1.5rem;
+    padding: 0;
+    list-style-position: outside;
+    color: $color-gray;
+    font-size: 0.9rem;
+    line-height: 1.8;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // 番号付きリストは数字を明確に表示
+  ol {
+    list-style-type: decimal;
+  }
+
+  // 箇条書きリストはドットで表示
+  ul {
+    list-style-type: disc;
+  }
+
+  // 規約・ポリシー系のテーブル
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+
+    th,
+    td {
+      padding: 0.75rem 0.75rem;
+      border: 0.0625rem solid rgba($color-gray, 0.4);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    th {
+      background-color: rgba($color-white, 0.04);
+      font-weight: 600;
+      color: $color-white;
+      text-align: left;
+    }
+
+    td {
+      color: $color-gray;
+    }
+  }
+}
+
+// ========================
 // 共通: CTAボタン用ミックスイン（幅オプション対応）
 // 使用例:
 //   @include button-cta(); // 既定（幅指定なし）
