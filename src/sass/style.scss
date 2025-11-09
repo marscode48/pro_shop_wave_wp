@@ -37,6 +37,7 @@ Description: PRO SHOP WAVEのオリジナルテーマ
 @use 'pages/single-blog'; // single.php 用（投稿詳細ページ）
 @use 'pages/search'; // search.php 用（検索結果ページ）
 @use 'pages/contact'; // page-contact.php 用（お問い合わせページ）
+@use 'pages/access'; // page-access.php 用（アクセスページ）
 
 // ========================
 // WooCommerce専用スタイルは別ビルドに分離
