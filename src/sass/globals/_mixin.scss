@@ -242,6 +242,10 @@
   h2 {
     margin: 2rem 0 0.75rem;
     @include heading-title($font-size: 1.05rem, $padding-left: 0.5rem);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
   }
 
   h3 {
