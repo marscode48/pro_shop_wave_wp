@@ -251,48 +251,6 @@
     color: $color-white;
   }
 
-  p {
-    &:not(:last-child) {
-      margin-bottom: 0.75rem;
-    }
-  }
-
-  a {
-    @include link-underline-animate();
-  }
-
-  strong {
-    font-weight: 700;
-    color: $color-white;
-  }
-
-  ul,
-  ol {
-    margin: 1rem 0 1.5rem 1.25rem;
-    padding: 0;
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-  }
-}
-
-// ========================
-// 規約・ポリシー系ページ向け: 見出し・リスト・テーブル共通スタイル
-// 使用例:
-//   .terms__content     { @include legal-content-structure(); }
-//   .privacy__content   { @include legal-content-structure(); }
-//   .tokushoho__content { @include legal-content-structure(); }
-// ========================
-@mixin legal-content-structure {
-  // h3〜h4見出し
-  h3 {
-    margin: 1.5rem 0 0.5rem;
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: $color-white;
-  }
-
   h4 {
     margin: 1.25rem 0 0.5rem;
     font-size: 0.94rem;
@@ -316,10 +274,24 @@
     color: $color-gray;
   }
 
-  // 番号付きリスト / 箇条書き
-  ol,
-  ul {
-    margin: 1rem 0 1.5rem 1.5rem;
+  p {
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  a {
+    @include link-underline-animate();
+  }
+
+  strong {
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0 1.5rem 1.25rem;
     padding: 0;
     list-style-position: outside;
     color: $color-gray;
@@ -341,6 +313,16 @@
     list-style-type: disc;
   }
 
+}
+
+// ========================
+// 規約・ポリシー系ページ向け: テーブルなど特有レイアウト用スタイル
+// 使用例:
+//   .terms__content     { @include legal-content-structure(); }
+//   .privacy__content   { @include legal-content-structure(); }
+//   .tokushoho__content { @include legal-content-structure(); }
+// ========================
+@mixin legal-content-structure {
   // 規約・ポリシー系のテーブル
   table {
     width: 100%;
