@@ -207,11 +207,32 @@
 // 汎用: ページ本文ブロックスタイル
 // Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
 // テキスト主体の固定ページ本文の見た目を共通化するためのスタイル。
+// $panel:
+//   null / none  … パネルなし（背景そのまま）
+//   gray         … グレーパネル (@include panel-surface-gray)
+//   black        … ブラックパネル (@include panel-surface-black)
 // ========================
-@mixin page-content-body {
+@mixin page-content-body($panel: null) {
   font-size: 0.875rem;
   line-height: 1.9;
   color: $color-gray;
+
+  // パネル種別によって背景とパディングを切り替え
+  @if $panel == gray {
+    @include panel-surface-gray();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  } @else if $panel == black {
+    @include panel-surface-black();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  }
 
   @include mq(lg) {
     font-size: 0.95rem;
