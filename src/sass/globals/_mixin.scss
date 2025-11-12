@@ -286,6 +286,7 @@
 
   a {
     @include link-underline-animate();
+    color: $color-red;
   }
 
   strong {
