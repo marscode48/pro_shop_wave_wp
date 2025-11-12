@@ -116,9 +116,8 @@
       textarea,
       input {
         width: 100%;
-        background-color: $color-white;
-        padding: 5px;
-        border: 1px solid $color-gray;
+        @include input-base($padding: 0.6em 0.9em);
+        @include input-focus();
       }
 
       textarea {
