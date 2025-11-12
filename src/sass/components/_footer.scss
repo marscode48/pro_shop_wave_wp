@@ -136,18 +136,7 @@
     justify-content: center;
   
     a {
-      color: $color-white;
-      font-size: 2em;
-      
-      @include mq(lg) {
-        transition: color $transition;
-      }
-
-      &:hover {
-        @include mq(lg) {
-          color: $color-red;
-        }
-      }
+      @include circle-icon-button();
     }
   }
 
