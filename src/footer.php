@@ -43,9 +43,9 @@
             </address>
           </div>
           <div class="footer__sns">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/proshopwave/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/proshopwave" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://www.facebook.com/proshopwave" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
 
