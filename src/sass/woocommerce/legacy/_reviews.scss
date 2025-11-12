@@ -58,8 +58,9 @@
             flex-wrap: wrap;
             flex: 1 1 auto;
             padding: 1em;
-            border: 1px solid $color-red;
-            background-color: $color-black;
+            // border: 1px solid $color-red;
+            // background-color: $color-black;
+            @include panel-surface-gray();
             @include reset-clearfix();
 
             .star-rating {

@@ -589,6 +589,35 @@ add_filter('loop_shop_per_page', function ($cols) {
   return 12; // 表示件数を変更
 }, 20);
 
+// ==================================================
+// WooCommerce: レビュー投稿の送信ボタンを <input> から <button> に変更
+// 目的: @mixin button-cta の疑似要素（::before/::after）を使うため
+// ==================================================
+add_filter('woocommerce_product_review_comment_form_args', function ($args) {
+  // 既存の class_submit を尊重しつつ、セクション共通のCTAクラスを付与
+  $class_submit = isset($args['class_submit']) && $args['class_submit'] !== ''
+    ? $args['class_submit'] . ' section__button'
+    : 'section__button';
+
+  // comment_form の submit_button フォーマットを <button> に置き換え
+  // %1$s=name, %2$s=id, %3$s=class, %4$s=ラベル
+  $args['submit_button'] = '<button name="%1$s" type="submit" id="%2$s" class="%3$s">'
+    . '<span class="section__button-inner">%4$s</span>'
+    . '</button>';
+
+  // 置き換え後に class を正しく渡す
+  $args['class_submit'] = $class_submit;
+
+  // ラッパーは既定と同じ（%1$s=submit_button, %2$s=hidden fields）
+  $args['submit_field'] = '<p class="form-submit">%1$s %2$s</p>';
+
+  // 念のためラベル未指定時の既定値
+  if (empty($args['label_submit'])) {
+    $args['label_submit'] = esc_html__('Submit', 'woocommerce');
+  }
+
+  return $args;
+});
 
 // ----------------------------------------------
 // Helper: 二重URLエンコード等を考慮してクエリ文字列を安全に取得
