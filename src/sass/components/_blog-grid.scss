@@ -1,0 +1,20 @@
+@use "../globals/index" as *;
+
+// ========================
+// Mixin: ブログカードレイアウト（共通グリッド）
+// - ブログ一覧・検索結果ページなどで再利用
+// ========================
+@mixin blog-grid() {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @include mq(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

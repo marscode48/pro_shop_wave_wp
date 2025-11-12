@@ -13,13 +13,11 @@
 get_header();
 ?>
 
-<section class="section section--cart" role="region" aria-label="Cart">
+<section class="section section--cart section--commerce-ui" role="region" aria-label="Cart">
   <div class="cart__inner l-container">
     <?php
     // Breadcrumb navigation
-    if (function_exists('woocommerce_breadcrumb')) {
-      woocommerce_breadcrumb();
-    }
+    get_template_part('template-parts/breadcrumb/breadcrumb');
 
     // ブロックエディタで配置したコンテンツ（カートブロック）をそのまま出力
     if (function_exists('the_content')) {

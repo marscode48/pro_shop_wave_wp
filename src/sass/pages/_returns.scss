@@ -1,0 +1,14 @@
+@use "../globals/index" as *;
+
+// ========================
+// Returns Page (返品・交換・キャンセル)
+// ========================
+.returns {
+  &__lead {
+    @include page-lead();
+  }
+
+  &__content {
+    @include page-content-body($panel: gray);
+  }
+}

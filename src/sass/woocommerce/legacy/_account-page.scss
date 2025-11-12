@@ -32,7 +32,6 @@
 
         a {
           @include link-underline-animate();
-          padding-bottom: 4px;
           color: $color-white;
           font-size: 0.95rem;
         }

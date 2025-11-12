@@ -1,0 +1,189 @@
+@use "../globals/index" as *;
+
+// ========================
+// ブログ・サイドバー全体
+// （PCは右カラム / SPは本文下に縦積み）
+// ========================
+.blog-sidebar {
+  display: block;
+
+  // 内側ラッパー: セクション間の余白をグリッドで管理
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include mq(md) {
+      gap: 1.25rem;
+    }
+
+    @include mq(lg) {
+      gap: 1.5rem;
+    }
+  }
+
+  // セクション（共通のパネル表現）
+  &__section {
+    @include panel-surface-gray();
+    padding: 1rem;
+
+    @include mq(md) {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+
+  // タイトル（各セクションごと共通）
+  &__title {
+    @include heading-title();
+    margin-bottom: 0.75rem;
+
+    @include mq(lg) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  // ========================
+  // ブログ・サイドバー: Recommend (おすすめ記事)
+  // ========================
+  &__recommend-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem; // サイドバー用にやや詰める
+
+    @include mq(md) {
+      gap: 1rem;
+      grid-template-columns: repeat(2, 1fr); // タブレットは2列
+    }
+
+    @include mq(lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__recommend-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__empty {
+    margin: 0.25rem 0 0;
+    color: $color-gray;
+    font-size: 0.95rem;
+  }
+
+  // ========================
+  // ブログ・サイドバー: Categories（カテゴリー別一覧）
+  // ========================
+  &__categories-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+      padding: 0.4rem 0;
+      border-bottom: 1px dotted rgba($color-white, 0.12);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__categories-link {
+    display: inline-block; // クリック領域を確保
+    color: $color-white;
+    text-decoration: none;
+    line-height: 1.4;
+
+    @include mq(lg) {
+      transition: color $transition;
+    }
+
+    &:hover,
+    &:focus {
+      color: $color-red;
+      outline: none;
+    }
+  }
+
+  // ========================
+  // ブログ・サイドバー: Archives（月別一覧）
+  // 月別アーカイブ（list / select）の見た目を統一
+  // blog-sidebar-archives.phpで（list / select）を切り替え
+  // ========================
+
+  // --- リスト表示
+  &__archives-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+      padding: 0.4rem 0;
+      border-bottom: 1px dotted rgba($color-white, 0.12);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      a {
+        display: inline-block; // クリック領域を確保
+        color: $color-white;
+        text-decoration: none;
+        line-height: 1.4;
+        @include mq(lg) {
+          transition: color $transition;
+        }
+
+        &:hover,
+        &:focus {
+          color: $color-red;
+          outline: none;
+        }
+      }
+    }
+  }
+
+  // --- セレクト表示
+  &__archives-form {
+    margin: 0.25rem 0 0;
+  }
+
+  &__select-wrap {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    i {
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba($color-white, 0.6);
+      pointer-events: none; // クリック操作を妨げない
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+  }
+
+  &__archives-select {
+    display: block;
+    width: 100%;
+    @include input-base(0.6em 0.9em);
+    @include input-focus();
+
+    // 右端に余白（カスタム矢印アイコン分）
+    padding-right: 2.25rem;
+
+    // ネイティブ矢印は環境によって描画が異なるため非表示にし、テーマ側の矢印に統一
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+  }
+}

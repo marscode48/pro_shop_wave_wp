@@ -251,11 +251,7 @@ $marker-anim-duration: var(--marker-animation-duration);
 
     .swiper-button-prev,
     .swiper-button-next {
-      display: grid;
-      place-content: center;
-      width: 2.8rem;
-      height: 2.8rem;
-      cursor: pointer;
+      @include circle-icon-button();
       position: absolute;
       z-index: 1;
       top: 0;
@@ -265,37 +261,6 @@ $marker-anim-duration: var(--marker-animation-duration);
       @include mq(lg) {
         top: 110%;
       }
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        border-radius: 50%;
-        border: 1px solid $color-red;
-        background-color: rgba($color-dark-gray, 0.6);
-        box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.05), -0.4rem -0.3rem 3rem $color-red;
-
-        @include mq(lg) {
-          transition: transform $transition;
-        }
-      }
-
-      &:hover::before {
-        @include mq(lg) {
-          transform: scale(1.2);
-        }
-      }
-
-      &::after {
-        width: 1rem;
-        height: 1rem;
-        content: "";
-        border: solid $color-red;
-        border-width: 3px 3px 0 0;
-      }
     }
 
     .swiper-button-prev {
@@ -304,11 +269,6 @@ $marker-anim-duration: var(--marker-animation-duration);
       @include mq(md) {
         right: calc(100% - 5vw);
       }
-
-      &::after {
-        margin-left: 0.4rem;
-        transform: rotate(-135deg);
-      }
     }
 
     .swiper-button-next {
@@ -316,11 +276,6 @@ $marker-anim-duration: var(--marker-animation-duration);
 
       @include mq(md) {
         left: calc(100% - 5vw);
-      }
-
-      &::after {
-        margin-right: 0.4rem;
-        transform: rotate(45deg);
       }
     }
   }
@@ -352,7 +307,17 @@ $marker-anim-duration: var(--marker-animation-duration);
     position: relative;
     @include product-card-gradient;
     border: 1px solid $color-red;
+    // 余白はブレークポイントごとに段階調整
     padding: 1rem;
+
+    @include mq(md) {
+      padding: 5%;
+    }
+
+    @include mq(lg) {
+      padding: 7%;
+    }
+    
     border-radius: $radius-card;
     overflow: hidden;
     text-align: center;

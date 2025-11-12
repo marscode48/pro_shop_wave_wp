@@ -99,10 +99,11 @@
 }
 
 // 下線アニメーションのmixin
+// $offset: 下線位置のオフセット（フォントのベースライン調整用。既定値: -0.24em）
 @mixin link-underline-animate(
   $color: $color-red,
   $height: 2px,
-  $duration: 0.2s
+  $offset: -0.25em
 ) {
   position: relative;
   text-decoration: none;
@@ -111,12 +112,12 @@
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: $offset;
     left: 0;
     width: 0%;
     height: $height;
     background-color: $color;
-    transition: width $duration ease-out;
+    transition: width $transition;
   }
 
   &:hover::after,
@@ -131,6 +132,29 @@
 /// @param $max - 最大サイズ（例: 3rem）
 @mixin clamp-font-size($min, $preferred, $max) {
   font-size: clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+// ========================
+// 汎用: セクション大見出し (ヒーロー/LP系)
+// 主に .section__title で使用。中央寄せ・大文字・白文字・シャドウ強め。
+// 可変にしたい値は引数で上書き可能。
+// ========================
+@mixin section-title(
+  $font-size: 2rem,
+  $color: $color-white,
+  $margin-bottom: 2rem,
+  $text-align: center,
+  $text-transform: uppercase,
+  $font-family: $font-heading,
+  $text-shadow: $text-shadow-black-default
+) {
+  font-size: $font-size;
+  font-family: $font-family;
+  text-align: $text-align;
+  color: $color;
+  margin-bottom: $margin-bottom;
+  text-transform: $text-transform;
+  text-shadow: $text-shadow;
 }
 
 // ========================
@@ -158,6 +182,177 @@
 
   @include mq(lg) {
     font-size: $font-size-lg;
+  }
+}
+
+// ========================
+// 汎用: ページリード文スタイル
+// Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
+// 固定ページ上部の説明テキストで共通利用するスタイル。
+// ========================
+@mixin page-lead {
+  color: $color-gray;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 32rem;
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+
+  @include mq(md) {
+    margin-inline: 0;
+    font-size: 1rem;
+  }
+}
+
+// ========================
+// 汎用: ページ本文ブロックスタイル
+// Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
+// テキスト主体の固定ページ本文の見た目を共通化するためのスタイル。
+// $panel:
+//   null / none  … パネルなし（背景そのまま）
+//   gray         … グレーパネル (@include panel-surface-gray)
+//   black        … ブラックパネル (@include panel-surface-black)
+// ========================
+@mixin page-content-body($panel: null) {
+  font-size: 0.875rem;
+  line-height: 1.9;
+  color: $color-gray;
+
+  // パネル種別によって背景とパディングを切り替え
+  @if $panel == gray {
+    @include panel-surface-gray();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  } @else if $panel == black {
+    @include panel-surface-black();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  }
+
+  @include mq(lg) {
+    font-size: 0.95rem;
+  }
+
+  // ★ テキスト系固定ページ共通の h2 見出しスタイル
+  h2 {
+    margin: 2rem 0 0.75rem;
+    @include heading-title($font-size: 1.05rem, $padding-left: 0.5rem);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  h4 {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: $color-white;
+  }
+
+  // 定義リスト
+  dl {
+    margin: 1rem 0 1.5rem;
+  }
+
+  dt {
+    font-weight: 600;
+    color: $color-white;
+    margin-bottom: 0.25rem;
+  }
+
+  dd {
+    margin: 0 0 0.75rem;
+    color: $color-gray;
+  }
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  a {
+    @include link-underline-animate();
+    color: $color-red;
+  }
+
+  strong {
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0 1.5rem 1.25rem;
+    padding: 0;
+    list-style-position: outside;
+    color: $color-gray;
+    font-size: 0.9rem;
+    line-height: 1.8;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // 番号付きリストは数字を明確に表示
+  ol {
+    list-style-type: decimal;
+  }
+
+  // 箇条書きリストはドットで表示
+  ul {
+    list-style-type: disc;
+  }
+
+}
+
+// ========================
+// 規約・ポリシー系ページ向け: テーブルなど特有レイアウト用スタイル
+// 使用例:
+//   .terms__content     { @include legal-content-structure(); }
+//   .privacy__content   { @include legal-content-structure(); }
+//   .tokushoho__content { @include legal-content-structure(); }
+// ========================
+@mixin legal-content-structure {
+  // 規約・ポリシー系のテーブル
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+
+    th,
+    td {
+      padding: 0.75rem 0.75rem;
+      border: 0.0625rem solid rgba($color-gray, 0.4);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    th {
+      background-color: rgba($color-white, 0.04);
+      font-weight: 600;
+      color: $color-white;
+      text-align: left;
+    }
+
+    td {
+      color: $color-gray;
+    }
   }
 }
 
@@ -359,6 +554,59 @@
 }
 
 // ========================
+// 丸アイコンボタン
+// 用途:
+// - 前後ナビの矢印アイコン（Font Awesomeなど）
+// - シェアアイコン (X / Facebook / LINE など)
+// - ほか丸いCTAボタン
+// 引数:
+//   $size         ... ボタンの直径
+//   $icon-size    ... 中央の<i>アイコンのフォントサイズ
+// 備考:
+//   疑似要素 ::before が丸いプレートを描画し、
+//   中の <i> アイコンはここで共通スタイルを付与します。
+// ========================
+@mixin circle-icon-button($size: 2.8rem, $icon-size: 1.25rem) {
+  display: grid;
+  place-content: center;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  color: $color-red;
+
+  // 背景の丸いプレート
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid $color-red;
+    background-color: rgba($color-dark-gray, 0.6);
+    box-shadow: 0.3rem 0.3rem 1rem rgba($color-black, 0.05),
+      -0.4rem -0.3rem 3rem $color-red;
+    transition: transform $transition;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    @include mq(lg) {
+      transform: scale(1.2);
+    }
+  }
+
+  // 中身の Font Awesome アイコン
+  i {
+    position: relative;
+    z-index: 1; // ::before の下敷きにならないように
+    font-size: $icon-size;
+    line-height: 1;
+    color: $color-red;
+  }
+}
+
+// ========================
 // 商品カード用グラデーション背景ミックスイン
 // ========================
 @mixin product-card-gradient {
@@ -462,7 +710,6 @@
   box-shadow: $shadow;
 }
 
-
 // ========================
 // 共通:input タグ用グラデーションミックスイン
 // ========================
@@ -476,6 +723,9 @@
   border-radius: 0.5rem;
   padding: $padding;
   color: $color-white;
+  &::placeholder {
+    color: rgba($color-white, 0.6);
+  }
 }
 
 // ========================
@@ -503,5 +753,116 @@
     border-color: $border-color;
     outline: $outline-width solid $outline-color;
     outline-offset: $outline-offset;
+  }
+}
+
+// ========================
+// 汎用: Pill（チップ/ピル型リンク/カテゴリタグ）用ミックスイン
+// 用途: chip, link, category など丸 pill 形状のUIを統一
+// ========================
+@mixin pill(
+  $padding: 0.45em 0.7em,
+  $font-size: 1rem,
+  $radius: 999px,
+  $border-color: $fb-border-color,
+  $fg: $color-white,
+  $bg: null,
+  // null の場合は panel-surface-black を適用
+  $hover-filter: brightness(2),
+  $with-selected: true // [data-selected="true"] スタイルを付与するか
+) {
+  padding: $padding;
+  font-size: $font-size;
+  line-height: 1;
+  color: $fg;
+  border-radius: $radius;
+  transition: border-color $transition, filter $transition;
+  text-decoration: none; // aにも使える
+
+  // ベース背景（指定がなければ黒パネルのmixin）
+  @if $bg == null {
+    @include panel-surface-black(
+      $border-color: $border-color,
+      $radius: $radius
+    );
+  } @else {
+    border: 1px solid $border-color;
+    background: $bg;
+  }
+
+  // hover（デスクトップ）
+  @include mq(lg) {
+    &:hover {
+      filter: $hover-filter;
+      border-color: $color-red;
+    }
+  }
+
+  // 選択時の見た目（chip等）
+  @if $with-selected == true {
+    // 選択モードのときは、hoverで枠を赤にし直さない
+    @include mq(lg) {
+      &:hover {
+        border-color: $fb-border-color;
+      }
+    }
+
+    &[data-selected="true"] {
+      border-color: $color-red;
+      background: $fb-selected-bg;
+      box-shadow: $fb-selected-shadow;
+    }
+  }
+}
+
+// ========================
+// Mixin: メタ日付（ブログカード・記事ページ共通）
+// ========================
+@mixin meta-date($font-size: 0.85rem, $icon: "\f017", $color: $color-gray) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $color;
+  font-size: $font-size;
+  font-family: $font-body;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  // アイコン（Font Awesome）
+  &::before {
+    content: $icon;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: 0.8;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(1px);
+  }
+
+  // 更新日のバッジ化
+  &.is-updated {
+    .is-updated-label {
+      content: "";
+      display: inline-block;
+      margin-left: 0.4rem;
+      @include pill(
+        $font-size: 0.75rem,
+        $padding: 0.3em 1em,
+        $border-color: $color-red,
+        $with-selected: false
+      );
+
+      @include mq(lg) {
+        &:hover {
+          filter: none;
+          $border-color: $color-red;
+        }
+      }
+    }
+  }
+
+  @include mq(lg) {
+    font-size: 0.9rem;
   }
 }

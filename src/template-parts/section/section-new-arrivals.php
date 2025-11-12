@@ -46,8 +46,12 @@
           ?>
         </div>
       </div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev" aria-label="Previous">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </div>
+      <div class="swiper-button-next" aria-label="Next">
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </div>
     </div>
     <div class="swiper-pagination"></div>
   </div>

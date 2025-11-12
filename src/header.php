@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the header
  *
@@ -7,6 +8,7 @@
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
+
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +60,20 @@
     <header class="header">
       <div class="header__inner">
 
+        <?php
+        // WooCommerce マイアカウントへのリンク（ログイン状態でラベルを出し分け）
+        $account_url = function_exists('wc_get_page_permalink')
+          ? wc_get_page_permalink('myaccount')
+          : esc_url(home_url('/my-account/'));
+        $is_logged_in = is_user_logged_in();
+        $account_label = $is_logged_in ? 'My Account' : 'Log In / Register';
+
+        // WooCommerce カートURLへのリンク（多言語・スラッグ変更に追従／WooCommerce無効時はフォールバック）
+        $cart_url = function_exists('wc_get_cart_url')
+          ? wc_get_cart_url()
+          : esc_url(home_url('/cart/'));
+        ?>
+
         <!-- ハンバーガーボタン（SPのみ表示） -->
         <button class="header__toggle" aria-label="メニューを開く">
           <span></span><span></span><span></span>
@@ -65,7 +81,7 @@
 
         <!-- ロゴエリア -->
         <div class="header__logo">
-        <?php $html_tag = (is_home() || is_front_page()) ? 'h1' : 'div'; ?>
+          <?php $html_tag = (is_home() || is_front_page()) ? 'h1' : 'div'; ?>
           <<?php echo $html_tag; ?>>
             <a href="<?php echo esc_url(home_url('/')); ?>">
               <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="PRO SHOP WAVE ロゴ" />
@@ -87,8 +103,16 @@
               </ul>
             </li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
+
+            <!-- アカウント出し分け（SPのみ表示） -->
+            <li class="header__nav-item header__nav-account">
+              <a href="<?php echo esc_url($account_url); ?>">
+                <?php echo esc_html($account_label); ?>
+              </a>
+            </li>
 
             <!-- 多言語切り替え（SPのみ表示） -->
             <li class="header__nav-item header__nav-lang">
@@ -109,21 +133,51 @@
         <!-- ユーティリティエリア -->
         <div class="header__utils">
 
-          <!-- SP用: 検索アイコン -->
-          <button class="header__search-toggle" aria-label="検索">
-            <i class="fas fa-search"></i>
-          </button>
+          <div class="header__search">
+            <!-- SP用: 検索アイコン -->
+            <button class="header__search-toggle" aria-label="検索">
+              <i class="fas fa-search"></i>
+            </button>
 
-          <!-- PC用：検索フォーム -->
-          <form action="/search" method="get" class="header__search-form">
-            <input type="text" name="s" placeholder="パーツやブログを検索">
-            <button type="submit" aria-label="検索"><i class="fas fa-search"></i></button>
-          </form>
+            <!-- PC用：検索フォーム（All検索／ショップ内は自動で商品スコープ） -->
+            <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="header__search-form" role="search">
+              <label class="screen-reader-text" for="global-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
+              <?php
+              $placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
+                ? 'ショップ内検索'
+                : '商品・ブログを検索';
+              ?>
+              <input
+                id="global-search"
+                type="search"
+                name="s"
+                placeholder="<?php echo esc_attr($placeholder_text); ?>">
+              <?php if (function_exists('is_woocommerce') && is_woocommerce()) : ?>
+                <!-- post_type が product の場合は archive-product.php に移動-->
+                <input type="hidden" name="post_type" value="product">
+              <?php endif; ?>
+              <button type="submit" aria-label="<?php echo esc_attr__('検索'); ?>">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
 
-          <!-- カートアイコン -->
+          <!-- アカウントアイコン（PCのみ表示） -->
+          <div class="header__account">
+            <a href="<?php echo esc_url($account_url); ?>" class="header__account-link" aria-label="<?php echo esc_attr($account_label); ?>">
+              <i class="fas fa-user" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- カートアイコン（数量バッジ付き） -->
           <div class="header__cart">
-            <a href="/cart" aria-label="カート">
-              <i class="fas fa-shopping-cart"></i>
+            <a href="<?php echo esc_url($cart_url); ?>" aria-label="カート">
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <?php
+              $cart_count = (function_exists('WC') && WC()->cart) ? (int) WC()->cart->get_cart_contents_count() : 0;
+              $count_class = $cart_count > 0 ? ' is-active' : '';
+              ?>
+              <span class="header__cart-count<?php echo esc_attr($count_class); ?>" aria-live="polite" aria-atomic="true"><?php echo esc_html($cart_count); ?></span>
             </a>
           </div>
 
@@ -138,8 +192,24 @@
       </div>
     </header>
 
-    <!-- SP検索フォーム -->
-    <form action="/search" method="get" class="search-form-sp">
-      <input type="text" name="s" placeholder="キーワードを検索">
-      <button type="submit"><i class="fas fa-search"></i></button>
+    <!-- SP検索フォーム（All検索／ショップ内は自動で商品スコープ） -->
+    <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="search-form-sp" role="search">
+      <label class="screen-reader-text" for="sp-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
+      <?php
+      $sp_placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
+        ? 'ショップ内検索'
+        : 'サイト内検索（商品・ブログ）';
+      ?>
+      <input
+        id="sp-search"
+        type="search"
+        name="s"
+        placeholder="<?php echo esc_attr($sp_placeholder_text); ?>">
+      <?php if (function_exists('is_woocommerce') && is_woocommerce()) : ?>
+        <!-- post_type が product の場合は archive-product.php に移動-->
+        <input type="hidden" name="post_type" value="product">
+      <?php endif; ?>
+      <button type="submit" aria-label="<?php echo esc_attr__('検索'); ?>">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
     </form>

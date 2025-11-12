@@ -13,13 +13,11 @@
 get_header();
 ?>
 
-<section class="section section--checkout" role="region" aria-label="Checkout">
+<section class="section section--checkout section--commerce-ui" role="region" aria-label="Checkout">
   <div class="checkout__inner l-container">
     <?php
     // Breadcrumb navigation
-    if (function_exists('woocommerce_breadcrumb')) {
-      woocommerce_breadcrumb();
-    }
+    get_template_part('template-parts/breadcrumb/breadcrumb');
 
     // ブロックエディタで配置したコンテンツ（チェックアウトブロック）をそのまま出力
     if (function_exists('the_content')) {

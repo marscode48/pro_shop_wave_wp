@@ -67,7 +67,6 @@ nav[aria-label="Breadcrumb"] {
       a {
         text-decoration: none;
         color: $color-white;
-        padding-bottom: 4px;
 
         @include mq(lg) {
           @include link-underline-animate();

@@ -21,6 +21,7 @@
             <ul class="footer__nav-list">
               <li class="footer__nav-item"><a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">Shop</a></li>
               <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
               <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
               <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
             </ul>
@@ -48,11 +49,18 @@
           </div>
         </div>
 
+        <!-- サポートメニュー -->
+        <div class="footer__support">
+          <a href="<?php echo esc_url(home_url('/guide/')); ?>">ご利用ガイド</a>
+          <a href="<?php echo esc_url(home_url('/faq/')); ?>">よくある質問</a>
+          <a href="<?php echo esc_url(home_url('/returns/')); ?>">返品・交換・キャンセルについて</a>
+        </div>
+
         <!-- ポリシーなど -->
         <div class="footer__legal">
-          <a href="#">利用規約</a>
-          <a href="#">プライバシーポリシー</a>
-          <a href="#">特商法表記</a>
+          <a href="<?php echo esc_url(home_url('/terms/')); ?>">利用規約</a>
+          <a href="<?php echo esc_url(home_url('/privacy/')); ?>">プライバシーポリシー</a>
+          <a href="<?php echo esc_url(home_url('/tokushoho/')); ?>">特商法表記</a>
         </div>
 
         <!-- コピーライト -->

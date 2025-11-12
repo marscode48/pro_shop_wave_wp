@@ -1,0 +1,30 @@
+@use "../globals/index" as *;
+
+// ========================
+// 共通: セールバッジ（.onsale）
+// 商品一覧・商品詳細・検索結果などで使用
+// ========================
+
+@mixin badge-sale() {
+  display: block;
+  background: $color-bright-red-gradient;
+  color: $color-white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  position: absolute;
+  top: 0.5%;
+  left: 0.5%;
+  z-index: 1;
+  min-height: 60px;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 5px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba($color-red, 0.3);
+
+  @include mq(lg) {
+    font-size: 0.8rem;
+  }
+}

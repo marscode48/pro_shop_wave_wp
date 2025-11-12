@@ -1,0 +1,16 @@
+@use "../globals/index" as *;
+@use "sass:color";
+
+// ========================
+// Tokushoho Page (特定商取引法に基づく表記)
+// ========================
+.tokushoho {
+  &__lead {
+    @include page-lead();
+  }
+
+  &__content {
+    @include page-content-body($panel: gray);
+    @include legal-content-structure();
+  }
+}

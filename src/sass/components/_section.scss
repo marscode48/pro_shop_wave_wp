@@ -10,13 +10,7 @@
   color: $color-white;
 
   &__title {
-    font-size: 2rem;
-    font-family: $font-heading;
-    text-align: center;
-    color: $color-white;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    text-shadow: $text-shadow-black-default;
+    @include section-title();
   }
 
   &__text {

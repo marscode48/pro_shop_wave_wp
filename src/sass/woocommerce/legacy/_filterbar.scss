@@ -235,27 +235,8 @@
   }
 
   &__chip {
-    padding: 0.45em 0.7em;
-    @include panel-surface-black(
-      $border-color: $fb-border-color,
-      $radius: 999px
-    );
-    color: $color-white;
+    @include pill($with-selected: true);
     cursor: pointer;
-    transition: border-color $transition, filter $transition;
-
-    &:hover {
-      @include mq(lg) {
-        filter: brightness(2);
-      }
-    }
-
-    // data-selected="true" で選択ビジュアル
-    &[data-selected="true"] {
-      border-color: $color-red;
-      background: $fb-selected-bg;
-      box-shadow: $fb-selected-shadow;
-    }
   }
 
   &__nohit {

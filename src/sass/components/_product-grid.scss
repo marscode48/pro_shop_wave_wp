@@ -1,0 +1,32 @@
+@use "../globals/index" as *;
+
+// ========================
+// Mixin: product-grid
+// 目的: 商品グリッドレイアウトUIの共通スタイルを再利用可能にする
+// 用途: Wooの商品ループ、検索結果カード、レコメンド等で横断利用
+// ========================
+@mixin product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include mq(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  li {
+    list-style: none outside;
+  }
+}
