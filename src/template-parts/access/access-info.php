@@ -116,7 +116,7 @@
 
     <div class="access-info__cta">
       <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="access-info__cta-link">
-        <?php esc_html_e('お問い合わせはこちら', 'proshopwave'); ?>
+        <?php esc_html_e('お問い合わせ', 'proshopwave'); ?>
       </a>
     </div>
 
