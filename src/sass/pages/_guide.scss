@@ -12,6 +12,6 @@
 
   &__content {
     // ご利用ガイド本文
-    @include page-content-body(gray);
+    @include page-content-body($panel: gray);
   }
 }
