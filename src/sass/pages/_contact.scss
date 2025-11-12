@@ -11,7 +11,7 @@
   }
 
   &__content {
-    @include page-content-body();
+    @include page-content-body($panel: gray);
 
     @include mq(md) {
      text-align: center; 
