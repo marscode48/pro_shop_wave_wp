@@ -157,6 +157,10 @@
 
       @include mq(lg) {
         flex-direction: row;
+        gap: 1.75rem;
+      }
+
+      @include mq(xxl) {
         gap: 2rem;
       }
     }
@@ -369,6 +373,10 @@
 
     @include mq(lg) {
       flex-direction: row;
+      gap: 1.75rem;
+    }
+
+    @include mq(xxl) {
       gap: 2rem;
     }
   }
