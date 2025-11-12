@@ -21,6 +21,7 @@
             <ul class="footer__nav-list">
               <li class="footer__nav-item"><a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">Shop</a></li>
               <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+              <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
               <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
               <li class="footer__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
             </ul>

@@ -103,6 +103,7 @@
               </ul>
             </li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
 
