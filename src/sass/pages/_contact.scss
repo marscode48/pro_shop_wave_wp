@@ -11,10 +11,10 @@
   }
 
   &__content {
-    @include page-content-body();
+    @include page-content-body($panel: gray);
 
     @include mq(md) {
-     text-align: center; 
+      text-align: center;
     }
   }
 }
@@ -216,12 +216,10 @@
     }
 
     // 送信ボタン
-    .wpcf7-submit {
-      @include button-cta($width: 90%, $width-lg: 18rem);
-    }
-
-    // Contact専用: 送信ボタンのトーン制御 (プライバシー同意が入るまで暗くする)
     .contact-form__submit {
+      @include button-cta($width: 90%, $width-lg: 18rem);
+
+      // Contact専用: 送信ボタンのトーン制御 (プライバシー同意が入るまで暗くする)
       &.is-disabled {
         opacity: 0.5;
         cursor: not-allowed;
