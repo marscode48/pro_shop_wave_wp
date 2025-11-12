@@ -99,10 +99,11 @@
 }
 
 // 下線アニメーションのmixin
+// $offset: 下線位置のオフセット（フォントのベースライン調整用。既定値: -0.24em）
 @mixin link-underline-animate(
   $color: $color-red,
   $height: 2px,
-  $duration: 0.2s
+  $offset: -0.25em
 ) {
   position: relative;
   text-decoration: none;
@@ -111,12 +112,12 @@
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: $offset;
     left: 0;
     width: 0%;
     height: $height;
     background-color: $color;
-    transition: width $duration ease-out;
+    transition: width $transition;
   }
 
   &:hover::after,
