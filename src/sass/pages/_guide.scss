@@ -1,0 +1,17 @@
+@use "../globals/index" as *;
+@use "sass:color";
+
+// ========================
+// Guide Page (ご利用ガイド)
+// ========================
+.guide {
+  &__lead {
+    // ページ上部のリード文（抜粋）
+    @include page-lead();
+  }
+
+  &__content {
+    // ご利用ガイド本文
+    @include page-content-body(gray);
+  }
+}
