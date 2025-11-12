@@ -151,21 +151,25 @@
     }
   }
 
+  &__support, 
   &__legal {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
 
     @include mq(lg) {
       flex-direction: row;
-      justify-content: center;
       gap: 1.5rem;
     }
 
     a {
-      @include link-underline-animate(); // 赤線アニメーション
+      @include link-underline-animate();
     }
   }
+
 
   &__copy {
     margin-top: 1.5rem;

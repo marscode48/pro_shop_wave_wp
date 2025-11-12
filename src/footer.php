@@ -49,6 +49,13 @@
           </div>
         </div>
 
+        <!-- サポートメニュー -->
+        <div class="footer__support">
+          <a href="<?php echo esc_url(home_url('/guide/')); ?>">ご利用ガイド</a>
+          <a href="<?php echo esc_url(home_url('/faq/')); ?>">よくある質問</a>
+          <a href="<?php echo esc_url(home_url('/returns/')); ?>">返品・交換・キャンセルについて</a>
+        </div>
+
         <!-- ポリシーなど -->
         <div class="footer__legal">
           <a href="<?php echo esc_url(home_url('/terms/')); ?>">利用規約</a>
