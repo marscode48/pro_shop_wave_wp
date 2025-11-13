@@ -73,6 +73,11 @@
 </footer>
 </div>
 
+<!-- ページトップへ戻るボタン（固定UI） -->
+<a href="#top" class="back-to-top" aria-label="ページトップへ戻る">
+  <i class="fas fa-chevron-up"></i>
+</a>
+
 <?php wp_footer(); ?>
 </body>
 
