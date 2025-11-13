@@ -11,7 +11,7 @@
   // 外枠（本文カード）
   // ------------------------------
   &__body {
-    padding: 0.75rem;
+    padding: 1rem;
     background-color: $color-dark-gray;
     border-radius: 0.75rem;
     box-shadow: 0 0 20px rgba($color-black, 0.6), 0 0 10px rgba($color-red, 0.2);
@@ -66,7 +66,11 @@
 
   // タイトル（大見出し）
   &__title {
-    @include section-title($font-size: 1.8rem, $margin-bottom: 1.25rem);
+    @include section-title($font-size: 1.5rem, $margin-bottom: 1.25rem);
+
+    @include mq(lg) {
+      font-size: 1.8rem;
+    }
   }
 
   // 日付（公開日 / 更新日ピルは meta-date() に集約）
