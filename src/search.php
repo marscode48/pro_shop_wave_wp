@@ -78,7 +78,7 @@ $posts_panel_id    = 'search-panel-posts';
 <main id="primary" class="search section">
   <div class="search__inner l-container l-container--wide">
     <?php get_template_part('template-parts/breadcrumb/breadcrumb'); ?>
-    <div class="search__header">
+    <div class="search__header fadeup">
       <h1 class="search__title  section__title">
         <?php echo esc_html__('検索結果', 'proshopwave'); ?>
       </h1>
@@ -90,7 +90,7 @@ $posts_panel_id    = 'search-panel-posts';
       <?php endif; ?>
     </div>
 
-    <div class="search__wrapper">
+    <div class="search__wrapper fadeup">
       <!-- タブヘッダー -->
       <div class="search-tabs" role="tablist" aria-label="<?php echo esc_attr__('検索結果タブ', 'proshopwave'); ?>">
         <?php if (class_exists('WooCommerce')) : ?>
