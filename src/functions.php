@@ -36,8 +36,8 @@ function proshopwave_enqueue_assets()
   // WooCommerceがjQueryに依存しているため、削除は行わない（GSAPなどはVanilla JSで対応）
   // wp_deregister_script('jquery');
 
-  // ローディングCSS
-  if (is_home() || is_front_page()) {
+  // ローディングCSS（サイトのフロントページのみ適用）
+  if (is_front_page()) {
     wp_enqueue_style('loader', get_theme_file_uri('css/loader.css'), [], false, 'all');
   }
 
