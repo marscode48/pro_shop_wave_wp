@@ -11,7 +11,8 @@ get_header();
 ?>
 
 <main id="primary" class="access section">
-  <div class="access__inner l-container l-container--wide">
+  <!-- <div class="access__inner l-container l-container--wide"> -->
+  <div class="access__inner l-container">
 
     <?php
     // パンくず
