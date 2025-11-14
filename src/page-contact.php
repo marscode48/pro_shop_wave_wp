@@ -11,7 +11,7 @@ get_header();
 ?>
 
 <main id="primary" class="contact section">
-  <div class="contact__inner l-container l-container--narrow">
+  <div class="contact__inner l-container">
 
     <?php
     // パンくず
