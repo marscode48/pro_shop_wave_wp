@@ -51,9 +51,9 @@ get_header('shop'); ?>
         woocommerce_output_all_notices();
 
         // フィルターバーを挿入
-        get_template_part( 'template-parts/filterbar/filterbar-woocommerce' );
+        get_template_part('template-parts/filterbar/filterbar-woocommerce');
         ?>
-        <div class="product-archive__controls">
+        <div class="product-archive__controls fadeup">
           <?php
           // 商品数
           woocommerce_result_count();
