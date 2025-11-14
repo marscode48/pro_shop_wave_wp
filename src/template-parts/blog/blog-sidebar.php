@@ -11,7 +11,7 @@
  */
 ?>
 
-<aside class="blog-sidebar" role="complementary" aria-label="サイドバー">
+<aside class="blog-sidebar fadeup" role="complementary" aria-label="サイドバー">
   <div class="blog-sidebar__inner">
     <?php
     // -----------------------------
