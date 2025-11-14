@@ -10,7 +10,7 @@
  */
 ?>
 
-<section class="access-info">
+<section class="access-info fadeup">
   <div class="access-info__inner">
 
     <div class="access-info__grid">
@@ -114,7 +114,7 @@
       </p>
     </section>
 
-    <div class="access-info__cta">
+    <div class="access-info__cta faderight">
       <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="access-info__cta-link">
         <?php esc_html_e('お問い合わせ', 'proshopwave'); ?>
       </a>

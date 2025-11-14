@@ -13,7 +13,7 @@
   <div class="single-blog__inner l-container l-container--wide">
     <?php get_template_part('template-parts/breadcrumb/breadcrumb'); ?>
     <div class="single-blog-layout">
-      <div class="single-blog__body">
+      <div class="single-blog__body fadeup">
         <?php
         // ヘッダー（タイトル / 日付 / カテゴリ / サムネイル）
         get_template_part('template-parts/single/single-header');

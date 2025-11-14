@@ -11,14 +11,14 @@
 if (function_exists('is_woocommerce') && is_woocommerce()) {
   // WooCommerceのパンくずリストを出力
 ?>
-  <nav class="breadcrumb" aria-label="Breadcrumb">
+  <nav class="breadcrumb faderight" aria-label="Breadcrumb">
     <?php woocommerce_breadcrumb(); ?>
   </nav>
 <?php
 } else {
   // 通常ページ用のパンくずリストを生成
 ?>
-  <nav class="breadcrumb" aria-label="Breadcrumb">
+  <nav class="breadcrumb faderight" aria-label="Breadcrumb">
     <ul class="breadcrumb__list">
       <li class="breadcrumb__item">
         <a href="<?php echo esc_url(home_url('/')); ?>">ホーム</a>

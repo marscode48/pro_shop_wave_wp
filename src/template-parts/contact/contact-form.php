@@ -10,7 +10,7 @@
 $contact_form_shortcode = '[contact-form-7 id="de3be12" title="お問い合わせフォーム"]';
 ?>
 
-<section class="contact-form">
+<section class="contact-form fadeup">
   <div class="contact-form__inner">
     <header class="contact-form__header">
       <h2 class="contact-form__title">

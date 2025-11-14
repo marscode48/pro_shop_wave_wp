@@ -22,7 +22,7 @@ if (! defined('ABSPATH')) {
 
 get_header('shop'); ?>
 
-<div class="product-single section">
+<div class="product-single section fadeup">
   <div class="product-single__inner l-container l-container--wide">
     <?php
     /**
