@@ -16,11 +16,11 @@
     </picture>
     <div class="hero__content">
       <h2 class="hero__heading-en">
-        <span class="hero__text-marker">Born from Kanagawa, </span><br>
+        <span class="hero__text-marker">From Japan,</span><br>
         <span class="hero__text-marker">Built for the <span class="hero__highlight">World.</span></span><br>
         <span class="hero__text-marker">Drift Culture Lives On.</span>
       </h2>
-      <p class="hero__subheading-jp">本物のドリフトカルチャーを、<br class="sp-only">神奈川から世界へ。</p>
+      <p class="hero__subheading-jp">本物のドリフトカルチャーを、<br class="sp-only">日本から世界へ。</p>
     </div>
   </div>
 </div>
