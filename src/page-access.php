@@ -11,7 +11,8 @@ get_header();
 ?>
 
 <main id="primary" class="access section">
-  <div class="access__inner l-container l-container--wide">
+  <!-- <div class="access__inner l-container l-container--wide"> -->
+  <div class="access__inner l-container">
 
     <?php
     // パンくず
@@ -22,7 +23,7 @@ get_header();
       <?php while (have_posts()) : the_post(); ?>
 
         <header class="access__header">
-          <h1 class="access__title section__title">
+          <h1 class="access__title section__title fadeup">
             <?php the_title(); ?>
           </h1>
 
@@ -33,7 +34,7 @@ get_header();
           <?php endif; ?>
         </header>
 
-        <div class="access__content">
+        <div class="access__content fadeup">
           <?php
           // 固定ページ本文（アクセスの補足説明などをブロックエディタで管理）
           the_content();

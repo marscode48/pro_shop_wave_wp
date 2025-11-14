@@ -65,7 +65,7 @@ if ('' === $title) {
 
 if ($title) : ?>
   <header class="blog-archive-header">
-    <h1 class="blog-archive__title section__title">
+    <h1 class="blog-archive__title section__title fadeup">
       <?php echo esc_html($title); ?>
     </h1>
 

@@ -100,23 +100,27 @@ $marker-anim-duration: var(--marker-animation-duration);
 
   &__content {
     position: absolute;
+    inset: 0;
     z-index: 2;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 5vw;
     color: $color-white;
-    height: max-content;
-    margin: auto;
     pointer-events: none;
   }
 
   &__heading-en {
-    @include clamp-font-size(2rem, 4vw, 5rem);
+    position: absolute;
+    z-index: 2;
+    top: 7.5vh;
+    left: 5vw;
+    max-width: min(60rem, 90vw);
+    font-size: 2rem;
     font-family: $font-heading;
     font-weight: 700;
     text-align: left;
     text-shadow: $text-shadow-black-default;
+
+    @include mq(md) {
+      @include clamp-font-size(3rem, 3.5vw, 5rem);
+    }
   }
 
   &__highlight {
@@ -126,25 +130,24 @@ $marker-anim-duration: var(--marker-animation-duration);
   }
 
   &__subheading-jp {
-    @include clamp-font-size(1rem, 2.5vw, 1.3rem);
+    position: absolute;
+    z-index: 2;
+    bottom: 10svh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(60rem, 90vw);
+    margin: 0;
+    font-size: 1rem;
     font-family: $font-body;
     font-weight: 400;
     line-height: 1.8;
     color: $color-white;
     text-align: center;
     text-shadow: $text-shadow-black-default;
-    margin-top: 40vh;
+    white-space: nowrap;
 
-    @include mq(lg) {
-      margin-top: 30vh;
-    }
-    
-    @include mq(xl) {
-      margin-top: 35vh;
-    }
-    
-    @include mq(xxl) {
-      margin-top: 45vh;
+    @include mq(md) {
+      @include clamp-font-size(1.125rem, 1.75vw, 1.5rem);
     }
   }
 
@@ -154,7 +157,7 @@ $marker-anim-duration: var(--marker-animation-duration);
   & .scroll-indicator {
     position: absolute;
     z-index: 10;
-    bottom: 2rem;
+    bottom: 4.5svh;
     left: 50%;
     transform: translateX(-50%) translateY(2rem);
     opacity: 0;

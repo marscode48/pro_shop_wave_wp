@@ -183,7 +183,7 @@ function term_value($t)
 ?>
 
 <!-- フィルターバー（ピル） -->
-<div class="filterbar">
+<div class="filterbar fadeup">
   <button class="filterbar__pill js-open-dropdown" data-target="cat-dropdown" aria-expanded="false">
     <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
     <span class="filterbar__pill-label">カテゴリー</span>

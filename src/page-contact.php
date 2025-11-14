@@ -11,7 +11,7 @@ get_header();
 ?>
 
 <main id="primary" class="contact section">
-  <div class="contact__inner l-container l-container--narrow">
+  <div class="contact__inner l-container">
 
     <?php
     // パンくず
@@ -22,7 +22,7 @@ get_header();
       <?php while (have_posts()) : the_post(); ?>
 
         <header class="contact__header">
-          <h1 class="contact__title section__title">
+          <h1 class="contact__title section__title fadeup">
             <?php the_title(); ?>
           </h1>
 
@@ -33,7 +33,7 @@ get_header();
           <?php endif; ?>
         </header>
 
-        <div class="contact__content">
+        <div class="contact__content fadeup">
           <?php
           // 固定ページ本文（説明テキストなど）
           the_content();

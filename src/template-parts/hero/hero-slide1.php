@@ -44,11 +44,11 @@
       <h2 class="hero__heading-en">
         <span class="hero__text-marker">90’s Drift Legacy.</span>
         <br>
-        <span class="hero__text-marker">Born in Kanagawa.</span>
+        <span class="hero__text-marker">Born in Yokohama.</span>
         <br>
         <span class="hero__text-marker"><span class="hero__highlight">JDM</span> Forever.</span>
       </h2>
-      <p class="hero__subheading-jp">90年代ストリートの系譜を受け継ぐ、<br class="sp-only">神奈川発・ドリフトチューンの頂点。</p>
+      <p class="hero__subheading-jp">90年代ストリートの系譜を受け継ぐ、<br class="sp-only">横浜発・ドリフトチューンの頂点。</p>
     </div>
   </div>
 </div>

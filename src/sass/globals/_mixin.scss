@@ -566,13 +566,17 @@
 //   疑似要素 ::before が丸いプレートを描画し、
 //   中の <i> アイコンはここで共通スタイルを付与します。
 // ========================
-@mixin circle-icon-button($size: 2.8rem, $icon-size: 1.25rem) {
+@mixin circle-icon-button(
+  $size: 2.8rem,
+  $icon-size: 1.25rem,
+  $position: relative
+) {
   display: grid;
   place-content: center;
   width: $size;
   height: $size;
   border-radius: 50%;
-  position: relative;
+  position: $position;
   cursor: pointer;
   color: $color-red;
 
