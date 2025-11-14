@@ -49,7 +49,7 @@
           }
 
           &__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -196,7 +196,7 @@
             padding-top: 0;
           }
           .wc-block-components-checkout-step__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -262,7 +262,7 @@
         // -------------------------------
         #payment-method {
           .wc-block-components-checkout-step__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -338,7 +338,7 @@
         // -------------------------------
         #order-notes {
           .wc-block-components-checkout-step__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
