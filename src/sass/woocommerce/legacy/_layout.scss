@@ -42,7 +42,7 @@
       width: auto !important;
       float: none !important;
 
-      @include panel-surface-black();
+      @include panel-surface-gray();
       padding: 1rem;
       color: $color-white;
 
