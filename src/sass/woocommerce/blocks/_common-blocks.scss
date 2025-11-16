@@ -115,6 +115,40 @@
     margin-top: 1.5em;
   }
 
+  // クーポン入力欄を開閉するトグルボタン（アイコン付き）
+  .wc-block-components-panel__button {
+    cursor: pointer;
+    color: $color-white;
+
+    &-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  // クーポン
+  .wc-block-components-totals-coupon__input {
+    input[type="text"] {
+      width: 100%;
+      @include input-base(1.5em 0.5em 0.5em);
+      @include input-focus(); // フォーカススタイル
+    }
+
+    label {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: $color-gray;
+    }
+  }
+
+  // WooCommerce デフォルトのフォーカススタイルを上書き
+  .wc-block-components-text-input input[type="text"]:focus {
+    background-color: transparent;
+    border: 1px solid rgba($color-white, 0.18);
+    color: $color-white;
+    box-shadow: none;
+  }
+
   // ブロック商品のカードUI（WooCommerce Blocks用）
   .wc-block-product,
   .wc-block-grid__product,

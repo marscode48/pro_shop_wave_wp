@@ -49,7 +49,7 @@
           }
 
           &__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -196,7 +196,7 @@
             padding-top: 0;
           }
           .wc-block-components-checkout-step__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -262,7 +262,7 @@
         // -------------------------------
         #payment-method {
           .wc-block-components-checkout-step__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -338,7 +338,7 @@
         // -------------------------------
         #order-notes {
           .wc-block-components-checkout-step__container {
-            @include panel-surface-black();
+            @include panel-surface-gray();
             padding: 1rem;
             @include mq(md) {
               padding: 1.25rem;
@@ -553,7 +553,7 @@
               margin-right: 0.2em;
               text-decoration-color: $color-red;
             }
-            
+
             .wc-block-components-product-price__value {
               font-weight: 700;
             }
@@ -569,34 +569,6 @@
           text-align: right;
           .wc-block-components-product-price__value {
             font-weight: 700;
-          }
-        }
-      }
-
-      // -------------------------------
-      // クーポン
-      // -------------------------------
-      .wp-block-woocommerce-checkout-order-summary-coupon-form-block {
-        .wc-block-components-panel__button {
-          cursor: pointer;
-          color: $color-white;
-
-          &-icon {
-            width: 1.25rem;
-            height: 1.25rem;
-          }
-        }
-
-        .wc-block-components-totals-coupon__input {
-          input[type="text"] {
-            @include input-base(1.5em 0.5em 0.5em);
-            width: 100%;
-          }
-
-          label {
-            display: inline-block;
-            font-size: 0.85rem;
-            color: $color-gray;
           }
         }
       }
