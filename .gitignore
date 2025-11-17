@@ -48,3 +48,10 @@ src/**/.DS_Store
 # ======================================
 *.css
 *.css.map
+
+# ======================================
+# 翻訳ファイル（themes/proshopwave/languages）
+# ======================================
+languages/*
+!languages/*.pot
+!languages/*.po
