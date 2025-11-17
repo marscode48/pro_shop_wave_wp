@@ -20,6 +20,9 @@ function proshopwave_theme_setup()
   // HTML5サポート
   add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
 
+  // テーマの翻訳読み込み
+  load_theme_textdomain('proshopwave', get_template_directory() . '/languages');
+
   // ナビゲーションメニューの登録
   register_nav_menus([
     'global' => 'グローバルナビゲーション',
