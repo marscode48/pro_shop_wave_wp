@@ -17,92 +17,92 @@ msgstr ""
 
 #: footer.php:21
 msgid "フッターナビゲーション"
-msgstr ""
+msgstr "Footer navigation"
 
 #: footer.php:25 header.php:98
 msgid "Shop"
-msgstr ""
+msgstr "Shop"
 
 #: footer.php:30 header.php:107 template-parts/blog/blog-archive-header.php:17
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: footer.php:35 header.php:108
 msgid "About"
-msgstr ""
+msgstr "About"
 
 #: footer.php:40 header.php:109
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: footer.php:45 header.php:110
 msgid "Access"
-msgstr ""
+msgstr "Access"
 
 #: footer.php:57
 msgid "PRO SHOP WAVE"
-msgstr ""
+msgstr "PRO SHOP WAVE"
 
 #: footer.php:60
 msgid "〒253-0083"
-msgstr ""
+msgstr "253-0083"
 
 #: footer.php:62
 msgid "神奈川県茅ヶ崎市西久保１５１８−１"
-msgstr ""
+msgstr "1518-1 Nishikubo, Chigasaki-shi, Kanagawa"
 
 #: footer.php:66
 msgid "TEL:"
-msgstr ""
+msgstr "TEL:"
 
 #: footer.php:70
 msgid "Mail:"
-msgstr ""
+msgstr "Mail:"
 
 #: footer.php:76
 msgid "Instagram"
-msgstr ""
+msgstr "Instagram"
 
 #: footer.php:79
 msgid "X (Twitter)"
-msgstr ""
+msgstr "X (Twitter)"
 
 #: footer.php:82
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: footer.php:91
 msgid "ご利用ガイド"
-msgstr ""
+msgstr "Shopping Guide"
 
 #: footer.php:94
 msgid "よくある質問"
-msgstr ""
+msgstr "FAQ"
 
 #: footer.php:97
 msgid "返品・交換・キャンセルについて"
-msgstr ""
+msgstr "Returns / Exchanges / Cancellations"
 
 #: footer.php:104
 msgid "利用規約"
-msgstr ""
+msgstr "Terms of Service"
 
 #: footer.php:107
 msgid "プライバシーポリシー"
-msgstr ""
+msgstr "Privacy Policy"
 
 #: footer.php:110
 msgid "特商法表記"
-msgstr ""
+msgstr "Legal Notice"
 
 #: footer.php:119
 #, php-format
 msgid "© %s PRO SHOP WAVE"
-msgstr ""
+msgstr "© %s PRO SHOP WAVE"
 
 #: footer.php:130
 msgid "ページトップへ戻る"
-msgstr ""
+msgstr "Back to top"
 
 #: functions.php:451
 msgid "型番:"
