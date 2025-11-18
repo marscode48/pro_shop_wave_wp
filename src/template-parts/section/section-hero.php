@@ -12,7 +12,7 @@
     <?php get_template_part('template-parts/hero/hero', 'slide3'); ?>
   </div>
   <div class="scroll-indicator">
-    <span class="scroll-indicator__text">Scroll</span>
+    <span class="scroll-indicator__text"><?php echo esc_html__( 'Scroll', 'proshopwave' ); ?></span>
     <span class="scroll-indicator__arrow"></span>
   </div>
 </section>
