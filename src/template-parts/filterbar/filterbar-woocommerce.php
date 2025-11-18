@@ -186,21 +186,21 @@ function term_value($t)
 <div class="filterbar fadeup">
   <button class="filterbar__pill js-open-dropdown" data-target="cat-dropdown" aria-expanded="false">
     <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
-    <span class="filterbar__pill-label">カテゴリー</span>
-    <span class="filterbar__pill-value" id="pill-cat">All</span>
+    <span class="filterbar__pill-label"><?php echo esc_html__('カテゴリー', 'proshopwave'); ?></span>
+    <span class="filterbar__pill-value" id="pill-cat"><?php echo esc_html__('All', 'proshopwave'); ?></span>
   </button>
   <button class="filterbar__pill js-open-dropdown" data-target="tag-dropdown" aria-expanded="false">
     <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
-    <span class="filterbar__pill-label">タグ</span>
-    <span class="filterbar__pill-value" id="pill-tag">All</span>
+    <span class="filterbar__pill-label"><?php echo esc_html__('タグ', 'proshopwave'); ?></span>
+    <span class="filterbar__pill-value" id="pill-tag"><?php echo esc_html__('All', 'proshopwave'); ?></span>
   </button>
   <button class="filterbar__pill js-open-dropdown" data-target="brand-dropdown" aria-expanded="false">
     <i class="fa-solid fa-filter filterbar__pill-icon" aria-hidden="true"></i>
-    <span class="filterbar__pill-label">ブランド</span>
-    <span class="filterbar__pill-value" id="pill-brand">All</span>
+    <span class="filterbar__pill-label"><?php echo esc_html__('ブランド', 'proshopwave'); ?></span>
+    <span class="filterbar__pill-value" id="pill-brand"><?php echo esc_html__('All', 'proshopwave'); ?></span>
   </button>
   <button class="filterbar__open sp-only-block js-open-modal" aria-expanded="false">
-    フィルター
+    <?php echo esc_html__('フィルター', 'proshopwave'); ?>
   </button>
 </div>
 
@@ -208,10 +208,10 @@ function term_value($t)
 <div class="pc-only-block">
   <!-- カテゴリ -->
   <div class="filterbar__dropdown" id="cat-dropdown" aria-hidden="true">
-    <div class="filterbar__panel" role="dialog" aria-label="カテゴリで選ぶ">
+    <div class="filterbar__panel" role="dialog" aria-label="<?php echo esc_attr__('カテゴリで選ぶ', 'proshopwave'); ?>">
       <div class="filterbar__grid">
         <div class="filterbar__group">
-          <h3>カテゴリを選択</h3>
+          <h3><?php echo esc_html__('カテゴリを選択', 'proshopwave'); ?></h3>
           <div class="filterbar__options" id="pc-cat-parent">
             <?php foreach ($parent_terms as $pt) : ?>
               <button class="filterbar__chip" data-value="<?php echo term_value($pt); ?>"><?php echo term_label($pt); ?></button>
@@ -221,7 +221,7 @@ function term_value($t)
 
         <?php foreach ($parent_terms as $pt) : ?>
           <div class="filterbar__group">
-            <h3><?php echo term_label($pt); ?></h3>
+            <h3><?php echo esc_html(term_label($pt)); ?></h3>
             <div class="filterbar__options" id="pc-cat-children-<?php echo term_value($pt); ?>">
               <?php foreach ($children_map[$pt->slug] as $ct) : ?>
                 <button class="filterbar__chip" data-value="<?php echo term_value($ct); ?>"><?php echo term_label($ct); ?></button>
@@ -231,18 +231,18 @@ function term_value($t)
         <?php endforeach; ?>
       </div>
       <div class="filterbar__actions">
-        <button class="filterbar__btn js-reset">カテゴリーをクリア</button>
-        <button class="filterbar__btn filterbar__btn--primary js-apply">適用</button>
+        <button class="filterbar__btn js-reset"><?php echo esc_html__('カテゴリーをクリア', 'proshopwave'); ?></button>
+        <button class="filterbar__btn filterbar__btn--primary js-apply"><?php echo esc_html__('適用', 'proshopwave'); ?></button>
       </div>
     </div>
   </div>
 
   <!-- タグ -->
   <div class="filterbar__dropdown" id="tag-dropdown" aria-hidden="true">
-    <div class="filterbar__panel" role="dialog" aria-label="タグで選ぶ">
+    <div class="filterbar__panel" role="dialog" aria-label="<?php echo esc_attr__('タグで選ぶ', 'proshopwave'); ?>">
       <div class="filterbar__grid">
         <div class="filterbar__group">
-          <h3>人気タグ</h3>
+          <h3><?php echo esc_html__('人気タグ', 'proshopwave'); ?></h3>
           <div class="filterbar__options" id="pc-tag-popular">
             <?php foreach ($popular_tags as $tg) : ?>
               <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
@@ -250,41 +250,41 @@ function term_value($t)
           </div>
         </div>
         <div class="filterbar__group">
-          <h3>タグを検索</h3>
-          <input type="text" id="pc-tag-search" placeholder="タグ名で検索（例: エアロ）" />
+          <h3><?php echo esc_html__('タグを検索', 'proshopwave'); ?></h3>
+          <input type="text" id="pc-tag-search" placeholder="<?php echo esc_attr__('タグ名で検索（例: エアロ）', 'proshopwave'); ?>" />
           <div class="filterbar__options" id="pc-tag-results"></div>
         </div>
         <div class="filterbar__group">
-          <h3>選択中</h3>
+          <h3><?php echo esc_html__('選択中', 'proshopwave'); ?></h3>
           <div class="filterbar__options" id="pc-tag-selected"></div>
         </div>
       </div>
       <div class="filterbar__actions">
-        <button class="filterbar__btn js-reset-tag">タグをクリア</button>
-        <button class="filterbar__btn filterbar__btn--primary js-apply">適用</button>
+        <button class="filterbar__btn js-reset-tag"><?php echo esc_html__('タグをクリア', 'proshopwave'); ?></button>
+        <button class="filterbar__btn filterbar__btn--primary js-apply"><?php echo esc_html__('適用', 'proshopwave'); ?></button>
       </div>
     </div>
   </div>
 
   <!-- ブランド -->
   <div class="filterbar__dropdown" id="brand-dropdown" aria-hidden="true">
-    <div class="filterbar__panel" role="dialog" aria-label="ブランドで選ぶ">
+    <div class="filterbar__panel" role="dialog" aria-label="<?php echo esc_attr__('ブランドで選ぶ', 'proshopwave'); ?>">
       <div class="filterbar__grid">
         <div class="filterbar__group">
-          <h3>ブランド/メーカー</h3>
+          <h3><?php echo esc_html__('ブランド/メーカー', 'proshopwave'); ?></h3>
           <div class="filterbar__options" id="pc-brand-maker">
             <?php if (!empty($brand_parents)) : ?>
               <?php foreach ($brand_parents as $bp) : ?>
                 <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
               <?php endforeach; ?>
             <?php else : ?>
-              <span class="muted">ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。</span>
+              <span class="muted"><?php echo esc_html__('ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。', 'proshopwave'); ?></span>
             <?php endif; ?>
           </div>
         </div>
 
         <div class="filterbar__group">
-          <h3>車種</h3>
+          <h3><?php echo esc_html__('車種', 'proshopwave'); ?></h3>
           <?php foreach ($brand_parents as $bp) : ?>
             <div class="filterbar__options" id="pc-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
               <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
@@ -295,7 +295,7 @@ function term_value($t)
         </div>
 
         <div class="filterbar__group">
-          <h3>型式</h3>
+          <h3><?php echo esc_html__('型式', 'proshopwave'); ?></h3>
           <?php foreach ($brand_parents as $bp) : ?>
             <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
               <div class="filterbar__options" id="pc-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
@@ -308,8 +308,8 @@ function term_value($t)
         </div>
       </div>
       <div class="filterbar__actions">
-        <button class="filterbar__btn js-reset-brand">ブランドをクリア</button>
-        <button class="filterbar__btn filterbar__btn--primary js-apply">適用</button>
+        <button class="filterbar__btn js-reset-brand"><?php echo esc_html__('ブランドをクリア', 'proshopwave'); ?></button>
+        <button class="filterbar__btn filterbar__btn--primary js-apply"><?php echo esc_html__('適用', 'proshopwave'); ?></button>
       </div>
     </div>
   </div>
@@ -319,15 +319,15 @@ function term_value($t)
 <div class="sp-only-block">
   <div class="filterbar__modal" id="filterbar-modal" aria-hidden="true">
     <div class="filterbar__modal-scrim js-close-modal" tabindex="-1"></div>
-    <div class="filterbar__modal-panel" role="dialog" aria-label="フィルター">
+    <div class="filterbar__modal-panel" role="dialog" aria-label="<?php echo esc_attr__('フィルター', 'proshopwave'); ?>">
       <div class="filterbar__modal-header">
-        <strong>条件で絞り込み</strong>
-        <button class="filterbar__btn js-close-modal">閉じる</button>
+        <strong><?php echo esc_html__('条件で絞り込み', 'proshopwave'); ?></strong>
+        <button class="filterbar__btn js-close-modal"><?php echo esc_html__('閉じる', 'proshopwave'); ?></button>
       </div>
 
       <details class="filterbar__accordion" open>
         <summary>
-          <span>カテゴリーで選ぶ</span>
+          <span><?php echo esc_html__('カテゴリーで選ぶ', 'proshopwave'); ?></span>
           <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </summary>
         <div class="filterbar__accordion-panel">
@@ -346,7 +346,7 @@ function term_value($t)
 
       <details class="filterbar__accordion">
         <summary>
-          <span>タグで選ぶ</span>
+          <span><?php echo esc_html__('タグで選ぶ', 'proshopwave'); ?></span>
           <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </summary>
         <div class="filterbar__accordion-panel">
@@ -355,7 +355,7 @@ function term_value($t)
               <button class="filterbar__chip" data-value="<?php echo term_value($tg); ?>" data-label="<?php echo term_label($tg); ?>"><?php echo term_label($tg); ?></button>
             <?php endforeach; ?>
           </div>
-          <input type="text" id="sp-tag-search" placeholder="タグ名で検索（例: エアロ）" />
+          <input type="text" id="sp-tag-search" placeholder="<?php echo esc_attr__('タグ名で検索（例: エアロ）', 'proshopwave'); ?>" />
           <div class="filterbar__options" id="sp-tag-selected"></div>
         </div>
       </details>
@@ -363,18 +363,18 @@ function term_value($t)
       <?php if ($brand_tax) : ?>
         <details class="filterbar__accordion">
           <summary>
-            <span>ブランドで選ぶ</span>
+            <span><?php echo esc_html__('ブランドで選ぶ', 'proshopwave'); ?></span>
             <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
           </summary>
           <div class="filterbar__accordion-panel">
-            <h4>ブランド/メーカー</h4>
+            <h4><?php echo esc_html__('ブランド/メーカー', 'proshopwave'); ?></h4>
             <div class="filterbar__options" id="sp-brand-maker">
               <?php foreach ($brand_parents as $bp) : ?>
                 <button class="filterbar__chip" data-value="<?php echo term_value($bp); ?>"><?php echo term_label($bp); ?></button>
               <?php endforeach; ?>
             </div>
 
-            <h4>車種</h4>
+            <h4><?php echo esc_html__('車種', 'proshopwave'); ?></h4>
             <?php foreach ($brand_parents as $bp) : ?>
               <div class="filterbar__options" id="sp-brand-model-<?php echo term_value($bp); ?>" data-parent="<?php echo term_value($bp); ?>">
                 <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
@@ -383,7 +383,7 @@ function term_value($t)
               </div>
             <?php endforeach; ?>
 
-            <h4>型式</h4>
+            <h4><?php echo esc_html__('型式', 'proshopwave'); ?></h4>
             <?php foreach ($brand_parents as $bp) : ?>
               <?php foreach (($brand_models_map[$bp->slug] ?? []) as $mdl) : ?>
                 <div class="filterbar__options" id="sp-brand-chassis-<?php echo term_value($mdl); ?>" data-model="<?php echo term_value($mdl); ?>">
@@ -398,8 +398,8 @@ function term_value($t)
       <?php endif; ?>
 
       <div class="filterbar__modal-footer">
-        <button class="filterbar__btn" id="sp-reset">リセット</button>
-        <button class="filterbar__btn filterbar__btn--primary" id="sp-apply">適用</button>
+        <button class="filterbar__btn" id="sp-reset"><?php echo esc_html__('リセット', 'proshopwave'); ?></button>
+        <button class="filterbar__btn filterbar__btn--primary" id="sp-apply"><?php echo esc_html__('適用', 'proshopwave'); ?></button>
       </div>
     </div>
   </div>
