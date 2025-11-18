@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-11-17 16:25+0900\n"
-"PO-Revision-Date: 2025-11-18 11:17+0900\n"
+"POT-Creation-Date: 2025-11-18 11:17+0900\n"
+"PO-Revision-Date: 2025-11-18 11:22+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en\n"
@@ -14,3 +14,442 @@ msgstr ""
 "X-Poedit-KeywordsList: "
 "__;_e;_x;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: footer.php:21
+msgid "フッターナビゲーション"
+msgstr ""
+
+#: footer.php:25 header.php:98
+msgid "Shop"
+msgstr ""
+
+#: footer.php:30 header.php:107 template-parts/blog/blog-archive-header.php:17
+msgid "Blog"
+msgstr ""
+
+#: footer.php:35 header.php:108
+msgid "About"
+msgstr ""
+
+#: footer.php:40 header.php:109
+msgid "Contact"
+msgstr ""
+
+#: footer.php:45 header.php:110
+msgid "Access"
+msgstr ""
+
+#: footer.php:57
+msgid "PRO SHOP WAVE"
+msgstr ""
+
+#: footer.php:60
+msgid "〒253-0083"
+msgstr ""
+
+#: footer.php:62
+msgid "神奈川県茅ヶ崎市西久保１５１８−１"
+msgstr ""
+
+#: footer.php:66
+msgid "TEL:"
+msgstr ""
+
+#: footer.php:70
+msgid "Mail:"
+msgstr ""
+
+#: footer.php:76
+msgid "Instagram"
+msgstr ""
+
+#: footer.php:79
+msgid "X (Twitter)"
+msgstr ""
+
+#: footer.php:82
+msgid "Facebook"
+msgstr ""
+
+#: footer.php:91
+msgid "ご利用ガイド"
+msgstr ""
+
+#: footer.php:94
+msgid "よくある質問"
+msgstr ""
+
+#: footer.php:97
+msgid "返品・交換・キャンセルについて"
+msgstr ""
+
+#: footer.php:104
+msgid "利用規約"
+msgstr ""
+
+#: footer.php:107
+msgid "プライバシーポリシー"
+msgstr ""
+
+#: footer.php:110
+msgid "特商法表記"
+msgstr ""
+
+#: footer.php:119
+#, php-format
+msgid "© %s PRO SHOP WAVE"
+msgstr ""
+
+#: footer.php:130
+msgid "ページトップへ戻る"
+msgstr ""
+
+#: functions.php:451
+msgid "型番:"
+msgstr ""
+
+#: functions.php:466
+msgid "タグ:"
+msgstr ""
+
+#: functions.php:619
+msgid "Submit"
+msgstr ""
+
+#: functions.php:864
+msgid "適合車種"
+msgstr ""
+
+#: header.php:70
+msgid "My Account"
+msgstr ""
+
+#: header.php:71
+msgid "Log In / Register"
+msgstr ""
+
+#: header.php:80
+msgid "メニューを開く"
+msgstr ""
+
+#: header.php:89 header.php:129
+msgid "PRO SHOP WAVE ロゴ"
+msgstr ""
+
+#: header.php:103
+msgid "Parts"
+msgstr ""
+
+#: header.php:104
+msgid "Apparel"
+msgstr ""
+
+#: header.php:146 header.php:199
+msgid "サイト内検索"
+msgstr ""
+
+#: header.php:149 header.php:202
+msgid "ショップ内検索"
+msgstr ""
+
+#: header.php:150
+msgid "商品・ブログを検索"
+msgstr ""
+
+#: header.php:161 header.php:214
+msgid "検索"
+msgstr ""
+
+#: header.php:176
+msgid "カート"
+msgstr ""
+
+#: header.php:203
+msgid "サイト内検索（商品・ブログ）"
+msgstr ""
+
+#: search.php:83
+msgid "検索結果"
+msgstr ""
+
+#: search.php:87
+msgid "キーワード: "
+msgstr ""
+
+#: search.php:95
+msgid "検索結果タブ"
+msgstr ""
+
+#: search.php:106
+msgid "商品"
+msgstr ""
+
+#: search.php:120
+msgid "記事"
+msgstr ""
+
+#: search.php:145
+msgid "さらに商品を表示"
+msgstr ""
+
+#: search.php:151
+msgid "該当する商品は見つかりませんでした。"
+msgstr ""
+
+#: search.php:175
+msgid "さらに記事を表示"
+msgstr ""
+
+#: search.php:181
+msgid "該当する記事は見つかりませんでした。"
+msgstr ""
+
+#: template-parts/access/access-info.php:20
+msgid "店舗情報"
+msgstr ""
+
+#: template-parts/access/access-info.php:27
+msgid "ショップ名"
+msgstr ""
+
+#: template-parts/access/access-info.php:36
+msgid "住所"
+msgstr ""
+
+#: template-parts/access/access-info.php:41
+msgid "Google Mapで見る"
+msgstr ""
+
+#: template-parts/access/access-info.php:48
+msgid "TEL"
+msgstr ""
+
+#: template-parts/access/access-info.php:59
+msgid "営業時間"
+msgstr ""
+
+#: template-parts/access/access-info.php:68
+msgid "定休日"
+msgstr ""
+
+#: template-parts/access/access-info.php:71
+msgid "不定休"
+msgstr ""
+
+#: template-parts/access/access-info.php:77
+msgid "駐車場"
+msgstr ""
+
+#: template-parts/access/access-info.php:80
+msgid ""
+"店舗前に数台分の専用駐車場あり。ローダウン車両でお越しの際はご注意ください。"
+msgstr ""
+
+#: template-parts/access/access-info.php:89
+msgid "アクセスマップ"
+msgstr ""
+
+#: template-parts/access/access-info.php:101
+msgid "お車でお越しの方"
+msgstr ""
+
+#: template-parts/access/access-info.php:104
+msgid ""
+"新湘南バイパス/圏央道 茅ケ崎中央IC より約3分。県道45号線沿い、茅ケ崎中央イン"
+"ダー交差点すぐそばです。"
+msgstr ""
+
+#: template-parts/access/access-info.php:110
+msgid "電車でお越しの方"
+msgstr ""
+
+#: template-parts/access/access-info.php:113
+msgid "最寄り駅：相模線 香川駅 下車、徒歩約12分です。"
+msgstr ""
+
+#: template-parts/access/access-info.php:119
+msgid "お問い合わせ"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:20
+#, php-format
+msgid "カテゴリー: %s"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:24
+#, php-format
+msgid "タグ: %s"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:36
+#, php-format
+msgid "年: %s"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:37
+msgid "Y"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:42
+#, php-format
+msgid "月: %s"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:43
+msgid "F Y"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:48
+#, php-format
+msgid "日: %s"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:49
+msgid "F j, Y"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:56
+#, php-format
+msgid "著者: %s"
+msgstr ""
+
+#: template-parts/blog/blog-archive-header.php:63
+msgid "ブログ"
+msgstr ""
+
+#: template-parts/blog/blog-archive-loop.php:25
+msgid "Posts navigation"
+msgstr ""
+
+#: template-parts/blog/blog-archive-loop.php:26
+msgid "Page"
+msgstr ""
+
+#: template-parts/blog/blog-archive-loop.php:32
+msgid "記事が見つかりませんでした。"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-archives.php:20
+msgid "アーカイブ"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-archives.php:62
+msgid "アーカイブを選択"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-archives.php:69
+msgid "アーカイブ選択"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-archives.php:72
+msgid "月を選択…"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-categories.php:19
+#: template-parts/single/single-footer-meta.php:29
+msgid "カテゴリー"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-categories.php:47
+msgid "カテゴリーはありません。"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-recommend.php:21
+msgid "おすすめ記事"
+msgstr ""
+
+#: template-parts/blog/blog-sidebar-recommend.php:76
+msgid "おすすめ記事はありません。"
+msgstr ""
+
+#: template-parts/contact/contact-form.php:17
+msgid "お問い合わせフォーム"
+msgstr ""
+
+#: template-parts/contact/contact-form.php:20
+msgid ""
+"必要事項をご入力のうえ送信してください。内容を確認後、担当者よりご連絡いたし"
+"ます。"
+msgstr ""
+
+#: template-parts/contact/contact-form.php:29
+msgid ""
+"※ お問い合わせ内容によってはご回答までお時間をいただく場合がございます。"
+msgstr ""
+
+#: template-parts/meta/meta-date.php:16
+msgid "更新"
+msgstr ""
+
+#: template-parts/single/single-author.php:18
+msgid "著者について"
+msgstr ""
+
+#: template-parts/single/single-author.php:23
+#, php-format
+msgid "著者アーカイブ: %s"
+msgstr ""
+
+#: template-parts/single/single-author.php:55
+msgid "著者のSNS"
+msgstr ""
+
+#: template-parts/single/single-author.php:57
+msgid "ウェブサイト"
+msgstr ""
+
+#: template-parts/single/single-footer-meta.php:25
+msgid "投稿メタ情報"
+msgstr ""
+
+#: template-parts/single/single-footer-meta.php:44
+msgid "タグ"
+msgstr ""
+
+#: template-parts/single/single-nav.php:22
+msgid "記事ナビゲーション"
+msgstr ""
+
+#: template-parts/single/single-related.php:75
+msgid "関連記事"
+msgstr ""
+
+#: template-parts/single/single-share.php:32
+msgid "＼ この記事をシェア ／"
+msgstr ""
+
+#: template-parts/single/single-share.php:42
+msgid "Share on X (Twitter)"
+msgstr ""
+
+#: template-parts/single/single-share.php:52
+msgid "Share on Facebook"
+msgstr ""
+
+#: template-parts/single/single-share.php:62
+msgid "Share on LINE"
+msgstr ""
+
+#: template-parts/single/single-share.php:71
+msgid "Copy article URL"
+msgstr ""
+
+#: template-parts/single/single-share.php:81
+msgid "Open native share menu"
+msgstr ""
+
+#: woocommerce/global/quantity-input.php:38
+msgid "数量"
+msgstr ""
+
+#: woocommerce/loop/pagination.php:31
+msgid "Product Pagination"
+msgstr ""
+
+#: woocommerce/single-product/related.php:28
+msgid "Related products"
+msgstr ""
+
+#: woocommerce/single-product/up-sells.php:27
+msgid "You may also like&hellip;"
+msgstr ""
