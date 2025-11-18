@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-11-18 12:02+0900\n"
-"PO-Revision-Date: 2025-11-18 13:37+0900\n"
+"POT-Creation-Date: 2025-11-18 14:35+0900\n"
+"PO-Revision-Date: 2025-11-18 14:35+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en_US\n"
@@ -387,38 +387,68 @@ msgid ""
 "90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレ"
 "ル。"
 msgstr ""
+"Wear 90’s street culture with our original JDM apparel.<br class=\"sp-only\">"
 
 #: template-parts/section/section-apparel.php:16
 #: template-parts/section/section-custom-parts.php:15
+#: template-parts/section/section-new-arrivals.php:36
 msgid "More"
-msgstr ""
+msgstr "More"
 
 #: template-parts/section/section-apparel.php:22
 msgid "アパレルカテゴリ"
-msgstr ""
+msgstr "Apparel categories"
 
 #: template-parts/section/section-blog.php:11
 msgid ""
 "ドリフトパーツやアパレルの<br class=\"sp-only\">最新情報をピックアップ。"
 msgstr ""
+"Pick up the latest news on drift parts and apparel.<br class=\"sp-only\">"
 
 #: template-parts/section/section-blog.php:29
 msgid "View All"
-msgstr ""
+msgstr "View All"
 
 #: template-parts/section/section-custom-parts.php:12
 msgid "Custom Parts"
-msgstr ""
+msgstr "Custom Parts"
 
 #: template-parts/section/section-custom-parts.php:13
 msgid ""
 "90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニン"
 "グパーツ。"
 msgstr ""
+"Tuning parts that revive the spirit of 90’s street style in the modern era.<br "
+"class=\"sp-only\">"
 
 #: template-parts/section/section-custom-parts.php:21
 msgid "カスタムパーツカテゴリ"
+msgstr "Custom parts categories"
+
+#: template-parts/section/section-hero.php:15
+msgid "Scroll"
+msgstr "Scroll"
+
+#: template-parts/section/section-new-arrivals.php:10
+msgid "New Arrivals"
+msgstr "New Arrivals"
+
+#: template-parts/section/section-new-arrivals.php:49
+msgid "Previous"
+msgstr "Previous"
+
+#: template-parts/section/section-new-arrivals.php:52
+msgid "Next"
+msgstr "Next"
+
+#: template-parts/section/section-sns.php:9
+msgid "Follow Our Drift life"
+msgstr "Follow our drift life"
+
+#: template-parts/section/section-sns.php:11
+msgid "90'sストリートチューンのリアルを、<br class=\"sp-only\">Instagramで。"
 msgstr ""
+"See the real world of 90’s street-tuned cars<br class=\"sp-only\">on Instagram."
 
 #: template-parts/single/single-author.php:18
 msgid "著者について"
