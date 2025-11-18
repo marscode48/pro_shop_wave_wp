@@ -11,7 +11,7 @@
  */
 ?>
 
-<aside class="blog-sidebar fadeup" role="complementary" aria-label="サイドバー">
+<aside class="blog-sidebar fadeup" role="complementary" aria-label="<?php echo esc_attr__( 'サイドバー', 'proshopwave' ); ?>">
   <div class="blog-sidebar__inner">
     <?php
     // -----------------------------
