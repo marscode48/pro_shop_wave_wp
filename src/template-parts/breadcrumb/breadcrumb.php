@@ -21,7 +21,7 @@ if (function_exists('is_woocommerce') && is_woocommerce()) {
   <nav class="breadcrumb faderight" aria-label="Breadcrumb">
     <ul class="breadcrumb__list">
       <li class="breadcrumb__item">
-        <a href="<?php echo esc_url(home_url('/')); ?>">ホーム</a>
+        <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html__( 'ホーム', 'proshopwave' ); ?></a>
       </li>
       <?php
       if (is_category() || is_single()) {
@@ -68,13 +68,13 @@ if (function_exists('is_woocommerce') && is_woocommerce()) {
         echo '<li class="breadcrumb__item">' . get_the_title() . '</li>';
       } elseif (is_search()) {
         // 検索結果ページ
-        echo '<li class="breadcrumb__item">検索結果: ' . get_search_query() . '</li>';
+        echo '<li class="breadcrumb__item">' . esc_html__( '検索結果:', 'proshopwave' ) . ' ' . esc_html( get_search_query() ) . '</li>';
       } elseif (is_404()) {
         // 404ページ
-        echo '<li class="breadcrumb__item">ページが見つかりません</li>';
+        echo '<li class="breadcrumb__item">' . esc_html__( 'ページが見つかりません', 'proshopwave' ) . '</li>';
       } else {
         // その他のアーカイブ等
-        echo '<li class="breadcrumb__item">' . wp_title('', false) . '</li>';
+        echo '<li class="breadcrumb__item">' . esc_html( wp_title( '', false ) ) . '</li>';
       }
       ?>
     </ul>
