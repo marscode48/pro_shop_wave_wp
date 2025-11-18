@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-11-18 11:17+0900\n"
-"PO-Revision-Date: 2025-11-18 11:22+0900\n"
+"POT-Creation-Date: 2025-11-18 12:02+0900\n"
+"PO-Revision-Date: 2025-11-18 13:37+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
-"Language: en\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,6 +24,7 @@ msgid "Shop"
 msgstr "Shop"
 
 #: footer.php:30 header.php:107 template-parts/blog/blog-archive-header.php:17
+#: template-parts/section/section-blog.php:10
 msgid "Blog"
 msgstr "Blog"
 
@@ -140,7 +141,7 @@ msgstr ""
 msgid "Parts"
 msgstr ""
 
-#: header.php:104
+#: header.php:104 template-parts/section/section-apparel.php:11
 msgid "Apparel"
 msgstr ""
 
@@ -379,6 +380,44 @@ msgstr ""
 
 #: template-parts/meta/meta-date.php:16
 msgid "更新"
+msgstr ""
+
+#: template-parts/section/section-apparel.php:13
+msgid ""
+"90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレ"
+"ル。"
+msgstr ""
+
+#: template-parts/section/section-apparel.php:16
+#: template-parts/section/section-custom-parts.php:15
+msgid "More"
+msgstr ""
+
+#: template-parts/section/section-apparel.php:22
+msgid "アパレルカテゴリ"
+msgstr ""
+
+#: template-parts/section/section-blog.php:11
+msgid ""
+"ドリフトパーツやアパレルの<br class=\"sp-only\">最新情報をピックアップ。"
+msgstr ""
+
+#: template-parts/section/section-blog.php:29
+msgid "View All"
+msgstr ""
+
+#: template-parts/section/section-custom-parts.php:12
+msgid "Custom Parts"
+msgstr ""
+
+#: template-parts/section/section-custom-parts.php:13
+msgid ""
+"90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニン"
+"グパーツ。"
+msgstr ""
+
+#: template-parts/section/section-custom-parts.php:21
+msgid "カスタムパーツカテゴリ"
 msgstr ""
 
 #: template-parts/single/single-author.php:18
