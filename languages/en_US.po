@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
 "POT-Creation-Date: 2025-11-19 15:44+0900\n"
-"PO-Revision-Date: 2025-11-19 15:49+0900\n"
+"PO-Revision-Date: 2025-11-19 15:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en_US\n"
@@ -597,7 +597,7 @@ msgstr "Custom Parts"
 
 #: template-parts/section/section-custom-parts.php:13
 msgid "90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニングパーツ。"
-msgstr "Tuning parts that revive the spirit of 90’s street style<br class=\"sp-only\">in the modern era."
+msgstr "Tuning parts that revive the spirit<br class=\"sp-only\">of 90’s street style in the modern era."
 
 #: template-parts/section/section-custom-parts.php:21
 msgid "カスタムパーツカテゴリ"
