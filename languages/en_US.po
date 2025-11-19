@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-11-18 14:35+0900\n"
-"PO-Revision-Date: 2025-11-18 14:35+0900\n"
+"POT-Creation-Date: 2025-11-19 14:36+0900\n"
+"PO-Revision-Date: 2025-11-19 14:45+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en_US\n"
@@ -11,9 +11,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ../src\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: content-product.php:153 template-parts/section/section-apparel.php:16
+#: template-parts/section/section-custom-parts.php:15
+#: template-parts/section/section-new-arrivals.php:36
+msgid "More"
+msgstr "More"
 
 #: footer.php:21
 msgid "フッターナビゲーション"
@@ -60,7 +65,7 @@ msgstr "TEL:"
 msgid "Mail:"
 msgstr "Mail:"
 
-#: footer.php:76
+#: footer.php:76 template-parts/single/single-author.php:69
 msgid "Instagram"
 msgstr "Instagram"
 
@@ -68,7 +73,7 @@ msgstr "Instagram"
 msgid "X (Twitter)"
 msgstr "X (Twitter)"
 
-#: footer.php:82
+#: footer.php:82 template-parts/single/single-author.php:75
 msgid "Facebook"
 msgstr "Facebook"
 
@@ -169,6 +174,10 @@ msgstr ""
 msgid "サイト内検索（商品・ブログ）"
 msgstr ""
 
+#: index.php:10
+msgid "このテーマにはまだ投稿コンテンツが設定されていません。"
+msgstr ""
+
 #: search.php:83
 msgid "検索結果"
 msgstr ""
@@ -242,8 +251,7 @@ msgid "駐車場"
 msgstr ""
 
 #: template-parts/access/access-info.php:80
-msgid ""
-"店舗前に数台分の専用駐車場あり。ローダウン車両でお越しの際はご注意ください。"
+msgid "店舗前に数台分の専用駐車場あり。ローダウン車両でお越しの際はご注意ください。"
 msgstr ""
 
 #: template-parts/access/access-info.php:89
@@ -255,9 +263,7 @@ msgid "お車でお越しの方"
 msgstr ""
 
 #: template-parts/access/access-info.php:104
-msgid ""
-"新湘南バイパス/圏央道 茅ケ崎中央IC より約3分。県道45号線沿い、茅ケ崎中央イン"
-"ダー交差点すぐそばです。"
+msgid "新湘南バイパス/圏央道 茅ケ崎中央IC より約3分。県道45号線沿い、茅ケ崎中央インダー交差点すぐそばです。"
 msgstr ""
 
 #: template-parts/access/access-info.php:110
@@ -347,6 +353,7 @@ msgid "月を選択…"
 msgstr ""
 
 #: template-parts/blog/blog-sidebar-categories.php:19
+#: template-parts/filterbar/filterbar-woocommerce.php:189
 #: template-parts/single/single-footer-meta.php:29
 msgid "カテゴリー"
 msgstr ""
@@ -363,19 +370,209 @@ msgstr ""
 msgid "おすすめ記事はありません。"
 msgstr ""
 
+#: template-parts/blog/blog-sidebar.php:14
+msgid "サイドバー"
+msgstr ""
+
+#: template-parts/breadcrumb/breadcrumb.php:24
+msgid "ホーム"
+msgstr ""
+
+#: template-parts/breadcrumb/breadcrumb.php:71
+msgid "検索結果:"
+msgstr ""
+
+#: template-parts/breadcrumb/breadcrumb.php:74
+msgid "ページが見つかりません"
+msgstr ""
+
+#: template-parts/card/card-blog.php:22
+msgid "Default Image"
+msgstr ""
+
+#: template-parts/card/card-blog.php:46
+msgid "Read More"
+msgstr ""
+
 #: template-parts/contact/contact-form.php:17
 msgid "お問い合わせフォーム"
 msgstr ""
 
 #: template-parts/contact/contact-form.php:20
-msgid ""
-"必要事項をご入力のうえ送信してください。内容を確認後、担当者よりご連絡いたし"
-"ます。"
+msgid "必要事項をご入力のうえ送信してください。内容を確認後、担当者よりご連絡いたします。"
 msgstr ""
 
 #: template-parts/contact/contact-form.php:29
-msgid ""
-"※ お問い合わせ内容によってはご回答までお時間をいただく場合がございます。"
+msgid "※ お問い合わせ内容によってはご回答までお時間をいただく場合がございます。"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:190
+#: template-parts/filterbar/filterbar-woocommerce.php:195
+#: template-parts/filterbar/filterbar-woocommerce.php:200
+msgid "All"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:194
+#: template-parts/single/single-footer-meta.php:44
+msgid "タグ"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:199
+msgid "ブランド"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:203
+#: template-parts/filterbar/filterbar-woocommerce.php:322
+msgid "フィルター"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:211
+msgid "カテゴリで選ぶ"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:214
+msgid "カテゴリを選択"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:234
+msgid "カテゴリーをクリア"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:235
+#: template-parts/filterbar/filterbar-woocommerce.php:264
+#: template-parts/filterbar/filterbar-woocommerce.php:312
+#: template-parts/filterbar/filterbar-woocommerce.php:402
+msgid "適用"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:242
+#: template-parts/filterbar/filterbar-woocommerce.php:349
+msgid "タグで選ぶ"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:245
+msgid "人気タグ"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:253
+msgid "タグを検索"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:254
+#: template-parts/filterbar/filterbar-woocommerce.php:358
+msgid "タグ名で検索（例: エアロ）"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:258
+msgid "選択中"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:263
+msgid "タグをクリア"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:271
+#: template-parts/filterbar/filterbar-woocommerce.php:366
+msgid "ブランドで選ぶ"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:274
+#: template-parts/filterbar/filterbar-woocommerce.php:370
+msgid "ブランド/メーカー"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:281
+msgid "ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:287
+#: template-parts/filterbar/filterbar-woocommerce.php:377
+msgid "車種"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:298
+#: template-parts/filterbar/filterbar-woocommerce.php:386
+msgid "型式"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:311
+msgid "ブランドをクリア"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:324
+msgid "条件で絞り込み"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:325
+msgid "閉じる"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:330
+msgid "カテゴリーで選ぶ"
+msgstr ""
+
+#: template-parts/filterbar/filterbar-woocommerce.php:401
+msgid "リセット"
+msgstr ""
+
+#: template-parts/hero/hero-slide1.php:38
+msgid "Hero Image 1"
+msgstr ""
+
+#: template-parts/hero/hero-slide1.php:42
+msgid "90’s Drift Legacy."
+msgstr ""
+
+#: template-parts/hero/hero-slide1.php:44
+msgid "Born in Yokohama."
+msgstr ""
+
+#: template-parts/hero/hero-slide1.php:46
+msgid "<span class=\"hero__highlight\">JDM</span> Forever."
+msgstr ""
+
+#: template-parts/hero/hero-slide1.php:49
+msgid "90年代ストリートの系譜を受け継ぐ、<br class=\"sp-only\">横浜発・ドリフトチューンの頂点。"
+msgstr ""
+
+#: template-parts/hero/hero-slide2.php:16
+msgid "Hero image 2"
+msgstr ""
+
+#: template-parts/hero/hero-slide2.php:20
+msgid "Slide Hard."
+msgstr ""
+
+#: template-parts/hero/hero-slide2.php:21
+msgid "Style Bold."
+msgstr ""
+
+#: template-parts/hero/hero-slide2.php:22
+msgid "<span class=\"hero__highlight\">WAVE</span> is Drift Culture."
+msgstr ""
+
+#: template-parts/hero/hero-slide2.php:25
+msgid "攻めの走り、攻めのスタイル。<br class=\"sp-only\">― それがWAVE。"
+msgstr ""
+
+#: template-parts/hero/hero-slide3.php:16
+msgid "Hero image 3"
+msgstr ""
+
+#: template-parts/hero/hero-slide3.php:20
+msgid "From Japan,"
+msgstr ""
+
+#: template-parts/hero/hero-slide3.php:21
+msgid "Built for the <span class=\"hero__highlight\">World.</span>"
+msgstr ""
+
+#: template-parts/hero/hero-slide3.php:22
+msgid "Drift Culture Lives On."
+msgstr ""
+
+#: template-parts/hero/hero-slide3.php:25
+msgid "本物のドリフトカルチャーを、<br class=\"sp-only\">日本から世界へ。"
 msgstr ""
 
 #: template-parts/meta/meta-date.php:16
@@ -383,27 +580,16 @@ msgid "更新"
 msgstr ""
 
 #: template-parts/section/section-apparel.php:13
-msgid ""
-"90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレ"
-"ル。"
-msgstr ""
-"Wear 90’s street culture with our original JDM apparel.<br class=\"sp-only\">"
-
-#: template-parts/section/section-apparel.php:16
-#: template-parts/section/section-custom-parts.php:15
-#: template-parts/section/section-new-arrivals.php:36
-msgid "More"
-msgstr "More"
+msgid "90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレル。"
+msgstr "Wear 90’s street culture with our original JDM apparel.<br class=\"sp-only\">"
 
 #: template-parts/section/section-apparel.php:22
 msgid "アパレルカテゴリ"
 msgstr "Apparel categories"
 
 #: template-parts/section/section-blog.php:11
-msgid ""
-"ドリフトパーツやアパレルの<br class=\"sp-only\">最新情報をピックアップ。"
-msgstr ""
-"Pick up the latest news on drift parts and apparel.<br class=\"sp-only\">"
+msgid "ドリフトパーツやアパレルの<br class=\"sp-only\">最新情報をピックアップ。"
+msgstr "Pick up the latest news on drift parts and apparel.<br class=\"sp-only\">"
 
 #: template-parts/section/section-blog.php:29
 msgid "View All"
@@ -414,12 +600,8 @@ msgid "Custom Parts"
 msgstr "Custom Parts"
 
 #: template-parts/section/section-custom-parts.php:13
-msgid ""
-"90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニン"
-"グパーツ。"
-msgstr ""
-"Tuning parts that revive the spirit of 90’s street style in the modern era.<br "
-"class=\"sp-only\">"
+msgid "90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニングパーツ。"
+msgstr "Tuning parts that revive the spirit of 90’s street style in the modern era.<br class=\"sp-only\">"
 
 #: template-parts/section/section-custom-parts.php:21
 msgid "カスタムパーツカテゴリ"
@@ -447,8 +629,7 @@ msgstr "Follow our drift life"
 
 #: template-parts/section/section-sns.php:11
 msgid "90'sストリートチューンのリアルを、<br class=\"sp-only\">Instagramで。"
-msgstr ""
-"See the real world of 90’s street-tuned cars<br class=\"sp-only\">on Instagram."
+msgstr "See the real world of 90’s street-tuned cars<br class=\"sp-only\">on Instagram."
 
 #: template-parts/single/single-author.php:18
 msgid "著者について"
@@ -467,12 +648,16 @@ msgstr ""
 msgid "ウェブサイト"
 msgstr ""
 
-#: template-parts/single/single-footer-meta.php:25
-msgid "投稿メタ情報"
+#: template-parts/single/single-author.php:63
+msgid "Twitter"
 msgstr ""
 
-#: template-parts/single/single-footer-meta.php:44
-msgid "タグ"
+#: template-parts/single/single-author.php:81
+msgid "YouTube"
+msgstr ""
+
+#: template-parts/single/single-footer-meta.php:25
+msgid "投稿メタ情報"
 msgstr ""
 
 #: template-parts/single/single-nav.php:22
@@ -507,8 +692,18 @@ msgstr ""
 msgid "Open native share menu"
 msgstr ""
 
-#: woocommerce/global/quantity-input.php:38
+#: woocommerce/global/quantity-input.php:34
+#: woocommerce/global/quantity-input.php:42
 msgid "数量"
+msgstr ""
+
+#: woocommerce/global/quantity-input.php:45
+#, php-format
+msgid "%s 個"
+msgstr ""
+
+#: woocommerce/global/quantity-input.php:64
+msgid "商品数量"
 msgstr ""
 
 #: woocommerce/loop/pagination.php:31
