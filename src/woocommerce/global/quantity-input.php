@@ -30,12 +30,22 @@ $step        = isset($step) ? wc_stock_amount($step) : 1;
 
 ?>
 <div class="product-quantity">
-  <span class="product-quantity__label product-quantity__label">数量</span>
+  <span class="product-quantity__label product-quantity__label">
+    <?php echo esc_html__('数量', 'proshopwave'); ?>
+  </span>
   <div class="product-quantity__controls">
     <span class="product-quantity__button product-quantity__button--decrease js-quantity-decrease"></span>
     <div class="product-quantity__input-wrapper">
       <label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>">
-        <?php echo esc_html($product ? $product->get_name() : __('数量', 'woocommerce')); ?>個
+        <?php
+        // translators: %s: product name or "quantity".
+        $pw_quantity_label = $product ? $product->get_name() : __('数量', 'proshopwave');
+
+        printf(
+          esc_html__('%s 個', 'proshopwave'),
+          esc_html($pw_quantity_label)
+        );
+        ?>
       </label>
       <input
         type="number"
@@ -51,7 +61,7 @@ $step        = isset($step) ? wc_stock_amount($step) : 1;
         placeholder=""
         inputmode="numeric"
         autocomplete="off"
-        aria-label="商品数量">
+        aria-label="<?php echo esc_attr__('商品数量', 'proshopwave'); ?>">
     </div>
     <span class="product-quantity__button product-quantity__button--increase js-quantity-increase"></span>
   </div>
