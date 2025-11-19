@@ -31,8 +31,7 @@ if ($related_products) : ?>
 		?>
 			<div class="products__header">
 				<h2 class="section__title fadeup">
-					<span class="products__header--top"><?php echo esc_html($heading); ?></span>
-					<span class="products__header--bottom">関連商品</span>
+					<?php echo esc_html($heading); ?>
 				</h2>
 			</div>
 		<?php endif; ?>

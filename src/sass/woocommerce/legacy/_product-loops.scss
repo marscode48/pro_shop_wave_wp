@@ -34,20 +34,6 @@
     }
   }
 
-  .products__header,
-  .product-archive__header {
-    &--top {
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    &--bottom {
-      display: block;
-      font-size: 1rem;
-      font-weight: 400;
-    }
-  }
-
   .products ul,
   ul.products {
     // 商品グリッドレイアウトをミックスインで適用
