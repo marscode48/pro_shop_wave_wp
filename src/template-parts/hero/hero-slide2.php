@@ -16,12 +16,12 @@
       <img src="<?php echo get_theme_file_uri('images/hero_slide_02_sp.jpg'); ?>" alt="<?php echo esc_attr__('Hero image 2', 'proshopwave'); ?>" class="hero__image" />
     </picture>
     <div class="hero__content">
-      <h2 class="hero__heading-en">
+      <h2 class="hero__heading">
         <span class="hero__text-marker"><?php echo esc_html__('Slide Hard.', 'proshopwave'); ?></span><br>
         <span class="hero__text-marker"><?php echo esc_html__('Style Bold.', 'proshopwave'); ?></span><br>
         <span class="hero__text-marker"><?php echo wp_kses_post(__('<span class="hero__highlight">WAVE</span> is Drift Culture.')); ?></span>
       </h2>
-      <p class="hero__subheading-jp">
+      <p class="hero__subheading">
         <?php echo wp_kses_post(__('攻めの走り、攻めのスタイル。<br class="sp-only">― それがWAVE。', 'proshopwave')); ?>
       </p>
     </div>

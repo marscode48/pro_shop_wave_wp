@@ -38,14 +38,14 @@
       <img src="<?php echo get_theme_file_uri('images/hero_slide_01_sp.jpg'); ?>" alt="<?php echo esc_attr__('Hero Image 1', 'proshopwave'); ?>" class="hero__image" />
     </picture>
     <div class="hero__content">
-      <h2 class="hero__heading-en">
+      <h2 class="hero__heading">
         <span class="hero__text-marker"><?php echo esc_html__("90’s Drift Legacy.", 'proshopwave'); ?></span>
         <br>
         <span class="hero__text-marker"><?php echo esc_html__("Born in Yokohama.", 'proshopwave'); ?></span>
         <br>
         <span class="hero__text-marker"><?php echo wp_kses_post(__('<span class="hero__highlight">JDM</span> Forever.')); ?></span>
       </h2>
-      <p class="hero__subheading-jp">
+      <p class="hero__subheading">
         <?php echo wp_kses_post(__('90年代ストリートの系譜を受け継ぐ、<br class="sp-only">横浜発・ドリフトチューンの頂点。', 'proshopwave')); ?>
       </p>
     </div>
