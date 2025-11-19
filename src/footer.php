@@ -57,7 +57,6 @@
             <strong><?php esc_html_e('PRO SHOP WAVE', 'proshopwave'); ?></strong>
           </p>
           <p>
-            <?php esc_html_e('〒253-0083', 'proshopwave'); ?>
             <a href="https://maps.app.goo.gl/2j8G8uKaDDwhdHmF9" target="_blank" rel="noopener noreferrer">
               <?php esc_html_e('神奈川県茅ヶ崎市西久保１５１８−１', 'proshopwave'); ?>
             </a>
