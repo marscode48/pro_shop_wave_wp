@@ -2,29 +2,32 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-04 14:28:17+0000\n"
+"Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2025-11-20 14:36+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/4.0.1\n"
-"Language: ja_JP\n"
-"Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
+"X-Generator: Poedit 3.8\n"
 
 #: assets/client/blocks/add-to-cart-with-options/block.json
 msgctxt "block description"
 msgid "Use blocks to create an \"Add to cart\" area that's customized for different product types, such as variable and grouped. "
-msgstr "ブロックを使用して「お買い物カゴに追加」エリアを作成し、バリエーションやグループ化など、さまざまな商品タイプに合わせてカスタマイズします。 "
+msgstr "ブロックを使用して「カートに追加」エリアを作成し、バリエーションやグループ化など、さまざまな商品タイプに合わせてカスタマイズします。 "
 
 #: assets/client/blocks/add-to-cart-with-options/block.json
 msgctxt "block title"
 msgid "Add to Cart + Options (Beta)"
-msgstr "オプションを付けてお買い物カゴに追加 (ベータ版)"
+msgstr "オプションを付けてカートに追加 (ベータ版)"
 
 #: assets/client/blocks/add-to-cart-with-options-variation-selector/block.json
 msgctxt "block description"
 msgid "Display any product variations available to select from and add to cart."
-msgstr "選択してお買い物カゴできる商品バリエーションを表示します。"
+msgstr "選択してカートできる商品バリエーションを表示します。"
 
 #: assets/client/blocks/add-to-cart-with-options-variation-selector/block.json
 msgctxt "block title"
@@ -79,7 +82,7 @@ msgstr "グループ化された商品: アイテムラベル (ベータ版)"
 #: assets/client/blocks/add-to-cart-form/block.json
 msgctxt "block description"
 msgid "Display a button that lets customers add a product to their cart. Use the added options to optimize for different product types."
-msgstr "顧客が商品をお買い物カゴに追加するためのボタンを表示します。 追加されたオプションを使用して、さまざまな商品タイプに最適化します。"
+msgstr "顧客が商品をカートに追加するためのボタンを表示します。 追加されたオプションを使用して、さまざまな商品タイプに最適化します。"
 
 #. translators: %1$s: Order number
 #: templates/emails/customer-cancelled-order.php:40
@@ -118,12 +121,12 @@ msgstr "注文のキャンセル: #%s"
 #. translators: %s: product ID
 #: src/StoreApi/Utilities/CartController.php:1166
 msgid "Product with ID \"%s\" was not found and cannot be added to the cart."
-msgstr "IDが「%s」の商品が見つからなかったため、お買い物カゴに追加できません。"
+msgstr "IDが「%s」の商品が見つからなかったため、カートに追加できません。"
 
 #. translators: %s: product name
 #: src/StoreApi/Utilities/CartController.php:273
 msgid "You cannot add &quot;%s&quot; with a quantity less than or equal to 0 to the cart."
-msgstr "数量が0以下の「%s」は、お買い物カゴに追加できません。"
+msgstr "数量が0以下の「%s」は、カートに追加できません。"
 
 #: src/Internal/Utilities/Users.php:50
 msgid "Invalid user ID."
@@ -252,12 +255,12 @@ msgstr "%1$s - 画像 (%2$d)"
 #. translators: %s: URL to the documentation.
 #: src/Blocks/Shipping/ShippingController.php:211
 msgid "This feature is not available when using the <a href=\"%s\">Cart and checkout blocks</a>. Shipping will be calculated at checkout."
-msgstr "この機能は、<a href=\"%s\">お買い物カゴおよび購入手続きブロック</a>の使用中はご利用いただけません。 送料は購入手続き時に計算されます。"
+msgstr "この機能は、<a href=\"%s\">カートおよび購入手続きブロック</a>の使用中はご利用いただけません。 送料は購入手続き時に計算されます。"
 
 #: src/Blocks/Domain/Services/CheckoutLink.php:67
 #: src/Blocks/Domain/Services/CheckoutLink.php:155
 msgid "The provided checkout link was out of date or invalid. No products were added to the cart."
-msgstr "指定された購入手続きリンクは古くなっているか、無効です。 お買い物カゴに追加された商品はありません。"
+msgstr "指定された購入手続きリンクは古くなっているか、無効です。 カートに追加された商品はありません。"
 
 #. translators: %1$s: Product filter name, %2$d: Number of products
 #: src/Blocks/BlockTypes/ProductFilterCheckboxList.php:159
@@ -268,7 +271,7 @@ msgstr[0] "%1$s (%2$d個の商品)"
 
 #: src/Blocks/BlockTypes/ProductButton.php:350
 msgid "Added to cart"
-msgstr "お買い物カゴに追加されました"
+msgstr "カートに追加されました"
 
 #. translators: items is items in a cart.
 #: src/Blocks/BlockTypes/MiniCartTitleItemsCounterBlock.php:46
@@ -278,7 +281,7 @@ msgstr "(%d個のアイテム)"
 #. translators: %s is the name of the product in cart.
 #: src/Blocks/BlockTypes/MiniCartItemsBlock.php:52
 msgid "Quantity of %s in your cart"
-msgstr "「お買い物カゴ」にある%sの数量"
+msgstr "「カート」にある%sの数量"
 
 #: src/Admin/Features/OnboardingTasks/Tasks/Payments.php:63
 msgid "5 minutes"
@@ -1751,7 +1754,7 @@ msgstr "商品の説明、属性、レビューを表示します"
 #: assets/client/blocks/add-to-cart-with-options-grouped-product-selector/block.json
 msgctxt "block description"
 msgid "Display a group of products that can be added to the cart."
-msgstr "お買い物カゴに追加できる商品のグループを表示します。"
+msgstr "カートに追加できる商品のグループを表示します。"
 
 #: assets/client/blocks/add-to-cart-with-options-grouped-product-selector/block.json
 msgctxt "block title"
@@ -2209,12 +2212,12 @@ msgstr "ダミー商品"
 
 #: src/Blocks/Templates/GroupedProductAddToCartWithOptionsTemplate.php:48
 msgid "Template used to display the Add to Cart + Options form for Grouped Products."
-msgstr "グループ化された商品に「オプションを付けてお買い物カゴに追加」フォームを表示するために使用するテンプレート。"
+msgstr "グループ化された商品に「オプションを付けてカートに追加」フォームを表示するために使用するテンプレート。"
 
 #: src/Blocks/Templates/GroupedProductAddToCartWithOptionsTemplate.php:39
 msgctxt "Template name"
 msgid "Grouped Product Add to Cart + Options"
-msgstr "グループ化された商品の「オプションを付けてお買い物カゴに追加」"
+msgstr "グループ化された商品の「オプションを付けてカートに追加」"
 
 #: src/Blocks/Domain/Services/CheckoutFieldsSchema/Validation.php:107
 msgid "Invalid field."
@@ -2457,7 +2460,7 @@ msgstr "現在、アクションスケジューラーは次の場所から読み
 
 #: includes/wc-template-functions.php:2629
 msgid "Cart is not available. This may indicate that the function is being called before woocommerce_init or in an admin context."
-msgstr "お買い物カゴは利用できません。 これは、woocommerce_init の前または管理コンテキストで関数が呼び出されていることを示している可能性があります。"
+msgstr "カートは利用できません。 これは、woocommerce_init の前または管理コンテキストで関数が呼び出されていることを示している可能性があります。"
 
 #. translators: %s: admin email
 #: includes/emails/class-wc-email.php:1062
@@ -2897,14 +2900,14 @@ msgstr "商品概要"
 #: assets/client/blocks/add-to-cart-with-options-quantity-selector/block.json
 msgctxt "block description"
 msgid "Display an input field customers can use to select the number of products to add to their cart. "
-msgstr "顧客がお買い物カゴに追加する商品数を選択するために使用できる入力フィールドを表示します。 "
+msgstr "顧客がカートに追加する商品数を選択するために使用できる入力フィールドを表示します。 "
 
 #: src/Blocks/BlockTypes/MiniCartItemsBlock.php:42
 #: assets/client/blocks/cart.js:12
 #: assets/client/blocks/mini-cart-contents.js:13
 #: assets/client/blocks/wc-cart-checkout-base-frontend.js:9
 msgid "Products in cart"
-msgstr "お買い物カゴの商品"
+msgstr "カートの商品"
 
 #: includes/admin/settings/class-wc-settings-emails.php:803
 #: assets/client/admin/wp-admin-scripts/settings-embed.js:2
@@ -3795,12 +3798,12 @@ msgstr "すべての商品"
 #: assets/client/blocks/cart-link/block.json
 msgctxt "block description"
 msgid "Display a link to the cart."
-msgstr "お買い物カゴへのリンクを表示します。"
+msgstr "カートへのリンクを表示します。"
 
 #: assets/client/blocks/cart-link/block.json
 msgctxt "block title"
 msgid "Cart Link"
-msgstr "お買い物カゴリンク"
+msgstr "カートリンク"
 
 #: assets/client/admin/product-editor/blocks/generic/notice/block.json
 #: assets/client/admin/product-editor/blocks/generic/product-notice-field/block.json
@@ -3845,12 +3848,12 @@ msgstr "お支払い方法に問題があるため、注文を完了できませ
 #. translators: 1: product name 2: maximum quantity
 #: src/StoreApi/Utilities/QuantityLimits.php:153
 msgid "The maximum quantity of &quot;%1$s&quot; allowed in the cart is %2$s"
-msgstr "お買い物カゴに入れることができる「%1$s」の最大数量は%2$sです"
+msgstr "カートに入れることができる「%1$s」の最大数量は%2$sです"
 
 #. translators: 1: product name 2: minimum quantity
 #: src/StoreApi/Utilities/QuantityLimits.php:148
 msgid "The minimum quantity of &quot;%1$s&quot; allowed in the cart is %2$s"
-msgstr "お買い物カゴに入れることができる「%1$s」の最小数量は%2$sです"
+msgstr "カートに入れることができる「%1$s」の最小数量は%2$sです"
 
 #. translators: 1: product name
 #: src/StoreApi/Utilities/QuantityLimits.php:143
@@ -3859,7 +3862,7 @@ msgstr "「%1$s」の数量は変更できません"
 
 #: src/StoreApi/Utilities/CartController.php:546
 msgid "Cannot place an order, your cart is empty."
-msgstr "お買い物カゴが空のため注文できません。"
+msgstr "カートが空のため注文できません。"
 
 #: src/Internal/ReceiptRendering/ReceiptRenderingEngine.php:392
 msgid "Success"
@@ -4017,7 +4020,7 @@ msgstr "WooCommerce の Meta 広告とピクセル"
 
 #: includes/class-wc-frontend-scripts.php:613
 msgid "Your selection has been reset. Please select some product options before adding this product to your cart."
-msgstr "選択内容がリセットされました。 この商品をお買い物カゴに追加する前に商品オプションを選択してください。"
+msgstr "選択内容がリセットされました。 この商品をカートに追加する前に商品オプションを選択してください。"
 
 #: includes/class-wc-frontend-scripts.php:520
 msgid "View full-screen image gallery"
@@ -4051,7 +4054,7 @@ msgstr "ストアではショートコード購入手続きを使用していま
 #. Translators: %1$s and %2$s are opening and closing <a> tags respectively.
 #: includes/admin/settings/class-wc-settings-accounts.php:329
 msgid "This feature is only available with the Cart & Checkout blocks. %1$sLearn more%2$s."
-msgstr "この機能は、お買い物カゴおよび購入手続きブロックでのみ使用できます。 %1$s詳しくはこちらをご覧ください%2$s。"
+msgstr "この機能は、カートおよび購入手続きブロックでのみ使用できます。 %1$s詳しくはこちらをご覧ください%2$s。"
 
 #: includes/admin/settings/class-wc-settings-accounts.php:129
 #: includes/admin/settings/class-wc-settings-accounts.php:142
@@ -4519,7 +4522,7 @@ msgstr "商品ページネーション"
 #. translators: %s is the product name
 #: templates/cart/mini-cart.php:58
 msgid "&ldquo;%s&rdquo; has been removed from your cart"
-msgstr "「%s」がお買い物カゴから削除されました"
+msgstr "「%s」がカートから削除されました"
 
 #. translators: %s: is the field error message
 #: src/StoreApi/Routes/V1/Checkout.php:276
@@ -4564,7 +4567,7 @@ msgstr "PayPal イベント (IPN リクエストなど) をログに記録し、
 #. translators: %s: Product title
 #: includes/class-wc-product-simple.php:90
 msgid "&ldquo;%s&rdquo; has been added to your cart"
-msgstr "「%s」をお買い物カゴに追加しました"
+msgstr "「%s」をカートに追加しました"
 
 #: includes/admin/views/html-admin-page-status-report.php:1093
 #: includes/rest-api/Controllers/Version2/class-wc-rest-system-status-tools-v2-controller.php:183
@@ -6956,13 +6959,13 @@ msgstr "期限切れの一時ファイルのクリーンアップを予約変更
 
 #: src/Internal/Features/ProductBlockEditor/ProductTemplates/SimpleProductTemplate.php:1194
 msgid "Tip: By suggesting complementary products in the cart using cross-sells, you can significantly increase the average order value."
-msgstr "ヒント: クロスセルを使ってお買い物カゴの商品の関連商品をおすすめすると、平均注文金額を大幅に増やすことができます。"
+msgstr "ヒント: クロスセルを使ってカートの商品の関連商品をおすすめすると、平均注文金額を大幅に増やすことができます。"
 
 #. translators: %1$s: "Learn more about linked products" link opening tag.
 #. %2$s: "Learn more about linked products" link closing tag.
 #: src/Internal/Features/ProductBlockEditor/ProductTemplates/SimpleProductTemplate.php:1174
 msgid "By suggesting complementary products in the cart using cross-sells, you can significantly increase the average order value. %1$sLearn more about linked products%2$s"
-msgstr "クロスセルを使ってお買い物カゴの商品の関連商品をお勧めすると、平均注文金額を大幅に増やすことができます。 %1$s関連商品の詳しい説明はこちら%2$s"
+msgstr "クロスセルを使ってカートの商品の関連商品をお勧めすると、平均注文金額を大幅に増やすことができます。 %1$s関連商品の詳しい説明はこちら%2$s"
 
 #: templates/order/attribution-details.php:77
 #: assets/client/blocks/add-to-cart-with-options-variation-selector-attribute.js:1
@@ -7175,7 +7178,7 @@ msgstr "お客様が購入手続き時に利用できる「ストアクレジッ
 
 #: src/Admin/Features/MarketingRecommendations/DefaultMarketingRecommendations.php:356
 msgid "Create a unique URL that applies a discount and optionally adds one or more products to the customer's cart."
-msgstr "割引が適用される固有の URL を作成し、任意で1つ以上の商品をお客様のお買い物カゴに追加します。"
+msgstr "割引が適用される固有の URL を作成し、任意で1つ以上の商品をお客様のカートに追加します。"
 
 #: src/Admin/Features/MarketingRecommendations/DefaultMarketingRecommendations.php:342
 msgid "Powerful, \"all in one\" solution for gift certificates, store credits, discount coupons and vouchers."
@@ -7219,7 +7222,7 @@ msgstr "面倒な部分を代わりに引き受けてくれる自動マーケテ
 
 #: src/Admin/Features/MarketingRecommendations/DefaultMarketingRecommendations.php:162
 msgid "Send targeted campaigns, recover abandoned carts and more with Mailchimp."
-msgstr "Mailchimp を使用すると、対象を絞り込んだキャンペーンの送信や放置されたお買い物カゴの復元などができます。"
+msgstr "Mailchimp を使用すると、対象を絞り込んだキャンペーンの送信や放置されたカートの復元などができます。"
 
 #: src/Admin/Features/MarketingRecommendations/DefaultMarketingRecommendations.php:96
 msgid "Create advertising campaigns and reach one billion global users with TikTok for WooCommerce."
@@ -7710,7 +7713,7 @@ msgstr "%sアイコン"
 
 #: src/Internal/Features/ProductBlockEditor/ProductTemplates/SimpleProductTemplate.php:1034
 msgid "This product will not trigger your customer's shipping calculator in cart or at checkout. This product also won't require your customers to enter their shipping details at checkout. <a href=\"https://woocommerce.com/document/managing-products/#adding-a-virtual-product\" target=\"_blank\" rel=\"noreferrer\">Read more about virtual products</a>."
-msgstr "この商品では顧客のお買い物カゴまたは購入手続き時に、送料計算機はトリガーされません。 また、この商品では顧客は購入手続き時にお届け先詳細の入力を求められません。 <a href=\"https://woocommerce.com/document/managing-products/#adding-a-virtual-product\" target=\"_blank\" rel=\"noreferrer\">バーチャル商品について詳細をご覧ください</a>。"
+msgstr "この商品では顧客のカートまたは購入手続き時に、送料計算機はトリガーされません。 また、この商品では顧客は購入手続き時にお届け先詳細の入力を求められません。 <a href=\"https://woocommerce.com/document/managing-products/#adding-a-virtual-product\" target=\"_blank\" rel=\"noreferrer\">バーチャル商品について詳細をご覧ください</a>。"
 
 #: src/Internal/Features/ProductBlockEditor/ProductTemplates/SimpleProductTemplate.php:1007
 msgid "This product has options, such as size or color. You can now manage each variation's shipping settings and other details individually."
@@ -7754,7 +7757,7 @@ msgstr "この商品にはサイズや色などのオプションがあります
 
 #: src/Internal/Features/ProductBlockEditor/ProductTemplates/ProductVariationTemplate.php:452
 msgid "This variation will not trigger your customer's shipping calculator in cart or at checkout. This product also won't require your customers to enter their shipping details at checkout. <a href=\"https://woocommerce.com/document/managing-products/#adding-a-virtual-product\" target=\"_blank\" rel=\"noreferrer\">Read more about virtual products</a>."
-msgstr "このバリエーションでは顧客のお買い物カゴまたは購入手続き時に、送料計算機はトリガーされません。 また、この商品では顧客は購入手続き時にお届け先詳細の入力を求められません。 <a href=\"https://woocommerce.com/document/managing-products/#adding-a-virtual-product\" target=\"_blank\" rel=\"noreferrer\">バーチャル商品について詳細をご覧ください</a>。"
+msgstr "このバリエーションでは顧客のカートまたは購入手続き時に、送料計算機はトリガーされません。 また、この商品では顧客は購入手続き時にお届け先詳細の入力を求められません。 <a href=\"https://woocommerce.com/document/managing-products/#adding-a-virtual-product\" target=\"_blank\" rel=\"noreferrer\">バーチャル商品について詳細をご覧ください</a>。"
 
 #. translators: %s is a number of files.
 #: src/Internal/Admin/Logging/PageController.php:669
@@ -7894,7 +7897,7 @@ msgstr "WooCommerce ストア識別子。"
 #. translators: %s: Product title
 #: includes/class-wc-product-simple.php:75
 msgid "Add to cart: &ldquo;%s&rdquo;"
-msgstr "お買い物カゴに追加: 「%s」"
+msgstr "カートに追加: 「%s」"
 
 #: includes/admin/settings/views/html-admin-page-shipping-zones.php:42
 msgid "An optional zone you can use to set the shipping method(s) available to any regions that have not been listed above."
@@ -8274,7 +8277,7 @@ msgstr "ページ: 購入手続き"
 #: src/Blocks/Templates/CartTemplate.php:33
 msgctxt "Template name"
 msgid "Page: Cart"
-msgstr "ページ: お買い物カゴ"
+msgstr "ページ: カート"
 
 #: src/StoreApi/Schemas/V1/ItemSchema.php:23
 msgid "The item type."
@@ -8381,7 +8384,7 @@ msgstr "買い物客がアクセスして購入を完了するページ"
 #. Translators: %s Page contents.
 #: includes/admin/settings/class-wc-settings-advanced.php:81
 msgid "Page where shoppers review their shopping cart"
-msgstr "買い物客がお買い物カゴを確認するページ"
+msgstr "買い物客がカートを確認するページ"
 
 #: includes/admin/class-wc-admin-webhooks-table-list.php:217
 msgid "Legacy"
@@ -8634,12 +8637,12 @@ msgstr "Products (ベータ)"
 #: assets/client/blocks/mini-cart/block.json
 msgctxt "block description"
 msgid "Display a button for shoppers to quickly view their cart."
-msgstr "買い物客がお買い物カゴをすぐに表示できるようにボタンを表示します。"
+msgstr "買い物客がカートをすぐに表示できるようにボタンを表示します。"
 
 #: assets/client/blocks/mini-cart/block.json
 msgctxt "block title"
 msgid "Mini-Cart"
-msgstr "ミニお買い物カゴ"
+msgstr "ミニカート"
 
 #: assets/client/blocks/inner-blocks/cart-express-payment-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-express-payment-block/block.json
@@ -8829,7 +8832,7 @@ msgstr "注文の合計。"
 
 #: src/StoreApi/Schemas/V1/OrderFeeSchema.php:30
 msgid "Unique identifier for the fee within the cart"
-msgstr "お買い物カゴ内の手数料の一意識別子"
+msgstr "カート内の手数料の一意識別子"
 
 #: src/StoreApi/Schemas/V1/ItemSchema.php:66
 msgid "If the quantity is editable or fixed."
@@ -8863,11 +8866,11 @@ msgstr "このご注文に対する支払いはできません。"
 #: src/Blocks/BlockTypes/ProductButton.php:111
 #: src/Blocks/BlockTypes/ProductButton.php:355
 msgid "%s in cart"
-msgstr "お買い物カゴ内の%s"
+msgstr "カート内の%s"
 
 #: src/Blocks/Templates/MiniCartTemplate.php:60
 msgid "The Mini-Cart template allows shoppers to see their cart items and provides access to the Cart and Checkout pages."
-msgstr "ミニお買い物カゴのテンプレートを使用すると、買い物客がお買い物カゴのアイテムを確認したり、お買い物カゴページと購入手続きページにアクセスしたりできます。"
+msgstr "ミニカートのテンプレートを使用すると、買い物客がカートのアイテムを確認したり、カートページと購入手続きページにアクセスしたりできます。"
 
 #: patterns/hero-product-chessboard.php:16
 msgid "We use only the highest-quality materials in our products, ensuring that they look great and last for years to come."
@@ -9033,7 +9036,7 @@ msgstr "購入手続きテンプレートは、購入プロセスの最終ステ
 
 #: src/Blocks/Templates/CartTemplate.php:42
 msgid "The Cart template displays the items selected by the user for purchase, including quantities, prices, and discounts. It allows users to review their choices before proceeding to checkout."
-msgstr "お買い物カゴテンプレートには、数量、価格、割引など、購入に関してユーザーが選択したアイテムが表示されます。 これにより、ユーザーは購入手続きに進む前に選択内容を確認できます。"
+msgstr "カートテンプレートには、数量、価格、割引など、購入に関してユーザーが選択したアイテムが表示されます。 これにより、ユーザーは購入手続きに進む前に選択内容を確認できます。"
 
 #: src/StoreApi/Schemas/V1/CheckoutSchema.php:109
 msgid "Order number used for display."
@@ -9374,17 +9377,17 @@ msgstr "この注文を表示するには、アカウントにログインして
 #: assets/client/blocks/inner-blocks/mini-cart-title-label-block/block.json
 msgctxt "block description"
 msgid "Block that displays the 'Your cart' part of the Mini-Cart Title block."
-msgstr "ミニお買い物カゴのタイトルブロックの「お買い物カゴ」部分を表示するブロック。"
+msgstr "ミニカートのタイトルブロックの「カート」部分を表示するブロック。"
 
 #: assets/client/blocks/inner-blocks/mini-cart-title-label-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Title Label"
-msgstr "ミニお買い物カゴのタイトルラベル"
+msgstr "ミニカートのタイトルラベル"
 
 #: assets/client/blocks/inner-blocks/mini-cart-title-items-counter-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Title Items Counter"
-msgstr "ミニお買い物カゴのタイトルのアイテムカウンター"
+msgstr "ミニカートのタイトルのアイテムカウンター"
 
 #: assets/client/blocks/product-meta/block.json
 msgctxt "block description"
@@ -9394,7 +9397,7 @@ msgstr "商品 SKU、 カテゴリー、タグなどを表示します。"
 #: assets/client/blocks/add-to-cart-form/block.json
 msgctxt "block title"
 msgid "Add to Cart with Options"
-msgstr "オプションを付けてお買い物カゴに追加"
+msgstr "オプションを付けてカートに追加"
 
 #: assets/client/admin/product-editor/blocks/generic/product-toggle-field/block.json
 #: assets/client/admin/product-editor/blocks/generic/toggle/block.json
@@ -9452,7 +9455,7 @@ msgstr "説明"
 #: assets/client/blocks/inner-blocks/mini-cart-title-items-counter-block/block.json
 msgctxt "block description"
 msgid "Block that displays the items counter part of the Mini-Cart Title block."
-msgstr "ミニお買い物カゴのタイトルブロックのアイテムカウンター部分を表示するブロック。"
+msgstr "ミニカートのタイトルブロックのアイテムカウンター部分を表示するブロック。"
 
 #: assets/client/admin/product-editor/blocks/product-fields/description/block.json
 #: assets/client/admin/product-editor/blocks/product-fields/product-description-field/block.json
@@ -9689,12 +9692,12 @@ msgstr "単一の商品"
 #: assets/client/blocks/inner-blocks/mini-cart-checkout-button-block/block.json
 msgctxt "block description"
 msgid "Block that displays the checkout button when the Mini-Cart has products."
-msgstr "ミニお買い物カゴに商品が入っている際に購入手続きボタンを表示するブロック。"
+msgstr "ミニカートに商品が入っている際に購入手続きボタンを表示するブロック。"
 
 #: assets/client/blocks/inner-blocks/mini-cart-checkout-button-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Proceed to Checkout Button"
-msgstr "購入手続きボタンに進むミニお買い物カゴ"
+msgstr "購入手続きボタンに進むミニカート"
 
 #: assets/client/blocks/inner-blocks/mini-cart-cart-button-block/block.json
 #: assets/client/blocks/inner-blocks/mini-cart-checkout-button-block/block.json
@@ -9715,7 +9718,7 @@ msgstr "塗りつぶし"
 #: assets/client/blocks/inner-blocks/mini-cart-cart-button-block/block.json
 msgctxt "block description"
 msgid "Block that displays the cart button when the Mini-Cart has products."
-msgstr "ミニお買い物カゴに商品が入っている際にお買い物カゴボタンを表示するブロック。"
+msgstr "ミニカートに商品が入っている際にカートボタンを表示するブロック。"
 
 #: assets/client/blocks/product-reviews/block.json
 msgctxt "block title"
@@ -10126,7 +10129,7 @@ msgstr "sku"
 #: assets/client/blocks/inner-blocks/mini-cart-cart-button-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart View Cart Button"
-msgstr "ミニお買い物カゴにお買い物カゴボタンを表示"
+msgstr "ミニカートにカートボタンを表示"
 
 #: assets/client/admin/product-editor/blocks/product-fields/product-shipping-class-field/block.json
 #: assets/client/admin/product-editor/blocks/product-fields/shipping-class/block.json
@@ -10303,7 +10306,7 @@ msgstr "商品情報"
 #: assets/client/blocks/product-button/block.json
 msgctxt "block title"
 msgid "Add to Cart Button"
-msgstr "「お買い物カゴに追加」ボタン"
+msgstr "「カートに追加」ボタン"
 
 #: templates/order/attribution-details.php:59
 #: assets/client/admin/chunks/multichannel-marketing.js:1
@@ -10321,7 +10324,7 @@ msgstr "購入手続きを迅速に処理できるよう最適化"
 
 #: src/Internal/Features/FeaturesController.php:278
 msgid "Cart & Checkout Blocks"
-msgstr "お買い物カゴおよび購入手続きブロック"
+msgstr "カートおよび購入手続きブロック"
 
 #: src/Admin/Features/ShippingPartnerSuggestions/DefaultShippingPartners.php:263
 msgid "Save time and money by printing your shipping labels right from your computer with WooCommerce Shipping. Try WooCommerce Shipping for free."
@@ -11343,7 +11346,7 @@ msgstr "クロスセル商品を表示します。"
 #: assets/client/blocks/inner-blocks/cart-cross-sells-products-block/block.json
 msgctxt "block title"
 msgid "Cart Cross-Sells Products"
-msgstr "クロスセル商品をお買い物カゴに追加"
+msgstr "クロスセル商品をカートに追加"
 
 #: assets/client/blocks/inner-blocks/cart-cross-sells-block/block.json
 msgctxt "block description"
@@ -11353,7 +11356,7 @@ msgstr "クロスセルブロックを表示します。"
 #: assets/client/blocks/inner-blocks/cart-cross-sells-block/block.json
 msgctxt "block title"
 msgid "Cart Cross-Sells"
-msgstr "クロスセルをお買い物カゴに追加"
+msgstr "クロスセルをカートに追加"
 
 #: assets/client/blocks/attribute-filter/block.json
 msgctxt "block title"
@@ -11458,7 +11461,7 @@ msgstr "顧客が価格帯を選択して商品グリッドを絞り込めるよ
 #: assets/client/blocks/inner-blocks/filled-mini-cart-contents-block/block.json
 msgctxt "block description"
 msgid "Contains blocks that display the content of the Mini-Cart."
-msgstr "ミニお買い物カゴの中身を表示するブロックを含みます。"
+msgstr "ミニカートの中身を表示するブロックを含みます。"
 
 #: assets/client/blocks/featured-product/block.json
 msgctxt "block description"
@@ -11540,7 +11543,7 @@ msgstr "Jetpack と連携していません。"
 
 #: src/Blocks/BlockTypes/MiniCart.php:699
 msgid "Empty Mini-Cart Message"
-msgstr "空のミニお買い物カゴのメッセージ"
+msgstr "空のミニカートのメッセージ"
 
 #: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:2109
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:2432
@@ -11804,7 +11807,7 @@ msgstr "1つの商品を表示します。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:165
 msgid "List of cross-sells items related to cart items."
-msgstr "お買い物カゴのアイテムに関連するクロスセルアイテムのリストです。"
+msgstr "カートのアイテムに関連するクロスセルアイテムのリストです。"
 
 #. translators: %1s: file name; %2s: slug value found.
 #: src/Blocks/Patterns/PatternRegistry.php:89
@@ -11859,7 +11862,7 @@ msgstr "%1$s... (その他%2$s個)"
 #: src/Blocks/Templates/MiniCartTemplate.php:38
 msgctxt "Template name"
 msgid "Mini-Cart"
-msgstr "ミニお買い物カゴ"
+msgstr "ミニカート"
 
 #: src/Blocks/Templates/ProductSearchResultsTemplate.php:35
 msgctxt "Template name"
@@ -11976,7 +11979,7 @@ msgstr "Y年n月j日 g:i A"
 
 #: src/Blocks/Templates/MiniCartTemplate.php:47
 msgid "Template used to display the Mini-Cart drawer."
-msgstr "ミニお買い物カゴのドロワーの表示に使用されるテンプレート。"
+msgstr "ミニカートのドロワーの表示に使用されるテンプレート。"
 
 #: includes/admin/meta-boxes/views/html-product-data-inventory.php:187
 msgid "Check to let customers to purchase only 1 item in a single order. This is particularly useful for items that have limited quantity, for example art or handmade goods."
@@ -12585,19 +12588,19 @@ msgstr[0] "同期する注文が%1$d件あります。"
 #: assets/client/blocks/inner-blocks/checkout-order-summary-cart-items-block/block.json
 msgctxt "block description"
 msgid "Shows cart items."
-msgstr "お買い物カゴのアイテムを表示します。"
+msgstr "カートのアイテムを表示します。"
 
 #: assets/client/blocks/inner-blocks/cart-items-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-cart-items-block/block.json
 msgctxt "block title"
 msgid "Cart Items"
-msgstr "お買い物カゴのアイテム"
+msgstr "カートのアイテム"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-taxes-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-taxes-block/block.json
 msgctxt "block description"
 msgid "Shows the cart taxes row."
-msgstr "お買い物カゴの税行を表示します。"
+msgstr "カートの税行を表示します。"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-taxes-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-taxes-block/block.json
@@ -12609,7 +12612,7 @@ msgstr "税"
 #: assets/client/blocks/inner-blocks/checkout-order-summary-subtotal-block/block.json
 msgctxt "block description"
 msgid "Shows the cart subtotal row."
-msgstr "お買い物カゴの小計行を表示します。"
+msgstr "カートの小計行を表示します。"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-subtotal-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-subtotal-block/block.json
@@ -12621,7 +12624,7 @@ msgstr "小計"
 #: assets/client/blocks/inner-blocks/checkout-order-summary-shipping-block/block.json
 msgctxt "block description"
 msgid "Shows the cart shipping row."
-msgstr "お買い物カゴの送料行を表示します。"
+msgstr "カートの送料行を表示します。"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-shipping-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-shipping-block/block.json
@@ -12643,7 +12646,7 @@ msgstr "見出し"
 #: assets/client/blocks/inner-blocks/checkout-order-summary-fee-block/block.json
 msgctxt "block description"
 msgid "Shows the cart fee row."
-msgstr "お買い物カゴの手数料行を表示します。"
+msgstr "カートの手数料行を表示します。"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-fee-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-fee-block/block.json
@@ -12655,7 +12658,7 @@ msgstr "手数料"
 #: assets/client/blocks/inner-blocks/checkout-order-summary-discount-block/block.json
 msgctxt "block description"
 msgid "Shows the cart discount row."
-msgstr "お買い物カゴの割引行を表示します。"
+msgstr "カートの割引行を表示します。"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-discount-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-discount-block/block.json
@@ -13053,12 +13056,12 @@ msgstr "商品の編集はどれくらい簡単でしたか ?"
 #: assets/client/blocks/inner-blocks/mini-cart-shopping-button-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Shopping Button"
-msgstr "ミニお買い物カゴのショッピングボタン"
+msgstr "ミニカートのショッピングボタン"
 
 #: assets/client/blocks/inner-blocks/mini-cart-shopping-button-block/block.json
 msgctxt "block description"
 msgid "Block that displays the shopping button when the Mini-Cart is empty."
-msgstr "ミニお買い物カゴが空の際にショッピングボタンを表示するブロック。"
+msgstr "ミニカートが空の際にショッピングボタンを表示するブロック。"
 
 #: src/Internal/DataStores/Orders/CustomOrdersTableController.php:299
 msgid "Custom orders tables have been deleted."
@@ -13098,11 +13101,11 @@ msgstr "注文の支払い URL。"
 
 #: src/StoreApi/Schemas/V1/ProductSchema.php:497
 msgid "The maximum quantity that can be added to the cart."
-msgstr "お買い物カゴに追加できる最大数量です。"
+msgstr "カートに追加できる最大数量です。"
 
 #: src/StoreApi/Schemas/V1/ProductSchema.php:491
 msgid "The minimum quantity that can be added to the cart."
-msgstr "お買い物カゴに追加できる最小数量です。"
+msgstr "カートに追加できる最小数量です。"
 
 #. translators: 1: email address, 2: order ID .
 #: includes/gateways/paypal/includes/class-wc-gateway-paypal-pdt-handler.php:152
@@ -13127,12 +13130,12 @@ msgstr "購入手続き"
 #: assets/client/blocks/inner-blocks/mini-cart-items-block/block.json
 msgctxt "block description"
 msgid "Contains the products table and other custom blocks of filled mini-cart."
-msgstr "商品の入ったミニお買い物カゴのその他のカスタムブロックと、商品テーブルを含みます。"
+msgstr "商品の入ったミニカートのその他のカスタムブロックと、商品テーブルを含みます。"
 
 #: assets/client/blocks/inner-blocks/mini-cart-items-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Items"
-msgstr "ミニお買い物カゴのアイテム"
+msgstr "ミニカートのアイテム"
 
 #: assets/client/blocks/accordion-group/block.json
 #: assets/client/blocks/accordion-header/block.json
@@ -13280,7 +13283,7 @@ msgstr "上限など、このアイテムの数量を制御する方法。"
 
 #: src/StoreApi/Routes/V1/CartAddItem.php:54
 msgid "Quantity of this item to add to the cart."
-msgstr "お買い物カゴに追加するこのアイテムの数量。"
+msgstr "カートに追加するこのアイテムの数量。"
 
 #: src/Internal/Admin/Notes/MagentoMigration.php:87
 msgid "Changing platforms might seem like a big hurdle to overcome, but it is easier than you might think to move your products, customers, and orders to WooCommerce. This article will help you with going through this process."
@@ -13357,47 +13360,47 @@ msgstr "バーデン＝ビュルテンベルク"
 #: assets/client/blocks/inner-blocks/mini-cart-title-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Title"
-msgstr "ミニお買い物カゴのタイトル"
+msgstr "ミニカートのタイトル"
 
 #: assets/client/blocks/inner-blocks/mini-cart-title-block/block.json
 msgctxt "block description"
 msgid "Block that displays the title of the Mini-Cart block."
-msgstr "ミニお買い物カゴブロックのタイトルを表示するブロック。"
+msgstr "ミニカートブロックのタイトルを表示するブロック。"
 
 #: assets/client/blocks/inner-blocks/mini-cart-products-table-block/block.json
 msgctxt "block description"
 msgid "Block that displays the products table of the Mini-Cart block."
-msgstr "ミニお買い物カゴブロックの商品テーブルを表示するブロック。"
+msgstr "ミニカートブロックの商品テーブルを表示するブロック。"
 
 #: assets/client/blocks/inner-blocks/mini-cart-products-table-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Products Table"
-msgstr "ミニお買い物カゴの商品テーブル"
+msgstr "ミニカートの商品テーブル"
 
 #: assets/client/blocks/inner-blocks/mini-cart-footer-block/block.json
 msgctxt "block title"
 msgid "Mini-Cart Footer"
-msgstr "ミニお買い物カゴのフッター"
+msgstr "ミニカートのフッター"
 
 #: assets/client/blocks/inner-blocks/filled-mini-cart-contents-block/block.json
 msgctxt "block title"
 msgid "Filled Mini-Cart view"
-msgstr "商品が入ったミニお買い物カゴの表示"
+msgstr "商品が入ったミニカートの表示"
 
 #: assets/client/blocks/inner-blocks/empty-mini-cart-contents-block/block.json
 msgctxt "block description"
 msgid "Blocks that are displayed when the Mini-Cart is empty."
-msgstr "ミニお買い物カゴが空の際に表示されるブロック。"
+msgstr "ミニカートが空の際に表示されるブロック。"
 
 #: assets/client/blocks/inner-blocks/mini-cart-footer-block/block.json
 msgctxt "block description"
 msgid "Block that displays the footer of the Mini-Cart block."
-msgstr "ミニお買い物カゴブロックのフッターを表示するブロック。"
+msgstr "ミニカートブロックのフッターを表示するブロック。"
 
 #: assets/client/blocks/inner-blocks/empty-mini-cart-contents-block/block.json
 msgctxt "block title"
 msgid "Empty Mini-Cart view"
-msgstr "空のミニお買い物カゴの表示"
+msgstr "空のミニカートの表示"
 
 #: src/Admin/Features/MarketingRecommendations/DefaultMarketingRecommendations.php:54
 #: assets/client/admin/chunks/5875.js:1
@@ -14091,7 +14094,7 @@ msgstr "購入手続きに進む"
 #: assets/client/blocks/mini-cart-contents-block/footer-frontend.js:1
 #: assets/client/blocks/mini-cart-contents.js:13
 msgid "View my cart"
-msgstr "お買い物カゴを表示"
+msgstr "カートを表示"
 
 #: src/Blocks/BlockTypes/MiniCartFooterBlock.php:30
 #: assets/client/blocks/mini-cart-contents-block/footer-frontend.js:1
@@ -14303,32 +14306,32 @@ msgstr "購入手続きに進む"
 #: assets/client/blocks/inner-blocks/filled-cart-block/block.json
 msgctxt "block description"
 msgid "Contains blocks that are displayed when the cart contains products."
-msgstr "お買い物カゴに商品が入っている際に表示されるブロックを含みます。"
+msgstr "カートに商品が入っている際に表示されるブロックを含みます。"
 
 #: assets/client/blocks/inner-blocks/filled-cart-block/block.json
 msgctxt "block title"
 msgid "Filled Cart"
-msgstr "商品が入ったお買い物カゴ"
+msgstr "商品が入ったカート"
 
 #: assets/client/blocks/inner-blocks/empty-cart-block/block.json
 msgctxt "block description"
 msgid "Contains blocks that are displayed when the cart is empty."
-msgstr "お買い物カゴが空の際に表示されるブロックを含みます。"
+msgstr "カートが空の際に表示されるブロックを含みます。"
 
 #: assets/client/blocks/inner-blocks/empty-cart-block/block.json
 msgctxt "block title"
 msgid "Empty Cart"
-msgstr "空のお買い物カゴ"
+msgstr "空のカート"
 
 #: assets/client/blocks/inner-blocks/cart-totals-block/block.json
 msgctxt "block description"
 msgid "Column containing the cart totals."
-msgstr "お買い物カゴの合計を含む列。"
+msgstr "カートの合計を含む列。"
 
 #: assets/client/blocks/inner-blocks/cart-totals-block/block.json
 msgctxt "block title"
 msgid "Cart Totals"
-msgstr "お買い物カゴの合計"
+msgstr "カートの合計"
 
 #: assets/client/blocks/inner-blocks/cart-order-summary-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-order-summary-block/block.json
@@ -14346,17 +14349,17 @@ msgstr "ご注文内容"
 #: assets/client/blocks/inner-blocks/cart-line-items-block/block.json
 msgctxt "block description"
 msgid "Block containing current line items in Cart."
-msgstr "お買い物カゴの現在の品目を含むブロック。"
+msgstr "カートの現在の品目を含むブロック。"
 
 #: assets/client/blocks/inner-blocks/cart-line-items-block/block.json
 msgctxt "block title"
 msgid "Cart Line Items"
-msgstr "お買い物カゴ品目"
+msgstr "カート品目"
 
 #: assets/client/blocks/inner-blocks/cart-items-block/block.json
 msgctxt "block description"
 msgid "Column containing cart items."
-msgstr "お買い物カゴ内のアイテムを含む列。"
+msgstr "カート内のアイテムを含む列。"
 
 #: assets/client/blocks/inner-blocks/cart-express-payment-block/block.json
 #: assets/client/blocks/inner-blocks/checkout-express-payment-block/block.json
@@ -14369,7 +14372,7 @@ msgstr "エクスプレスチェックアウト"
 #: assets/client/blocks/mini-cart-contents-block/title-label-frontend.js:1
 #: assets/client/blocks/mini-cart-contents.js:3
 msgid "Your cart"
-msgstr "お買い物カゴ"
+msgstr "カート"
 
 #: src/StoreApi/Utilities/OrderController.php:645
 #: assets/client/blocks/cart.js:2 assets/client/blocks/checkout.js:2
@@ -14423,7 +14426,7 @@ msgstr "テレメトリーデータを投稿しています。"
 
 #: src/Blocks/Templates/MiniCartTemplate.php:59
 msgid "Mini-Cart"
-msgstr "ミニお買い物カゴ"
+msgstr "ミニカート"
 
 #: src/StoreApi/Schemas/V1/ProductCollectionDataSchema.php:99
 msgid "Returns number of products with each stock status."
@@ -15028,46 +15031,46 @@ msgstr "%1$s、%2$s"
 #. translators: %s: product names.
 #: src/StoreApi/Utilities/CartController.php:431
 msgid "There are too many %s in the cart. Only 1 can be purchased. Please reduce the quantity in your cart."
-msgstr "お買い物カゴの %s の数量が多すぎます。 購入できるのは1点限りです。 お買い物カゴ内の数量を減らしてください。"
+msgstr "カートの %s の数量が多すぎます。 購入できるのは1点限りです。 カート内の数量を減らしてください。"
 
 #: src/StoreApi/Utilities/CartController.php:462
 msgid "There was an error with an item in your cart."
-msgstr "お買い物カゴ内のアイテムにエラーが生じました。"
+msgstr "カート内のアイテムにエラーが生じました。"
 
 #. translators: %s: product names.
 #: src/StoreApi/Utilities/CartController.php:448
 msgid "There are not enough %s in stock. Please reduce the quantities in your cart."
-msgstr "%sの在庫が足りません。お買い物カゴ内の数量を減らしてください。"
+msgstr "%sの在庫が足りません。カート内の数量を減らしてください。"
 
 #. translators: %s: product names.
 #: src/StoreApi/Utilities/CartController.php:436
 msgid "There are too many %s in the cart. Only 1 of each can be purchased. Please reduce the quantities in your cart."
-msgstr "お買い物カゴ内の%sの数量が多すぎます。購入できるのは1点限りです。 お買い物カゴ内の数量を減らしてください。"
+msgstr "カート内の%sの数量が多すぎます。購入できるのは1点限りです。 カート内の数量を減らしてください。"
 
 #. translators: %s: product names.
 #: src/StoreApi/Utilities/CartController.php:424
 msgid "%s cannot be purchased. Please remove them from your cart."
-msgstr "%sは購入できません。お買い物カゴから削除してください。"
+msgstr "%sは購入できません。カートから削除してください。"
 
 #. translators: %s: product names.
 #: src/StoreApi/Utilities/CartController.php:412
 msgid "%s are out of stock and cannot be purchased. Please remove them from your cart."
-msgstr "%sは在庫がないため、購入できません。お買い物カゴから削除してください。"
+msgstr "%sは在庫がないため、購入できません。カートから削除してください。"
 
 #. translators: %s: product names.
 #: src/StoreApi/Utilities/CartController.php:443
 msgid "There is not enough %s in stock. Please reduce the quantity in your cart."
-msgstr "%sの在庫が足りません。お買い物カゴ内の数量を減らしてください。"
+msgstr "%sの在庫が足りません。カート内の数量を減らしてください。"
 
 #. translators: %s: product name.
 #: src/StoreApi/Utilities/CartController.php:407
 msgid "%s is out of stock and cannot be purchased. Please remove it from your cart."
-msgstr "%s は在庫がないため、購入できません。お買い物カゴから削除してください。"
+msgstr "%s は在庫がないため、購入できません。カートから削除してください。"
 
 #. translators: %s: product name.
 #: src/StoreApi/Utilities/CartController.php:419
 msgid "%s cannot be purchased. Please remove it from your cart."
-msgstr "%s は購入できません。お買い物カゴから削除してください。"
+msgstr "%s は購入できません。カートから削除してください。"
 
 #: includes/admin/class-wc-admin-settings.php:709
 msgid "Search for a page&hellip;"
@@ -15226,7 +15229,7 @@ msgstr "メタデータの値。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:193
 msgid "List of cart fees."
-msgstr "お買い物カゴ手数料のリスト。"
+msgstr "カート手数料のリスト。"
 
 #: src/StoreApi/Schemas/V1/CartFeeSchema.php:56
 #: src/StoreApi/Schemas/V1/OrderFeeSchema.php:56
@@ -15639,7 +15642,7 @@ msgstr "送料にかかる税金の合計。 送料が計算されていない�
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:187
 msgid "True if the cart meets the criteria for showing shipping costs, and rates have been calculated and included in the totals."
-msgstr "お買い物カゴが送料表示要件を満たしている場合は True となり、費用が計算されて合計金額に追加されます。"
+msgstr "カートが送料表示要件を満たしている場合は True となり、費用が計算されて合計金額に追加されます。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:247
 msgid "Total price of shipping. If shipping has not been calculated, a null response will be sent."
@@ -17341,11 +17344,11 @@ msgstr "属性 ID または属性がタクソノミーベースでない場合�
 
 #: src/StoreApi/Schemas/V1/ProductSchema.php:485
 msgid "Add to cart URL."
-msgstr "「お買い物カゴに追加」URL。"
+msgstr "「カートに追加」URL。"
 
 #: src/StoreApi/Schemas/V1/ProductSchema.php:411
 msgid "Does the product have additional options before it can be added to the cart?"
-msgstr "商品をお買い物カゴに追加する前に追加オプションを選択する必要がありますか ?"
+msgstr "商品をカートに追加する前に追加オプションを選択する必要がありますか ?"
 
 #: includes/class-wc-checkout.php:1185
 msgid "An account is already registered with your email address. <a href=\"#\" class=\"showlogin\">Please log in.</a>"
@@ -17467,7 +17470,7 @@ msgstr "項目を削除"
 #: src/Blocks/BlockTypes/MiniCart.php:701 assets/client/blocks/cart.js:23
 #: assets/client/blocks/checkout-frontend.js:1
 msgid "Your cart is currently empty!"
-msgstr "現在お買い物カゴには何も入っていません。"
+msgstr "現在カートには何も入っていません。"
 
 #: includes/class-wc-install.php:2935 src/Blocks/BlockTypes/Cart.php:88
 #: assets/client/blocks/cart.js:23
@@ -17620,7 +17623,7 @@ msgstr "配送料金に添付されたメタデータ。"
 
 #: src/StoreApi/Schemas/V1/CartShippingRateSchema.php:208
 msgid "True if this is the rate currently selected by the customer for the cart."
-msgstr "お客様が現在この料金を「お買い物カゴ」用に選択している場合は true。"
+msgstr "お客様が現在この料金を「カート」用に選択している場合は true。"
 
 #: src/Blocks/Domain/Services/DraftOrders.php:96
 #: src/Blocks/Domain/Services/DraftOrders.php:120
@@ -17664,7 +17667,7 @@ msgstr "荷物名。"
 
 #: src/StoreApi/Schemas/V1/CartShippingRateSchema.php:88
 msgid "List of cart items the returned shipping rates apply to."
-msgstr "返された配送料金の適用される「お買い物カゴ」の項目のリスト。"
+msgstr "返された配送料金の適用される「カート」の項目のリスト。"
 
 #: src/StoreApi/Schemas/V1/CartShippingRateSchema.php:102
 msgid "Name of the item."
@@ -17717,16 +17720,16 @@ msgstr "決済代行サービスから返された支払いのステータス。
 #: src/StoreApi/Schemas/V1/CartSchema.php:175
 #: src/StoreApi/Schemas/V1/OrderSchema.php:266
 msgid "True if the cart needs payment. False for carts with only free products and no shipping costs."
-msgstr "「お買い物カゴ」で支払いが必要な場合は true。 「お買い物カゴ」が無料の商品と配送料金無料のみの場合は false。"
+msgstr "「カート」で支払いが必要な場合は true。 「カート」が無料の商品と配送料金無料のみの場合は false。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:119
 msgid "List of available shipping rates for the cart."
-msgstr "「お買い物カゴ」に使用可能な配送料金のリスト。"
+msgstr "「カート」に使用可能な配送料金のリスト。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:109
 #: src/StoreApi/Schemas/V1/OrderSchema.php:242
 msgid "List of applied cart coupons."
-msgstr "適用された「お買い物カゴ」のクーポンのリスト。"
+msgstr "適用された「カート」のクーポンのリスト。"
 
 #: src/StoreApi/Schemas/V1/CheckoutSchema.php:187
 msgid "A URL to redirect the customer after checkout. This could be, for example, a link to the payment processors website."
@@ -17734,15 +17737,15 @@ msgstr "購入手続き後にお客様を転送する URL。 これは支払い�
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:203
 msgid "Cart total amounts provided using the smallest unit of the currency."
-msgstr "通貨の最小単位を使用して表示された「お買い物カゴ」の合計金額。"
+msgstr "通貨の最小単位を使用して表示された「カート」の合計金額。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:211
 msgid "Total price of items in the cart."
-msgstr "お買い物カゴ内の項目すべての合計価格。"
+msgstr "カート内の項目すべての合計価格。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:217
 msgid "Total tax on items in the cart."
-msgstr "「お買い物カゴ」の項目にかかる税金の合計。"
+msgstr "「カート」の項目にかかる税金の合計。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:223
 #: src/StoreApi/Schemas/V1/OrderSchema.php:156
@@ -17795,7 +17798,7 @@ msgstr "請求された税金の金額。"
 #: src/StoreApi/Schemas/V1/CartSchema.php:303
 #: src/StoreApi/Schemas/V1/OrderSchema.php:278
 msgid "List of cart item errors, for example, items in the cart which are out of stock."
-msgstr "「お買い物カゴ」の項目エラーのリスト (欠品中の項目が「お買い物カゴ」に入っているなど)。"
+msgstr "「カート」の項目エラーのリスト (欠品中の項目が「カート」に入っているなど)。"
 
 #: src/StoreApi/Schemas/V1/ProductCategorySchema.php:52
 msgid "Category image."
@@ -17918,11 +17921,11 @@ msgstr "親商品の ID (該当する場合)。"
 #. translators: %s Coupon codes.
 #: src/StoreApi/Utilities/OrderController.php:326
 msgid "Invalid coupons were removed from the cart: \"%s\""
-msgstr "「お買い物カゴ」から次の無効なクーポンが削除されました :「%s」"
+msgstr "「カート」から次の無効なクーポンが削除されました :「%s」"
 
 #: src/StoreApi/Utilities/OrderController.php:47
 msgid "Cannot create order from empty cart."
-msgstr "空のお買い物カゴからは注文を作成できません。"
+msgstr "空のカートからは注文を作成できません。"
 
 #. translators: %s: product name
 #: src/StoreApi/Utilities/CartController.php:1208
@@ -17932,19 +17935,19 @@ msgstr "「%s」は購入できません。"
 #. translators: %1$s coupon code, %2$s reason.
 #: src/StoreApi/Utilities/CartController.php:1114
 msgid "The \"%1$s\" coupon has been removed from your cart: %2$s"
-msgstr "「%1$s」クーポンが「お買い物カゴ」から削除されました : %2$s"
+msgstr "「%1$s」クーポンが「カート」から削除されました : %2$s"
 
 #: src/StoreApi/Utilities/CartController.php:242
 msgid "Cart item is invalid."
-msgstr "「お買い物カゴ」の項目が無効です。"
+msgstr "「カート」の項目が無効です。"
 
 #: src/StoreApi/Routes/V1/CartRemoveItem.php:73
 msgid "Cart item no longer exists or is invalid."
-msgstr "「お買い物カゴ」の項目が欠品となったか無効です。"
+msgstr "「カート」の項目が欠品となったか無効です。"
 
 #: src/StoreApi/Routes/V1/CartRemoveItem.php:51
 msgid "Unique identifier (key) for the cart item."
-msgstr "「お買い物カゴ」の項目に固有の識別子 (キー)。"
+msgstr "「カート」の項目に固有の識別子 (キー)。"
 
 #: src/StoreApi/Schemas/V1/ProductSchema.php:116
 msgid "Price data provided using the smallest unit of the currency."
@@ -18001,7 +18004,7 @@ msgstr "クーポンは無効になっています。"
 #: src/StoreApi/Routes/V1/CartCouponsByCode.php:51
 #: src/StoreApi/Routes/V1/CartRemoveCoupon.php:48
 msgid "Unique identifier for the coupon within the cart."
-msgstr "「お買い物カゴ」のクーポンに固有の識別子。"
+msgstr "「カート」のクーポンに固有の識別子。"
 
 #: src/StoreApi/Routes/V1/AbstractRoute.php:169
 #: src/StoreApi/Routes/V1/AbstractRoute.php:182
@@ -18046,7 +18049,7 @@ msgstr "通貨の最小単位を使用している場合、最大価格を基準
 
 #: src/StoreApi/Routes/V1/CartUpdateItem.php:50
 msgid "New quantity of the item in the cart."
-msgstr "「お買い物カゴ」に含まれるこの項目の数量。"
+msgstr "「カート」に含まれるこの項目の数量。"
 
 #: src/StoreApi/Routes/V1/CartRemoveCoupon.php:76
 msgid "Invalid coupon code."
@@ -18054,16 +18057,16 @@ msgstr "無効なクーポンコード。"
 
 #: src/StoreApi/Routes/V1/CartUpdateItem.php:46
 msgid "Unique identifier (key) for the cart item to update."
-msgstr "「お買い物カゴ」の更新対象項目に固有の識別子 (キー)。"
+msgstr "「カート」の更新対象項目に固有の識別子 (キー)。"
 
 #: src/StoreApi/Routes/V1/CartRemoveCoupon.php:80
 msgid "Coupon cannot be removed because it is not already applied to the cart."
-msgstr "まだお買い物カゴに適用されていないため、クーポンを削除できません。"
+msgstr "まだカートに適用されていないため、クーポンを削除できません。"
 
 #: src/StoreApi/Routes/V1/CartCouponsByCode.php:82
 #: src/StoreApi/Routes/V1/CartCouponsByCode.php:97
 msgid "Coupon does not exist in the cart."
-msgstr "お買い物カゴ内にクーポンはありません。"
+msgstr "カート内にクーポンはありません。"
 
 #. translators: %s coupon code
 #: src/StoreApi/Utilities/CartController.php:1005
@@ -18805,7 +18808,7 @@ msgstr "始めてみよう"
 
 #: src/Internal/Admin/RemoteFreeExtensions/DefaultFreeExtensions.php:209
 msgid "Send targeted campaigns, recover abandoned carts and much more with Mailchimp."
-msgstr "Mailchimp を使用すると、対象を絞り込んだキャンペーンの送信や放置されたお買い物カゴの復元などさまざまなことができます。"
+msgstr "Mailchimp を使用すると、対象を絞り込んだキャンペーンの送信や放置されたカートの復元などさまざまなことができます。"
 
 #: src/Admin/Features/OnboardingTasks/Tasks/Payments.php:42
 #: assets/client/admin/chunks/launch-store.js:1
@@ -20943,7 +20946,7 @@ msgstr "商品を最高価格で絞り込む"
 #: assets/client/blocks/product-button/block.json
 msgctxt "block description"
 msgid "Display a call to action button which either adds the product to the cart, or links to the product page."
-msgstr "商品をお買い物カゴに追加するか、商品ページにリンクする、いずれかのアクションを促すボタンを表示します。"
+msgstr "商品をカートに追加するか、商品ページにリンクする、いずれかのアクションを促すボタンを表示します。"
 
 #: includes/admin/settings/class-wc-settings-emails.php:209
 msgid "Center"
@@ -21114,24 +21117,24 @@ msgstr "在庫管理単位 (該当する場合)。"
 
 #: src/StoreApi/Routes/V1/CartAddItem.php:48
 msgid "The cart item product or variation ID."
-msgstr "お買い物カゴのアイテム商品またはバリエーション ID。"
+msgstr "カートのアイテム商品またはバリエーション ID。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:159
 msgid "Total weight (in grams) of all products in the cart."
-msgstr "お買い物カゴ内の商品すべての総重量 (グラム)。"
+msgstr "カート内の商品すべての総重量 (グラム)。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:181
 #: src/StoreApi/Schemas/V1/OrderSchema.php:272
 msgid "True if the cart needs shipping. False for carts with only digital goods or stores with no shipping methods set-up."
-msgstr "お買い物カゴに配送が必要な場合は True。デジタル商品のみが含まれるお買い物カゴまたは配送方法が設定されていないストアの場合は False。"
+msgstr "カートに配送が必要な場合は True。デジタル商品のみが含まれるカートまたは配送方法が設定されていないストアの場合は False。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:143
 msgid "List of cart items."
-msgstr "お買い物カゴのアイテムのリスト。"
+msgstr "カートのアイテムのリスト。"
 
 #: src/StoreApi/Schemas/V1/CartSchema.php:153
 msgid "Number of items in the cart."
-msgstr "お買い物カゴ内のアイテムの数。"
+msgstr "カート内のアイテムの数。"
 
 #: src/StoreApi/Schemas/V1/TermSchema.php:60
 msgid "Number of objects (posts of any type) assigned to the term."
@@ -21215,17 +21218,17 @@ msgstr "無効な属性 ID。"
 #: src/StoreApi/Routes/V1/CartAddItem.php:98
 #: src/StoreApi/Routes/V1/CartItems.php:104
 msgid "Cannot create an existing cart item."
-msgstr "お買い物カゴの既存のアイテムは作成できません。"
+msgstr "カートの既存のアイテムは作成できません。"
 
 #: src/StoreApi/Routes/V1/CartItemsByKey.php:90
 #: src/StoreApi/Routes/V1/CartItemsByKey.php:128
 #: src/StoreApi/Utilities/CartController.php:236
 msgid "Cart item does not exist."
-msgstr "お買い物カゴのアイテムが存在しません。"
+msgstr "カートのアイテムが存在しません。"
 
 #: src/StoreApi/Utilities/CartController.php:809
 msgid "Unable to retrieve cart."
-msgstr "お買い物カゴを取得できません。"
+msgstr "カートを取得できません。"
 
 #: src/StoreApi/Routes/V1/ProductAttributeTerms.php:83
 msgid "Attribute does not exist."
@@ -21246,7 +21249,7 @@ msgstr "%1$s に投稿された値が無効です。可能な値 :%2$s"
 
 #: src/StoreApi/Utilities/CartController.php:1471
 msgid "This product cannot be added to the cart."
-msgstr "この商品はお買い物カゴに追加できません。"
+msgstr "この商品はカートに追加できません。"
 
 #: includes/rest-api/Controllers/Version2/class-wc-rest-system-status-v2-controller.php:745
 msgid "Total post count."
@@ -21349,11 +21352,11 @@ msgstr "通常の商品価格。"
 #: src/StoreApi/Routes/V1/CartItemsByKey.php:51
 #: src/StoreApi/Schemas/V1/CartShippingRateSchema.php:96
 msgid "Unique identifier for the item within the cart."
-msgstr "お買い物カゴ内の項目に固有の識別子。"
+msgstr "カート内の項目に固有の識別子。"
 
 #: src/StoreApi/Schemas/V1/ProductSchema.php:467
 msgid "Add to cart button parameters."
-msgstr "「お買い物カゴにを追加」ボタンパラメーター。"
+msgstr "「カートにを追加」ボタンパラメーター。"
 
 #: src/StoreApi/Schemas/V1/TermSchema.php:48
 msgid "Term description."
@@ -21370,7 +21373,7 @@ msgstr "商品はセール中ですか ?"
 
 #: src/StoreApi/Schemas/V1/CartFeeSchema.php:30
 msgid "Unique identifier for the fee within the cart."
-msgstr "お買い物カゴ内の手数料に固有の識別子。"
+msgstr "カート内の手数料に固有の識別子。"
 
 #: src/StoreApi/Routes/V1/ProductCollectionData.php:206
 msgid "Filter condition\t being performed which may affect counts. Valid values include \"and\" and \"or\"."
@@ -24340,7 +24343,7 @@ msgstr "当サイトから購入される際、お客様の名前、請求先住
 
 #: includes/class-wc-privacy.php:95
 msgid "We’ll also use cookies to keep track of cart contents while you’re browsing our site."
-msgstr "当社では、サイトの閲覧中にお買い物カゴの内容を追跡するために Cookie も使用しています。"
+msgstr "当社では、サイトの閲覧中にカートの内容を追跡するために Cookie も使用しています。"
 
 #: includes/class-wc-privacy.php:97
 msgid "Note: you may want to further detail your cookie policy, and link to that section from here."
@@ -24616,16 +24619,16 @@ msgstr "このクラスのインスタンスの非シリアライズは禁止さ
 #. translators: %1$s: product name. %2$s product permalink
 #: includes/class-wc-cart-session.php:196
 msgid "%1$s has been removed from your cart because it has since been modified. You can add it back to your cart <a href=\"%2$s\">here</a>."
-msgstr "%1$s が変更されたため、お買い物カゴから削除されました。<a href=\"%2$s\">こちら</a>からお買い物カゴに戻すことができます。"
+msgstr "%1$s が変更されたため、カートから削除されました。<a href=\"%2$s\">こちら</a>からカートに戻すことができます。"
 
 #. translators: %d: amount of sessions
 #: includes/rest-api/Controllers/Version2/class-wc-rest-system-status-tools-v2-controller.php:544
 msgid "Deleted all active sessions, and %d saved carts."
-msgstr "すべての有効なセッションと%d個の保存済みお買い物カゴを削除しました。"
+msgstr "すべての有効なセッションと%d個の保存済みカートを削除しました。"
 
 #: includes/rest-api/Controllers/Version2/class-wc-rest-system-status-tools-v2-controller.php:170
 msgid "This tool will delete all customer session data from the database, including current carts and saved carts in the database."
-msgstr "このツールは、現在お買い物カゴに入っているものとデータベースに保存されているお買い物カゴも含め、すべての顧客セッションデータをデータベースから削除します。"
+msgstr "このツールは、現在カートに入っているものとデータベースに保存されているカートも含め、すべての顧客セッションデータをデータベースから削除します。"
 
 #: includes/class-wc-privacy-erasers.php:64
 #: includes/class-wc-privacy-exporters.php:203
@@ -26402,7 +26405,7 @@ msgstr "有効な商品絞り込み"
 
 #: includes/widgets/class-wc-widget-cart.php:23
 msgid "Display the customer shopping cart."
-msgstr "お客様のお買い物カゴの表示。"
+msgstr "お客様のカートの表示。"
 
 #. translators: %s: product name
 #: includes/shortcodes/class-wc-shortcode-checkout.php:156
@@ -26834,7 +26837,7 @@ msgstr "物理的商品を販売する予定です。"
 #: includes/admin/class-wc-admin-post-types.php:855
 #: assets/client/blocks/page-content-wrapper.js:1
 msgid "Cart Page"
-msgstr "お買い物カゴページ"
+msgstr "カートページ"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:231
 msgid "Store setup"
@@ -27042,19 +27045,19 @@ msgstr "「他の配送地域で利用できない場所」の地域は更新で
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:260
 msgid "Product categories that the coupon will not be applied to, or that cannot be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr "「確定されたお買い物カゴ割引」を適用するため、クーポンが適用されない、またはお買い物カゴに含めない商品カテゴリーです。"
+msgstr "「確定されたカート割引」を適用するため、クーポンが適用されない、またはカートに含めない商品カテゴリーです。"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:242
 msgid "Product categories that the coupon will be applied to, or that need to be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr "「確定されたお買い物カゴ割引」を適用するため、クーポンを適用する、またはお買い物カゴに含めるべき商品カテゴリーです。"
+msgstr "「確定されたカート割引」を適用するため、クーポンを適用する、またはカートに含めるべき商品カテゴリーです。"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:221
 msgid "Products that the coupon will not be applied to, or that cannot be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr "「確定されたお買い物カゴ割引」を適用するため、クーポンが適用されない、またはお買い物カゴに含めない商品です。"
+msgstr "「確定されたカート割引」を適用するため、クーポンが適用されない、またはカートに含めない商品です。"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:203
 msgid "Products that the coupon will be applied to, or that need to be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr "「確定されたお買い物カゴ割引」を適用するため、クーポンを適用する、またはお買い物カゴに含めるべき商品です。"
+msgstr "「確定されたカート割引」を適用するため、クーポンを適用する、またはカートに含めるべき商品です。"
 
 #: includes/wc-product-functions.php:1048
 msgid "Search results only"
@@ -28371,7 +28374,7 @@ msgstr "配送"
 
 #: includes/wc-coupon-functions.php:25
 msgid "Fixed cart discount"
-msgstr "お買い物カゴごとに割引"
+msgstr "カートごとに割引"
 
 #: includes/shortcodes/class-wc-shortcode-my-account.php:84
 msgid "Your password has been reset successfully."
@@ -28758,7 +28761,7 @@ msgstr "エラー:"
 #: includes/class-wc-cart-session.php:561
 msgid "%d item from your previous order is currently unavailable and could not be added to your cart."
 msgid_plural "%d items from your previous order are currently unavailable and could not be added to your cart."
-msgstr[0] "以前のご注文中%d件の商品は現在ご購入いただけないため、お買い物カゴに追加できませんでした。"
+msgstr[0] "以前のご注文中%d件の商品は現在ご購入いただけないため、カートに追加できませんでした。"
 
 #: includes/class-wc-customer.php:1104 includes/class-wc-order.php:1354
 msgid "Invalid billing email address"
@@ -28770,12 +28773,12 @@ msgstr "無効な請求メールアドレス"
 #: src/Blocks/BlockTypes/ProductButton.php:380
 #: src/Blocks/BlockTypes/ProductButton.php:381
 msgid "View cart"
-msgstr "お買い物カゴを表示"
+msgstr "カートを表示"
 
 #. translators: %s: product name
 #: includes/class-wc-cart.php:1194
 msgid "You cannot add another \"%s\" to your cart."
-msgstr "お買い物カゴに「%s」をさらに追加することはできません。"
+msgstr "カートに「%s」をさらに追加することはできません。"
 
 #: includes/class-wc-ajax.php:1033 includes/class-wc-ajax.php:1065
 #: includes/class-wc-ajax.php:1157 includes/class-wc-ajax.php:1221
@@ -29964,7 +29967,7 @@ msgstr "利用制限なし"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:311
 msgid "Apply to all qualifying items in cart"
-msgstr "お買い物カゴ内のすべての対応商品に適用"
+msgstr "カート内のすべての対応商品に適用"
 
 #. translators: %s: tax rates count
 #: includes/admin/importers/class-wc-tax-rate-importer.php:187
@@ -32976,7 +32979,7 @@ msgstr "ターム名。"
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1264
 #: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1455
 msgid "MD5 hash of cart items to ensure orders are not modified."
-msgstr "注文を確実にするためのお買い物カゴ内の商品の MD5ハッシュは変更されません。"
+msgstr "注文を確実にするためのカート内の商品の MD5ハッシュは変更されません。"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2155
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:2131
@@ -33700,12 +33703,12 @@ msgstr "提供された API キーには読み取り権限がありません。"
 #: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:534
 #: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:477
 msgid "Minimum order amount that needs to be in the cart before coupon applies."
-msgstr "クーポンが適用される前にお買い物カゴに入れる必要がある最低注文金額。"
+msgstr "クーポンが適用される前にカートに入れる必要がある最低注文金額。"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:501
 #: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:444
 msgid "Max number of items in the cart the coupon can be applied to."
-msgstr "お買い物カゴ内でクーポンを適用できる最大商品数。"
+msgstr "カート内でクーポンを適用できる最大商品数。"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:902
 #: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:290
@@ -34662,7 +34665,7 @@ msgstr "WooCommerce のデータの更新が完了しました。ありがとう
 
 #: includes/class-wc-frontend-scripts.php:611
 msgid "Please select some product options before adding this product to your cart."
-msgstr "この商品をお買い物カゴに追加するには、商品オプションを選択してください。"
+msgstr "この商品をカートに追加するには、商品オプションを選択してください。"
 
 #: includes/class-wc-tax.php:822
 msgid "Tax class already exists"
@@ -35890,7 +35893,7 @@ msgstr "ブルガリア・レフ"
 #: src/Blocks/BlockTypes/MiniCart.php:602 assets/client/blocks/cart-link.js:1
 #: assets/client/blocks/cart.js:32
 msgid "Cart"
-msgstr "お買い物カゴ"
+msgstr "カート"
 
 #: templates/checkout/form-coupon.php:35
 msgid "Click here to enter your code"
@@ -35929,7 +35932,7 @@ msgstr "絞り込み"
 
 #: includes/widgets/class-wc-widget-cart.php:35
 msgid "Hide if cart is empty"
-msgstr "お買い物カゴが空の場合は非表示"
+msgstr "カートが空の場合は非表示"
 
 #: includes/wc-core-functions.php:561
 msgid "Hong Kong dollar"
@@ -35965,7 +35968,7 @@ msgstr "ナイジェリア・ナイラ"
 
 #: templates/cart/mini-cart.php:100
 msgid "No products in the cart."
-msgstr "お買い物カゴに商品がありません。"
+msgstr "カートに商品がありません。"
 
 #: includes/shortcodes/class-wc-shortcode-my-account.php:323
 msgid "Password reset is not allowed for this user"
@@ -36013,7 +36016,7 @@ msgstr "アラブ首長国連邦ディルハム"
 
 #: includes/wc-template-functions.php:3973
 msgid "Your cart is currently empty."
-msgstr "現在お買い物カゴには何も入っていません。"
+msgstr "現在カートには何も入っていません。"
 
 #: includes/wc-template-functions.php:2579
 msgctxt "breadcrumb"
@@ -36040,7 +36043,7 @@ msgstr "セール"
 #: includes/wc-cart-functions.php:98
 msgid "%s has been added to your cart."
 msgid_plural "%s have been added to your cart."
-msgstr[0] "%sをお買い物カゴに追加しました。"
+msgstr[0] "%sをカートに追加しました。"
 
 #: templates/checkout/order-receipt.php:25 templates/checkout/thankyou.php:49
 #: assets/client/blocks/order-confirmation-summary.js:1
@@ -36063,7 +36066,7 @@ msgstr "購入手続きを行うには、ログインしている必要があり
 
 #: templates/cart/cart.php:180
 msgid "Update cart"
-msgstr "お買い物カゴを更新"
+msgstr "カートを更新"
 
 #. Translators: %s display name.
 #: templates/auth/form-grant-access.php:57
@@ -36098,7 +36101,7 @@ msgstr "有効な絞り込み"
 
 #: templates/checkout/cart-errors.php:25
 msgid "Return to cart"
-msgstr "お買い物カゴへ戻る"
+msgstr "カートへ戻る"
 
 #: templates/checkout/form-login.php:47
 msgid "If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section."
@@ -36118,14 +36121,14 @@ msgstr "この注文&rsquo;s 状況は &ldquo;%s&rdquo;&mdash;支払いが出来
 
 #: templates/checkout/cart-errors.php:21
 msgid "There are some issues with the items in your cart. Please go back to the cart page and resolve these issues before checking out."
-msgstr "お買い物カゴ内の商品にエラーがあります。お買い物カゴページに戻り、エラーをご確認後、購入手続きにお進みください。"
+msgstr "カート内の商品にエラーがあります。カートページに戻り、エラーをご確認後、購入手続きにお進みください。"
 
 #: templates/cart/cart-totals.php:25
 #: assets/client/blocks/cart-blocks/order-summary-heading-frontend.js:1
 #: assets/client/blocks/cart-blocks/order-summary-heading-style.js:1
 #: assets/client/blocks/cart.js:26
 msgid "Cart totals"
-msgstr "お買い物カゴの合計"
+msgstr "カートの合計"
 
 #: includes/shortcodes/class-wc-shortcode-order-tracking.php:48
 msgid "Please enter a valid order ID"
@@ -36999,7 +37002,7 @@ msgstr "{site_title}の注文 ({order_date}) への備考が追加しました�
 
 #: includes/shipping/legacy-local-delivery/class-wc-shipping-legacy-local-delivery.php:152
 msgid "Percentage of cart total"
-msgstr "お買い物カゴ合計の割合"
+msgstr "カート合計の割合"
 
 #: includes/gateways/bacs/class-wc-gateway-bacs.php:197
 #: assets/client/admin/chunks/settings-payments-bacs.js:1
@@ -37956,7 +37959,7 @@ msgstr "都道府県 / 州 / 郡"
 #: includes/class-wc-cart.php:1232
 #: src/StoreApi/Utilities/CartController.php:285
 msgid "You cannot add &quot;%s&quot; to the cart because the product is out of stock."
-msgstr "商品が在庫切れのため、お買い物カゴに「%s」を追加できません。"
+msgstr "商品が在庫切れのため、カートに「%s」を追加できません。"
 
 #. translators: %s: url
 #: includes/class-wc-auth.php:188
@@ -37970,11 +37973,11 @@ msgstr "住所を変更しました。"
 #. Translators: %s Product title.
 #: includes/class-wc-form-handler.php:721
 msgid "You can only have 1 %s in your cart."
-msgstr "%sは1つのみお買い物カゴに入れられます。"
+msgstr "%sは1つのみカートに入れられます。"
 
 #: includes/class-wc-cart-session.php:574
 msgid "The cart has been filled with the items from your previous order."
-msgstr "お買い物カゴに以前の注文内容を追加しました。"
+msgstr "カートに以前の注文内容を追加しました。"
 
 #. translators: %s: search term
 #: includes/class-wc-breadcrumb.php:367
@@ -37988,7 +37991,7 @@ msgstr "「%s」タグの付いた投稿"
 
 #: includes/class-wc-form-handler.php:924
 msgid "Please choose a product to add to your cart&hellip;"
-msgstr "お買い物カゴに追加する商品を選択してください&hellip;"
+msgstr "カートに追加する商品を選択してください&hellip;"
 
 #. translators: %s: Attribute name.
 #: includes/class-wc-cart.php:1157
@@ -38019,16 +38022,16 @@ msgstr "ファイルをダウンロードするにはログインが必要です
 
 #: includes/class-wc-form-handler.php:916
 msgid "Please choose the quantity of items you wish to add to your cart&hellip;"
-msgstr "お買い物カゴに追加したい商品の数量を選択してください&hellip;"
+msgstr "カートに追加したい商品の数量を選択してください&hellip;"
 
 #: includes/class-wc-form-handler.php:743
 msgid "Cart updated."
-msgstr "お買い物カゴを更新しました。"
+msgstr "カートを更新しました。"
 
 #. translators: %s: coupon code
 #: includes/class-wc-coupon.php:1126
 msgid "Sorry, coupon \"%s\" is not applicable to your cart contents."
-msgstr "クーポン「%s 」はお買い物カゴの内容には適用されません。"
+msgstr "クーポン「%s 」はカートの内容には適用されません。"
 
 #: includes/class-wc-ajax.php:297
 msgid "Sorry there was a problem removing this coupon."
@@ -38037,27 +38040,27 @@ msgstr "このクーポンの削除中に問題が発生しました。"
 #. translators: 1: quantity in stock 2: current quantity
 #: includes/class-wc-cart.php:1276 includes/class-wc-cart.php:1283
 msgid "You cannot add that amount to the cart &mdash; we have %1$s in stock and you already have %2$s in your cart."
-msgstr "お買い物カゴにその数を追加することはできません &mdash; 在庫は%1$s個あり、すでにお買い物カゴに%2$s個入っています。"
+msgstr "カートにその数を追加することはできません &mdash; 在庫は%1$s個あり、すでにカートに%2$s個入っています。"
 
 #. translators: 1: product name 2: quantity in stock
 #: includes/class-wc-cart.php:1249
 #: src/StoreApi/Utilities/CartController.php:301
 msgid "You cannot add that amount of &quot;%1$s&quot; to the cart because there is not enough stock (%2$s remaining)."
-msgstr "在庫不足のため「%1$s」をお買い物カゴに追加することができません (在庫数 %2$s)。"
+msgstr "在庫不足のため「%1$s」をカートに追加することができません (在庫数 %2$s)。"
 
 #. translators: %s: product name
 #: includes/class-wc-cart.php:795
 msgid "Sorry, \"%s\" is not in stock. Please edit your cart and try again. We apologize for any inconvenience caused."
-msgstr "「%s」の在庫がありません。恐れ入りますが、お買い物カゴを編集してもう一度お試しください。"
+msgstr "「%s」の在庫がありません。恐れ入りますが、カートを編集してもう一度お試しください。"
 
 #: includes/class-wc-cart.php:772
 msgid "An item which is no longer available was removed from your cart."
-msgstr "1つの商品が現在購入できない状態のため、お買い物カゴから削除しました。"
+msgstr "1つの商品が現在購入できない状態のため、カートから削除しました。"
 
 #. translators: %s: product name
 #: includes/class-wc-cart-session.php:181
 msgid "%s has been removed from your cart because it can no longer be purchased. Please contact us if you need assistance."
-msgstr "%sは現在購入できないため、お買い物カゴから削除しました。詳細はお問い合わせください。"
+msgstr "%sは現在購入できないため、カートから削除しました。詳細はお問い合わせください。"
 
 #. translators: %s: shipping location (prefix e.g. 'to' + ISO 3166-1 alpha-2
 #. country code)
@@ -38641,7 +38644,7 @@ msgstr "PHP POST サイズ上限"
 #: includes/rest-api/Controllers/Version2/class-wc-rest-system-status-v2-controller.php:1510
 msgctxt "Page setting"
 msgid "Cart"
-msgstr "お買い物カゴ"
+msgstr "カート"
 
 #. Translators: %1$s: shortcode text, %2$s: block slug.
 #: includes/admin/views/html-admin-page-status-report.php:885
@@ -39392,7 +39395,7 @@ msgstr "操作"
 
 #: includes/admin/settings/class-wc-settings-advanced.php:79
 msgid "Cart page"
-msgstr "お買い物カゴページ"
+msgstr "カートページ"
 
 #: includes/admin/settings/class-wc-settings-emails.php:167
 msgid "Email template"
@@ -39444,7 +39447,7 @@ msgstr "はい、税込み価格を入力します"
 
 #: includes/admin/settings/class-wc-settings-products.php:84
 msgid "Add to cart behaviour"
-msgstr "「お買い物カゴに追加」の処理"
+msgstr "「カートに追加」の処理"
 
 #: includes/admin/settings/class-wc-settings-advanced.php:140
 msgid "If you define a \"Terms\" page the customer will be asked if they accept them when checking out."
@@ -39466,23 +39469,23 @@ msgstr "キーを取り消す"
 
 #: includes/admin/settings/views/settings-tax.php:53
 msgid "Shipping tax class based on cart items"
-msgstr "お買い物カゴ内の商品に応じた送料税クラス"
+msgstr "カート内の商品に応じた送料税クラス"
 
 #: includes/admin/settings/class-wc-settings-products.php:85
 msgid "Redirect to the cart page after successful addition"
-msgstr "追加後、お買い物カゴのページにリダイレクト"
+msgstr "追加後、カートのページにリダイレクト"
 
 #: includes/admin/settings/views/settings-tax.php:47
 msgid "Optionally control which tax class shipping gets, or leave it so shipping tax is based on the cart items themselves."
-msgstr "オプションとして、配送に適用される税クラスをコントロールできます。または、お買い物カゴ内の商品自体に基づいた配送税にする場合はそのままにしてください。"
+msgstr "オプションとして、配送に適用される税クラスをコントロールできます。または、カート内の商品自体に基づいた配送税にする場合はそのままにしてください。"
 
 #: includes/admin/settings/class-wc-settings-shipping.php:114
 msgid "Enable the shipping calculator on the cart page"
-msgstr "お買い物カゴページの送料計算機を有効化"
+msgstr "カートページの送料計算機を有効化"
 
 #: includes/admin/settings/class-wc-settings-products.php:92
 msgid "Enable AJAX add to cart buttons on archives"
-msgstr "アーカイブで AJAX の「お買い物カゴに追加」ボタンを有効化"
+msgstr "アーカイブで AJAX の「カートに追加」ボタンを有効化"
 
 #: includes/admin/settings/views/settings-tax.php:77
 msgid "Display prices in the shop"
@@ -39490,11 +39493,11 @@ msgstr "ショップで価格を表示"
 
 #: includes/admin/settings/views/settings-tax.php:89
 msgid "Display prices during cart and checkout"
-msgstr "お買い物カゴ内と購入手続きで価格を表示"
+msgstr "カート内と購入手続きで価格を表示"
 
 #: includes/admin/settings/class-wc-settings-general.php:269
 msgid "Coupons can be applied from the cart and checkout pages."
-msgstr "クーポンはお買い物カゴまたは支払手続きページから適用できます。"
+msgstr "クーポンはカートまたは支払手続きページから適用できます。"
 
 #: includes/admin/reports/class-wc-report-downloads.php:89
 #: includes/admin/reports/class-wc-report-downloads.php:223
@@ -41717,7 +41720,7 @@ msgstr "クーポンコードがすでに存在します - お客様は、この
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:312
 msgid "The maximum number of individual items this coupon can apply to when using product discounts. Leave blank to apply to all qualifying items in cart."
-msgstr "割引にこのクーポンを適用できる個別項目の最大数。お買い物カゴ内のすべての対象項目に適用するには、空白のままにします。"
+msgstr "割引にこのクーポンを適用できる個別項目の最大数。カート内のすべての対象項目に適用するには、空白のままにします。"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:93
 msgid "Value of the coupon."
@@ -41818,7 +41821,7 @@ msgstr "%1$s を呼び出す際にエラーが発生しました: %2$s"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:180
 msgid "Check this box if the coupon should not apply to items on sale. Per-item coupons will only work if the item is not on sale. Per-cart coupons will only work if there are items in the cart that are not on sale."
-msgstr "クーポンをセール商品に適用しない場合、このチェックボックスをオンにします。商品ごとのクーポンは商品がセールで中ない場合に適用します。お買い物カゴ単位のクーポンは、お買い物カゴ内にセール商品が無い場合のみ適用します。"
+msgstr "クーポンをセール商品に適用しない場合、このチェックボックスをオンにします。商品ごとのクーポンは商品がセールで中ない場合に適用します。カート単位のクーポンは、カート内にセール商品が無い場合のみ適用します。"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:558
 msgid "No shipping address set."
@@ -42850,7 +42853,7 @@ msgstr "クーポン額"
 #: includes/class-wc-install.php:999
 msgctxt "Page title"
 msgid "Cart"
-msgstr "お買い物カゴ"
+msgstr "カート"
 
 #: includes/abstracts/abstract-wc-order.php:2520
 #: includes/admin/class-wc-admin-dashboard.php:496
@@ -44142,7 +44145,7 @@ msgstr "一致する項目がありません"
 #: assets/client/blocks/product-button-frontend.js:3
 #: assets/client/blocks/product-button.js:2
 msgid "Add to cart"
-msgstr "お買い物カゴに追加"
+msgstr "カートに追加"
 
 #: includes/admin/class-wc-admin-assets.php:176
 #: includes/class-wc-frontend-scripts.php:626
