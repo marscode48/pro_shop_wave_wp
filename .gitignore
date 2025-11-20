@@ -55,3 +55,10 @@ src/**/.DS_Store
 languages/*
 !languages/*.pot
 !languages/*.po
+
+# ======================================
+# WooCommerce翻訳（管理用）
+# テーマ内で管理：languages/woocommerce/
+# ======================================
+languages/woocommerce/*
+!languages/woocommerce/*.po
