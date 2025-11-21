@@ -496,15 +496,6 @@ function custom_related_products_heading($heading)
 add_filter('woocommerce_product_related_products_heading', 'custom_related_products_heading');
 
 // -----------------------------
-// WooCommerce アップセル商品の見出しを英語に変更
-// -----------------------------
-function custom_upsells_products_heading($heading)
-{
-  return 'Recommended';
-}
-add_filter('woocommerce_product_upsells_products_heading', 'custom_upsells_products_heading');
-
-// -----------------------------
 // WooCommerce 商品ループ <li> に fadeup クラスを追加
 // -----------------------------
 function add_fadeup_class_to_product_loop_item($classes)
