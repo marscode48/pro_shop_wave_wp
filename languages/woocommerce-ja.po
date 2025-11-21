@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-11-20 14:36+0900\n"
+"PO-Revision-Date: 2025-11-21 07:27+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -98,7 +98,7 @@ msgstr "注文番号%1$s がキャンセルされたことをお知らせしま�
 
 #: templates/emails/block/general-block-email.php:134
 msgid "Store Information"
-msgstr "情報を保存"
+msgstr "ストア情報"
 
 #: templates/emails/block/customer-pos-completed-order.php:29
 #: templates/emails/block/customer-pos-refunded-order.php:38
@@ -182,7 +182,7 @@ msgstr "メールを表示"
 
 #: src/Internal/EmailEditor/Integration.php:144
 msgid "New Email"
-msgstr "新しいメールアドレス"
+msgstr "新規メール"
 
 #: src/Internal/EmailEditor/Integration.php:143
 msgid "Edit Email"
@@ -255,12 +255,12 @@ msgstr "%1$s - 画像 (%2$d)"
 #. translators: %s: URL to the documentation.
 #: src/Blocks/Shipping/ShippingController.php:211
 msgid "This feature is not available when using the <a href=\"%s\">Cart and checkout blocks</a>. Shipping will be calculated at checkout."
-msgstr "この機能は、<a href=\"%s\">カートおよび購入手続きブロック</a>の使用中はご利用いただけません。 送料は購入手続き時に計算されます。"
+msgstr "この機能は、<a href=\"%s\">カートおよびご購入手続きブロック</a>の使用中はご利用いただけません。 送料はご購入手続き時に計算されます。"
 
 #: src/Blocks/Domain/Services/CheckoutLink.php:67
 #: src/Blocks/Domain/Services/CheckoutLink.php:155
 msgid "The provided checkout link was out of date or invalid. No products were added to the cart."
-msgstr "指定された購入手続きリンクは古くなっているか、無効です。 カートに追加された商品はありません。"
+msgstr "指定されたご購入手続きリンクは古くなっているか、無効です。 カートに追加された商品はありません。"
 
 #. translators: %1$s: Product filter name, %2$d: Number of products
 #: src/Blocks/BlockTypes/ProductFilterCheckboxList.php:159
@@ -376,7 +376,7 @@ msgstr "処理中または保留中の注文がキャンセルされた場合に
 #. translators: %s: coupon code
 #: includes/class-wc-coupon.php:1037 includes/class-wc-discounts.php:608
 msgid "Coupon \"%s\" cannot be applied because it does not exist."
-msgstr "クーポン「%s」は、存在しないため適用できません。"
+msgstr "クーポン「%s」は、無効です。"
 
 #. translators: %s: coupon code
 #: includes/class-wc-coupon.php:1030
@@ -524,12 +524,12 @@ msgstr "商品が在庫切れまたは入荷待ちの場合に買い物客に知
 #: assets/client/blocks/product-stock-indicator/block.json
 msgctxt "block title"
 msgid "Product Stock Indicator"
-msgstr "商品在庫インジケーター"
+msgstr "在庫ステータス"
 
 #: assets/client/blocks/product-specifications/block.json
 msgctxt "block keyword"
 msgid "additional information"
-msgstr "追加情報"
+msgstr "商品詳細"
 
 #: assets/client/blocks/product-specifications/block.json
 msgctxt "block keyword"
@@ -689,7 +689,7 @@ msgstr "価格"
 #: assets/client/blocks/product-filter-clear-button/block.json
 msgctxt "block title"
 msgid "Clear filters"
-msgstr "フィルターをクリア"
+msgstr "絞り込みを解除"
 
 #: assets/client/blocks/product-filter-attribute/block.json
 msgctxt "block title"
@@ -818,7 +818,7 @@ msgstr "新しい注文: %s、"
 #. translators: %s: order number
 #: templates/emails/block/admin-failed-order.php:28
 msgid "Order failed: #%s,"
-msgstr "注文が失敗しました: 番号%s、"
+msgstr "決済に失敗しました: 番号%s、"
 
 #. translators: %s: order number
 #: templates/emails/block/admin-cancelled-order.php:28
@@ -1242,12 +1242,12 @@ msgstr "%s のレビュー"
 #: src/Blocks/BlockTypes/Reviews/ProductReviewsPaginationPrevious.php:26
 #: assets/client/blocks/product-reviews-pagination-previous.js:1
 msgid "Older Reviews"
-msgstr "過去のレビュー"
+msgstr "以前のレビュー"
 
 #: src/Blocks/BlockTypes/Reviews/ProductReviewsPaginationNext.php:33
 #: assets/client/blocks/product-reviews-pagination-next.js:1
 msgid "Newer Reviews"
-msgstr "最近のレビュー"
+msgstr "新しいレビュー"
 
 #. translators: %s: human-readable time difference.
 #: src/Blocks/BlockTypes/Reviews/ProductReviewDate.php:40
@@ -1256,11 +1256,11 @@ msgstr "%s前"
 
 #: src/Blocks/BlockTypes/Reviews/ProductReviewContent.php:55
 msgid "Your review is awaiting moderation. This is a preview; your review will be visible after it has been approved."
-msgstr "あなたのレビューは承認待ちです。 これはプレビューです。レビューは承認後に表示されます。"
+msgstr "レビューは承認待ちです。 これはプレビューです。レビューは承認後に表示されます。"
 
 #: src/Blocks/BlockTypes/Reviews/ProductReviewContent.php:53
 msgid "Your review is awaiting moderation."
-msgstr "あなたのレビューは承認待ちです。"
+msgstr "レビューは承認待ちです。"
 
 #: src/Blocks/BlockTypes/ProductSpecifications.php:108
 #: assets/client/blocks/product-specifications.js:2
@@ -1331,7 +1331,7 @@ msgstr "ブランドのリストです。"
 
 #: includes/rest-api/Controllers/Version3/class-wc-rest-orders-controller.php:462
 msgid "Limit result set to orders created via specific sources (e.g. checkout, admin)."
-msgstr "特定のソース (購入手続き、管理画面など) で作成された注文に結果を絞り込みます。"
+msgstr "特定のソース (ご購入手続き、管理画面など) で作成された注文に結果を絞り込みます。"
 
 #: includes/rest-api/Controllers/Version3/class-wc-rest-order-refunds-controller.php:188
 msgid "Value of the Cost of Goods Sold for the refund item."
@@ -1574,7 +1574,7 @@ msgstr "非表示のクーポンのリストです。 各非表示エントリ�
 
 #: includes/admin/settings/views/html-admin-page-shipping-zone-methods.php:18
 msgid "Return to shipping"
-msgstr "配送に戻る"
+msgstr "配送設定に戻る"
 
 #: packages/email-editor/src/Engine/theme.json
 msgctxt "Font size name"
@@ -1744,7 +1744,7 @@ msgstr "1"
 #: assets/client/blocks/product-filter-clear-button/block.json
 msgctxt "block keyword"
 msgid "clear filters"
-msgstr "フィルターをクリア"
+msgstr "絞り込みを解除"
 
 #: assets/client/blocks/product-details/block.json
 msgctxt "block description"
@@ -2500,7 +2500,7 @@ msgstr "次の取引のお知らせをお待ちください。 詳細につい�
 
 #: includes/emails/class-wc-email-failed-order.php:75
 msgid "Order failed: #{order_number}"
-msgstr "注文が失敗しました: 番号{order_number}"
+msgstr "決済に失敗しました: 番号{order_number}"
 
 #: includes/emails/class-wc-email-failed-order.php:50
 msgid "Select who should be notified if an order that was previously processing or on-hold has failed."
@@ -5338,7 +5338,7 @@ msgstr "または次に移動:"
 #: patterns/no-products-found-filters.php:13
 msgctxt "Used in sentence: You can try clearing any filters or head to our store's home."
 msgid "clearing any filters"
-msgstr "すべてのフィルターをクリア"
+msgstr "すべての絞り込みを解除"
 
 #: patterns/no-products-found-filters.php:13
 msgctxt "Used in sentence: You can try clearing any filters or head to our store's home."
@@ -6884,12 +6884,12 @@ msgstr "追加フィールド"
 #: assets/client/blocks/inner-blocks/checkout-additional-information-block/block.json
 msgctxt "block description"
 msgid "Render additional fields in the 'Additional information' location."
-msgstr "追加フィールドを「追加情報」の場所にレンダリングします。"
+msgstr "追加フィールドを「商品詳細」の場所にレンダリングします。"
 
 #: assets/client/blocks/inner-blocks/checkout-additional-information-block/block.json
 msgctxt "block title"
 msgid "Additional information"
-msgstr "追加情報"
+msgstr "商品詳細"
 
 #: assets/client/admin/product-editor/blocks/product-fields/product-details-section-description/block.json
 msgctxt "block description"
@@ -8126,12 +8126,12 @@ msgstr "注文確認の請求先先住所を表示します。"
 #: assets/client/blocks/order-confirmation-additional-information/block.json
 msgctxt "block description"
 msgid "Displays additional information provided by third-party extensions for the current order."
-msgstr "サードパーティの拡張機能からの現在の注文に関する追加情報を表示します。"
+msgstr "サードパーティの拡張機能からの現在の注文に関する商品詳細を表示します。"
 
 #: assets/client/blocks/order-confirmation-additional-information/block.json
 msgctxt "block title"
 msgid "Additional Information"
-msgstr "追加情報"
+msgstr "商品詳細"
 
 #: assets/client/blocks/classic-shortcode/block.json
 msgctxt "block description"
@@ -9450,7 +9450,7 @@ msgstr "入手可能な商品の在庫数"
 #: assets/client/admin/product-editor/blocks/product-fields/product-details-section-description/block.json
 msgctxt "block keyword"
 msgid "description"
-msgstr "説明"
+msgstr "商品説明"
 
 #: assets/client/blocks/inner-blocks/mini-cart-title-items-counter-block/block.json
 msgctxt "block description"
@@ -10344,7 +10344,7 @@ msgstr "トランザクションプロセッサとその画像の配列。"
 
 #: includes/wc-template-functions.php:4200
 msgid "Shop"
-msgstr "ショップ"
+msgstr "Shop"
 
 #: patterns/product-search-form.php:10
 msgctxt "placeholder for search field"
@@ -20309,7 +20309,7 @@ msgstr "新規入荷商品"
 
 #: src/Admin/API/OnboardingTasks.php:521
 msgid "Shop by Category"
-msgstr "カテゴリー別ショップ"
+msgstr "カテゴリから探す"
 
 #: src/Admin/API/OnboardingTasks.php:494 src/Admin/API/OnboardingTasks.php:501
 msgid "Content…"
@@ -22200,7 +22200,7 @@ msgstr "アビム"
 msgctxt "with first and last result"
 msgid "Showing %1$d&ndash;%2$d of %3$d result"
 msgid_plural "Showing %1$d&ndash;%2$d of %3$d results"
-msgstr[0] "結果の%1$d～%2$d/%3$dを表示しています"
+msgstr[0] "全%3$d件中 %1$d～%2$d件を表示"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:1923
 msgid "WooCommerce Admin icon"
@@ -23372,7 +23372,7 @@ msgstr "住所を入力して配送オプションを表示してください。
 
 #: includes/wc-template-functions.php:1622
 msgid "Sort by latest"
-msgstr "新しい順に並べ替え"
+msgstr "新しい順"
 
 #: includes/wc-stock-functions.php:401
 msgid "Stock levels increased:"
@@ -32758,7 +32758,7 @@ msgstr "特定の属性分類 ID を割り当てられた商品に制限。(割�
 #: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:2213
 #: includes/rest-api/Controllers/Version3/class-wc-rest-products-controller.php:1647
 msgid "Define if the attribute is visible on the \"Additional information\" tab in the product's page."
-msgstr "商品ページの「追加情報」タブで属性を表示するかどうかを定義。"
+msgstr "商品ページの「商品詳細」タブで属性を表示するかどうかを定義。"
 
 #: includes/data-stores/class-wc-product-data-store-cpt.php:275
 #: src/Blocks/AIContent/UpdateProducts.php:217
@@ -35118,7 +35118,7 @@ msgstr "現在この商品は在庫切れのため、ご利用いただけませ
 
 #: templates/single-product/up-sells.php:26
 msgid "You may also like&hellip;"
-msgstr "こちらもおすすめ&hellip;"
+msgstr "おすすめ商品"
 
 #: src/Blocks/BlockTypes/Reviews/ProductReviewForm.php:125
 #: templates/single-product-reviews.php:130
@@ -35231,7 +35231,7 @@ msgstr "&nbsp;&ndash; ページ %s"
 #: assets/client/blocks/all-products.js:20
 #: assets/client/blocks/catalog-sorting.js:1
 msgid "Default sorting"
-msgstr "デフォルト表示"
+msgstr "おすすめ順"
 
 #. translators: %s: reviews count
 #: includes/wc-template-functions.php:2137
@@ -35655,7 +35655,7 @@ msgstr "カテゴリーの順番"
 #: templates/checkout/form-shipping.php:57
 #: templates/single-product/tabs/additional-information.php:22
 msgid "Additional information"
-msgstr "追加情報"
+msgstr "商品詳細"
 
 #. translators: %s: search query
 #: includes/wc-template-functions.php:1123
@@ -42952,7 +42952,7 @@ msgstr "このレビューをゴミ箱から復元"
 #: assets/client/admin/product-editor/index.js:2
 #: assets/client/blocks/product-details.js:1
 msgid "Description"
-msgstr "説明"
+msgstr "商品説明"
 
 #: includes/admin/class-wc-admin-api-keys-table-list.php:50
 #: includes/admin/reports/class-wc-report-downloads.php:88
@@ -43966,7 +43966,7 @@ msgstr "二度同じ税率を追加することはできません !"
 
 #: includes/admin/class-wc-admin-dashboard.php:47
 msgid "WooCommerce Recent Reviews"
-msgstr "WooCommerce 最近のレビュー"
+msgstr "WooCommerce 新しいレビュー"
 
 #: includes/wc-template-functions.php:3927
 msgctxt "min_price"
