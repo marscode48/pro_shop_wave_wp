@@ -19,7 +19,7 @@
         <?php the_post_thumbnail('full', ['class' => 'card-blog__image']); ?>
       <?php else : ?>
         <source srcset="<?php echo esc_url(get_theme_file_uri('images/default-thumbnail.webp')); ?>" type="image/webp">
-        <img src="<?php echo esc_url(get_theme_file_uri('images/default-thumbnail.jpg')); ?>" alt="デフォルト画像" class="card-blog__image">
+        <img src="<?php echo esc_url(get_theme_file_uri('images/default-thumbnail.jpg')); ?>" alt="<?php echo esc_attr__( 'Default Image', 'proshopwave' ); ?>" class="card-blog__image">
       <?php endif; ?>
     </picture>
     <div class="card-blog__content">
@@ -43,7 +43,7 @@
     <?php endif; ?>
     <div class="card-blog__more">
       <a href="<?php the_permalink(); ?>" class="card-blog__more-link">
-        Read More<i class="fas fa-arrow-right"></i>
+        <?php echo esc_html__( 'Read More', 'proshopwave' ); ?><i class="fas fa-arrow-right"></i>
       </a>
     </div>
   </div>

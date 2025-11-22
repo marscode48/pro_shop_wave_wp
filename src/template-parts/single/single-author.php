@@ -60,25 +60,25 @@ $author_archive_url = get_author_posts_url($author_id);
           <?php endif; ?>
 
           <?php if ($twitter_url) : ?>
-            <a class="author__sns-link author__sns-link--twitter" href="<?php echo esc_url($twitter_url); ?>" target="_blank" rel="noopener nofollow" aria-label="Twitter">
+            <a class="author__sns-link author__sns-link--twitter" href="<?php echo esc_url($twitter_url); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php echo esc_attr__('Twitter', 'proshopwave'); ?>">
               <i class="fab fa-x-twitter"></i>
             </a>
           <?php endif; ?>
 
           <?php if ($instagram_url) : ?>
-            <a class="author__sns-link author__sns-link--instagram" href="<?php echo esc_url($instagram_url); ?>" target="_blank" rel="noopener nofollow" aria-label="Instagram">
+            <a class="author__sns-link author__sns-link--instagram" href="<?php echo esc_url($instagram_url); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php echo esc_attr__('Instagram', 'proshopwave'); ?>">
               <i class="fab fa-instagram"></i>
             </a>
           <?php endif; ?>
 
           <?php if ($facebook_url) : ?>
-            <a class="author__sns-link author__sns-link--facebook" href="<?php echo esc_url($facebook_url); ?>" target="_blank" rel="noopener nofollow" aria-label="Facebook">
+            <a class="author__sns-link author__sns-link--facebook" href="<?php echo esc_url($facebook_url); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php echo esc_attr__('Facebook', 'proshopwave'); ?>">
               <i class="fab fa-facebook-f"></i>
             </a>
           <?php endif; ?>
 
           <?php if ($youtube_url) : ?>
-            <a class="author__sns-link author__sns-link--youtube" href="<?php echo esc_url($youtube_url); ?>" target="_blank" rel="noopener nofollow" aria-label="YouTube">
+            <a class="author__sns-link author__sns-link--youtube" href="<?php echo esc_url($youtube_url); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php echo esc_attr__('YouTube', 'proshopwave'); ?>">
               <i class="fab fa-youtube"></i>
             </a>
           <?php endif; ?>

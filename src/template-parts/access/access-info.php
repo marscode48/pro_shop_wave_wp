@@ -36,7 +36,7 @@
               <?php esc_html_e('住所', 'proshopwave'); ?>
             </dt>
             <dd class="access-info__desc">
-              〒253-0083 神奈川県茅ヶ崎市西久保１５１８−１<br>
+              <?php echo esc_html__( '神奈川県茅ヶ崎市西久保１５１８−１', 'proshopwave' ); ?><br>
               <a href="https://maps.app.goo.gl/2j8G8uKaDDwhdHmF9" target="_blank" rel="noopener" class="access-info__map-link">
                 <?php esc_html_e('Google Mapで見る', 'proshopwave'); ?>
               </a>

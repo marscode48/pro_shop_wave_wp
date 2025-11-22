@@ -20,6 +20,9 @@ function proshopwave_theme_setup()
   // HTML5サポート
   add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
 
+  // テーマの翻訳読み込み
+  load_theme_textdomain('proshopwave', get_template_directory() . '/languages');
+
   // ナビゲーションメニューの登録
   register_nav_menus([
     'global' => 'グローバルナビゲーション',
@@ -482,24 +485,6 @@ function proshopwave_remove_product_meta()
   remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 }
 add_action('woocommerce_before_single_product', 'proshopwave_remove_product_meta');
-
-// -----------------------------
-// WooCommerce 関連商品の見出しを変更
-// -----------------------------
-function custom_related_products_heading($heading)
-{
-  return 'Related';
-}
-add_filter('woocommerce_product_related_products_heading', 'custom_related_products_heading');
-
-// -----------------------------
-// WooCommerce アップセル商品の見出しを英語に変更
-// -----------------------------
-function custom_upsells_products_heading($heading)
-{
-  return 'Recommended';
-}
-add_filter('woocommerce_product_upsells_products_heading', 'custom_upsells_products_heading');
 
 // -----------------------------
 // WooCommerce 商品ループ <li> に fadeup クラスを追加

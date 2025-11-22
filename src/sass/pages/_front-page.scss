@@ -106,7 +106,7 @@ $marker-anim-duration: var(--marker-animation-duration);
     pointer-events: none;
   }
 
-  &__heading-en {
+  &__heading {
     position: absolute;
     z-index: 2;
     top: 7.5vh;
@@ -129,7 +129,7 @@ $marker-anim-duration: var(--marker-animation-duration);
     letter-spacing: 0.06em;
   }
 
-  &__subheading-jp {
+  &__subheading {
     position: absolute;
     z-index: 2;
     bottom: 10svh;

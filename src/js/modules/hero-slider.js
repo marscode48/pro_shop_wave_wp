@@ -43,7 +43,7 @@ export class HeroSlider {
     heroContentEl.classList.add('is-marker-active');
 
     const markers = heroContentEl.querySelectorAll('.hero__text-marker');
-    const subheading = heroContentEl.querySelector('.hero__subheading-jp');
+    const subheading = heroContentEl.querySelector('.hero__subheading');
 
     // マーカーのアニメーション関連のインラインスタイルを設定
     if (markers.length > 0) {
@@ -90,7 +90,7 @@ export class HeroSlider {
     heroContentEl.classList.add('is-marker-completed');
 
     // サブヘディングをGSAPでアニメーションでフェードアウト
-    const subheading = heroContentEl.querySelector('.hero__subheading-jp');
+    const subheading = heroContentEl.querySelector('.hero__subheading');
     if (subheading) {
       gsap.to(subheading, {
         scale: 0.25,

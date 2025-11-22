@@ -150,7 +150,7 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
     ?>
     <div class="product-card__more">
       <a href="<?php the_permalink(); ?>" class="product-card__more-link">
-        More<i class="fas fa-arrow-right" aria-hidden="true"></i>
+        <?php echo esc_html__( 'More', 'proshopwave' ); ?><i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
     <?php

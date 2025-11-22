@@ -7,8 +7,8 @@
 ?>
 <section class="section section--blog">
   <div class="section__inner">
-    <h2 class="section__title fadeup">Blog</h2>
-    <p class="section__text fadeup">ドリフトパーツやアパレルの<br class="sp-only">最新情報をピックアップ。</p>
+    <h2 class="section__title fadeup"><?php echo esc_html__( 'Blog', 'proshopwave' ); ?></h2>
+    <p class="section__text fadeup"><?php echo wp_kses_post( __( 'ドリフトパーツやアパレルの<br class="sp-only">最新情報をピックアップ。', 'proshopwave' ) ); ?></p>
     <div class="card-list card-list--blog">
       <?php
       $blog_query = new WP_Query([
@@ -26,7 +26,7 @@
     </div>
     <div class="section__button-area faderight">
       <a href="/blog/" class="section__button">
-        <span class="section__button-inner">View All</span>
+        <span class="section__button-inner"><?php echo esc_html__( 'View All', 'proshopwave' ); ?></span>
       </a>
     </div>
   </div>

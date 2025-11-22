@@ -23,7 +23,7 @@ get_header();
 
         <header class="about__header">
           <h1 class="about__title section__title fadeup">
-            <?php the_title(); ?>
+            <?php echo esc_html( get_the_title() ); ?>
           </h1>
 
           <?php if (has_excerpt()) : ?>

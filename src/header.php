@@ -66,7 +66,9 @@
           ? wc_get_page_permalink('myaccount')
           : esc_url(home_url('/my-account/'));
         $is_logged_in = is_user_logged_in();
-        $account_label = $is_logged_in ? 'My Account' : 'Log In / Register';
+        $account_label = $is_logged_in
+          ? __('My Account', 'proshopwave')
+          : __('Log In / Register', 'proshopwave');
 
         // WooCommerce カートURLへのリンク（多言語・スラッグ変更に追従／WooCommerce無効時はフォールバック）
         $cart_url = function_exists('wc_get_cart_url')
@@ -75,7 +77,7 @@
         ?>
 
         <!-- ハンバーガーボタン（SPのみ表示） -->
-        <button class="header__toggle" aria-label="メニューを開く">
+        <button class="header__toggle" aria-label="<?php echo esc_attr__('メニューを開く', 'proshopwave'); ?>">
           <span></span><span></span><span></span>
         </button>
 
@@ -84,7 +86,7 @@
           <?php $html_tag = (is_home() || is_front_page()) ? 'h1' : 'div'; ?>
           <<?php echo $html_tag; ?>>
             <a href="<?php echo esc_url(home_url('/')); ?>">
-              <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="PRO SHOP WAVE ロゴ" />
+              <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="<?php echo esc_attr__('PRO SHOP WAVE ロゴ', 'proshopwave'); ?>" />
             </a>
           </<?php echo $html_tag; ?>>
         </div>
@@ -93,19 +95,19 @@
         <nav class="header__nav">
           <ul class="header__nav-list">
             <li class="header__nav-item header__nav-item--has-children">
-              <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>">Shop</a>
+              <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>"><?php esc_html_e('Shop', 'proshopwave'); ?></a>
               <button class="header__nav-toggle" aria-haspopup="menu" aria-expanded="false" aria-label="商品カテゴリを開く">
                 <span class="header__nav-toggle-icon"></span>
               </button>
               <ul class="header__submenu">
-                <li><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>">Parts</a></li>
-                <li><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>">Apparel</a></li>
+                <li><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>"><?php esc_html_e('Parts', 'proshopwave'); ?></a></li>
+                <li><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>"><?php esc_html_e('Apparel', 'proshopwave'); ?></a></li>
               </ul>
             </li>
-            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
-            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
-            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>">Access</a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'proshopwave'); ?></a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/about/')); ?>"><?php esc_html_e('About', 'proshopwave'); ?></a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/contact/')); ?>"><?php esc_html_e('Contact', 'proshopwave'); ?></a></li>
+            <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/access/')); ?>"><?php esc_html_e('Access', 'proshopwave'); ?></a></li>
 
             <!-- アカウント出し分け（SPのみ表示） -->
             <li class="header__nav-item header__nav-account">
@@ -124,7 +126,7 @@
             <!-- ロゴ（SPのみ表示） -->
             <li class="header__nav-item header__logo">
               <a href="<?php echo esc_url(home_url('/')); ?>">
-                <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="PRO SHOP WAVE ロゴ" />
+                <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="<?php echo esc_attr__('PRO SHOP WAVE ロゴ', 'proshopwave'); ?>" />
               </a>
             </li>
           </ul>
@@ -144,8 +146,8 @@
               <label class="screen-reader-text" for="global-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
               <?php
               $placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
-                ? 'ショップ内検索'
-                : '商品・ブログを検索';
+                ? __('ショップ内検索', 'proshopwave')
+                : __('商品・ブログを検索', 'proshopwave');
               ?>
               <input
                 id="global-search"
@@ -156,7 +158,7 @@
                 <!-- post_type が product の場合は archive-product.php に移動-->
                 <input type="hidden" name="post_type" value="product">
               <?php endif; ?>
-              <button type="submit" aria-label="<?php echo esc_attr__('検索'); ?>">
+              <button type="submit" aria-label="<?php echo esc_attr__('検索', 'proshopwave'); ?>">
                 <i class="fas fa-search" aria-hidden="true"></i>
               </button>
             </form>
@@ -171,7 +173,7 @@
 
           <!-- カートアイコン（数量バッジ付き） -->
           <div class="header__cart">
-            <a href="<?php echo esc_url($cart_url); ?>" aria-label="カート">
+            <a href="<?php echo esc_url($cart_url); ?>" aria-label="<?php echo esc_attr__('カート', 'proshopwave'); ?>">
               <i class="fas fa-shopping-cart" aria-hidden="true"></i>
               <?php
               $cart_count = (function_exists('WC') && WC()->cart) ? (int) WC()->cart->get_cart_contents_count() : 0;
@@ -197,8 +199,8 @@
       <label class="screen-reader-text" for="sp-search"><?php echo esc_html__('サイト内検索', 'proshopwave'); ?></label>
       <?php
       $sp_placeholder_text = (function_exists('is_woocommerce') && is_woocommerce())
-        ? 'ショップ内検索'
-        : 'サイト内検索（商品・ブログ）';
+        ? __('ショップ内検索', 'proshopwave')
+        : __('サイト内検索（商品・ブログ）', 'proshopwave');
       ?>
       <input
         id="sp-search"
@@ -209,7 +211,7 @@
         <!-- post_type が product の場合は archive-product.php に移動-->
         <input type="hidden" name="post_type" value="product">
       <?php endif; ?>
-      <button type="submit" aria-label="<?php echo esc_attr__('検索'); ?>">
+      <button type="submit" aria-label="<?php echo esc_attr__('検索', 'proshopwave'); ?>">
         <i class="fas fa-search" aria-hidden="true"></i>
       </button>
     </form>

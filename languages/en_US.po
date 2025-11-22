@@ -1,0 +1,715 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: proshopwave 1.0.0\n"
+"POT-Creation-Date: 2025-11-19 15:44+0900\n"
+"PO-Revision-Date: 2025-11-19 15:56+0900\n"
+"Last-Translator: \n"
+"Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+"X-Poedit-Basepath: ../src\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: content-product.php:153 template-parts/section/section-apparel.php:16
+#: template-parts/section/section-custom-parts.php:15
+#: template-parts/section/section-new-arrivals.php:36
+msgid "More"
+msgstr "More"
+
+#: footer.php:21
+msgid "フッターナビゲーション"
+msgstr "Footer navigation"
+
+#: footer.php:25 header.php:98
+msgid "Shop"
+msgstr "Shop"
+
+#: footer.php:30 header.php:107 template-parts/blog/blog-archive-header.php:17
+#: template-parts/section/section-blog.php:10
+msgid "Blog"
+msgstr "Blog"
+
+#: footer.php:35 header.php:108
+msgid "About"
+msgstr "About"
+
+#: footer.php:40 header.php:109
+msgid "Contact"
+msgstr "Contact"
+
+#: footer.php:45 header.php:110
+msgid "Access"
+msgstr "Access"
+
+#: footer.php:57
+msgid "PRO SHOP WAVE"
+msgstr "PRO SHOP WAVE"
+
+#: footer.php:61 template-parts/access/access-info.php:39
+msgid "神奈川県茅ヶ崎市西久保１５１８−１"
+msgstr "1518-1 Nishikubo, Chigasaki-shi, Kanagawa"
+
+#: footer.php:65
+msgid "TEL:"
+msgstr "TEL:"
+
+#: footer.php:69
+msgid "Mail:"
+msgstr "Mail:"
+
+#: footer.php:75 template-parts/single/single-author.php:69
+msgid "Instagram"
+msgstr "Instagram"
+
+#: footer.php:78
+msgid "X (Twitter)"
+msgstr "X (Twitter)"
+
+#: footer.php:81 template-parts/single/single-author.php:75
+msgid "Facebook"
+msgstr "Facebook"
+
+#: footer.php:90
+msgid "ご利用ガイド"
+msgstr "Shopping Guide"
+
+#: footer.php:93
+msgid "よくある質問"
+msgstr "FAQ"
+
+#: footer.php:96
+msgid "返品・交換・キャンセルについて"
+msgstr "Returns / Exchanges / Cancellations"
+
+#: footer.php:103
+msgid "利用規約"
+msgstr "Terms of Service"
+
+#: footer.php:106
+msgid "プライバシーポリシー"
+msgstr "Privacy Policy"
+
+#: footer.php:109
+msgid "特商法表記"
+msgstr "Legal Notice"
+
+#: footer.php:118
+#, php-format
+msgid "© %s PRO SHOP WAVE"
+msgstr "© %s PRO SHOP WAVE"
+
+#: footer.php:129
+msgid "ページトップへ戻る"
+msgstr "Back to top"
+
+#: functions.php:451
+msgid "型番:"
+msgstr "Part No.:"
+
+#: functions.php:466
+msgid "タグ:"
+msgstr "Tags:"
+
+#: functions.php:619
+msgid "Submit"
+msgstr "Submit"
+
+#: functions.php:864
+msgid "適合車種"
+msgstr "Compatible models"
+
+#: header.php:70
+msgid "My Account"
+msgstr "My Account"
+
+#: header.php:71
+msgid "Log In / Register"
+msgstr "Log In / Register"
+
+#: header.php:80
+msgid "メニューを開く"
+msgstr "Open menu"
+
+#: header.php:89 header.php:129
+msgid "PRO SHOP WAVE ロゴ"
+msgstr "PRO SHOP WAVE logo"
+
+#: header.php:103
+msgid "Parts"
+msgstr "Parts"
+
+#: header.php:104 template-parts/section/section-apparel.php:11
+msgid "Apparel"
+msgstr "Apparel"
+
+#: header.php:146 header.php:199
+msgid "サイト内検索"
+msgstr "Site search"
+
+#: header.php:149 header.php:202
+msgid "ショップ内検索"
+msgstr "Shop search"
+
+#: header.php:150
+msgid "商品・ブログを検索"
+msgstr "Search products and blog posts"
+
+#: header.php:161 header.php:214
+msgid "検索"
+msgstr "Search"
+
+#: header.php:176
+msgid "カート"
+msgstr "Cart"
+
+#: header.php:203
+msgid "サイト内検索（商品・ブログ）"
+msgstr "Site search (products & blog)"
+
+#: index.php:10
+msgid "このテーマにはまだ投稿コンテンツが設定されていません。"
+msgstr "No post content has been created in this theme yet."
+
+#: search.php:83
+msgid "検索結果"
+msgstr "Search results"
+
+#: search.php:87
+msgid "キーワード: "
+msgstr "Keyword: "
+
+#: search.php:95
+msgid "検索結果タブ"
+msgstr "Search results tabs"
+
+#: search.php:106
+msgid "商品"
+msgstr "Products"
+
+#: search.php:120
+msgid "記事"
+msgstr "Articles"
+
+#: search.php:145
+msgid "さらに商品を表示"
+msgstr "Load more products"
+
+#: search.php:151
+msgid "該当する商品は見つかりませんでした。"
+msgstr "No matching products were found."
+
+#: search.php:175
+msgid "さらに記事を表示"
+msgstr "Load more articles"
+
+#: search.php:181
+msgid "該当する記事は見つかりませんでした。"
+msgstr "No matching articles were found."
+
+#: template-parts/access/access-info.php:20
+msgid "店舗情報"
+msgstr "Shop information"
+
+#: template-parts/access/access-info.php:27
+msgid "ショップ名"
+msgstr "Shop name"
+
+#: template-parts/access/access-info.php:36
+msgid "住所"
+msgstr "Address"
+
+#: template-parts/access/access-info.php:41
+msgid "Google Mapで見る"
+msgstr "View on Google Maps"
+
+#: template-parts/access/access-info.php:48
+msgid "TEL"
+msgstr "TEL"
+
+#: template-parts/access/access-info.php:59
+msgid "営業時間"
+msgstr "Business hours"
+
+#: template-parts/access/access-info.php:68
+msgid "定休日"
+msgstr "Regular holiday"
+
+#: template-parts/access/access-info.php:71
+msgid "不定休"
+msgstr "Irregular holidays"
+
+#: template-parts/access/access-info.php:77
+msgid "駐車場"
+msgstr "Parking"
+
+#: template-parts/access/access-info.php:80
+msgid "店舗前に数台分の専用駐車場あり。ローダウン車両でお越しの際はご注意ください。"
+msgstr "There are several dedicated parking spaces in front of the shop. Please take care when visiting with a lowered vehicle."
+
+#: template-parts/access/access-info.php:89
+msgid "アクセスマップ"
+msgstr "Access map"
+
+#: template-parts/access/access-info.php:101
+msgid "お車でお越しの方"
+msgstr "For visitors by car"
+
+#: template-parts/access/access-info.php:104
+msgid "新湘南バイパス/圏央道 茅ケ崎中央IC より約3分。県道45号線沿い、茅ケ崎中央インダー交差点すぐそばです。"
+msgstr "Approx. 3 minutes from Shin-Shonan Bypass / Ken-O Expressway Chigasaki-Chuo IC. Located along Route 45, near the Chigasaki Chuo Under intersection."
+
+#: template-parts/access/access-info.php:110
+msgid "電車でお越しの方"
+msgstr "For visitors by train"
+
+#: template-parts/access/access-info.php:113
+msgid "最寄り駅：相模線 香川駅 下車、徒歩約12分です。"
+msgstr "Nearest station: Sagami Line, Kagawa Station (about 12 minutes on foot)."
+
+#: template-parts/access/access-info.php:119
+msgid "お問い合わせ"
+msgstr "Contact"
+
+#: template-parts/blog/blog-archive-header.php:20
+#, php-format
+msgid "カテゴリー: %s"
+msgstr "Category: %s"
+
+#: template-parts/blog/blog-archive-header.php:24
+#, php-format
+msgid "タグ: %s"
+msgstr "Tag: %s"
+
+#: template-parts/blog/blog-archive-header.php:36
+#, php-format
+msgid "年: %s"
+msgstr "Year: %s"
+
+#: template-parts/blog/blog-archive-header.php:37
+msgid "Y"
+msgstr "Y"
+
+#: template-parts/blog/blog-archive-header.php:42
+#, php-format
+msgid "月: %s"
+msgstr "Month: %s"
+
+#: template-parts/blog/blog-archive-header.php:43
+msgid "F Y"
+msgstr "F Y"
+
+#: template-parts/blog/blog-archive-header.php:48
+#, php-format
+msgid "日: %s"
+msgstr "Day: %s"
+
+#: template-parts/blog/blog-archive-header.php:49
+msgid "F j, Y"
+msgstr "F j, Y"
+
+#: template-parts/blog/blog-archive-header.php:56
+#, php-format
+msgid "著者: %s"
+msgstr "Author: %s"
+
+#: template-parts/blog/blog-archive-header.php:63
+msgid "ブログ"
+msgstr "Blog"
+
+#: template-parts/blog/blog-archive-loop.php:25
+msgid "Posts navigation"
+msgstr "Posts navigation"
+
+#: template-parts/blog/blog-archive-loop.php:26
+msgid "Page"
+msgstr "Page"
+
+#: template-parts/blog/blog-archive-loop.php:32
+msgid "記事が見つかりませんでした。"
+msgstr "No posts were found."
+
+#: template-parts/blog/blog-sidebar-archives.php:20
+msgid "アーカイブ"
+msgstr "Archives"
+
+#: template-parts/blog/blog-sidebar-archives.php:62
+msgid "アーカイブを選択"
+msgstr "Select an archive"
+
+#: template-parts/blog/blog-sidebar-archives.php:69
+msgid "アーカイブ選択"
+msgstr "Archive selection"
+
+#: template-parts/blog/blog-sidebar-archives.php:72
+msgid "月を選択…"
+msgstr "Select month…"
+
+#: template-parts/blog/blog-sidebar-categories.php:19
+#: template-parts/filterbar/filterbar-woocommerce.php:189
+#: template-parts/single/single-footer-meta.php:29
+msgid "カテゴリー"
+msgstr "Categories"
+
+#: template-parts/blog/blog-sidebar-categories.php:47
+msgid "カテゴリーはありません。"
+msgstr "No categories available."
+
+#: template-parts/blog/blog-sidebar-recommend.php:21
+msgid "おすすめ記事"
+msgstr "Recommended articles"
+
+#: template-parts/blog/blog-sidebar-recommend.php:76
+msgid "おすすめ記事はありません。"
+msgstr "No recommended articles."
+
+#: template-parts/blog/blog-sidebar.php:14
+msgid "サイドバー"
+msgstr "Sidebar"
+
+#: template-parts/breadcrumb/breadcrumb.php:24
+msgid "ホーム"
+msgstr "Home"
+
+#: template-parts/breadcrumb/breadcrumb.php:71
+msgid "検索結果:"
+msgstr "Search results:"
+
+#: template-parts/breadcrumb/breadcrumb.php:74
+msgid "ページが見つかりません"
+msgstr "Page not found"
+
+#: template-parts/card/card-blog.php:22
+msgid "Default Image"
+msgstr "Default Image"
+
+#: template-parts/card/card-blog.php:46
+msgid "Read More"
+msgstr "Read More"
+
+#: template-parts/contact/contact-form.php:17
+msgid "お問い合わせフォーム"
+msgstr "Contact form"
+
+#: template-parts/contact/contact-form.php:20
+msgid "必要事項をご入力のうえ送信してください。内容を確認後、担当者よりご連絡いたします。"
+msgstr "Please fill in the required fields and send your message. Our staff will contact you after confirming the details."
+
+#: template-parts/contact/contact-form.php:29
+msgid "※ お問い合わせ内容によってはご回答までお時間をいただく場合がございます。"
+msgstr "Depending on the nature of your inquiry, it may take some time for us to respond."
+
+#: template-parts/filterbar/filterbar-woocommerce.php:190
+#: template-parts/filterbar/filterbar-woocommerce.php:195
+#: template-parts/filterbar/filterbar-woocommerce.php:200
+msgid "All"
+msgstr "All"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:194
+#: template-parts/single/single-footer-meta.php:44
+msgid "タグ"
+msgstr "Tags"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:199
+msgid "ブランド"
+msgstr "Brand"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:203
+#: template-parts/filterbar/filterbar-woocommerce.php:322
+msgid "フィルター"
+msgstr "Filter"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:211
+msgid "カテゴリで選ぶ"
+msgstr "Filter by category"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:214
+msgid "カテゴリを選択"
+msgstr "Select a category"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:234
+msgid "カテゴリーをクリア"
+msgstr "Clear category"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:235
+#: template-parts/filterbar/filterbar-woocommerce.php:264
+#: template-parts/filterbar/filterbar-woocommerce.php:312
+#: template-parts/filterbar/filterbar-woocommerce.php:402
+msgid "適用"
+msgstr "Apply"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:242
+#: template-parts/filterbar/filterbar-woocommerce.php:349
+msgid "タグで選ぶ"
+msgstr "Filter by tag"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:245
+msgid "人気タグ"
+msgstr "Popular tags"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:253
+msgid "タグを検索"
+msgstr "Search tags"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:254
+#: template-parts/filterbar/filterbar-woocommerce.php:358
+msgid "タグ名で検索（例: エアロ）"
+msgstr "Search by tag name (e.g. aero)"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:258
+msgid "選択中"
+msgstr "Selected"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:263
+msgid "タグをクリア"
+msgstr "Clear tags"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:271
+#: template-parts/filterbar/filterbar-woocommerce.php:366
+msgid "ブランドで選ぶ"
+msgstr "Filter by brand"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:274
+#: template-parts/filterbar/filterbar-woocommerce.php:370
+msgid "ブランド/メーカー"
+msgstr "Brand / Manufacturer"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:281
+msgid "ブランド用タクソノミーが未登録です（product_brand / pa_brand を想定）。"
+msgstr "No brand taxonomy is registered (expected: product_brand or pa_brand)."
+
+#: template-parts/filterbar/filterbar-woocommerce.php:287
+#: template-parts/filterbar/filterbar-woocommerce.php:377
+msgid "車種"
+msgstr "Car model"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:298
+#: template-parts/filterbar/filterbar-woocommerce.php:386
+msgid "型式"
+msgstr "Model code"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:311
+msgid "ブランドをクリア"
+msgstr "Clear brand"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:324
+msgid "条件で絞り込み"
+msgstr "Refine by conditions"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:325
+msgid "閉じる"
+msgstr "Close"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:330
+msgid "カテゴリーで選ぶ"
+msgstr "Choose by category"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:401
+msgid "リセット"
+msgstr "Reset"
+
+#: template-parts/hero/hero-slide1.php:38
+msgid "Hero Image 1"
+msgstr "Hero Image 1"
+
+#: template-parts/hero/hero-slide1.php:42
+msgid "90’s Drift Legacy."
+msgstr "90’s Drift Legacy."
+
+#: template-parts/hero/hero-slide1.php:44
+msgid "Born in Yokohama."
+msgstr "Born in Yokohama."
+
+#: template-parts/hero/hero-slide1.php:46
+msgid "<span class=\"hero__highlight\">JDM</span> Forever."
+msgstr "<span class=\"hero__highlight\">JDM</span> Forever."
+
+#: template-parts/hero/hero-slide1.php:49
+msgid "90年代ストリートの系譜を受け継ぐ、<br class=\"sp-only\">横浜発・ドリフトチューンの頂点。"
+msgstr "Carrying the legacy of 90’s street culture,<br class=\"sp-only\">the pinnacle of Yokohama-born drift tuning."
+
+#: template-parts/hero/hero-slide2.php:16
+msgid "Hero image 2"
+msgstr "Hero image 2"
+
+#: template-parts/hero/hero-slide2.php:20
+msgid "Slide Hard."
+msgstr "Slide Hard."
+
+#: template-parts/hero/hero-slide2.php:21
+msgid "Style Bold."
+msgstr "Style Bold."
+
+#: template-parts/hero/hero-slide2.php:22
+msgid "<span class=\"hero__highlight\">WAVE</span> is Drift Culture."
+msgstr "<span class=\"hero__highlight\">WAVE</span> is Drift Culture."
+
+#: template-parts/hero/hero-slide2.php:25
+msgid "攻めの走り、攻めのスタイル。<br class=\"sp-only\">― それがWAVE。"
+msgstr "Aggressive driving, aggressive style.<br class=\"sp-only\">— that is WAVE."
+
+#: template-parts/hero/hero-slide3.php:16
+msgid "Hero image 3"
+msgstr "Hero image 3"
+
+#: template-parts/hero/hero-slide3.php:20
+msgid "From Japan,"
+msgstr "From Japan,"
+
+#: template-parts/hero/hero-slide3.php:21
+msgid "Built for the <span class=\"hero__highlight\">World.</span>"
+msgstr "Built for the <span class=\"hero__highlight\">World.</span>"
+
+#: template-parts/hero/hero-slide3.php:22
+msgid "Drift Culture Lives On."
+msgstr "Drift Culture Lives On."
+
+#: template-parts/hero/hero-slide3.php:25
+msgid "本物のドリフトカルチャーを、<br class=\"sp-only\">日本から世界へ。"
+msgstr "Bringing authentic drift culture<br class=\"sp-only\">from Japan to the world."
+
+#: template-parts/meta/meta-date.php:16
+msgid "更新"
+msgstr "Updated"
+
+#: template-parts/section/section-apparel.php:13
+msgid "90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレル。"
+msgstr "Wear 90’s street culture<br class=\"sp-only\">with our original JDM apparel."
+
+#: template-parts/section/section-apparel.php:22
+msgid "アパレルカテゴリ"
+msgstr "Apparel categories"
+
+#: template-parts/section/section-blog.php:11
+msgid "ドリフトパーツやアパレルの<br class=\"sp-only\">最新情報をピックアップ。"
+msgstr "Pick up the latest news<br class=\"sp-only\">on drift parts and apparel."
+
+#: template-parts/section/section-blog.php:29
+msgid "View All"
+msgstr "View All"
+
+#: template-parts/section/section-custom-parts.php:12
+msgid "Custom Parts"
+msgstr "Custom Parts"
+
+#: template-parts/section/section-custom-parts.php:13
+msgid "90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニングパーツ。"
+msgstr "Tuning parts that revive the spirit<br class=\"sp-only\">of 90’s street style in the modern era."
+
+#: template-parts/section/section-custom-parts.php:21
+msgid "カスタムパーツカテゴリ"
+msgstr "Custom parts categories"
+
+#: template-parts/section/section-hero.php:15
+msgid "Scroll"
+msgstr "Scroll"
+
+#: template-parts/section/section-new-arrivals.php:10
+msgid "New Arrivals"
+msgstr "New Arrivals"
+
+#: template-parts/section/section-new-arrivals.php:49
+msgid "Previous"
+msgstr "Previous"
+
+#: template-parts/section/section-new-arrivals.php:52
+msgid "Next"
+msgstr "Next"
+
+#: template-parts/section/section-sns.php:9
+msgid "Follow Our Drift life"
+msgstr "Follow our drift life"
+
+#: template-parts/section/section-sns.php:11
+msgid "90'sストリートチューンのリアルを、<br class=\"sp-only\">Instagramで。"
+msgstr "See the real world of 90’s street-tuned cars<br class=\"sp-only\">on Instagram."
+
+#: template-parts/single/single-author.php:18
+msgid "著者について"
+msgstr "About the author"
+
+#: template-parts/single/single-author.php:23
+#, php-format
+msgid "著者アーカイブ: %s"
+msgstr "Author archive: %s"
+
+#: template-parts/single/single-author.php:55
+msgid "著者のSNS"
+msgstr "Author's social media"
+
+#: template-parts/single/single-author.php:57
+msgid "ウェブサイト"
+msgstr "Website"
+
+#: template-parts/single/single-author.php:63
+msgid "Twitter"
+msgstr "Twitter"
+
+#: template-parts/single/single-author.php:81
+msgid "YouTube"
+msgstr "YouTube"
+
+#: template-parts/single/single-footer-meta.php:25
+msgid "投稿メタ情報"
+msgstr "Post meta information"
+
+#: template-parts/single/single-nav.php:22
+msgid "記事ナビゲーション"
+msgstr "Post navigation"
+
+#: template-parts/single/single-related.php:75
+msgid "関連記事"
+msgstr "Related articles"
+
+#: template-parts/single/single-share.php:32
+msgid "＼ この記事をシェア ／"
+msgstr "Share this article"
+
+#: template-parts/single/single-share.php:42
+msgid "Share on X (Twitter)"
+msgstr "Share on X (Twitter)"
+
+#: template-parts/single/single-share.php:52
+msgid "Share on Facebook"
+msgstr "Share on Facebook"
+
+#: template-parts/single/single-share.php:62
+msgid "Share on LINE"
+msgstr "Share on LINE"
+
+#: template-parts/single/single-share.php:71
+msgid "Copy article URL"
+msgstr "Copy article URL"
+
+#: template-parts/single/single-share.php:81
+msgid "Open native share menu"
+msgstr "Open native share menu"
+
+#: woocommerce/global/quantity-input.php:34
+#: woocommerce/global/quantity-input.php:42
+msgid "数量"
+msgstr "Quantity"
+
+#: woocommerce/global/quantity-input.php:45
+#, php-format
+msgid "%s 個"
+msgstr "%s pcs"
+
+#: woocommerce/global/quantity-input.php:64
+msgid "商品数量"
+msgstr "Product quantity"
+
+#: woocommerce/loop/pagination.php:31
+msgid "Product Pagination"
+msgstr "Product Pagination"
+
+#: woocommerce/single-product/related.php:28
+msgid "Related products"
+msgstr "Related products"
+
+#: woocommerce/single-product/up-sells.php:27
+msgid "You may also like&hellip;"
+msgstr "You may also like&hellip;"

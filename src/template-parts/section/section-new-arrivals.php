@@ -7,7 +7,7 @@
 ?>
 <section class="section section--new">
   <div class="section__inner">
-    <h2 class="section__title fadeup">New Arrivals</h2>
+    <h2 class="section__title fadeup"><?php echo esc_html__( 'New Arrivals', 'proshopwave' ); ?></h2>
     <div class="swiper-area new-arrivals-swiper fadeup">
       <div class="swiper">
         <div class="swiper-wrapper">
@@ -33,7 +33,7 @@
                   <p class="card-item__subtitle"><?php echo wp_trim_words(get_the_excerpt(), 35); ?></p>
                   <div class="card-item__more">
                     <a href="<?php the_permalink(); ?>" class="card-item__more-link">
-                      More<i class="fas fa-arrow-right" aria-hidden="true"></i>
+                      <?php echo esc_html__( 'More', 'proshopwave' ); ?><i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -46,10 +46,10 @@
           ?>
         </div>
       </div>
-      <div class="swiper-button-prev" aria-label="Previous">
+      <div class="swiper-button-prev" aria-label="<?php echo esc_attr__( 'Previous', 'proshopwave' ); ?>">
         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
       </div>
-      <div class="swiper-button-next" aria-label="Next">
+      <div class="swiper-button-next" aria-label="<?php echo esc_attr__( 'Next', 'proshopwave' ); ?>">
         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
       </div>
     </div>
