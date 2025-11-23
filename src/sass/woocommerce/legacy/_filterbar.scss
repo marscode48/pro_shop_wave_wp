@@ -332,16 +332,16 @@
 
   &__modal-footer {
     position: sticky;
-    bottom: 0;
+    bottom: -1rem;
     display: flex;
     gap: 0.5rem;
     background: linear-gradient(
       180deg,
-      rgba(15, 15, 15, 0),
-      rgba(15, 15, 15, 1) 35%
+      rgba(10, 10, 10, 0),
+      rgba(10, 10, 10, 0.95) 40%
     );
     padding-top: 0.75rem;
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.5rem;
   }
 
   // アコーディオン（summary/詳細）
