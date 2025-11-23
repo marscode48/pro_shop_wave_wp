@@ -212,12 +212,9 @@
 
     #pc-tag-search {
       width: 100%;
-      padding: 0.6em;
-      border-radius: $fb-radius;
-      border: 1px solid $fb-border-color;
-      background: rgba($color-white, 0.03);
-      color: $color-white;
       box-sizing: border-box;
+      @include input-base(0.6em);
+      @include input-focus();
     }
   }
 
@@ -389,14 +386,11 @@
     }
 
     #sp-tag-search {
-      margin-top: 1rem;
+      margin: 1rem 0;
       width: 100%;
-      padding: 0.6em;
-      border-radius: $fb-radius;
-      border: 1px solid $fb-border-soft-color;
-      background: rgba($color-white, 0.03);
-      color: $color-white;
       box-sizing: border-box;
+      @include input-base(0.6em);
+      @include input-focus();
     }
   }
 }
