@@ -131,6 +131,10 @@
     border-radius: $fb-radius;
     border: 1px solid $color-red;
 
+    @include mq(md) {
+      flex: 0 0 35%;
+    }
+
     &::after {
       font-family: "Font Awesome 6 Free";
       font-weight: 900;
