@@ -152,6 +152,12 @@
       // サイドバー（合計・クーポン等）
       // =====================================
       &__sidebar {
+        @media screen and (min-width: 700px) {
+          position: sticky;
+          top: calc($header-height + 0.625rem); // ヘッダー分の余白 + 余白
+          align-self: flex-start;
+        }
+
         .wp-block-woocommerce-cart-order-summary-block {
           border-bottom: $border-dark-gray;
 
