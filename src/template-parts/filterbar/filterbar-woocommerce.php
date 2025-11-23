@@ -200,7 +200,7 @@ function term_value($t)
     <span class="filterbar__pill-value" id="pill-brand"><?php echo esc_html__('All', 'proshopwave'); ?></span>
   </button>
   <button class="filterbar__open sp-only-block js-open-modal" aria-expanded="false">
-    <?php echo esc_html__('フィルター', 'proshopwave'); ?>
+    <?php echo esc_html__('絞り込み', 'proshopwave'); ?>
   </button>
 </div>
 

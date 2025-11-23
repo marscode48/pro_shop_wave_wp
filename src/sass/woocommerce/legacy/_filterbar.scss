@@ -131,6 +131,10 @@
     border-radius: $fb-radius;
     border: 1px solid $color-red;
 
+    @include mq(md) {
+      flex: 0 0 35%;
+    }
+
     &::after {
       font-family: "Font Awesome 6 Free";
       font-weight: 900;
@@ -212,12 +216,9 @@
 
     #pc-tag-search {
       width: 100%;
-      padding: 0.6em;
-      border-radius: $fb-radius;
-      border: 1px solid $fb-border-color;
-      background: rgba($color-white, 0.03);
-      color: $color-white;
       box-sizing: border-box;
+      @include input-base(0.6em);
+      @include input-focus();
     }
   }
 
@@ -335,16 +336,16 @@
 
   &__modal-footer {
     position: sticky;
-    bottom: 0;
+    bottom: -1rem;
     display: flex;
     gap: 0.5rem;
     background: linear-gradient(
       180deg,
-      rgba(15, 15, 15, 0),
-      rgba(15, 15, 15, 1) 35%
+      rgba(10, 10, 10, 0),
+      rgba(10, 10, 10, 0.95) 40%
     );
     padding-top: 0.75rem;
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.5rem;
   }
 
   // アコーディオン（summary/詳細）
@@ -389,14 +390,11 @@
     }
 
     #sp-tag-search {
-      margin-top: 1rem;
+      margin: 1rem 0;
       width: 100%;
-      padding: 0.6em;
-      border-radius: $fb-radius;
-      border: 1px solid $fb-border-soft-color;
-      background: rgba($color-white, 0.03);
-      color: $color-white;
       box-sizing: border-box;
+      @include input-base(0.6em);
+      @include input-focus();
     }
   }
 }
