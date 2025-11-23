@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-11-19 15:44+0900\n"
-"PO-Revision-Date: 2025-11-19 15:56+0900\n"
+"POT-Creation-Date: 2025-11-24 06:54+0900\n"
+"PO-Revision-Date: 2025-11-24 06:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en_US\n"
@@ -114,11 +114,11 @@ msgstr "Part No.:"
 msgid "タグ:"
 msgstr "Tags:"
 
-#: functions.php:619
+#: functions.php:601
 msgid "Submit"
 msgstr "Submit"
 
-#: functions.php:864
+#: functions.php:846
 msgid "適合車種"
 msgstr "Compatible models"
 
@@ -418,8 +418,7 @@ msgid "ブランド"
 msgstr "Brand"
 
 #: template-parts/filterbar/filterbar-woocommerce.php:203
-#: template-parts/filterbar/filterbar-woocommerce.php:322
-msgid "フィルター"
+msgid "絞り込み"
 msgstr "Filter"
 
 #: template-parts/filterbar/filterbar-woocommerce.php:211
@@ -494,6 +493,10 @@ msgstr "Model code"
 #: template-parts/filterbar/filterbar-woocommerce.php:311
 msgid "ブランドをクリア"
 msgstr "Clear brand"
+
+#: template-parts/filterbar/filterbar-woocommerce.php:322
+msgid "フィルター"
+msgstr "Filter"
 
 #: template-parts/filterbar/filterbar-woocommerce.php:324
 msgid "条件で絞り込み"
