@@ -236,8 +236,8 @@
   }
 
   &__chip {
-    @include pill($with-selected: true);
     cursor: pointer;
+    @include pill($with-selected: true);
   }
 
   &__nohit {

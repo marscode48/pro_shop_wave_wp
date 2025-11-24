@@ -54,8 +54,8 @@
 
   // 共通見出し
   &__heading {
-    @include heading-title($font-size: 1.15rem, $font-size-lg: 1.3rem);
     margin-bottom: 1rem;
+    @include heading-title($font-size: 1.15rem, $font-size-lg: 1.3rem);
 
     &--map {
       @include mq(md) {
@@ -188,8 +188,8 @@
   }
 
   &__section-title {
-    @include heading-title($font-size: 1rem, $font-size-lg: 1.1rem);
     margin-bottom: 0.75rem;
+    @include heading-title($font-size: 1rem, $font-size-lg: 1.1rem);
   }
 
   &__text {
@@ -210,7 +210,7 @@
   }
 
   &__cta-link {
-    @include button-cta($width: 80%, $width-lg: 320px, $max-inline-size: 20rem);
     display: inline-flex;
+    @include button-cta($width: 80%, $width-lg: 320px, $max-inline-size: 20rem);
   }
 }

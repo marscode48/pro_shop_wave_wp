@@ -112,7 +112,9 @@
   // 単品購入（CTA）ボタン（商品詳細ページなど）
   .single_add_to_cart_button.button.alt {
     @include button-cta($width-lg: 280px);
-    margin-top: 1.5em;
+    & {
+      margin-top: 1.5em;
+    }
   }
 
   // クーポン入力欄を開閉するトグルボタン（アイコン付き）
@@ -160,7 +162,6 @@
     float: none;
     text-align: center;
     list-style: none;
-    @include product-card-gradient;
     padding: 1rem !important;
     border: 1px solid $color-red;
     border-radius: $radius-card;
@@ -173,6 +174,7 @@
     box-sizing: border-box !important;
     vertical-align: baseline;
     text-align: center;
+    @include product-card-gradient;
 
     @include mq(lg) {
       &:hover {

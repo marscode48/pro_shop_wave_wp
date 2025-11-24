@@ -84,8 +84,8 @@
     margin-bottom: 2rem;
 
     .woocommerce-order-details__title {
-      @include heading-title();
       margin: 0 0 0.75rem;
+      @include heading-title();
     }
 
     .order-actions--heading {

@@ -48,8 +48,8 @@
   }
 
   &__title {
-    @include heading-title($font-size: 1.2rem, $font-size-lg: 1.4rem);
     margin-bottom: 0.75rem;
+    @include heading-title($font-size: 1.2rem, $font-size-lg: 1.4rem);
   }
 
   &__description {
@@ -124,11 +124,11 @@
 
     textarea {
       min-height: 8rem;
+      resize: vertical;
 
       @include mq(md) {
         min-height: 10rem;
       }
-      resize: vertical;
     }
 
     // ラジオ・チェックボックス類
