@@ -254,12 +254,11 @@ $marker-anim-duration: var(--marker-animation-duration);
 
     .swiper-button-prev,
     .swiper-button-next {
-      @include circle-icon-button();
-      position: absolute;
       z-index: 1;
       top: 0;
       bottom: 0;
       margin: auto;
+      @include circle-icon-button($position: absolute);
 
       @include mq(lg) {
         top: 110%;
@@ -307,22 +306,8 @@ $marker-anim-duration: var(--marker-animation-duration);
   }
 
   .card-item {
-    position: relative;
-    @include product-card-gradient;
     border: 1px solid $color-red;
-    // 余白はブレークポイントごとに段階調整
-    padding: 1rem;
-
-    @include mq(md) {
-      padding: 5%;
-    }
-
-    @include mq(lg) {
-      padding: 7%;
-    }
-    
     border-radius: $radius-card;
-    overflow: hidden;
     text-align: center;
     color: $color-white;
     display: flex;
@@ -330,6 +315,17 @@ $marker-anim-duration: var(--marker-animation-duration);
     height: 100%;
     box-shadow: $box-shadow-red-default;
     transition: box-shadow $transition;
+    padding: 1rem;
+    @include product-card-gradient;
+
+    // 余白はブレークポイントごとに段階調整
+    @include mq(md) {
+      padding: 5%;
+    }
+
+    @include mq(lg) {
+      padding: 7%;
+    }
 
     &:hover {
       @include mq(lg) {

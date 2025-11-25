@@ -358,9 +358,9 @@
     padding-top: 2rem;
 
     &-title {
-      @include heading-title($padding-left: 0, $border-left: none);
       margin-bottom: 1.5rem;
       text-align: center;
+      @include heading-title($padding-left: 0, $border-left: none);
     }
 
     &-actions {
@@ -372,10 +372,8 @@
 
     // 丸アイコンボタン（X / Facebook / LINE / コピー / ネイティブ共有）
     .share__icon {
-      @include circle-icon-button();
-      color: $color-red;
       text-decoration: none;
-      position: relative;
+      @include circle-icon-button();
 
       // コピー完了フィードバック
       &.is-copied::after {
@@ -478,7 +476,6 @@
     // 矢印ボタン部（Font Awesome 矢印入りの丸ボタン）
     &-arrow {
       @include circle-icon-button($size: 2.4rem, $icon-size: 1rem);
-      flex-shrink: 0;
     }
 
     // タイトル部分
@@ -518,13 +515,12 @@
     text-align: center;
 
     &-title {
-      @include heading-title($padding-left: 0, $border-left: none);
-      margin-bottom: 2rem;
-
       // 中央テキスト + 両サイドライン
       display: inline-flex;
       align-items: center;
       gap: 0.75rem;
+      margin-bottom: 2rem;
+      @include heading-title($padding-left: 0, $border-left: none);
 
       &::before,
       &::after {
@@ -546,8 +542,8 @@
     @include panel-surface-gray();
 
     &-title {
-      @include heading-title();
       margin-bottom: 0.75rem;
+      @include heading-title();
     }
 
     .author {

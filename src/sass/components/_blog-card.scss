@@ -32,6 +32,12 @@
   overflow: hidden;
   border: 1px solid $color-red;
   border-radius: $radius-card;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: $box-shadow-red-default;
+  transition: box-shadow $transition;
   // 余白はブレークポイントごとに段階調整
   padding: 1rem;
 
@@ -42,13 +48,6 @@
   @include mq(lg) {
     padding: 7%;
   }
-
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  box-shadow: $box-shadow-red-default;
-  transition: box-shadow $transition;
 
   &:hover {
     @include mq(lg) {
@@ -106,9 +105,9 @@
   }
 
   &__date {
-    @include meta-date();
     min-height: 1.7em;
     margin-bottom: 0.4rem;
+    @include meta-date();
   }
 
   &__title {

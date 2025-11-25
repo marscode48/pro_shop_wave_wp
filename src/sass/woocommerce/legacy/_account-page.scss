@@ -22,8 +22,8 @@
     #customer_login {
       // 見出し（h2）
       h2 {
-        @include heading-title();
         margin: 0 0 0.75rem;
+        @include heading-title();
       }
 
       // 補助リンク
@@ -161,8 +161,8 @@
         }
 
         .woocommerce-order-details__title {
-          @include heading-title();
           margin: 0 0 1rem;
+          @include heading-title();
         }
       }
 
@@ -187,8 +187,8 @@
             }
 
             .woocommerce-column__title {
-              @include heading-title();
               margin: 0 0 0.75rem;
+              @include heading-title();
             }
 
             address {
@@ -250,8 +250,8 @@
             @include reset-clearfix();
 
             h2 {
-              @include heading-title();
               margin: 0;
+              @include heading-title();
             }
 
             h3 {
@@ -300,8 +300,8 @@
 
         // 見出し
         > h2 {
-          @include heading-title();
           margin: 0 0 1rem;
+          @include heading-title();
         }
 
         .woocommerce-address-fields {
@@ -372,8 +372,8 @@
 
           // 「パスワードの変更」タイトル
           legend {
-            @include heading-title();
             margin: 0 0 0.75rem;
+            @include heading-title();
           }
         }
 

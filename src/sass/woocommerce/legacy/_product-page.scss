@@ -363,8 +363,8 @@
         }
 
         h2 {
-          @include heading-title();
           margin-bottom: 1rem;
+          @include heading-title();
         }
 
         p {

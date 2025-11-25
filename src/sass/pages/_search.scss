@@ -122,8 +122,10 @@
 
         span.onsale {
           @include badge-sale();
-          top: 3%;
-          left: 3%;
+          & {
+            top: 3%;
+            left: 3%;
+          }
         }
       }
     }

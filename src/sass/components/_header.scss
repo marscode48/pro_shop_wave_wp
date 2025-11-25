@@ -459,6 +459,8 @@
 
   &__account,
   &__cart {
+    // カート数量バッジ
+    position: relative;
     a {
       display: flex;
       align-items: center;
@@ -480,9 +482,6 @@
     i {
       pointer-events: none; // アイコンクリックでもリンクが効くように
     }
-
-    // カート数量バッジ
-    position: relative;
 
     .header__cart-count {
       position: absolute;

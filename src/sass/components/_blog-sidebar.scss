@@ -34,8 +34,8 @@
 
   // タイトル（各セクションごと共通）
   &__title {
-    @include heading-title();
     margin-bottom: 0.75rem;
+    @include heading-title();
 
     @include mq(lg) {
       margin-bottom: 1rem;

@@ -13,9 +13,6 @@
   $text-color: $color-white
 ) {
   position: relative;
-  @if $use-gradient {
-    @include product-card-gradient;
-  }
   border: 1px solid $border-color;
   padding: $padding;
   border-radius: $radius;
@@ -26,7 +23,9 @@
   height: 100%;
   box-shadow: $box-shadow-red-default;
   transition: box-shadow $transition;
-
+  @if $use-gradient {
+    @include product-card-gradient;
+  }
   &:hover {
     @include mq(lg) {
       box-shadow: $box-shadow-red-hover;
