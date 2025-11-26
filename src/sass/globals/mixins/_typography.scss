@@ -1,0 +1,199 @@
+/*
+  Typography mixins extracted from _mixin.scss
+
+  Includes:
+    - clamp-font-size
+    - section-title
+    - heading-title
+    - page-lead
+    - page-content-body
+*/
+
+@use "sass:color";
+@use "../variables" as *;
+@use "../mq" as *;
+@use "./effects" as *;
+@use "./panel" as *;
+
+// ========================
+/// フォントサイズ用 clamp mixin
+/// @param $min - 最小サイズ（例: 1rem）
+/// @param $preferred - 推奨サイズ（例: 2vw）
+/// @param $max - 最大サイズ（例: 3rem）
+// ========================
+@mixin clamp-font-size($min, $preferred, $max) {
+  font-size: clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+// ========================
+// 汎用: セクション大見出し (ヒーロー/LP系)
+// 主に .section__title で使用。中央寄せ・大文字・白文字・シャドウ強め。
+// 可変にしたい値は引数で上書き可能。
+// ========================
+@mixin section-title(
+  $font-size: 2rem,
+  $color: $color-white,
+  $margin-bottom: 2rem,
+  $text-align: center,
+  $text-transform: uppercase,
+  $font-family: $font-heading,
+  $text-shadow: $text-shadow-black-default
+) {
+  font-size: $font-size;
+  font-family: $font-family;
+  text-align: $text-align;
+  color: $color;
+  margin-bottom: $margin-bottom;
+  text-transform: $text-transform;
+  text-shadow: $text-shadow;
+}
+
+// ========================
+// 汎用: セクションタイトル/見出し用ミックスイン
+// 目的: 左線付きのタイトルデザインを統一的に適用
+// ========================
+@mixin heading-title(
+  $font-weight: 700,
+  $font-size: 1.1rem,
+  $font-size-lg: 1.25rem,
+  $line-height: 1.2,
+  $color: $color-white,
+  $letter-spacing: 0.02em,
+  $padding-left: 0.8rem,
+  $border-left: $border-title
+) {
+  font-family: $font-heading;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  letter-spacing: $letter-spacing;
+  padding-left: $padding-left;
+  border-left: $border-left;
+
+  @include mq(lg) {
+    font-size: $font-size-lg;
+  }
+}
+
+// ========================
+// 汎用: ページリード文スタイル
+// Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
+// 固定ページ上部の説明テキストで共通利用するスタイル。
+// ========================
+@mixin page-lead {
+  color: $color-gray;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 32rem;
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+
+  @include mq(md) {
+    margin-inline: 0;
+    font-size: 1rem;
+  }
+}
+
+// ========================
+// 汎用: ページ本文ブロックスタイル
+// Contact / Access / 利用規約 / プライバシーポリシー / 特商法表記 など
+// テキスト主体の固定ページ本文の見た目を共通化するためのスタイル。
+//
+// $panel:
+//   null / none  … パネルなし（背景そのまま）
+//   gray         … グレーパネル（page-content-panel(gray)）
+//   black        … ブラックパネル（page-content-panel(black)）
+// ========================
+@mixin page-content-body($panel: null) {
+  font-size: 0.875rem;
+  line-height: 1.9;
+  color: $color-gray;
+
+  // 背景＆パディングは panel 系ヘルパーに委譲
+  @include page-content-panel($panel);
+
+  @include mq(lg) {
+    font-size: 0.95rem;
+  }
+
+  // ★ テキスト系固定ページ共通の h2 見出しスタイル
+  h2 {
+    margin: 2rem 0 0.75rem;
+    @include heading-title($font-size: 1.05rem, $padding-left: 0.5rem);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  h4 {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: $color-white;
+  }
+
+  // 定義リスト
+  dl {
+    margin: 1rem 0 1.5rem;
+  }
+
+  dt {
+    font-weight: 600;
+    color: $color-white;
+    margin-bottom: 0.25rem;
+  }
+
+  dd {
+    margin: 0 0 0.75rem;
+    color: $color-gray;
+  }
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  a {
+    @include link-underline-animate();
+    color: $color-red;
+  }
+
+  strong {
+    font-weight: 700;
+    color: $color-white;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0 1.5rem 1.25rem;
+    padding: 0;
+    list-style-position: outside;
+    color: $color-gray;
+    font-size: 0.9rem;
+    line-height: 1.8;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // 番号付きリストは数字を明確に表示
+  ol {
+    list-style-type: decimal;
+  }
+
+  // 箇条書きリストはドットで表示
+  ul {
+    list-style-type: disc;
+  }
+}
