@@ -18,16 +18,13 @@
   @include circle-icon-button(
     $size: 3rem,
     $icon-size: 1.2rem,
-    $position: fixed
+    $position: fixed,
+    $scale: 1.1
   );
 
   @include mq(lg) {
     bottom: 2.5rem;
     right: 2rem;
-  }
-
-  &:hover::before {
-    transform: scale(1.1);
   }
 
   &.is-visible {

@@ -221,6 +221,7 @@
 // 引数:
 //   $size         ... ボタンの直径
 //   $icon-size    ... 中央の<i>アイコンのフォントサイズ
+//   $scale        ... hoverやactive時の大きさ（デフォルト: 1.2）
 // 備考:
 //   疑似要素 ::before が丸いプレートを描画し、
 //   中の <i> アイコンはここで共通スタイルを付与します。
@@ -228,7 +229,8 @@
 @mixin circle-icon-button(
   $size: 2.8rem,
   $icon-size: 1.25rem,
-  $position: relative
+  $position: relative,
+  $scale: 1.2
 ) {
   display: grid;
   place-content: center;
@@ -253,11 +255,15 @@
     z-index: -1;
   }
 
-  &:hover::before {
-    @include mq(lg) {
-      transform: scale(1.2);
-    }
-  }
+  // ▼ hover / active を scale 引数で制御
+  @include hover-active-before(
+    $hover: (
+      transform: scale(#{$scale}),
+    ),
+    $active: (
+      transform: scale(#{$scale}),
+    )
+  );
 
   // 中身の Font Awesome アイコン
   i {
