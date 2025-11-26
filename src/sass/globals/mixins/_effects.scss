@@ -1,0 +1,132 @@
+/*
+  Effects mixins extracted from _mixin.scss
+
+  Includes:
+    - animation
+    - link-hovers
+    - link-underline-animate
+    - product-card-gradient
+*/
+
+@use "sass:color";
+@use "../variables" as *;
+@use "../mq" as *;
+
+// ========================
+// アニメーション
+// ========================
+@mixin animation(
+  $name,
+  $duration: 1s,
+  $timing-function: ease,
+  $delay: 0s,
+  $iteration-count: 1,
+  $direction: normal,
+  $fill-mode: forwards
+) {
+  animation: $name $duration $timing-function $delay $iteration-count $direction
+    $fill-mode;
+}
+
+// ========================
+// リンク時ホバー
+// ========================
+@mixin link-hovers($opacity: 0.75, $afterTextColor: rgb(220, 220, 220)) {
+  transition: all 0.3s;
+  &:hover {
+    color: $afterTextColor;
+    opacity: $opacity;
+  }
+}
+
+// ========================
+// 下線アニメーションのmixin
+// $offset: 下線位置のオフセット（フォントのベースライン調整用。既定値: -0.24em）
+// ========================
+@mixin link-underline-animate(
+  $color: $color-red,
+  $height: 2px,
+  $offset: -0.25em
+) {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: $offset;
+    left: 0;
+    width: 0%;
+    height: $height;
+    background-color: $color;
+    transition: width $transition;
+  }
+
+  &:hover::after,
+  &.is-active::after {
+    width: 100%;
+  }
+}
+
+// ========================
+// 商品カード用グラデーション背景ミックスイン
+// ========================
+@mixin product-card-gradient {
+  // ベース背景
+  background-color: rgba($color-black, 0.85);
+  background-image: linear-gradient(
+      180deg,
+      rgba($color-black, 0.65) 0%,
+      rgba($color-black, 0.35) 100%
+    ),
+    radial-gradient(
+      120% 120% at 0% 0%,
+      rgba($color-red, 0.25) 0%,
+      rgba($color-red, 0) 55%
+    ),
+    radial-gradient(
+      120% 120% at 100% 100%,
+      rgba($color-red, 0.15) 0%,
+      rgba($color-red, 0) 65%
+    );
+  background-blend-mode: multiply, screen, normal;
+  position: relative;
+  overflow: hidden;
+
+  // オーバーレイ
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        120% 120% at 0% 0%,
+        rgba($color-red, 0.28) 0%,
+        rgba($color-red, 0) 55%
+      ),
+      radial-gradient(
+        120% 120% at 100% 100%,
+        rgba($color-red, 0.18) 0%,
+        rgba($color-red, 0) 65%
+      );
+    opacity: 0.7;
+    transition: opacity $transition;
+    z-index: 1;
+  }
+
+  // hover/focus時（PCのみ）
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before,
+    &:focus-visible::before {
+      opacity: 0.95;
+    }
+  }
+
+  // タッチ端末: active時
+  @media (hover: none) and (pointer: coarse) {
+    &:active::before {
+      opacity: 0.95;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+/*
+  Panels mixins extracted from _mixin.scss
+
+  Includes:
+    - panel-surface-gray
+    - panel-surface-black
+    - page-content-panel
+*/
+
+@use "sass:color";
+@use "../variables" as *;
+@use "../mq" as *;
+
+// ========================
+// パネル用グレー背景スタイルミックスイン
+// 役割: グレー系のパネル背景、境界線、影をまとめて適用します。
+// 引数:
+//   $bg - 背景グラデーション（デフォルトは $panel-gray-bg-gradient）
+//   $border-color - 境界線の色（デフォルトは $panel-gray-border-color）
+//   $radius - 角丸の半径（デフォルトは $panel-gray-border-radius）
+//   $shadow - 内側の影（デフォルトは $panel-gray-inset-shadow）
+// ========================
+@mixin panel-surface-gray(
+  $bg: $panel-gray-bg-gradient,
+  $border-color: $panel-gray-border-color,
+  $radius: $panel-gray-border-radius,
+  $shadow: $panel-gray-inset-shadow
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// ========================
+// パネル用ブラック背景スタイルミックスイン
+// 役割: ブラック系のパネル背景、境界線、影をまとめて適用します。
+// 引数:
+//   $bg - 背景グラデーション（デフォルトは $panel-black-bg-gradient）
+//   $border-color - 境界線の色（デフォルトは $panel-black-border-color）
+//   $radius - 角丸の半径（デフォルトは $panel-black-border-radius）
+//   $shadow - 内側の影（デフォルトは $panel-black-inset-shadow）
+// ========================
+@mixin panel-surface-black(
+  $bg: $panel-black-bg-gradient,
+  $border-color: $panel-black-border-color,
+  $radius: $panel-black-border-radius,
+  $shadow: $panel-black-inset-shadow
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// ========================
+// ページ本文パネル用ヘルパー
+// 役割: $panel の種類に応じて背景＆パディングだけを付与
+// 使用例:
+//   .page-content { @include page-content-body(gray); }  // グレーパネル
+//   .page-content { @include page-content-body(black); } // ブラックパネル
+// ========================
+@mixin page-content-panel($panel: null) {
+  // パネル種別によって背景とパディングを切り替え
+  @if $panel == gray {
+    @include panel-surface-gray();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  } @else if $panel == black {
+    @include panel-surface-black();
+    padding: 1.75rem 1.25rem;
+
+    @include mq(md) {
+      padding: 2rem 2.5rem;
+    }
+  }
+}
