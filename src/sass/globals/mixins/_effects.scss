@@ -4,6 +4,9 @@
   Includes:
     - animation
     - link-hovers
+    - hover-active
+    - hover-active-before
+    - hover-active-after
     - link-underline-animate
     - product-card-gradient
 */
@@ -36,6 +39,79 @@
   &:hover {
     color: $afterTextColor;
     opacity: $opacity;
+  }
+}
+
+// ========================
+// hover / focus-visible（PC）
+// active（SP）対応 UI アニメーション
+// ========================
+@mixin hover-active($hover: (), $active: ()) {
+  // PC: hover / focus-visible
+  @media (hover: hover) and (pointer: fine) {
+    &:hover,
+    &:focus-visible {
+      @each $prop, $value in $hover {
+        #{$prop}: $value;
+      }
+    }
+  }
+
+  // SP: active
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+      @each $prop, $value in $active {
+        #{$prop}: $value;
+      }
+    }
+  }
+}
+
+// ========================
+// hover-active-before（疑似要素::before 専用）
+// ========================
+@mixin hover-active-before($hover: (), $active: ()) {
+  // PC: hover / focus-visible → ::before
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before,
+    &:focus-visible::before {
+      @each $prop, $value in $hover {
+        #{$prop}: $value;
+      }
+    }
+  }
+
+  // SP: active → ::before
+  @media (hover: none) and (pointer: coarse) {
+    &:active::before {
+      @each $prop, $value in $active {
+        #{$prop}: $value;
+      }
+    }
+  }
+}
+
+// ========================
+// hover-active-after（疑似要素::after 専用）
+// ========================
+@mixin hover-active-after($hover: (), $active: ()) {
+  // PC: hover / focus-visible → ::after
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::after,
+    &:focus-visible::after {
+      @each $prop, $value in $hover {
+        #{$prop}: $value;
+      }
+    }
+  }
+
+  // SP: active → ::after
+  @media (hover: none) and (pointer: coarse) {
+    &:active::after {
+      @each $prop, $value in $active {
+        #{$prop}: $value;
+      }
+    }
   }
 }
 
