@@ -31,9 +31,9 @@
         text-align: center;
 
         a {
-          @include link-underline-animate();
           color: $color-white;
           font-size: 0.95rem;
+          @include link-underline-animate();
         }
       }
 
