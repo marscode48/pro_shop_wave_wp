@@ -153,7 +153,6 @@
     align-items: center;
     font-size: 0.9rem;
     @include link-underline-animate($color-red);
-    color: $color-red;
   }
 
   &__tel-link {

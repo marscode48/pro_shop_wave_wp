@@ -207,7 +207,6 @@
       }
 
       & a {
-        @include link-underline-animate();
         color: $color-white;
         font-family: $font-heading;
         text-decoration: none;
@@ -215,6 +214,7 @@
         letter-spacing: 0.1em;
         font-weight: 500;
         font-size: 1rem;
+        @include link-underline-animate();
 
         @include mq(lg) {
           font-size: 1.1rem;

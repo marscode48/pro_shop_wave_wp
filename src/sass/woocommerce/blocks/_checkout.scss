@@ -390,10 +390,9 @@
           text-align: center;
 
           .wc-block-components-checkout-return-to-cart-button {
-            @include link-underline-animate();
             color: $color-white;
-            text-decoration: none;
             font-size: 0.9rem;
+            @include link-underline-animate();
           }
 
           .wc-block-components-checkout-place-order-button {
