@@ -26,6 +26,7 @@ $color-dark-gray-gradient: linear-gradient(
 // Fonts
 $font-heading: "Oswald", sans-serif;
 $font-body: "Noto Sans JP", sans-serif;
+$rem-base: 16; // html { font-size: 62.5%; } の場合は 10 を指定
 
 // Layout
 $header-height: 80px;

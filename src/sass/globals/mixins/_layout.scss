@@ -1,0 +1,25 @@
+/*
+  Layout mixins extracted from _mixin.scss
+
+  Includes:
+    - pc-px-to-vw
+    - sp-px-to-vw
+*/
+
+@use "sass:color";
+@use "../variables" as *;
+@use "../mq" as *;
+
+// ========================
+// pxをvwに変換
+// 1.	$property: 変換したいCSSプロパティ（例: width, margin, padding など）。
+// 2.	$px-value: px単位の値。
+// 3.	$base-width (オプション):基準となる幅（デフォルトは1920px）。設計の基準幅に合わせて変更可能。
+// ========================
+@mixin pc-px-to-vw($property, $px-value, $base-width: 1280) {
+  #{$property}: math.div($px-value, $base-width) * 100vw;
+}
+
+@mixin sp-px-to-vw($property, $px-value, $base-width: 393) {
+  #{$property}: math.div($px-value, $base-width) * 100vw;
+}
