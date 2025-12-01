@@ -1,5 +1,5 @@
-@use '../globals/index' as *;
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "sass:color";
 
 // ========================
 // セクション共通
@@ -49,6 +49,17 @@
     @include mq(lg) {
       flex: 0 1 45vw;
     }
+
+    @include hover-active() {
+      .section__picture {
+        box-shadow: $box-shadow-red-hover;
+      }
+
+      .section__image {
+        transform: scale(1.02);
+        animation: bright-flash 0.2s linear forwards;
+      }
+    }
   }
 
   &__picture {
@@ -63,10 +74,6 @@
 
     @include mq(lg) {
       aspect-ratio: 3 / 2;
-
-      .section__link:hover & {
-        box-shadow: $box-shadow-red-hover;
-      }
     }
   }
 
@@ -76,13 +83,6 @@
     height: 100%;
     display: block;
     transition: transform $transition, filter $transition;
-
-    .section__link:hover & {
-      @include mq(lg) {
-        transform: scale(1.02);
-        animation: bright-flash 0.2s linear forwards;
-      }
-    }
   }
 
   &--reverse .section__flex {

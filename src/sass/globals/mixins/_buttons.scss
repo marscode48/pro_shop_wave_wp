@@ -57,18 +57,31 @@
     width: $width;
   }
 
-  &:hover {
-    @include mq(lg) {
-      background: linear-gradient(
-        135deg,
-        color.adjust($color-white, $lightness: 15%) 70%,
-        color.adjust($color-red, $lightness: 5%) 100%
-      );
-      color: $color-red;
-      border-color: $color-red;
-      box-shadow: $box-shadow-red-hover;
-      animation: bright-flash 0.2s linear forwards;
-    }
+  @include hover-active(
+    $hover: (
+      background:
+        linear-gradient(
+          135deg,
+          color.adjust($color-white, $lightness: 15%) 70%,
+          color.adjust($color-red, $lightness: 5%) 100%
+        ),
+      color: $color-red,
+      border-color: $color-red,
+      box-shadow: $box-shadow-red-hover,
+    ),
+    $active: (
+      background:
+        linear-gradient(
+          135deg,
+          color.adjust($color-white, $lightness: 15%) 65%,
+          color.adjust($color-red, $lightness: 5%) 100%
+        ),
+      color: $color-red,
+      border-color: $color-red,
+      box-shadow: $box-shadow-red-hover,
+    )
+  ) {
+    animation: bright-flash 0.2s linear forwards;
   }
 
   // 内側テキスト要素の反スキュー（親が複合セレクタでも安全な指定）
@@ -99,13 +112,28 @@
     top: 55%;
   }
 
-  &:hover::before,
-  &:hover::after {
-    @include mq(lg) {
-      transform: translateX(10px);
-      background-color: $color-red;
-    }
-  }
+  // hover / active: decorative lines on before/after (lg and up)
+  @include hover-active-before(
+    $hover: (
+      transform: translateX(10px),
+      background-color: $color-red,
+    ),
+    $active: (
+      transform: translateX(7px),
+      background-color: $color-red,
+    )
+  );
+
+  @include hover-active-after(
+    $hover: (
+      transform: translateX(10px),
+      background-color: $color-red,
+    ),
+    $active: (
+      transform: translateX(7px),
+      background-color: $color-red,
+    )
+  );
 
   // 可変: lg以上での幅
   @include mq(lg) {
@@ -159,24 +187,13 @@
     transition: transform $transition;
   }
 
-  // デスクトップ（マウス等）: hover / focus-visible
-  @media (hover: hover) and (pointer: fine) {
-    &:hover,
-    &:focus-visible {
-      color: color.adjust($color, $lightness: 10%);
-      i {
-        transform: translateX(if($direction == right, $shift, -$shift));
-      }
-    }
-  }
-
-  // タッチ端末（スマホ/タブレット）: active
-  @media (hover: none) and (pointer: coarse) {
-    &:active {
-      color: color.adjust($color, $lightness: 10%);
-      i {
-        transform: translateX(if($direction == right, $shift, -$shift));
-      }
+  @include hover-active(
+    $hover: (
+      color: color.adjust($color, $lightness: 15%),
+    )
+  ) {
+    i {
+      transform: translateX(if($direction == right, $shift, -$shift));
     }
   }
 
@@ -309,22 +326,21 @@
     background: $bg;
   }
 
-  // hover（デスクトップ）
-  @include mq(lg) {
-    &:hover {
-      filter: $hover-filter;
-      border-color: $color-red;
-    }
-  }
+  @include hover-active(
+    $hover: (
+      filter: $hover-filter,
+      border-color: $color-red,
+    )
+  );
 
   // 選択時の見た目（chip等）
   @if $with-selected == true {
     // 選択モードのときは、hoverで枠を赤にし直さない
-    @include mq(lg) {
-      &:hover {
-        border-color: $fb-border-color;
-      }
-    }
+    @include hover-active(
+      $hover: (
+        border-color: $fb-border-color,
+      )
+    );
 
     &[data-selected="true"] {
       border-color: $color-red;

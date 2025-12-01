@@ -256,8 +256,8 @@
           transition: transform $transition, border-color $transition;
         }
 
-        &:hover .header__nav-toggle-icon {
-          @include mq(lg) {
+        @include hover-active() {
+          .header__nav-toggle-icon {
             border-color: $color-red;
           }
         }
@@ -343,10 +343,11 @@
       a {
         color: $color-white;
         text-decoration: none;
+        letter-spacing: 0.15em;
+        @include link-underline-animate();
 
-        &.is-active {
-          // color: $color-red;
-          font-weight: bold;
+        &.is-active::after {
+          width: 100%;
         }
       }
 
@@ -403,6 +404,13 @@
 
     &-toggle {
       display: flex;
+      transition: color $transition;
+
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
 
       @include mq(lg) {
         display: none; // PCでは非表示
@@ -446,11 +454,11 @@
           }
 
           @include mq(lg) {
-            &:hover,
-            &:focus,
-            &:focus-visible {
-              filter: brightness(1.5);
-            }
+            @include hover-active(
+              $hover: (
+                filter: brightness(1.5),
+              )
+            );
           }
         }
       }
@@ -472,11 +480,11 @@
         font-size: 1.4rem;
       }
 
-      &:hover {
-        @include mq(lg) {
-          color: $color-red;
-        }
-      }
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
     }
 
     i {
@@ -528,28 +536,11 @@
       gap: 0.5rem;
 
       a {
-        position: relative;
-        display: inline-block;
         color: $color-white;
         text-decoration: none;
         font-size: 0.9rem;
-        padding-bottom: 3px;
-        transition: color $transition;
-
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0%;
-          height: 2px;
-          background-color: $color-red;
-          transition: width $transition;
-        }
-
-        &:hover::after {
-          width: 100%;
-        }
+        letter-spacing: 0.04em;
+        @include link-underline-animate();
 
         &.is-active::after {
           width: 100%;

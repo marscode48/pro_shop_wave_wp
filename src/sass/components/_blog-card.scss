@@ -49,11 +49,11 @@
     padding: 7%;
   }
 
-  &:hover {
-    @include mq(lg) {
-      box-shadow: $box-shadow-red-hover;
-    }
-  }
+  @include hover-active(
+    $hover: (
+      box-shadow: $box-shadow-red-hover,
+    )
+  );
 
   &::before {
     content: "";
@@ -76,12 +76,10 @@
     color: inherit;
     text-decoration: none;
 
-    &:hover {
-      @include mq(lg) {
-        .card-blog__image {
-          transform: scale(1.05);
-          filter: brightness(1.2);
-        }
+    @include hover-active() {
+      .card-blog__image {
+        transform: scale(1.05);
+        filter: brightness(1.2);
       }
     }
   }
@@ -161,11 +159,11 @@
     text-decoration: none;
     transition: color $transition;
 
-    &:hover {
-      @include mq(lg) {
-        color: $color-white;
-      }
-    }
+    @include hover-active(
+      $hover: (
+        color: $color-white,
+      )
+    );
   }
 
   &__more {

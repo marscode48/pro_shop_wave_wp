@@ -43,6 +43,12 @@
     font-weight: 700;
     transition: filter $transition;
 
+    @include hover-active(
+      $hover: (
+        filter: brightness(1.5),
+      )
+    );
+
     &:focus {
       box-shadow: inset 0 0 0 1px $color-white, 0 0 0 2px $color-gray !important;
       outline: 3px solid transparent !important;
@@ -51,12 +57,6 @@
     &:focus-visible {
       box-shadow: inset 0 0 0 1px $color-white, 0 0 0 3px rgba($color-red, 0.65) !important;
       outline: 3px solid transparent !important;
-    }
-
-    @include mq(lg) {
-      &:hover {
-        filter: brightness(1.5);
-      }
     }
   }
 
@@ -100,13 +100,13 @@
     transition: background-color $transition, color $transition,
       box-shadow $transition;
 
-    @include mq(lg) {
-      &:hover {
-        background: $color-red;
-        color: $color-white;
-        box-shadow: $box-shadow-red-hover;
-      }
-    }
+    @include hover-active(
+      $hover: (
+        background: $color-red,
+        color: $color-white,
+        box-shadow: $box-shadow-red-hover,
+      )
+    );
   }
 
   // 単品購入（CTA）ボタン（商品詳細ページなど）
@@ -176,11 +176,11 @@
     text-align: center;
     @include product-card-gradient;
 
-    @include mq(lg) {
-      &:hover {
-        box-shadow: $box-shadow-red-hover;
-      }
-    }
+    @include hover-active(
+      $hover: (
+        box-shadow: $box-shadow-red-hover,
+      )
+    );
 
     // リンク全体
     .wc-block-grid__product-link {
@@ -214,8 +214,8 @@
       overflow: hidden;
       border-radius: $radius-image;
 
-      @include mq(lg) {
-        &:hover img {
+      @include hover-active() {
+        img {
           transform: scale(1.05);
           filter: brightness(1.2);
         }
@@ -316,11 +316,11 @@
         transition: filter $transition;
         padding: calc(0.667em + 2px) calc(0.1em + 2px);
 
-        @include mq(lg) {
-          &:hover {
-            filter: brightness(1.5);
-          }
-        }
+        @include hover-active(
+          $hover: (
+            filter: brightness(1.5),
+          )
+        );
       }
     }
   }

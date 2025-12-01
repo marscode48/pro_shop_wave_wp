@@ -58,12 +58,12 @@
         background-color $transition;
 
       // ホバー/フォーカス時のアクセント
-      @include mq(lg) {
-        &:hover {
-          color: $color-red;
-          border-color: $color-red;
-        }
-      }
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+          border-color: $color-red,
+        )
+      );
 
       // アクティブタブ
       &.is-active {

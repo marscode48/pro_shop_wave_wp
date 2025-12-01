@@ -17,16 +17,13 @@
     .page-numbers {
       color: $color-white;
       margin: 0 0.5rem;
+      transition: color $transition;
 
-      @include mq(lg) {
-        transition: color $transition;
-      }
-
-      &:hover {
-        @include mq(lg) {
-          color: $color-red;
-        }
-      }
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
 
       &.current {
         font-weight: bold;

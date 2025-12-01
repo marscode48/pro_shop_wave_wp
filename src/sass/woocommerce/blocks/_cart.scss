@@ -91,11 +91,11 @@
                   @include panel-surface-black($radius: 100vmax);
                   transition: border-color $transition, filter $transition;
 
-                  @include mq(lg) {
-                    &:hover {
-                      filter: brightness(2);
-                    }
-                  }
+                  @include hover-active(
+                    $hover: (
+                      filter: brightness(2),
+                    )
+                  );
 
                   &__input:focus {
                     box-shadow: none;

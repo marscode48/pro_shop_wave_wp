@@ -327,11 +327,11 @@ $marker-anim-duration: var(--marker-animation-duration);
       padding: 7%;
     }
 
-    &:hover {
-      @include mq(lg) {
-        box-shadow: $box-shadow-red-hover;
-      }
-    }
+    @include hover-active(
+      $hover: (
+        box-shadow: $box-shadow-red-hover,
+      )
+    );
   
     &__image {
       width: 100%;
