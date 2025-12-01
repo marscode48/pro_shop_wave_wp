@@ -43,13 +43,11 @@
 
     .product_title {
       @include section-title(
-        $margin-bottom: 1rem,
+        $sp-margin-bottom: 1rem,
+        $md-margin-bottom: 1rem,
         $text-align: left,
         $text-transform: none
       );
-      & {
-        margin-bottom: 1rem;
-      }
     }
 
     span.price,

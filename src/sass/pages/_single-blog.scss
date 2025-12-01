@@ -66,11 +66,12 @@
 
   // タイトル（大見出し）
   &__title {
-    @include section-title($font-size: 1.5rem, $margin-bottom: 1.25rem);
-
-    @include mq(lg) {
-      font-size: 1.8rem;
-    }
+    @include section-title(
+      $sp-font-size: 1.5rem,
+      $md-font-size: 1.8rem,
+      $sp-margin-bottom: 1.25rem,
+      $md-margin-bottom: 1.25rem,
+    );
   }
 
   // 日付（公開日 / 更新日ピルは meta-date() に集約）
