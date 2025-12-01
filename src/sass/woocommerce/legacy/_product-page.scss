@@ -1,6 +1,7 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
 @use "../../components/badge-sale" as *;
+@use "../../components/price-sale" as *;
 @use "sass:color";
 
 // ========================
@@ -52,17 +53,7 @@
       color: $color-white;
       margin-bottom: 1rem;
       font-weight: bold;
-
-      ins {
-        text-decoration: none;
-        color: $color-red; // セール後価格は赤で強調
-      }
-
-      del {
-        opacity: 0.6; // 旧価格はやや薄く
-        margin-right: 0.2em;
-        text-decoration-color: $color-red;
-      }
+      @include wc-price-sale();
     }
 
     .woocommerce-product-details__short-description {
@@ -558,6 +549,10 @@
               )
             );
           }
+        }
+
+        td.woocommerce-grouped-product-list-item__price {
+          @include wc-price-sale();
         }
 
         td {

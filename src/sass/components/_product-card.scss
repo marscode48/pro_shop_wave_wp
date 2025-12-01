@@ -1,4 +1,5 @@
 @use "../globals/index" as *;
+@use "./price-sale" as *;
 
 // ========================
 // Mixin: product-card
@@ -147,16 +148,7 @@
     color: $color-white;
     margin: 0;
 
-    ins {
-      text-decoration: none;
-      color: $color-red; // セール後価格は赤で強調
-    }
-
-    del {
-      opacity: 0.6; // 旧価格はやや薄く
-      margin-right: 0.2em;
-      text-decoration-color: $color-red;
-    }
+    @include wc-price-sale();
 
     // 税区分の表示制御（WooCommerceの価格サフィックス）
     // 商品一覧（ブロック / グリッドなど）では非表示
