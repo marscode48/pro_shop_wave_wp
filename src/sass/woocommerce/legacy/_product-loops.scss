@@ -89,6 +89,10 @@
       display: inline-block;
       margin-left: auto; // 右に配置
 
+      @include mq(md) {
+        width: 35%; // filterbar__open と同じ大きさ
+      }
+
       @include mq(lg) {
         width: auto;
         margin-left: 0;
