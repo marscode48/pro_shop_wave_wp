@@ -4,6 +4,7 @@
   Includes:
     - clamp-font-size
     - section-title
+    - section-text
     - heading-title
     - page-lead
     - page-content-body
@@ -31,21 +32,52 @@
 // 可変にしたい値は引数で上書き可能。
 // ========================
 @mixin section-title(
-  $font-size: 2rem,
+  $sp-font-size: 1.75rem,
+  $md-font-size: 2rem,
+  $sp-margin-bottom: 1.75rem,
+  $md-margin-bottom: 2rem,
   $color: $color-white,
-  $margin-bottom: 2rem,
   $text-align: center,
   $text-transform: uppercase,
   $font-family: $font-heading,
   $text-shadow: $text-shadow-black-default
 ) {
-  font-size: $font-size;
+  // --- SP（デフォルト） ---
+  font-size: $sp-font-size;
+  margin-bottom: $sp-margin-bottom;
   font-family: $font-family;
   text-align: $text-align;
   color: $color;
-  margin-bottom: $margin-bottom;
   text-transform: $text-transform;
   text-shadow: $text-shadow;
+
+  // --- md以上 ---
+  @include mq(md) {
+    font-size: $md-font-size;
+    margin-bottom: $md-margin-bottom;
+  }
+}
+// ========================
+// 汎用: セクション説明文テキスト
+// 主に .section__text などで使用。中央寄せ・白文字・シャドウ強めの説明文。
+// ========================
+@mixin section-text(
+  $font-size: 1rem,
+  $color: $color-white,
+  $sp-margin-bottom: 1.75rem,
+  $md-margin-bottom: 2rem,
+  $text-align: center,
+  $text-shadow: $text-shadow-black-default
+) {
+  text-align: $text-align;
+  font-size: $font-size;
+  color: $color;
+  margin-bottom: $sp-margin-bottom;
+  text-shadow: $text-shadow;
+  
+  @include mq(md) {
+    margin-bottom: $md-margin-bottom;
+  }
 }
 
 // ========================

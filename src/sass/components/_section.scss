@@ -14,11 +14,7 @@
   }
 
   &__text {
-    text-align: center;
-    font-size: 1rem;
-    color: $color-white;
-    margin-bottom: 2rem;
-    text-shadow: $text-shadow-black-default;
+    @include section-text();
   }
 
   &__button {
