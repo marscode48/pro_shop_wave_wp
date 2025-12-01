@@ -39,13 +39,18 @@
   $font-family: $font-heading,
   $text-shadow: $text-shadow-black-default
 ) {
-  font-size: $font-size;
+  font-size: 1.75rem;
   font-family: $font-family;
   text-align: $text-align;
   color: $color;
-  margin-bottom: $margin-bottom;
+  margin-bottom: 1.75rem;
   text-transform: $text-transform;
   text-shadow: $text-shadow;
+
+  @include mq(md) {
+    font-size: 2rem;
+    margin-bottom: $margin-bottom;
+  }
 }
 
 // ========================
