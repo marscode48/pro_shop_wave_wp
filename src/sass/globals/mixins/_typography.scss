@@ -4,6 +4,7 @@
   Includes:
     - clamp-font-size
     - section-title
+    - section-text
     - heading-title
     - page-lead
     - page-content-body
@@ -51,6 +52,28 @@
     font-size: 2rem;
     margin-bottom: $margin-bottom;
   }
+}
+
+// ========================
+// 汎用: セクション説明文テキスト
+// 主に .section__text などで使用。中央寄せ・白文字・シャドウ強めの説明文。
+// ========================
+@mixin section-text(
+  $font-size: 1rem,
+  $color: $color-white,
+  $margin-bottom: 2rem,
+  $text-align: center,
+  $text-shadow: $text-shadow-black-default
+) {
+  text-align: $text-align;
+  font-size: $font-size;
+  color: $color;
+  margin-bottom: 1.75rem;
+
+  @include mq(md) {
+    margin-bottom: $margin-bottom;
+  }
+  text-shadow: $text-shadow;
 }
 
 // ========================
