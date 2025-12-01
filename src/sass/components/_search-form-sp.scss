@@ -1,4 +1,4 @@
-@use '../globals/index' as *;
+@use "../globals/index" as *;
 
 // ========================
 // 検索フォーム（SP表示用）
@@ -36,6 +36,12 @@
     color: $color-white;
     border: none;
     padding: 0.5rem 1rem;
+    transition: filter $transition;
+    @include hover-active(
+      $hover: (
+        filter: brightness(1.5),
+      )
+    );
   }
 
   &.is-visible {

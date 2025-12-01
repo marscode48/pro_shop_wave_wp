@@ -26,11 +26,11 @@
   @if $use-gradient {
     @include product-card-gradient;
   }
-  &:hover {
-    @include mq(lg) {
-      box-shadow: $box-shadow-red-hover;
-    }
-  }
+  @include hover-active(
+    $hover: (
+      box-shadow: $box-shadow-red-hover,
+    )
+  );
 
   // ---- バッジ（セール等）
   .onsale {
@@ -53,12 +53,10 @@
     display: block;
     overflow: hidden;
 
-    &:hover {
-      @include mq(lg) {
-        img {
-          transform: scale(1.05);
-          filter: brightness(1.2);
-        }
+    @include hover-active($hover: (), $active: ()) {
+      img {
+        transform: scale(1.05);
+        filter: brightness(1.2);
       }
     }
 
@@ -91,14 +89,13 @@
     white-space: nowrap;
 
     .product-card__brand-link {
-      @include mq(lg) {
-        transition: color $transition;
-      }
-      &:hover {
-        @include mq(lg) {
-          color: $color-red;
-        }
-      }
+      transition: color $transition;
+
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
     }
   }
 
@@ -107,14 +104,13 @@
     color: $color-gray;
 
     a {
-      @include mq(lg) {
-        transition: color $transition;
-      }
-      &:hover {
-        @include mq(lg) {
-          color: $color-red;
-        }
-      }
+      transition: color $transition;
+
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
     }
   }
 

@@ -99,14 +99,16 @@
       word-break: break-word; // 一部ブラウザ向けフォールバック
       transition: filter $transition;
 
+      @include hover-active(
+        $hover: (
+          filter: brightness(0.75),
+        )
+      );
+
       &:focus-visible {
         outline: 0.125rem solid color.scale($color-red, $lightness: 15%);
         outline-offset: 0.125rem;
         text-decoration: none;
-      }
-
-      &:hover {
-        filter: brightness(0.75);
       }
     }
 
@@ -281,11 +283,11 @@
       background: $color-bright-red-gradient;
       transition: filter $transition;
 
-      @include mq(lg) {
-        &:hover {
-          filter: brightness(1.5);
-        }
-      }
+      @include hover-active(
+        $hover: (
+          filter: brightness(1.5),
+        )
+      );
 
       &:focus-visible {
         outline: 0.125rem solid color.scale($color-red, $lightness: 15%);
@@ -465,12 +467,6 @@
           }
         }
       }
-
-      &:hover {
-        @include mq(lg) {
-          color: $color-red;
-        }
-      }
     }
 
     // 矢印ボタン部（Font Awesome 矢印入りの丸ボタン）
@@ -491,9 +487,9 @@
       -webkit-line-clamp: 2; // SP は 2行まで
       line-clamp: 2;
       -webkit-box-orient: vertical;
+      transition: color $transition;
 
       @include mq(lg) {
-        @include link-underline-animate();
         max-width: 100%;
         white-space: nowrap;
         overflow: hidden;
@@ -504,6 +500,12 @@
         line-clamp: initial;
         -webkit-box-orient: initial;
       }
+
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
     }
   }
 
@@ -574,12 +576,13 @@
             transition: transform $transition, box-shadow $transition;
           }
 
-          &:hover,
-          &:focus-visible {
-            transform: translateY(-2px);
-            box-shadow: 0 0 0 2px rgba($color-red, 0.7);
-            outline: none;
-          }
+          @include hover-active(
+            $hover: (
+              transform: translateY(-2px),
+              box-shadow: 0 0 0 2px rgba($color-red, 0.7),
+              outline: none,
+            )
+          );
         }
 
         img {
@@ -624,16 +627,14 @@
           text-decoration: none;
           border-bottom: 1px dashed rgba($color-gray, 0.4);
           outline: none;
+          transition: color $transition, border-color $transition;
 
-          @include mq(lg) {
-            transition: color $transition, border-color $transition;
-          }
-
-          &:hover,
-          &:focus-visible {
-            color: $color-red;
-            border-color: rgba($color-red, 0.7);
-          }
+          @include hover-active(
+            $hover: (
+              color: $color-red,
+              border-color: rgba($color-red, 0.7),
+            )
+          );
         }
       }
 
@@ -662,6 +663,7 @@
         color: $color-white;
         text-decoration: none;
         line-height: 1;
+        transition: color $transition;
 
         i {
           font-size: 1.1rem;
@@ -669,18 +671,18 @@
           color: currentColor;
         }
 
+        @include hover-active(
+          $hover: (
+            color: $color-red,
+          )
+        );
+
         &:focus-visible {
           outline: 0.125rem solid color.scale($color-red, $lightness: 15%);
           outline-offset: 0.125rem;
         }
 
-        @include mq(lg) {
-          transition: color $transition;
-        }
-
-        &:hover,
         &:focus {
-          color: $color-red;
           outline: none;
         }
       }

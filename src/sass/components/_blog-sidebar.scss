@@ -98,16 +98,13 @@
     color: $color-white;
     text-decoration: none;
     line-height: 1.4;
+    transition: color $transition;
 
-    @include mq(lg) {
-      transition: color $transition;
-    }
-
-    &:hover,
-    &:focus {
-      color: $color-red;
-      outline: none;
-    }
+    @include hover-active(
+      $hover: (
+        color: $color-red,
+      )
+    );
   }
 
   // ========================
@@ -136,15 +133,13 @@
         color: $color-white;
         text-decoration: none;
         line-height: 1.4;
-        @include mq(lg) {
-          transition: color $transition;
-        }
+        transition: color $transition;
 
-        &:hover,
-        &:focus {
-          color: $color-red;
-          outline: none;
-        }
+        @include hover-active(
+          $hover: (
+            color: $color-red,
+          )
+        );
       }
     }
   }

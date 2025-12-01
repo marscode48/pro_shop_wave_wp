@@ -117,11 +117,13 @@
               color: $color-gray;
               text-decoration: underline;
               cursor: pointer;
-              @include mq(lg) {
-                &:hover {
-                  color: $color-white;
-                }
-              }
+              transition: color $transition;
+
+              @include hover-active(
+                $hover: (
+                  color: $color-red,
+                )
+              );
             }
           }
 
@@ -180,11 +182,13 @@
             color: $color-gray;
             cursor: pointer;
             padding: 0.25rem 0;
-            @include mq(lg) {
-              &:hover {
-                color: $color-white;
-              }
-            }
+            transition: color $transition;
+
+            @include hover-active(
+              $hover: (
+                color: $color-red,
+              )
+            );
           }
         }
 
@@ -226,7 +230,7 @@
               &.wc-block-components-radio-control__option-checked,
               &--checked-option-highlighted {
                 @include input-base($padding: 0.875em 0.875em 0.875em 3.5em);
-                border: 1px solid $color-gray;
+                border: 1px solid $color-red;
               }
             }
 
@@ -281,7 +285,7 @@
 
                 .wc-block-components-radio-control__option {
                   @include input-base($padding: 0.875em 0.875em 0.875em 3.5em);
-                  border: 1px solid $color-gray;
+                  border: 1px solid $color-red;
                 }
               }
             }
@@ -390,10 +394,9 @@
           text-align: center;
 
           .wc-block-components-checkout-return-to-cart-button {
-            @include link-underline-animate();
             color: $color-white;
-            text-decoration: none;
             font-size: 0.9rem;
+            @include link-underline-animate();
           }
 
           .wc-block-components-checkout-place-order-button {

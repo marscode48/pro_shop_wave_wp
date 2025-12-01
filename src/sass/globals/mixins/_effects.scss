@@ -14,6 +14,7 @@
 @use "sass:color";
 @use "../variables" as *;
 @use "../mq" as *;
+@use "sass:list";
 
 // ========================
 // アニメーション
@@ -46,7 +47,9 @@
 // hover / focus-visible（PC）
 // active（SP）対応 UI アニメーション
 // ========================
-@mixin hover-active($hover: (), $active: ()) {
+@mixin hover-active($hover: (), $active: null) {
+  // $active が null または空マップなら $hover をそのまま使う
+  $active: if($active == null or list.length($active) == 0, $hover, $active);
   // PC: hover / focus-visible
   @media (hover: hover) and (pointer: fine) {
     &:hover,
@@ -54,6 +57,9 @@
       @each $prop, $value in $hover {
         #{$prop}: $value;
       }
+
+      // 子要素などを制御したいときに使うオプションブロック
+      @content;
     }
   }
 
@@ -63,6 +69,9 @@
       @each $prop, $value in $active {
         #{$prop}: $value;
       }
+
+      // 子要素などを制御したいときに使うオプションブロック
+      @content;
     }
   }
 }
@@ -70,7 +79,9 @@
 // ========================
 // hover-active-before（疑似要素::before 専用）
 // ========================
-@mixin hover-active-before($hover: (), $active: ()) {
+@mixin hover-active-before($hover: (), $active: null) {
+  // $active が null または空マップなら $hover をそのまま使う
+  $active: if($active == null or list.length($active) == 0, $hover, $active);
   // PC: hover / focus-visible → ::before
   @media (hover: hover) and (pointer: fine) {
     &:hover::before,
@@ -78,6 +89,9 @@
       @each $prop, $value in $hover {
         #{$prop}: $value;
       }
+
+      // 子要素などを制御したいときに使うオプションブロック
+      @content;
     }
   }
 
@@ -87,6 +101,9 @@
       @each $prop, $value in $active {
         #{$prop}: $value;
       }
+
+      // 子要素などを制御したいときに使うオプションブロック
+      @content;
     }
   }
 }
@@ -94,7 +111,9 @@
 // ========================
 // hover-active-after（疑似要素::after 専用）
 // ========================
-@mixin hover-active-after($hover: (), $active: ()) {
+@mixin hover-active-after($hover: (), $active: null) {
+  // $active が null または空マップなら $hover をそのまま使う
+  $active: if($active == null or list.length($active) == 0, $hover, $active);
   // PC: hover / focus-visible → ::after
   @media (hover: hover) and (pointer: fine) {
     &:hover::after,
@@ -103,6 +122,9 @@
         #{$prop}: $value;
       }
     }
+
+    // 子要素などを制御したいときに使うオプションブロック
+    @content;
   }
 
   // SP: active → ::after
@@ -112,6 +134,9 @@
         #{$prop}: $value;
       }
     }
+
+    // 子要素などを制御したいときに使うオプションブロック
+    @content;
   }
 }
 
@@ -122,7 +147,7 @@
 @mixin link-underline-animate(
   $color: $color-red,
   $height: 2px,
-  $offset: -0.25em
+  $offset: -0.24em
 ) {
   position: relative;
   text-decoration: none;
@@ -139,10 +164,11 @@
     transition: width $transition;
   }
 
-  &:hover::after,
-  &.is-active::after {
-    width: 100%;
-  }
+  @include hover-active-after(
+    $hover: (
+      width: 100%,
+    )
+  );
 }
 
 // ========================

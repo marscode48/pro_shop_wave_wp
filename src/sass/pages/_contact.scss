@@ -288,9 +288,11 @@
           text-decoration: underline;
           transition: color $transition;
 
-          &:hover {
-            color: color.scale($color-red, $lightness: 10%);
-          }
+          @include hover-active(
+            $hover: (
+              color: color.scale($color-red, $lightness: 20%),
+            )
+          );
         }
 
         @include mq(md) {

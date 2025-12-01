@@ -40,12 +40,6 @@
       gap: 0.5em;
       padding: 0.55em 0.9em;
     }
-
-    &:hover {
-      @include mq(lg) {
-        filter: brightness(2);
-      }
-    }
   }
 
   &__pill {
@@ -59,6 +53,12 @@
     @include mq(lg) {
       pointer-events: auto;
       cursor: pointer;
+
+      @include hover-active(
+        $hover: (
+          filter: brightness(2),
+        )
+      );
     }
 
     &-label {
@@ -130,6 +130,12 @@
     letter-spacing: 0.08em;
     border-radius: $fb-radius;
     border: 1px solid $color-red;
+
+    @include hover-active(
+      $hover: (
+        filter: brightness(2),
+      )
+    );
 
     @include mq(md) {
       flex: 0 0 35%;
@@ -264,12 +270,12 @@
 
     @include panel-surface-black($radius: 8px);
 
-    &:hover {
-      @include mq(lg) {
-        border-color: color.adjust($color-red, $lightness: -10%);
-        color: color.adjust($color-white, $lightness: -30%);
-      }
-    }
+    @include hover-active(
+      $hover: (
+        border-color: color.adjust($color-red, $lightness: -10%),
+        color: color.adjust($color-white, $lightness: -30%),
+      )
+    );
 
     &--primary {
       color: $color-white;
@@ -277,12 +283,12 @@
       border-color: $color-red;
       background: $color-bright-red-gradient;
 
-      &:hover {
-        @include mq(lg) {
-          filter: brightness(1.25);
-          box-shadow: 0 0 10px rgba($color-red, 0.15);
-        }
-      }
+      @include hover-active(
+        $hover: (
+          filter: brightness(1.25),
+          box-shadow: 0 0 10px rgba($color-red, 0.15),
+        )
+      );
     }
   }
 

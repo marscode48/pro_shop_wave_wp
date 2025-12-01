@@ -225,12 +225,16 @@
 
             transition: transform $transition, filter $transition;
 
-            &.flex-active,
-            &:hover {
+            &.flex-active {
               // opacity: 1;
-
               transform: scale(1.05);
             }
+
+            @include hover-active(
+              $hover: (
+                transform: scale(1.05),
+              )
+            );
           }
         }
       }
@@ -265,9 +269,13 @@
     }
 
     // ホバー時にシャドウ強調（PCのみ）
-    .woocommerce-product-gallery:hover::before {
+    .woocommerce-product-gallery {
       @include mq(lg) {
-        box-shadow: $box-shadow-red-hover;
+        @include hover-active-before(
+          $hover: (
+            box-shadow: $box-shadow-red-hover,
+          )
+        );
       }
     }
 
@@ -311,7 +319,13 @@
             position: relative;
             cursor: pointer;
 
-            &:hover,
+            @include hover-active(
+              $hover: (
+                text-decoration: none,
+                color: $color-white,
+              )
+            );
+
             &[aria-selected="true"] {
               text-decoration: none;
               color: $color-white;
@@ -411,16 +425,14 @@
           justify-content: center;
           cursor: pointer;
           user-select: none;
+          transition: filter $transition;
+          will-change: filter;
 
-          @include mq(lg) {
-            // グラデーションの差し替えはアニメーションできないため、filterで明るさを滑らかに変化
-            transition: filter $transition;
-            will-change: filter;
-
-            &:hover {
-              filter: brightness(2);
-            }
-          }
+          @include hover-active(
+            $hover: (
+              filter: brightness(2),
+            )
+          );
 
           &--decrease::before {
             content: "−";
@@ -538,12 +550,13 @@
           padding-right: 1em;
           padding-left: 1em;
 
-          @include mq(lg) {
+          a {
             transition: color $transition;
-
-            &:hover {
-              color: $color-gray;
-            }
+            @include hover-active(
+              $hover: (
+                color: $color-gray,
+              )
+            );
           }
         }
 
@@ -561,14 +574,6 @@
             height: 40px;
             width: 100%;
             font-weight: normal;
-
-            @include mq(lg) {
-              transition: background-color $transition;
-
-              &:hover {
-                background-color: $color-gray;
-              }
-            }
           }
 
           p.stock,

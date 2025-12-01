@@ -102,19 +102,17 @@
   &__desc {
     margin: 0;
     line-height: 1.7;
+    transition: color $transition;
 
     a {
       color: $color-red;
       text-decoration: none;
 
-      @include mq(lg) {
-        transition: color $transition;
-      }
-
-      &:hover,
-      &:focus-visible {
-        color: color.scale($color-red, $lightness: 15%);
-      }
+      @include hover-active(
+        $hover: (
+          color: color.scale($color-red, $lightness: 20%),
+        )
+      );
     }
   }
 
@@ -153,7 +151,6 @@
     align-items: center;
     font-size: 0.9rem;
     @include link-underline-animate($color-red);
-    color: $color-red;
   }
 
   &__tel-link {
@@ -163,15 +160,13 @@
     font-weight: 600;
     color: $color-white;
     text-decoration: none;
+    transition: color $transition;
 
-    @include mq(lg) {
-      transition: color $transition;
-    }
-
-    &:hover,
-    &:focus-visible {
-      color: $color-red;
-    }
+    @include hover-active(
+      $hover: (
+        color: $color-red,
+      )
+    );
   }
 
   // アクセス案内セクション（車 / 電車）

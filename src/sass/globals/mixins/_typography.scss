@@ -164,8 +164,7 @@
   }
 
   a {
-    @include link-underline-animate();
-    color: $color-red;
+    @include link-underline-animate($color: $color-red);
   }
 
   strong {

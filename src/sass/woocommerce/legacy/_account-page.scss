@@ -31,9 +31,9 @@
         text-align: center;
 
         a {
-          @include link-underline-animate();
           color: $color-white;
           font-size: 0.95rem;
+          @include link-underline-animate();
         }
       }
 
@@ -115,18 +115,18 @@
             background-color: $color-dark-gray;
             transition: background-color $transition, color $transition;
 
-            @include mq(lg) {
-              &:hover,
-              &:focus {
-                background-color: rgba($color-red, 0.5);
-                color: $color-white;
-              }
-              &:focus-visible {
-                outline: 2px solid rgba($color-red, 0.9);
-                outline-offset: 2px;
-                background-color: rgba($color-red, 0.5);
-                color: $color-white;
-              }
+            @include hover-active(
+              $hover: (
+                background-color: rgba($color-red, 0.5),
+                color: $color-white,
+              )
+            );
+
+            &:focus-visible {
+              outline: 2px solid rgba($color-red, 0.9);
+              outline-offset: 2px;
+              background-color: rgba($color-red, 0.5);
+              color: $color-white;
             }
           }
 
@@ -263,20 +263,14 @@
               display: inline-flex;
               align-items: center;
               justify-content: center;
-              padding: 0.45em 0.9em;
-              color: $color-white;
-              text-decoration: none;
               font-weight: 700;
-              font-size: 0.9rem;
               letter-spacing: 0.03em;
-              @include panel-surface-black($radius: 999px);
-              transition: filter $transition;
               float: none !important;
 
-              &:hover {
-                @include mq(lg) {
-                  filter: brightness(2);
-                }
+              @include pill($font-size: 0.75rem, $with-selected: false);
+
+              @include mq(lg) {
+                font-size: 0.875rem;
               }
             }
           }
@@ -399,13 +393,15 @@
         }
 
         a {
-          color: $color-red;
+          color: $color-gray;
           text-decoration: underline;
           transition: color $transition;
 
-          &:hover {
-            color: color.scale($color-red, $lightness: 10%);
-          }
+          @include hover-active(
+            $hover: (
+              color: $color-red,
+            )
+          );
         }
       }
     }
