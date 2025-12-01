@@ -1,5 +1,6 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
+@use "../../components/price-sale" as *;
 @use "sass:color";
 
 // =============================================================
@@ -281,17 +282,7 @@
       color: $color-white;
       margin: 0 auto;
 
-      ins {
-        font-weight: 400;
-        text-decoration: none;
-        color: $color-red;
-      }
-
-      del {
-        opacity: 0.6;
-        margin-right: 0.2em;
-        text-decoration-color: $color-red;
-      }
+      @include wc-price-sale();
     }
 
     // レーティング（今回は非表示）

@@ -1,0 +1,25 @@
+@use "../globals/index" as *;
+
+// ========================
+// Mixin: wc-price-sale
+// 目的: WooCommerceの価格UI（通常価格・セール価格）の共通スタイルを一元化
+// 用途: product-card, product-page, WC Blocks など全ての価格表示コンポーネントで横断利用
+// ========================
+
+@mixin wc-price-sale(
+  $sale-color: $color-red,
+  $old-opacity: 0.6,
+  $old-gap: 0.2em,
+  $old-decoration-color: $color-red
+) {
+  ins {
+    text-decoration: none;
+    color: $sale-color;
+  }
+
+  del {
+    opacity: $old-opacity;
+    margin-right: $old-gap;
+    text-decoration-color: $old-decoration-color;
+  }
+}
