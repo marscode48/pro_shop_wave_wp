@@ -13,9 +13,9 @@
       <p class="section__text fadeup">
         <?php echo wp_kses_post(__('90’sストリートカルチャーを纏う、<br class="sp-only">オリジナルJDMアパレル。', 'proshopwave')); ?>
       </p>
-      <button class="section__button faderight">
+      <a href="/product-category/apparel/" class="section__button faderight">
         <?php echo esc_html__('More', 'proshopwave'); ?>
-      </button>
+      </a>
     </div>
     <a href="/product-category/apparel/" class="section__link">
       <picture class="section__picture fadeup">
