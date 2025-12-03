@@ -21,7 +21,7 @@ if (function_exists('is_woocommerce') && is_woocommerce()) {
   <nav class="breadcrumb faderight" aria-label="Breadcrumb">
     <ul class="breadcrumb__list">
       <li class="breadcrumb__item">
-        <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html__( 'ホーム', 'proshopwave' ); ?></a>
+        <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html__('ホーム', 'proshopwave'); ?></a>
       </li>
       <?php
       if (is_category() || is_single()) {
@@ -68,13 +68,67 @@ if (function_exists('is_woocommerce') && is_woocommerce()) {
         echo '<li class="breadcrumb__item">' . get_the_title() . '</li>';
       } elseif (is_search()) {
         // 検索結果ページ
-        echo '<li class="breadcrumb__item">' . esc_html__( '検索結果:', 'proshopwave' ) . ' ' . esc_html( get_search_query() ) . '</li>';
+        echo '<li class="breadcrumb__item">' . esc_html__('検索結果:', 'proshopwave') . ' ' . esc_html(get_search_query()) . '</li>';
       } elseif (is_404()) {
         // 404ページ
-        echo '<li class="breadcrumb__item">' . esc_html__( 'ページが見つかりません', 'proshopwave' ) . '</li>';
+        echo '<li class="breadcrumb__item">' . esc_html__('ページが見つかりません', 'proshopwave') . '</li>';
       } else {
-        // その他のアーカイブ等
-        echo '<li class="breadcrumb__item">' . esc_html( wp_title( '', false ) ) . '</li>';
+        // その他のアーカイブ等（ブログアーカイブ系のタイトルと揃える）
+        $title = '';
+
+        if (is_home() && ! is_front_page()) {
+          // ブログインデックス（/blog 等）
+          $title = __('blog', 'proshopwave');
+        } elseif (is_tag()) {
+          // タグアーカイブ
+          $title = sprintf(
+            __('「%s」タグの記事', 'proshopwave'),
+            single_tag_title('', false)
+          );
+        } elseif (is_tax()) {
+          // カスタムタクソノミー用
+          $title = single_term_title('', false);
+        } elseif (is_post_type_archive()) {
+          // 投稿タイプアーカイブ
+          $title = post_type_archive_title('', false);
+        } elseif (is_year()) {
+          // 年別アーカイブ
+          $title = sprintf(
+            __('%s年の記事', 'proshopwave'),
+            get_the_date('Y')
+          );
+        } elseif (is_month()) {
+          // 月別アーカイブ
+          $title = sprintf(
+            __('%s年%s月の記事', 'proshopwave'),
+            get_the_date('Y'),
+            get_the_date('n')
+          );
+        } elseif (is_day()) {
+          // 日別アーカイブ
+          $title = sprintf(
+            __('%s年%s月%s日の記事', 'proshopwave'),
+            get_the_date('Y'),
+            get_the_date('n'),
+            get_the_date('j')
+          );
+        } elseif (is_author()) {
+          // 著者アーカイブ
+          $author = get_queried_object();
+          if ($author) {
+            $title = sprintf(
+              __('投稿者「%s」の記事', 'proshopwave'),
+              $author->display_name
+            );
+          }
+        }
+
+        // どの条件にも当てはまらない場合は従来どおり wp_title() をフォールバックに使用
+        if ($title === '') {
+          $title = wp_title('', false);
+        }
+
+        echo '<li class="breadcrumb__item">' . esc_html($title) . '</li>';
       }
       ?>
     </ul>
