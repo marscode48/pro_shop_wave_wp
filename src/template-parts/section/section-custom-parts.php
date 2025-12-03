@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for Custom Parts section
  *
@@ -15,7 +16,7 @@
         <span class="section__button-inner"><?php echo esc_html__('More', 'proshopwave'); ?></span>
       </button>
     </div>
-    <a href="/custom-parts/" class="section__link">
+    <a href="/product-category/parts/" class="section__link">
       <picture class="section__picture fadeup">
         <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/section_parts_pc.webp'); ?>" type="image/webp">
         <img src="<?php echo get_theme_file_uri('images/section_parts_sp.jpg'); ?>" alt="<?php echo esc_attr__('カスタムパーツカテゴリ', 'proshopwave'); ?>" class="section__image">
