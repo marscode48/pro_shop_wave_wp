@@ -14,14 +14,14 @@ $description = '';
 
 if (is_home() && ! is_front_page()) {
   // ブログインデックス（/blog 等）
-  $title = __('Blog', 'proshopwave');
+  $title = __('blog', 'proshopwave');
 } elseif (is_category()) {
   // カテゴリーアーカイブ
-  $title       = sprintf(__('カテゴリー: %s', 'proshopwave'), single_cat_title('', false));
+  $title       = sprintf(__('「%s」カテゴリーの記事', 'proshopwave'), single_cat_title('', false));
   $description = term_description();
 } elseif (is_tag()) {
   // タグアーカイブ
-  $title       = sprintf(__('タグ: %s', 'proshopwave'), single_tag_title('', false));
+  $title       = sprintf(__('「%s」タグの記事', 'proshopwave'), single_tag_title('', false));
   $description = term_description();
 } elseif (is_tax()) {
   // カスタムタクソノミー用（必要に応じて使用）
@@ -33,34 +33,37 @@ if (is_home() && ! is_front_page()) {
 } elseif (is_year()) {
   // 年別アーカイブ
   $title = sprintf(
-    __('年: %s', 'proshopwave'),
-    get_the_date(_x('Y', 'yearly archives date format', 'proshopwave'))
+    __('%s年の記事', 'proshopwave'),
+    get_the_date('Y')
   );
 } elseif (is_month()) {
   // 月別アーカイブ
   $title = sprintf(
-    __('月: %s', 'proshopwave'),
-    get_the_date(_x('F Y', 'monthly archives date format', 'proshopwave'))
+    __('%s年%s月の記事', 'proshopwave'),
+    get_the_date('Y'),
+    get_the_date('n')
   );
 } elseif (is_day()) {
   // 日別アーカイブ
   $title = sprintf(
-    __('日: %s', 'proshopwave'),
-    get_the_date(_x('F j, Y', 'daily archives date format', 'proshopwave'))
+    __('%s年%s月%s日の記事', 'proshopwave'),
+    get_the_date('Y'),
+    get_the_date('n'),
+    get_the_date('j')
   );
 } elseif (is_author()) {
   // 著者アーカイブ
   $author = get_queried_object();
 
   if ($author) {
-    $title       = sprintf(__('著者: %s', 'proshopwave'), $author->display_name);
+    $title       = sprintf(__('投稿者「%s」の記事', 'proshopwave'), $author->display_name);
     $description = get_the_author_meta('description', $author->ID);
   }
 }
 
 // どの条件にも当てはまらない場合のフォールバック
 if ('' === $title) {
-  $title = __('ブログ', 'proshopwave');
+  $title = __('blog', 'proshopwave');
 }
 
 if ($title) : ?>
@@ -70,7 +73,7 @@ if ($title) : ?>
     </h1>
 
     <?php if (! empty($description)) : ?>
-      <div class="blog-archive__description section__text">
+      <div class="blog-archive__description section__text fadeup">
         <?php echo wp_kses_post(wpautop($description)); ?>
       </div>
     <?php endif; ?>

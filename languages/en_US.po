@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-11-24 06:54+0900\n"
-"PO-Revision-Date: 2025-11-24 06:56+0900\n"
+"POT-Creation-Date: 2025-12-03 14:14+0900\n"
+"PO-Revision-Date: 2025-12-03 14:28+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en_US\n"
@@ -28,8 +28,7 @@ msgstr "Footer navigation"
 msgid "Shop"
 msgstr "Shop"
 
-#: footer.php:30 header.php:107 template-parts/blog/blog-archive-header.php:17
-#: template-parts/section/section-blog.php:10
+#: footer.php:30 header.php:107 template-parts/section/section-blog.php:10
 msgid "Blog"
 msgstr "Blog"
 
@@ -274,51 +273,40 @@ msgstr "Nearest station: Sagami Line, Kagawa Station (about 12 minutes on foot).
 msgid "お問い合わせ"
 msgstr "Contact"
 
+#: template-parts/blog/blog-archive-header.php:17
+#: template-parts/blog/blog-archive-header.php:67
+msgid "blog"
+msgstr "blog"
+
 #: template-parts/blog/blog-archive-header.php:20
 #, php-format
-msgid "カテゴリー: %s"
-msgstr "Category: %s"
+msgid "「%s」カテゴリーの記事"
+msgstr "Posts in the \"%s\" category"
 
 #: template-parts/blog/blog-archive-header.php:24
 #, php-format
-msgid "タグ: %s"
-msgstr "Tag: %s"
+msgid "「%s」タグの記事"
+msgstr "Posts tagged \"%s\""
 
 #: template-parts/blog/blog-archive-header.php:36
 #, php-format
-msgid "年: %s"
-msgstr "Year: %s"
-
-#: template-parts/blog/blog-archive-header.php:37
-msgid "Y"
-msgstr "Y"
+msgid "%s年の記事"
+msgstr "Posts from %s"
 
 #: template-parts/blog/blog-archive-header.php:42
 #, php-format
-msgid "月: %s"
-msgstr "Month: %s"
-
-#: template-parts/blog/blog-archive-header.php:43
-msgid "F Y"
-msgstr "F Y"
-
-#: template-parts/blog/blog-archive-header.php:48
-#, php-format
-msgid "日: %s"
-msgstr "Day: %s"
+msgid "%s年%s月の記事"
+msgstr "Posts from %2$s %1$s"
 
 #: template-parts/blog/blog-archive-header.php:49
-msgid "F j, Y"
-msgstr "F j, Y"
-
-#: template-parts/blog/blog-archive-header.php:56
 #, php-format
-msgid "著者: %s"
-msgstr "Author: %s"
+msgid "%s年%s月%s日の記事"
+msgstr "Posts on %2$s %3$s, %1$s"
 
-#: template-parts/blog/blog-archive-header.php:63
-msgid "ブログ"
-msgstr "Blog"
+#: template-parts/blog/blog-archive-header.php:59
+#, php-format
+msgid "投稿者「%s」の記事"
+msgstr "Posts by %s"
 
 #: template-parts/blog/blog-archive-loop.php:25
 msgid "Posts navigation"
