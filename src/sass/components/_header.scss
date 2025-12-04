@@ -282,17 +282,16 @@
           position: absolute;
           top: calc(100% + 8px);
           left: 0;
+          padding: 0.75rem;
           min-width: 12rem;
           margin: 0;
-          display: none;
-          border: 1px solid $color-red;
-          border-radius: $radius-card;
-          background: linear-gradient(
-            180deg,
-            rgba($color-black, 0.96),
-            rgba($color-black, 0.76)
-          );
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(8px);
+          pointer-events: none;
+          transition: opacity $transition, transform $transition,
+            visibility $transition;
+          @include panel-surface-black($bg: $color-black);
         }
 
         li {
@@ -312,7 +311,14 @@
 
             @include mq(lg) {
               font-size: 1.1rem;
+              padding: 0;
             }
+          }
+        }
+
+        li + li {
+          @include mq(lg) {
+            margin-top: 0.5rem;
           }
         }
       }
@@ -325,7 +331,10 @@
 
         .header__submenu {
           @include mq(lg) {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
           }
         }
       }
