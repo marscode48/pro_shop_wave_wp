@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: proshopwave 1.0.0\n"
-"POT-Creation-Date: 2025-12-03 14:14+0900\n"
-"PO-Revision-Date: 2025-12-03 14:28+0900\n"
+"POT-Creation-Date: 2025-12-05 13:51+0900\n"
+"PO-Revision-Date: 2025-12-05 13:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: Masakazu Adachi <marscode48@gmail.com>\n"
 "Language: en_US\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: content-product.php:153 template-parts/section/section-apparel.php:16
-#: template-parts/section/section-custom-parts.php:15
+#: content-product.php:153 template-parts/section/section-apparel.php:17
+#: template-parts/section/section-custom-parts.php:16
 #: template-parts/section/section-new-arrivals.php:36
 msgid "More"
 msgstr "More"
@@ -113,11 +113,19 @@ msgstr "Part No.:"
 msgid "タグ:"
 msgstr "Tags:"
 
-#: functions.php:601
+#: functions.php:600
+msgid "HOME"
+msgstr "HOME"
+
+#: functions.php:604 template-parts/filterbar/filterbar-woocommerce.php:199
+msgid "ブランド"
+msgstr "Brand"
+
+#: functions.php:691
 msgid "Submit"
 msgstr "Submit"
 
-#: functions.php:846
+#: functions.php:936
 msgid "適合車種"
 msgstr "Compatible models"
 
@@ -141,7 +149,7 @@ msgstr "PRO SHOP WAVE logo"
 msgid "Parts"
 msgstr "Parts"
 
-#: header.php:104 template-parts/section/section-apparel.php:11
+#: header.php:104 template-parts/section/section-apparel.php:12
 msgid "Apparel"
 msgstr "Apparel"
 
@@ -274,7 +282,7 @@ msgid "お問い合わせ"
 msgstr "Contact"
 
 #: template-parts/blog/blog-archive-header.php:17
-#: template-parts/blog/blog-archive-header.php:67
+#: template-parts/blog/blog-archive-header.php:66
 msgid "blog"
 msgstr "blog"
 
@@ -284,26 +292,31 @@ msgid "「%s」カテゴリーの記事"
 msgstr "Posts in the \"%s\" category"
 
 #: template-parts/blog/blog-archive-header.php:24
+#: template-parts/breadcrumb/breadcrumb.php:85
 #, php-format
 msgid "「%s」タグの記事"
 msgstr "Posts tagged \"%s\""
 
 #: template-parts/blog/blog-archive-header.php:36
+#: template-parts/breadcrumb/breadcrumb.php:97
 #, php-format
 msgid "%s年の記事"
 msgstr "Posts from %s"
 
 #: template-parts/blog/blog-archive-header.php:42
+#: template-parts/breadcrumb/breadcrumb.php:103
 #, php-format
 msgid "%s年%s月の記事"
 msgstr "Posts from %2$s %1$s"
 
 #: template-parts/blog/blog-archive-header.php:49
+#: template-parts/breadcrumb/breadcrumb.php:110
 #, php-format
 msgid "%s年%s月%s日の記事"
 msgstr "Posts on %2$s %3$s, %1$s"
 
 #: template-parts/blog/blog-archive-header.php:59
+#: template-parts/breadcrumb/breadcrumb.php:120
 #, php-format
 msgid "投稿者「%s」の記事"
 msgstr "Posts by %s"
@@ -360,7 +373,7 @@ msgstr "Sidebar"
 
 #: template-parts/breadcrumb/breadcrumb.php:24
 msgid "ホーム"
-msgstr "Home"
+msgstr "HOME"
 
 #: template-parts/breadcrumb/breadcrumb.php:71
 msgid "検索結果:"
@@ -369,6 +382,10 @@ msgstr "Search results:"
 #: template-parts/breadcrumb/breadcrumb.php:74
 msgid "ページが見つかりません"
 msgstr "Page not found"
+
+#: template-parts/breadcrumb/breadcrumb.php:81
+msgid "BLOG"
+msgstr "BLOG"
 
 #: template-parts/card/card-blog.php:22
 msgid "Default Image"
@@ -400,10 +417,6 @@ msgstr "All"
 #: template-parts/single/single-footer-meta.php:44
 msgid "タグ"
 msgstr "Tags"
-
-#: template-parts/filterbar/filterbar-woocommerce.php:199
-msgid "ブランド"
-msgstr "Brand"
 
 #: template-parts/filterbar/filterbar-woocommerce.php:203
 msgid "絞り込み"
@@ -566,11 +579,11 @@ msgstr "Bringing authentic drift culture<br class=\"sp-only\">from Japan to the 
 msgid "更新"
 msgstr "Updated"
 
-#: template-parts/section/section-apparel.php:13
+#: template-parts/section/section-apparel.php:14
 msgid "90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレル。"
 msgstr "Wear 90’s street culture<br class=\"sp-only\">with our original JDM apparel."
 
-#: template-parts/section/section-apparel.php:22
+#: template-parts/section/section-apparel.php:23
 msgid "アパレルカテゴリ"
 msgstr "Apparel categories"
 
@@ -582,15 +595,15 @@ msgstr "Pick up the latest news<br class=\"sp-only\">on drift parts and apparel.
 msgid "View All"
 msgstr "View All"
 
-#: template-parts/section/section-custom-parts.php:12
+#: template-parts/section/section-custom-parts.php:13
 msgid "Custom Parts"
 msgstr "Custom Parts"
 
-#: template-parts/section/section-custom-parts.php:13
+#: template-parts/section/section-custom-parts.php:14
 msgid "90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニングパーツ。"
 msgstr "Tuning parts that revive the spirit<br class=\"sp-only\">of 90’s street style in the modern era."
 
-#: template-parts/section/section-custom-parts.php:21
+#: template-parts/section/section-custom-parts.php:22
 msgid "カスタムパーツカテゴリ"
 msgstr "Custom parts categories"
 

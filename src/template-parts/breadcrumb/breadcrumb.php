@@ -78,7 +78,7 @@ if (function_exists('is_woocommerce') && is_woocommerce()) {
 
         if (is_home() && ! is_front_page()) {
           // ブログインデックス（/blog 等）
-          $title = __('blog', 'proshopwave');
+          $title = __('BLOG', 'proshopwave');
         } elseif (is_tag()) {
           // タグアーカイブ
           $title = sprintf(

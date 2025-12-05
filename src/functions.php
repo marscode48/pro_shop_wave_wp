@@ -597,7 +597,7 @@ add_filter('woocommerce_get_breadcrumb', function ($crumbs, $breadcrumb) {
   }
 
   // 既存の「ホーム」パンくずだけ再利用（多言語環境を尊重）
-  $home_label = isset($crumbs[0][0]) ? $crumbs[0][0] : esc_html__('Home', 'woocommerce');
+  $home_label = isset($crumbs[0][0]) ? $crumbs[0][0] : esc_html__('HOME', 'woocommerce');
   $home_link  = isset($crumbs[0][1]) ? $crumbs[0][1] : home_url('/');
 
   // 「ブランド」ラベル（必要なら .po/.mo 側で翻訳）
