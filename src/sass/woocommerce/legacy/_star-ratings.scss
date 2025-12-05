@@ -18,7 +18,11 @@
 	 */
   .star-rating {
     float: none;
+    font-size: 1rem;
+    line-height: 1;
     color: $color-red;
+    text-shadow: 1px 1px 2px rgba($color-black, 0.6);
+    padding-top: 1.5rem; // text-shadow を広げるため
 
     &::before {
       color: $color-red;
@@ -27,6 +31,7 @@
 
     span {
       float: none;
+      padding-top: 2.5rem;
     }
   }
 
@@ -37,15 +42,25 @@
     @include reset-clearfix();
 
     .star-rating {
-      margin: 0 0.5em 0 0;
-      float: none;
+      margin: 0.5rem 0.5rem 0 0;
+      float: none !important;
+    }
+
+    .woocommerce-review-link {
+      transition: color $transition;
+
+      @include hover-active(
+        $hover: (
+          color: $color-red,
+        )
+      );
     }
   }
 
   #reviews > #comments {
     margin-bottom: 2rem;
   }
-  
+
   #review_form_wrapper {
     padding: 1.25rem;
     @include panel-surface-gray();

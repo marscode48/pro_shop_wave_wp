@@ -80,7 +80,7 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 0.75rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
 
   .product-card__brand {
@@ -103,6 +103,9 @@
   .product-card__category {
     font-size: 0.8rem;
     color: $color-gray;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     a {
       transition: color $transition;
@@ -121,7 +124,7 @@
   .woocommerce-loop-category__title {
     padding: 0;
     font-family: $font-heading;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
     line-height: 1.2;
     letter-spacing: 0.06em;
     font-size: 1.125rem;
@@ -139,7 +142,11 @@
   }
 
   .star-rating {
-    font-size: 0.75rem;
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    font-size: 0.875rem;
+    pointer-events: none;
   }
 
   // ---- 価格
@@ -160,7 +167,12 @@
   // ---- もっと見るリンク等
   .product-card__more {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+
+    @include mq(md) {
+      padding-top: 1.75rem;
+    }
 
     .product-card__more-link {
       @include more-link($color-red);
