@@ -553,6 +553,96 @@ function custom_woocommerce_breadcrumbs($defaults)
 add_filter('woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs');
 
 // -----------------------------
+// WooCommerce: クエリ型ブランド絞り込み時のパンくずを「ブランド > 階層 > 用途」に合わせる
+// 例: /shop/?product_brand=mow → ホーム > ブランド > MOW
+//     /shop/?product_brand=s14 → ホーム > ブランド > NISSAN > SILVIA > S14
+// -----------------------------
+// 補足:
+// product_brand は WooCommerce 標準の product_cat と異なり、
+// /shop/?product_brand=... のようなクエリだけでは「タクソノミーアーカイブ」と判定されません。
+// WooCommerce 側では通常のショップアーカイブ（/shop/）に対する絞り込みとみなされるため、
+// そのままだとパンくずが「ホーム > SHOP」のままになります。
+// ここではクエリからブランドタームを読み取り、実際のブランド階層
+// （例: NISSAN > SILVIA > S14）に合わせてパンくず配列を差し替えています。
+add_filter('woocommerce_get_breadcrumb', function ($crumbs, $breadcrumb) {
+  // WooCommerceが有効で、かつメインのショップページのときだけ処理
+  if (! function_exists('is_shop') || ! is_shop()) {
+    return $crumbs;
+  }
+
+  // 対応しているブランド用タクソノミーを判定（product_brand 優先）
+  $brand_tax = taxonomy_exists('product_brand')
+    ? 'product_brand'
+    : (taxonomy_exists('pa_brand') ? 'pa_brand' : '');
+
+  if (! $brand_tax) {
+    return $crumbs;
+  }
+
+  // クエリパラメータからブランドスラッグを取得
+  if (! function_exists('get_query_slug')) {
+    return $crumbs; // 念のため
+  }
+
+  $brand_slug = get_query_slug($brand_tax);
+  if ($brand_slug === '') {
+    // ?product_brand=（または対応タクソノミー）が付いていない通常の /shop/ はそのまま
+    return $crumbs;
+  }
+
+  // スラッグからブランドタームを取得
+  $term = get_term_by('slug', $brand_slug, $brand_tax);
+  if (! $term || is_wp_error($term)) {
+    return $crumbs;
+  }
+
+  // 既存の「ホーム」パンくずだけ再利用（多言語環境を尊重）
+  $home_label = isset($crumbs[0][0]) ? $crumbs[0][0] : esc_html__('Home', 'woocommerce');
+  $home_link  = isset($crumbs[0][1]) ? $crumbs[0][1] : home_url('/');
+
+  // 「ブランド」ラベル（必要なら .po/.mo 側で翻訳）
+  $brand_root_label = __('ブランド', 'proshopwave');
+  // ブランド一覧のリンクが無い場合は空文字のままでもOK
+  $brand_root_link  = ''; // 例: 専用のブランド一覧ページを作ったらそのURLに差し替え
+
+  // --- 親ブランド階層（NISSAN > SILVIA > S14 など）をたどる ---
+  $chain_terms = [];
+
+  // 先祖タームIDの配列（親 → 祖父…）
+  $ancestors = get_ancestors($term->term_id, $brand_tax, 'taxonomy');
+  if (! empty($ancestors)) {
+    // 上位階層から順に並べたいので、ID配列を逆順に
+    $ancestors = array_reverse($ancestors);
+    foreach ($ancestors as $ancestor_id) {
+      $ancestor_term = get_term($ancestor_id, $brand_tax);
+      if ($ancestor_term && ! is_wp_error($ancestor_term)) {
+        $chain_terms[] = $ancestor_term;
+      }
+    }
+  }
+
+  // 最後に現在のターム（例: S14）を追加
+  $chain_terms[] = $term;
+
+  // 「ホーム > ブランド > NISSAN > SILVIA > S14」という配列を組み立て直す
+  $new_crumbs = [
+    [$home_label, $home_link],
+    [$brand_root_label, $brand_root_link],
+  ];
+
+  foreach ($chain_terms as $t) {
+    $link = get_term_link($t);
+    if (is_wp_error($link)) {
+      $new_crumbs[] = [$t->name, ''];
+    } else {
+      $new_crumbs[] = [$t->name, $link];
+    }
+  }
+
+  return $new_crumbs;
+}, 10, 2);
+
+// -----------------------------
 // WooCommerce アーカイブ説明から不要な div と p タグを除去
 // -----------------------------
 remove_action('woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10);
