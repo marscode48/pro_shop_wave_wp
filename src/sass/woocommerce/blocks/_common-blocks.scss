@@ -294,13 +294,13 @@
     // カートに追加ボタン
     .wc-block-components-product-button,
     .wc-block-grid__product-add-to-cart {
-      margin-top: 0.625rem !important;
-      margin-bottom: 0.625rem !important;
-      width: 100%;
+      margin-top: 1.25rem !important;
+      margin-bottom: 1.25rem !important;
+      width: 90%;
 
       .wc-block-components-product-button__button,
       .wp-block-button__link {
-        width: 100%;
+        width: 90%;
         font-size: 0.75rem !important;
         line-height: 1.2;
         background: $color-bright-red-gradient;
