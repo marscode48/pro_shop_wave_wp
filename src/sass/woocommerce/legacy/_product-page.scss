@@ -43,11 +43,11 @@
       // PC表示時は画像エリア55% / summary 45%の比率
       @include mq(lg) {
         .woocommerce-product-gallery {
-          flex: 0 0 55%;
+          flex: 0 1 55%;
         }
 
         .summary {
-          flex: 0 0 45%;
+          flex: 0 1 45%;
         }
       }
     }
