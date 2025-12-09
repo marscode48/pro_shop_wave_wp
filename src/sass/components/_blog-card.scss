@@ -91,7 +91,7 @@
     width: 100%;
     aspect-ratio: 3 / 2;
     margin-bottom: 1rem;
-    border-radius: 0.5rem;
+    border-radius: $radius-image;
   }
 
   &__image {
