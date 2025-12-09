@@ -39,12 +39,23 @@
       .summary {
         flex: 1;
       }
+
+      // PC表示時は画像エリア55% / summary 45%の比率
+      @include mq(lg) {
+        .woocommerce-product-gallery {
+          flex: 0 0 55%;
+        }
+
+        .summary {
+          flex: 0 0 45%;
+        }
+      }
     }
 
     .product_title {
       @include section-title(
-        $sp-margin-bottom: 1rem,
-        $md-margin-bottom: 1rem,
+        $sp-margin-bottom: 0.5rem,
+        $md-margin-bottom: 0.5rem,
         $text-align: left,
         $text-transform: none
       );
@@ -54,13 +65,13 @@
     p.price {
       font-size: 1.5rem;
       color: $color-white;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       font-weight: bold;
       @include wc-price-sale();
     }
 
     .woocommerce-product-details__short-description {
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       line-height: 1.8;
 
       @include mq(lg) {
@@ -70,7 +81,7 @@
 
     .product-sku {
       font-size: 0.875rem;
-      margin: 0 0 1rem;
+      margin: 0 0 0.75rem;
       color: rgba($color-white, 0.85);
 
       .product-sku__label {
@@ -125,7 +136,7 @@
     }
 
     .product-fitment {
-      margin: 0 0 1rem;
+      margin: 0 0 0.75rem;
       padding: 0.75rem 1rem;
       @include panel-surface-black($border-color: $fb-border-color);
       backdrop-filter: blur(0.5px);
@@ -162,32 +173,63 @@
 
     p.stock,
     p.out-of-stock {
+      margin-top: 1rem;
       font-size: 0.875rem;
-      margin-bottom: 1rem;
     }
 
     p.stock {
       color: $color-white;
+      font-size: 0.875rem;
     }
 
     p.out-of-stock {
       color: $color-red;
+      font-size: 1.125rem;
     }
 
     .woocommerce-product-rating {
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     div.images {
       margin-bottom: 0;
 
-      img {
-        object-fit: cover;
-        aspect-ratio: 3 / 2;
-      }
-
       &.woocommerce-product-gallery {
         position: relative;
+      }
+
+      .woocommerce-product-gallery__image {
+        border-radius: $radius-image;
+        // 画像をscale(1.05)で拡大しても、枠外にはみ出さないように隠す
+        overflow: hidden;
+
+        a {
+          display: block;
+          height: 100%;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          object-fit: cover;
+          aspect-ratio: 3 / 2;
+          transition: transform $transition, filter $transition;
+
+          // ホバー時に画像を少し拡大＋フラッシュアニメーション
+          @include hover-active(
+            $hover: (
+              transform: scale(1.02),
+              animation: bright-flash 0.2s linear forwards,
+            )
+          );
+        }
+      }
+
+      .flex-viewport {
+        .woocommerce-product-gallery__image {
+          // .flex-viewport 内のメイン画像だけ、角丸を上書き（上辺のみ丸める）
+          border-radius: $radius-image $radius-image 0 0;
+        }
       }
 
       .woocommerce-product-gallery__wrapper {
@@ -199,36 +241,67 @@
       }
 
       // 商品画像下サムネイル
-      // ここをflexスタイルに変更する
       .flex-control-thumbs {
-        // overflow: hidden;
-        // zoom: 1;
-        // margin: 0;
-        // padding: 0;
+        position: relative;
+        overflow: hidden;
+        zoom: 1;
 
+        // サムネイルエリア下部だけ角丸を付与し、メイン画像（上部）との一体感を保つ
+        border-radius: 0 0 $radius-image $radius-image;
+
+        // --------
+        // floatレイアウト → flexレイアウトに移行
+        // --------
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        // SP：3列固定（33.33%）
         li {
-          // width: 25%;
-          // float: left;
-          // margin: 0;
-          // list-style: none;
+          width: auto;
+          float: none;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          flex: 0 0 calc(100% / 3);
+          // サムネイル画像をscale(1.05)で拡大しても、枠外にはみ出さないように隠す
+          overflow: hidden;
 
           img {
-            // cursor: pointer;
-            // opacity: 0.5;
-            // margin: 0;
-
-            transition: transform $transition, filter $transition;
+            width: 100%;
+            display: block;
+            opacity: 0.6;
+            transition: transform $transition, opacity $transition;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
 
             &.flex-active {
-              // opacity: 1;
               transform: scale(1.05);
+              opacity: 1;
             }
 
             @include hover-active(
               $hover: (
                 transform: scale(1.05),
+                opacity: 1,
               )
             );
+          }
+        }
+
+        // タブレット：4列固定（25%）
+        @include mq(md) {
+          li {
+            flex: 0 0 calc(100% / 4);
+          }
+        }
+
+        // PC：5列固定（20%）
+        @include mq(lg) {
+          li {
+            flex: 0 0 calc(100% / 5);
           }
         }
       }
@@ -256,7 +329,9 @@
     .woocommerce-product-gallery::before {
       content: "";
       position: absolute;
+      z-index: -1;
       inset: 0;
+      border-radius: $radius-image;
       box-shadow: $box-shadow-red-default;
       transition: box-shadow $transition;
       pointer-events: none;
@@ -386,9 +461,6 @@
     }
 
     form.cart {
-      display: flex;
-      flex-direction: column;
-      row-gap: 1rem;
       margin-bottom: 0;
 
       @include reset-clearfix();
@@ -398,6 +470,7 @@
         align-items: center;
         column-gap: 0.5em;
         font-size: 1rem;
+        margin-top: 1rem;
 
         &__label {
           font-size: 0.875rem;
@@ -407,7 +480,7 @@
         &__controls {
           display: flex;
           align-items: center;
-          border: 1px solid rgba($color-white, 0.18);
+          border: $border-dark-gray;
         }
 
         &__button {
@@ -465,11 +538,19 @@
 
       .variations {
         margin-bottom: 0;
+        // フォーム全体の横幅を適度に制限して、UIが横に伸びすぎないようにする
+        width: 100%;
+        max-width: 22rem; // 約352px。必要に応じて調整可。
 
         tr {
           display: flex;
           align-items: center;
           column-gap: 0.5em;
+          row-gap: 0.75rem;
+        }
+
+        tr + tr {
+          margin-top: 0.75rem;
         }
 
         td,
@@ -484,24 +565,46 @@
           column-gap: 0.5em;
         }
 
+        // ラベル列を常に一定幅に揃える
+        th.label {
+          flex: 0 0 5rem;
+          text-align: left;
+        }
+
+        // 値側は残り幅をすべて使う
+        td.value {
+          flex: 1 1 auto;
+        }
+
         label {
           font-weight: normal;
           font-size: 0.875rem;
         }
 
         select {
+          font-size: 0.875rem;
+          font-weight: normal;
+          letter-spacing: 0.02em;
           margin-right: 0;
           width: auto;
           height: 2.5em;
           padding-left: 0.5em;
           color: $color-white;
           border: $border-dark-gray;
-          // WooCommerceデフォルトの矢印アイコンを白に変更
+          border-radius: 4px;
+          cursor: pointer;
+          // グラデーション背景 + 白矢印アイコン（複数背景レイヤー）
           background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jaGV2cm9uLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ii8+PC9zdmc+")
-            no-repeat;
-          background-color: $color-dark-gray;
-          background-size: 16px;
-          background-position: calc(100% - 12px) 50%;
+              no-repeat calc(100% - 12px) 50% / 16px,
+            $color-dark-gray-gradient;
+          transition: filter $transition;
+          will-change: filter;
+
+          @include hover-active(
+            $hover: (
+              filter: brightness(2),
+            )
+          );
         }
 
         td.label {
@@ -509,22 +612,23 @@
         }
       }
 
-      .woocommerce-variation-description p {
-        margin-bottom: 1em;
+      .single_variation {
+        margin-top: 1rem;
       }
 
       .reset_variations {
         font-size: 0.85rem;
+        transition: color $transition;
+
+        @include hover-active(
+          $hover: (
+            color: $color-red,
+          )
+        );
       }
 
       .wc-no-matching-variations {
         display: none;
-      }
-
-      .woocommerce-variation-add-to-cart {
-        display: flex;
-        flex-direction: column;
-        row-gap: 1rem;
       }
 
       .button {
@@ -534,8 +638,13 @@
 
       .single_add_to_cart_button.button.alt {
         @include button-cta($width-lg: 280px);
+
+        & {
+          margin-top: 2rem;
+        }
+
         @include mq(lg) {
-          margin: 0;
+          margin: 2rem auto 0 0;
         }
       }
 
@@ -576,12 +685,16 @@
 
           p.stock,
           p.out-of-stock {
-            margin-bottom: 0;
+            margin-top: 0.2rem;
+          }
+
+          .product-quantity {
+            margin-top: 0;
           }
         }
 
         td:first-child {
-          width: 4em;
+          width: auto;
           text-align: center;
         }
       }
