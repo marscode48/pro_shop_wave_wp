@@ -53,6 +53,7 @@
   .product-card__image-link {
     display: block;
     overflow: hidden;
+    border-radius: $radius-image;
 
     @include hover-active($hover: (), $active: ()) {
       img {
@@ -69,7 +70,6 @@
       box-shadow: none;
       object-fit: cover;
       aspect-ratio: 3 / 2;
-      border-radius: $radius-image;
       transition: transform $transition, filter $transition;
     }
   }
