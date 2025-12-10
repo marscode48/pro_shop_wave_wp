@@ -200,7 +200,7 @@
 
       .woocommerce-product-gallery__image {
         border-radius: $radius-image;
-        // 画像をscale(1.05)で拡大しても、枠外にはみ出さないように隠す
+        // 画像をscale(1.02)で拡大しても、枠外にはみ出さないように隠す
         overflow: hidden;
 
         a {
@@ -263,28 +263,27 @@
           padding: 0;
           list-style: none;
           flex: 0 0 calc(100% / 3);
-          // サムネイル画像をscale(1.05)で拡大しても、枠外にはみ出さないように隠す
+          // サムネイル画像をscale(1.02)で拡大しても、枠外にはみ出さないように隠す
           overflow: hidden;
 
           img {
             width: 100%;
             display: block;
             opacity: 0.6;
-            transition: transform $transition, opacity $transition;
+            transition: transform $transition, filter $transition,
+              opacity $transition;
             aspect-ratio: 1 / 1;
             object-fit: cover;
 
             &.flex-active {
-              transform: scale(1.05);
+              @include flash-scale();
               opacity: 1;
             }
 
-            @include hover-active(
-              $hover: (
-                transform: scale(1.05),
-                opacity: 1,
-              )
-            );
+            @include hover-active {
+              @include flash-scale();
+              opacity: 1;
+            }
           }
         }
 

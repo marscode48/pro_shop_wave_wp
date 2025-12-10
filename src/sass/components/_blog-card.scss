@@ -78,8 +78,7 @@
 
     @include hover-active() {
       .card-blog__image {
-        transform: scale(1.05);
-        filter: brightness(1.2);
+        @include flash-scale($scale: 1.01); // ブログだけ弱め
       }
     }
   }
