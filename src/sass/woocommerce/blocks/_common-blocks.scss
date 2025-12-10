@@ -215,7 +215,7 @@
       overflow: hidden;
       border-radius: $radius-image;
 
-      @include hover-active() {
+      @include hover-active {
         img {
           @include flash-scale();
         }

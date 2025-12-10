@@ -256,7 +256,7 @@
           transition: transform $transition, border-color $transition;
         }
 
-        @include hover-active() {
+        @include hover-active {
           .header__nav-toggle-icon {
             border-color: $color-red;
           }
