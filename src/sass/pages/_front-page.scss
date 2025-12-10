@@ -1,5 +1,5 @@
-@use '../globals/index' as *;
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "sass:color";
 
 // ========================
 // HERO セクション
@@ -24,7 +24,7 @@ $marker-anim-duration: var(--marker-animation-duration);
         transition-property: opacity, transform !important;
         pointer-events: none;
 
-        &.swiper-slide[class*=-active] {
+        &.swiper-slide[class*="-active"] {
           pointer-events: auto;
         }
       }
@@ -34,7 +34,7 @@ $marker-anim-duration: var(--marker-animation-duration);
     .slide-media img {
       transition: 7s 1s ease-out;
     }
-    .swiper-slide[class*=-active] .slide-media img {
+    .swiper-slide[class*="-active"] .slide-media img {
       transition-delay: 0s;
       transform: scale(1.2);
     }
@@ -200,7 +200,8 @@ $marker-anim-duration: var(--marker-animation-duration);
 // キーフレーム定義
 // ========================
 @keyframes hero__text-marker-anim {
-  60%, 100% {
+  60%,
+  100% {
     clip-path: inset(0);
   }
 }
@@ -244,7 +245,6 @@ $marker-anim-duration: var(--marker-animation-duration);
 // New Parts セクション
 // ========================
 .section--new {
-
   .new-arrivals-swiper {
     position: relative;
 
@@ -332,27 +332,27 @@ $marker-anim-duration: var(--marker-animation-duration);
         box-shadow: $box-shadow-red-hover,
       )
     );
-  
+
     &__image {
       width: 100%;
       object-fit: cover;
       aspect-ratio: 3 / 2;
       border-radius: $radius-image;
     }
-  
+
     &__content {
       display: flex;
       flex-direction: column;
       padding: 1rem;
       flex: 1;
     }
-  
+
     &__date {
       font-size: 0.8rem;
       color: $color-gray;
       margin-bottom: 0.4rem;
     }
-  
+
     &__title {
       font-family: $font-heading;
       margin-bottom: 0.6rem;
@@ -363,7 +363,7 @@ $marker-anim-duration: var(--marker-animation-duration);
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-  
+
     &__subtitle {
       font-family: $font-body;
       font-size: 0.85rem;
@@ -377,7 +377,7 @@ $marker-anim-duration: var(--marker-animation-duration);
         font-size: 1rem;
       }
     }
-  
+
     &__more {
       margin-top: 1rem;
 
@@ -392,7 +392,6 @@ $marker-anim-duration: var(--marker-animation-duration);
 // Blog セクション
 // ========================
 .section--blog {
-
   .section__title {
     text-transform: uppercase;
   }
@@ -406,13 +405,13 @@ $marker-anim-duration: var(--marker-animation-duration);
 // SNS セクション
 // ========================
 .section--sns {
-  background-image: url('./images/bg_sns_section_sp.webp');
+  background-image: url("./images/bg_sns_section_sp.webp");
   background-size: cover;
   background-position: center;
   position: relative;
 
   @include mq(lg) {
-    background-image: url('./images/bg_sns_section_pc.webp');
+    background-image: url("./images/bg_sns_section_pc.webp");
   }
 
   &::before {
@@ -437,7 +436,6 @@ $marker-anim-duration: var(--marker-animation-duration);
   overflow: hidden;
 
   .section-bg {
-
     &__picture {
       position: absolute;
       top: 0;
@@ -460,14 +458,5 @@ $marker-anim-duration: var(--marker-animation-duration);
     position: relative;
     z-index: 1;
     background: transparent;
-  }
-}
-
-@keyframes bright-flash {
-  0% {
-    filter: brightness(2.5);
-  }
-  100% {
-    filter: brightness(1.25);
   }
 }

@@ -81,7 +81,7 @@
       box-shadow: $box-shadow-red-hover,
     )
   ) {
-    animation: bright-flash 0.2s linear forwards;
+    @include flash-bright();
   }
 
   // 内側テキスト要素の反スキュー（親が複合セレクタでも安全な指定）

@@ -216,12 +216,9 @@
           transition: transform $transition, filter $transition;
 
           // ホバー時に画像を少し拡大＋フラッシュアニメーション
-          @include hover-active(
-            $hover: (
-              transform: scale(1.02),
-              animation: bright-flash 0.2s linear forwards,
-            )
-          );
+          @include hover-active() {
+            @include flash-scale();
+          }
         }
       }
 
