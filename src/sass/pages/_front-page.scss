@@ -460,12 +460,3 @@ $marker-anim-duration: var(--marker-animation-duration);
     background: transparent;
   }
 }
-
-@keyframes bright-flash {
-  0% {
-    filter: brightness(2.5);
-  }
-  100% {
-    filter: brightness(1.25);
-  }
-}

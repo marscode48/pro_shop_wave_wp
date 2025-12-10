@@ -52,8 +52,7 @@
       }
 
       .section__image {
-        transform: scale(1.02);
-        animation: bright-flash 0.2s linear forwards;
+        @include flash-scale();
       }
     }
   }

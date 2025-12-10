@@ -2,6 +2,9 @@
   Effects mixins extracted from _mixin.scss
 
   Includes:
+    - bright-flash(keyframes)
+    - flash-scale
+    - flash-bright
     - animation
     - link-hovers
     - hover-active
@@ -15,6 +18,44 @@
 @use "../variables" as *;
 @use "../mq" as *;
 @use "sass:list";
+
+// ========================
+// Keyframes（共通エフェクト用）
+// スパーク感のある明るさフラッシュ
+// ========================
+@keyframes bright-flash {
+  0% {
+    filter: brightness(1) contrast(1);
+  }
+  25% {
+    /* 一気に光るピーク */
+    filter: brightness(2.6) contrast(1.15) saturate(1.1);
+  }
+  55% {
+    /* 少し落ち着くけどまだ強めの光 */
+    filter: brightness(1.6) contrast(1.08);
+  }
+  100% {
+    /* ほんのりだけ明るさを残す */
+    filter: brightness(1.15) contrast(1.02);
+  }
+}
+
+// ========================
+// 画像ホバー用エフェクト（拡大＋bright-flash）
+// ========================
+@mixin flash-scale($scale: 1.02, $duration: 0.22s) {
+  transform: scale($scale);
+  animation: bright-flash $duration linear forwards;
+}
+
+// ========================
+// 汎用: 明るさフラッシュのみ適用するエフェクト
+// ボタンなど transform を既に使っている要素向け
+// ========================
+@mixin flash-bright($duration: 0.22s) {
+  animation: bright-flash $duration linear forwards;
+}
 
 // ========================
 // アニメーション
