@@ -46,7 +46,7 @@
       flex: 0 1 45vw;
     }
 
-    @include hover-active() {
+    @include hover-active {
       .section__picture {
         box-shadow: $box-shadow-red-hover;
       }
