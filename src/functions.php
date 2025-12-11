@@ -342,7 +342,7 @@ function proshopwave_add_woocommerce_support()
   // WooCommerce の基本機能（商品ページ、カートなど）をテーマに対応させる
   add_theme_support('woocommerce');
   // 商品画像ギャラリー：ズーム機能を有効化
-  add_theme_support('wc-product-gallery-zoom');
+  // add_theme_support('wc-product-gallery-zoom');
   // 商品画像ギャラリー：ライトボックス（拡大表示）を有効化
   add_theme_support('wc-product-gallery-lightbox');
   // 商品画像ギャラリー：スライダー機能を有効化
