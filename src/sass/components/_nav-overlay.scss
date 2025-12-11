@@ -9,7 +9,7 @@
   left: 0;
   width: 100vw;
   height: 100svh;
-  background-color: rgba(0, 0, 0, 0.5); // 半透明黒
+  background-color: rgba($color-black, 0.5); // 半透明黒
   backdrop-filter: blur(4px);          // 背景をぼかす
   z-index: 98;
   opacity: 0;
