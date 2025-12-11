@@ -89,6 +89,6 @@ $fb-card: linear-gradient(
   rgba($color-black, 0.86)
 );
 $fb-radius: 12px;
-$fb-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+$fb-shadow: 0 10px 30px rgba($color-black, 0.75);
 $fb-selected-bg: rgba($color-red, 0.24);
 $fb-selected-shadow: 0 0 0 0.12rem rgba($color-red, 0.28);
