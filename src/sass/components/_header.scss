@@ -11,8 +11,8 @@
   height: $header-height;
   padding: 0 $space-inline-header;
   background-color: $color-black;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // オプションで影
-  transition: border-color $transition, background $transition;
+  box-shadow: 0 4px 12px rgba($color-black, 0.25);
+  transition: border-color $transition, background-color $transition;
 
   // ========================
   // WordPress 管理バー対策
