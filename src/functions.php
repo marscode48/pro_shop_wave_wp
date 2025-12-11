@@ -419,21 +419,23 @@ add_action('init', 'proshopwave_register_product_categories');
 
 
 // -----------------------------
-// WooCommerce 商品登録時にSKUを自動生成（登録日（yymmdd形式）＋投稿ID）
+// WooCommerce 商品登録時にSKUを自動生成（WAVE-000123形式 / 投稿IDベース）
 // -----------------------------
 function proshopwave_generate_auto_sku($post_id)
 {
+  // 対象: 商品投稿タイプのみ
   if (get_post_type($post_id) !== 'product') {
     return;
   }
 
+  // すでにSKUが手動入力されている場合は上書きしない
   $sku = get_post_meta($post_id, '_sku', true);
   if (! empty($sku)) {
     return;
   }
 
-  $date = date('ymd'); // 例：240701（2024年7月1日）
-  $sku  = $date . '-' . $post_id;
+  // 投稿IDを6桁ゼロ埋めして「WAVE-000123」のような形式でSKUを自動生成
+  $sku = sprintf('WAVE-%06d', (int) $post_id);
 
   update_post_meta($post_id, '_sku', $sku);
 }
