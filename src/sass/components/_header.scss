@@ -107,10 +107,12 @@
     justify-content: center;
     height: 100%;
     width: 180px;
+    min-width: 120px;
 
     @include mq(lg) {
       width: 220px;
       justify-content: flex-start;
+      flex: 0 1 auto;
     }
 
     a {
@@ -163,6 +165,7 @@
       visibility: visible;
       pointer-events: auto;
       background: none;
+      flex: 0 0 auto;
     }
 
     &-list {
@@ -394,11 +397,16 @@
     button {
       color: $color-white;
       font-size: 1.2rem;
+
+      @include mq(lg) {
+        font-size: 1.4rem;
+      }
     }
 
     @include mq(lg) {
       flex-direction: row;
       gap: 1.75rem;
+      flex: 0 0 auto;
     }
 
     @include mq(xxl) {
@@ -421,15 +429,16 @@
         )
       );
 
-      @include mq(lg) {
-        display: none; // PCでは非表示
+      @include mq(xl) {
+        display: none; // PC(1280px以上)では非表示
       }
     }
 
     &-form {
       display: none;
 
-      @include mq(lg) {
+      // PC(1280px以上)のみ表示
+      @include mq(xl) {
         display: flex;
         align-items: center;
 
@@ -462,7 +471,7 @@
             height: 20px;
           }
 
-          @include mq(lg) {
+          @include mq(xl) {
             @include hover-active(
               $hover: (
                 filter: brightness(1.5),
