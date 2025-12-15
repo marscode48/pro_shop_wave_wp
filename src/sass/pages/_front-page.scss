@@ -409,6 +409,7 @@ $marker-anim-duration: var(--marker-animation-duration);
   background-size: cover;
   background-position: center;
   position: relative;
+  contain: layout paint; // iframeの影響範囲を閉じ込めてチラツキを防止
 
   @include mq(lg) {
     background-image: url("./images/bg_sns_section_pc.webp");
@@ -438,11 +439,10 @@ $marker-anim-duration: var(--marker-animation-duration);
   .section-bg {
     &__picture {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
+      z-index: -1;
       width: 100%;
       height: 100%;
-      z-index: -1;
       pointer-events: none;
     }
 
@@ -450,7 +450,9 @@ $marker-anim-duration: var(--marker-animation-duration);
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.8) blur(2px);
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      object-position: 58% 50%;
     }
   }
 
