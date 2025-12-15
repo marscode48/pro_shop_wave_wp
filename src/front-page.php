@@ -13,7 +13,7 @@ get_header();
 
   <div class="section-group">
     <div class="section-bg">
-      <picture class="section-bg__picture parallax" data-speed="35">
+      <picture class="section-bg__picture parallax" data-speed="14">
         <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/bg_newparts_blog_parallax_pc.webp'); ?>" type="image/webp">
         <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/bg_newparts_blog_parallax_pc.jpg'); ?>" type="image/jpeg">
         <source srcset="<?php echo get_theme_file_uri('images/bg_newparts_blog_parallax_sp.webp'); ?>" type="image/webp">

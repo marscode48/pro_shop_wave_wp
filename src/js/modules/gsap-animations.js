@@ -135,9 +135,9 @@ export class GsapAnimations {
 
       gsap.fromTo(
         img,
-        { y: `-${speed}%` },
+        { yPercent: -speed },
         {
-          y: `${speed}%`,
+          yPercent: speed,
           ease: "none",
           overwrite: "auto", // transform競合を防止
           scrollTrigger: {
