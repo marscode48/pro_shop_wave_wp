@@ -293,8 +293,7 @@
     // カートに追加ボタン
     .wc-block-components-product-button,
     .wc-block-grid__product-add-to-cart {
-      margin-top: 1.25rem !important;
-      margin-bottom: 1.25rem !important;
+      margin: 1.25rem auto !important;
       width: 90%;
 
       .wc-block-components-product-button__button,
