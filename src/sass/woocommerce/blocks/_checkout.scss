@@ -400,6 +400,10 @@
 
           .wc-block-components-checkout-place-order-button {
             padding: 0.8em 1.2em;
+
+            @container (max-width: 399px) {
+              width: 100%;
+            }
           }
         }
 
