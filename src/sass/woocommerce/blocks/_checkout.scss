@@ -391,7 +391,6 @@
         // 購入アクション（戻る / 注文確定）
         // -------------------------------
         .wp-block-woocommerce-checkout-actions-block {
-          text-align: center;
 
           .wc-block-components-checkout-return-to-cart-button {
             color: $color-white;
@@ -401,6 +400,10 @@
 
           .wc-block-components-checkout-place-order-button {
             padding: 0.8em 1.2em;
+
+            @container (max-width: 399px) {
+              width: 100%;
+            }
           }
         }
 

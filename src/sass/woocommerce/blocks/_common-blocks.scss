@@ -90,7 +90,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    white-space: nowrap;
+    white-space: wrap;
     letter-spacing: 0.05em;
     padding: 0.25em 0.75em;
     border: 1px solid $color-red;
@@ -293,8 +293,7 @@
     // カートに追加ボタン
     .wc-block-components-product-button,
     .wc-block-grid__product-add-to-cart {
-      margin-top: 1.25rem !important;
-      margin-bottom: 1.25rem !important;
+      margin: 1.25rem auto !important;
       width: 90%;
 
       .wc-block-components-product-button__button,

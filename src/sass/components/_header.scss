@@ -106,8 +106,8 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 180px;
-    min-width: 120px;
+    width: 70%;
+    max-width: 180px;
 
     @include mq(lg) {
       width: 220px;
