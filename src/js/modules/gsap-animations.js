@@ -19,6 +19,11 @@ export class GsapAnimations {
     this.animateFade();
     this.animateResponsive();
     this.animateParallax();
+
+    // ページ内の画像読み込み完了後に ScrollTrigger を再計算
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
   }
 
   // 統合版フェードアニメーション
