@@ -1,12 +1,12 @@
-@use '../globals/index' as *;
-@use 'sass:color';
+@use "../globals/index" as *;
+@use "sass:color";
 
 // ========================
 // FOOTER 共通
 // ========================
 .footer {
   position: relative;
-  background-image: url('./images/bg_footer_sp.webp');
+  background-image: url("./images/bg-footer-sp.webp");
   background-size: cover;
   background-position: center;
   color: $color-white;
@@ -14,14 +14,17 @@
   font-size: 0.8rem;
 
   @include mq(lg) {
-    background-image: url('./images/bg_footer_pc.webp');
+    background-image: url("./images/bg-footer-pc.webp");
   }
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(rgba($color-red, 0.3) 0%, rgba($color-black, 0.6) 20%);
+    background: linear-gradient(
+      rgba($color-red, 0.3) 0%,
+      rgba($color-black, 0.6) 20%
+    );
     z-index: 0;
   }
 
@@ -64,7 +67,6 @@
   }
 
   &__nav {
-
     &-list {
       display: flex;
       gap: 1.2rem;
@@ -72,7 +74,7 @@
       justify-content: center;
       flex-direction: column;
       align-items: center;
-  
+
       @include mq(lg) {
         justify-content: flex-start;
         flex-direction: row;
@@ -109,11 +111,10 @@
   }
 
   &__contact {
-    
     address {
       font-style: normal;
       line-height: 1.6;
-  
+
       p {
         margin: 0.2rem 0;
         letter-spacing: 0.04em;
@@ -123,7 +124,7 @@
           font-family: $font-heading;
         }
       }
-  
+
       a {
         text-decoration: none;
         word-break: break-word;
@@ -136,13 +137,13 @@
     display: flex;
     gap: 1.2rem;
     justify-content: center;
-  
+
     a {
       @include circle-icon-button();
     }
   }
 
-  &__support, 
+  &__support,
   &__legal {
     display: flex;
     flex-direction: column;
@@ -160,7 +161,6 @@
       @include link-underline-animate();
     }
   }
-
 
   &__copy {
     margin-top: 1.5rem;

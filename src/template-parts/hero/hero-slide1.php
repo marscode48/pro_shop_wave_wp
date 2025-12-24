@@ -13,29 +13,29 @@
       <source
         media="(min-width: 960px)"
         srcset="
-          <?php echo get_theme_file_uri('images/hero_slide_01_pc.webp'); ?> 1x,
-          <?php echo get_theme_file_uri('images/hero_slide_01_pc@2x.webp'); ?> 2x
+          <?php echo get_theme_file_uri('images/hero-slide-01-pc.webp'); ?> 1x,
+          <?php echo get_theme_file_uri('images/hero-slide-01-pc@2x.webp'); ?> 2x
         "
         type="image/webp">
       <source
         media="(min-width: 960px)"
         srcset="
-          <?php echo get_theme_file_uri('images/hero_slide_01_pc.jpg'); ?> 1x,
-          <?php echo get_theme_file_uri('images/hero_slide_01_pc@2x.jpg'); ?> 2x
+          <?php echo get_theme_file_uri('images/hero-slide-01-pc.jpg'); ?> 1x,
+          <?php echo get_theme_file_uri('images/hero-slide-01-pc@2x.jpg'); ?> 2x
         ">
       <!-- SP用画像（WebP & JPG） -->
       <source
         srcset="
-          <?php echo get_theme_file_uri('images/hero_slide_01_sp.webp'); ?> 1x,
-          <?php echo get_theme_file_uri('images/hero_slide_01_sp@2x.webp'); ?> 2x
+          <?php echo get_theme_file_uri('images/hero-slide-01-sp.webp'); ?> 1x,
+          <?php echo get_theme_file_uri('images/hero-slide-01-sp@2x.webp'); ?> 2x
         "
         type="image/webp">
       <source
         srcset="
-          <?php echo get_theme_file_uri('images/hero_slide_01_sp.jpg'); ?> 1x,
-          <?php echo get_theme_file_uri('images/hero_slide_01_sp@2x.jpg'); ?> 2x
+          <?php echo get_theme_file_uri('images/hero-slide-01-sp.jpg'); ?> 1x,
+          <?php echo get_theme_file_uri('images/hero-slide-01-sp@2x.jpg'); ?> 2x
         ">
-      <img src="<?php echo get_theme_file_uri('images/hero_slide_01_sp.jpg'); ?>" alt="<?php echo esc_attr__('Hero Image 1', 'proshopwave'); ?>" class="hero__image" />
+      <img src="<?php echo get_theme_file_uri('images/hero-slide-01-sp.jpg'); ?>" alt="<?php echo esc_attr__('Hero Image 1', 'proshopwave'); ?>" class="hero__image" />
     </picture>
     <div class="hero__content">
       <h2 class="hero__heading">

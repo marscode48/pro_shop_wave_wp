@@ -405,14 +405,14 @@ $marker-anim-duration: var(--marker-animation-duration);
 // SNS セクション
 // ========================
 .section--sns {
-  background-image: url("./images/bg_sns_section_sp.webp");
+  background-image: url("./images/bg-sns-section-sp.webp");
   background-size: cover;
   background-position: center;
   position: relative;
   contain: layout paint; // iframeの影響範囲を閉じ込めてチラツキを防止
 
   @include mq(lg) {
-    background-image: url("./images/bg_sns_section_pc.webp");
+    background-image: url("./images/bg-sns-section-pc.webp");
   }
 
   &::before {

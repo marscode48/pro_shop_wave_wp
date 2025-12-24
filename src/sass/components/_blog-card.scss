@@ -59,7 +59,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("./images/bg_blog_card_sp.webp");
+    background-image: url("./images/bg-blog-card-sp.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -67,7 +67,7 @@
     z-index: -1;
 
     @include mq(lg) {
-      background-image: url("./images/bg_blog_card_pc.webp");
+      background-image: url("./images/bg-blog-card-pc.webp");
     }
   }
 

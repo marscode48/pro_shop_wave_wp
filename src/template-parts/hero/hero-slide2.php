@@ -9,11 +9,11 @@
 <div class="swiper-slide">
   <div class="hero-slide">
     <picture class="slide-media">
-      <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/hero_slide_02_pc.webp'); ?> 1x, <?php echo get_theme_file_uri('images/hero_slide_02_pc@2x.webp'); ?> 2x" type="image/webp">
-      <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/hero_slide_02_pc.jpg'); ?> 1x, <?php echo get_theme_file_uri('images/hero_slide_02_pc@2x.jpg'); ?> 2x">
-      <source srcset="<?php echo get_theme_file_uri('images/hero_slide_02_sp.webp'); ?> 1x, <?php echo get_theme_file_uri('images/hero_slide_02_sp@2x.webp'); ?> 2x" type="image/webp">
-      <source srcset="<?php echo get_theme_file_uri('images/hero_slide_02_sp.jpg'); ?> 1x, <?php echo get_theme_file_uri('images/hero_slide_02_sp@2x.jpg'); ?> 2x">
-      <img src="<?php echo get_theme_file_uri('images/hero_slide_02_sp.jpg'); ?>" alt="<?php echo esc_attr__('Hero image 2', 'proshopwave'); ?>" class="hero__image" />
+      <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/hero-slide-02-pc.webp'); ?> 1x, <?php echo get_theme_file_uri('images/hero-slide-02-pc@2x.webp'); ?> 2x" type="image/webp">
+      <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/hero-slide-02-pc.jpg'); ?> 1x, <?php echo get_theme_file_uri('images/hero-slide-02-pc@2x.jpg'); ?> 2x">
+      <source srcset="<?php echo get_theme_file_uri('images/hero-slide-02-sp.webp'); ?> 1x, <?php echo get_theme_file_uri('images/hero-slide-02-sp@2x.webp'); ?> 2x" type="image/webp">
+      <source srcset="<?php echo get_theme_file_uri('images/hero-slide-02-sp.jpg'); ?> 1x, <?php echo get_theme_file_uri('images/hero-slide-02-sp@2x.jpg'); ?> 2x">
+      <img src="<?php echo get_theme_file_uri('images/hero-slide-02-sp.jpg'); ?>" alt="<?php echo esc_attr__('Hero image 2', 'proshopwave'); ?>" class="hero__image" />
     </picture>
     <div class="hero__content">
       <h2 class="hero__heading">
