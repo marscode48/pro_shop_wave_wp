@@ -255,13 +255,14 @@
         padding: 0;
         list-style: none;
 
-        // SP：3列固定（33.33%）
         li {
           width: auto;
           float: none;
           margin: 0;
           padding: 0;
           list-style: none;
+          // サムネイルは SP / PC 共通で常に3列固定にする
+          // WooCommerceの columns クラスや画面幅には依存しない
           flex: 0 0 calc(100% / 3);
           // サムネイル画像をscale(1.02)で拡大しても、枠外にはみ出さないように隠す
           overflow: hidden;
@@ -284,20 +285,6 @@
               @include flash-scale();
               opacity: 1;
             }
-          }
-        }
-
-        // タブレット：4列固定（25%）
-        @include mq(md) {
-          li {
-            flex: 0 0 calc(100% / 4);
-          }
-        }
-
-        // PC：5列固定（20%）
-        @include mq(lg) {
-          li {
-            flex: 0 0 calc(100% / 5);
           }
         }
       }
