@@ -221,6 +221,19 @@ export class FilterbarWooCommerce {
   _applyToURL() {
     // 現在の URL をオブジェクト化（安全にクエリ編集するため）
     const url = new URL(window.location.href);
+    // -----------------------------
+    // ページングURL正規化
+    // /shop/page/2/ のようなパス型ページングを検知した場合は
+    // パスから page/{n} を除去し、?paged={n} に正規化する
+    // これにより、2ページ目以降での絞り込み時に
+    // index.php へフォールバックしてしまう問題を防ぐ
+    // -----------------------------
+    const pageMatch = url.pathname.match(/\/page\/(\d+)\/?$/);
+    if (pageMatch) {
+      const pageNum = pageMatch[1];
+      url.pathname = url.pathname.replace(/\/page\/\d+\/?$/, "/");
+      url.searchParams.set("paged", pageNum);
+    }
     // URLSearchParams で ?key=value を編集（set: 置換/正規化, delete: 完全削除）
     const sp = url.searchParams;
 
