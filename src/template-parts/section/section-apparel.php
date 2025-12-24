@@ -19,8 +19,23 @@
     </div>
     <a href="/product-category/apparel/" class="section__link">
       <picture class="section__picture fadeup">
-        <source media="(min-width: 960px)" srcset="<?php echo get_theme_file_uri('images/section_apparel_pc.webp'); ?>" type="image/webp">
-        <img src="<?php echo get_theme_file_uri('images/section_apparel_sp.jpg'); ?>" alt="<?php echo esc_attr__('アパレルカテゴリ', 'proshopwave'); ?>" class="section__image">
+        <!-- PC: WebP + JPG -->
+        <source
+          media="(min-width: 960px)"
+          srcset="<?php echo get_theme_file_uri('images/section-apparel-pc@2x.webp'); ?> 2x, <?php echo get_theme_file_uri('images/section-apparel-pc.webp'); ?> 1x"
+          type="image/webp" />
+        <source
+          media="(min-width: 960px)"
+          srcset="<?php echo get_theme_file_uri('images/section-apparel-pc@2x.jpg'); ?> 2x, <?php echo get_theme_file_uri('images/section-apparel-pc.jpg'); ?> 1x" />
+
+        <!-- SP: WebP + JPG -->
+        <source
+          srcset="<?php echo get_theme_file_uri('images/section-apparel-sp@2x.webp'); ?> 2x, <?php echo get_theme_file_uri('images/section-apparel-sp.webp'); ?> 1x"
+          type="image/webp" />
+        <img
+          src="<?php echo get_theme_file_uri('images/section-apparel-sp.jpg'); ?>"
+          alt="<?php echo esc_attr__('アパレルカテゴリ', 'proshopwave'); ?>"
+          class="section__image" />
       </picture>
     </a>
   </div>

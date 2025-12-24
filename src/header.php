@@ -86,7 +86,7 @@
           <?php $html_tag = (is_home() || is_front_page()) ? 'h1' : 'div'; ?>
           <<?php echo $html_tag; ?>>
             <a href="<?php echo esc_url(home_url('/')); ?>">
-              <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="<?php echo esc_attr__('PRO SHOP WAVE ロゴ', 'proshopwave'); ?>" />
+              <img src="<?php echo get_theme_file_uri('images/logo-pro-shop-wave.svg'); ?>" alt="<?php echo esc_attr__('PRO SHOP WAVE ロゴ', 'proshopwave'); ?>" />
             </a>
           </<?php echo $html_tag; ?>>
         </div>
@@ -126,7 +126,7 @@
             <!-- ロゴ（SPのみ表示） -->
             <li class="header__nav-item header__logo">
               <a href="<?php echo esc_url(home_url('/')); ?>">
-                <img src="<?php echo get_theme_file_uri('images/logo_pro-shop-wave.svg'); ?>" alt="<?php echo esc_attr__('PRO SHOP WAVE ロゴ', 'proshopwave'); ?>" />
+                <img src="<?php echo get_theme_file_uri('images/logo-pro-shop-wave.svg'); ?>" alt="<?php echo esc_attr__('PRO SHOP WAVE ロゴ', 'proshopwave'); ?>" />
               </a>
             </li>
           </ul>
