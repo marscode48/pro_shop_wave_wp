@@ -33,6 +33,22 @@ function proshopwave_add_woocommerce_support()
 add_action('after_setup_theme', 'proshopwave_add_woocommerce_support');
 
 // -----------------------------
+// WooCommerce: ギャラリーのサムネイル画像サイズを制御
+// 目的: flex-control-thumbs（ギャラリー下のサムネイル）が
+//       デフォルトで 100x100 / 150x150 など小さいサイズを参照しがちなので、
+//       ここで「どの登録済み画像サイズを使うか」を指定して解像度を確保する。
+// -----------------------------
+function proshopwave_set_gallery_thumbnail_size($size)
+{
+  return 'woocommerce_thumbnail';
+}
+
+add_filter(
+  'woocommerce_gallery_thumbnail_size',
+  'proshopwave_set_gallery_thumbnail_size'
+);
+
+// -----------------------------
 // WooCommerce 商品カテゴリの初期登録（パーツ・アパレル）
 // -----------------------------
 function proshopwave_register_product_categories()
