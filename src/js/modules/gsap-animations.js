@@ -20,10 +20,15 @@ export class GsapAnimations {
     this.animateResponsive();
     this.animateParallax();
 
-    // ページ内の画像読み込み完了後に ScrollTrigger を再計算
-    window.addEventListener("load", () => {
-      ScrollTrigger.refresh();
-    });
+    // ScrollTrigger
+    const refreshScrollTrigger = () => {
+      // load 直後は微妙にレイアウトが動くことがあるため、少し待ってから再計算する
+      window.setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
+    };
+
+    window.addEventListener("load", refreshScrollTrigger, { once: true });
   }
 
   // 統合版フェードアニメーション
