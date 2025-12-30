@@ -25,7 +25,7 @@
             <div class="swiper-slide">
               <div class="card-item">
                 <picture>
-                  <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php the_title_attribute(); ?>" class="card-item__image">
+                  <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>" alt="<?php the_title_attribute(); ?>" class="card-item__image">
                 </picture>
                 <div class="card-item__content">
                   <time class="card-item__date" datetime="<?php echo get_the_date('Y-m-d'); ?>"><?php echo get_the_date('Y.m.d'); ?></time>
