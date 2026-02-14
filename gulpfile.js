@@ -88,7 +88,7 @@ function php() {
 // **ファイルの変更監視**
 function startAppServer() {
   browserSync.init({
-    proxy: "pro-shop-wave.local"
+    proxy: "test-pro-shop-wave.local",
   });
 
   watch(paths.styles.src, styles);
