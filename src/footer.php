@@ -67,7 +67,7 @@
           </p>
           <p>
             <?php esc_html_e('Mail:', 'proshopwave'); ?>
-            <a href="mailto:info@proshop-wave.jp">info@proshop-wave.jp</a>
+            <a href="mailto:info@ps-wave.com">info@ps-wave.com</a>
           </p>
         </address>
       </div>
@@ -94,6 +94,9 @@
       </a>
       <a href="<?php echo esc_url(home_url('/returns/')); ?>">
         <?php esc_html_e('返品・交換・キャンセルについて', 'proshopwave'); ?>
+      </a>
+      <a href="<?php echo esc_url(home_url('/shipping/')); ?>">
+        <?php esc_html_e('配送・送料について', 'proshopwave'); ?>
       </a>
     </div>
 
