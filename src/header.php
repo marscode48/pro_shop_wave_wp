@@ -39,6 +39,9 @@
   <meta name="apple-mobile-web-app-title" content="WAVE" />
   <link rel="manifest" href="<?php echo esc_url(get_theme_file_uri('images/site.webmanifest')); ?>" />
 
+  <!--  Google Search Console -->
+  <meta name="google-site-verification" content="3jOgrn2VauB7cpXdulIAXGFM1zKQgNDYrR6NCHSzw-E" />
+
   <?php wp_head(); ?>
 </head>
 
