@@ -759,3 +759,94 @@ if (function_exists('add_filter')) {
     return $fragments;
   });
 }
+
+// ---------------------------------------------
+// WooCommerce: 送料別途見積商品のカート・チェックアウト制御
+// 対象: 配送クラス slug が aero-estimate の商品
+//
+// 目的:
+// - エアロ・大型外装など送料が注文時点で確定しない商品を判定する
+// - 対象商品が含まれる注文では、即時決済を避けて bankjp のみ表示する
+// - カート・チェックアウトの送料表示を「送料別途見積」に差し替える
+// - 送料金額・送料税額をチェックアウト時点では 0 にし、後ほど総額を案内する運用にする
+// ---------------------------------------------
+function proshopwave_cart_has_estimate_shipping_item()
+{
+  if (! function_exists('WC') || ! WC()->cart) {
+    return false;
+  }
+
+  foreach (WC()->cart->get_cart() as $cart_item) {
+    $product = $cart_item['data'] ?? null;
+
+    if (! $product instanceof WC_Product) {
+      continue;
+    }
+
+    if ($product->get_shipping_class() === 'aero-estimate') {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+// 送料別途見積商品が含まれる場合、支払い方法を bankjp のみに制限する。
+add_filter('woocommerce_available_payment_gateways', function ($gateways) {
+  // 管理画面、または通常注文では支払い方法を変更しない。
+  if (is_admin() || ! proshopwave_cart_has_estimate_shipping_item()) {
+    return $gateways;
+  }
+
+  foreach ($gateways as $gateway_id => $gateway) {
+    // bankjp は Japanized for WooCommerce の日本国内向け銀行振込。
+    // 送料確定後に支払い総額を案内するため、即時決済ではなく bankjp のみ残す。
+    if ($gateway_id === 'bankjp') {
+      continue;
+    }
+
+    unset($gateways[$gateway_id]);
+  }
+
+  return $gateways;
+});
+
+// 送料別途見積商品が含まれる場合、支払い方法の直前に注意文を表示する。
+add_action('woocommerce_review_order_before_payment', function () {
+  if (! proshopwave_cart_has_estimate_shipping_item()) {
+    return;
+  }
+
+  echo '<div class="woocommerce-info proshopwave-estimate-shipping-notice">';
+  echo esc_html__('大型商品・エアロパーツが含まれるため、送料は別途見積となります。画面上の合計金額には、別途見積の送料は含まれていません。ご注文後、送料を含めたお支払い総額を当店よりご案内いたします。お支払いはご案内後の銀行振込にてお願いいたします。', 'proshopwave');
+  echo '</div>';
+});
+
+// 送料別途見積商品が含まれる場合、配送方法ラベルから金額表示を隠す。
+add_filter('woocommerce_cart_shipping_method_full_label', function ($label, $method) {
+  if (! proshopwave_cart_has_estimate_shipping_item()) {
+    return $label;
+  }
+
+  return esc_html__('送料別途見積', 'proshopwave');
+}, 10, 2);
+
+// 送料別途見積商品が含まれる場合、WooCommerce の送料計算結果を注文時点では 0 にする。
+add_filter('woocommerce_package_rates', function ($rates, $package) {
+  if (! proshopwave_cart_has_estimate_shipping_item()) {
+    return $rates;
+  }
+
+  foreach ($rates as $rate) {
+    if (! $rate instanceof WC_Shipping_Rate) {
+      continue;
+    }
+
+    // WC_Shipping_Rate の cost / taxes は直接プロパティを書き換えず、setter 経由で更新する。
+    // 直接 `$rate->taxes[$tax_id] = 0` のように変更すると Notice が出るため。
+    $rate->set_cost(0);
+    $rate->set_taxes([]);
+  }
+
+  return $rates;
+}, 20, 2);
