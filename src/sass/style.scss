@@ -49,8 +49,14 @@ Text Domain: proshopwave
 @use 'pages/tokushoho'; // page-tokushoho.php 用（特定商取引法ページ）
 
 // ========================
-// WooCommerce専用スタイルは別ビルドに分離
+// WooCommerce専用スタイルは別ビルドで管理
 // ========================
-// ・Blocks:  src/sass/woocommerce/woocommerce-blocks.scss  → css/woocommerce-blocks.css（functions.phpで条件読み込み）
-// ・Legacy:  src/sass/woocommerce/legacy/woocommerce-legacy.scss → css/woocommerce-legacy.css（functions.phpで条件読み込み）
-// ※ ここでは読み込まない（重複適用を防ぐ）
+// ・Legacy: src/sass/woocommerce/legacy/woocommerce-legacy.scss → css/woocommerce/legacy/woocommerce-legacy.css
+// ・Blocks: src/sass/woocommerce/blocks/woocommerce-blocks.scss → css/woocommerce/blocks/woocommerce-blocks.css（保管用）
+// ・読み込み制御: src/inc/setup/enqueue.php の proshopwave_enqueue_woocommerce_styles()
+//
+// 現在の運用:
+// ・Cart / Checkout / My Account / 商品一覧 / 商品詳細はクラシック版のため Legacy CSS を条件読み込みする
+// ・WooCommerce Blocks は現在使用しないため、Blocks CSS は読み込まない
+// ・Blocks 側の Sass は、将来的にブロック版へ戻す可能性がある場合の保管用として残す
+// ※ style.scss では WooCommerce 専用スタイルを読み込まない（全ページへの重複適用を防ぐ）
