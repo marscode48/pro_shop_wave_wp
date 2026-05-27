@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Template Name: WooCommerce Cart (Block)
- * Description: ブロック版 WooCommerce カートページ用テンプレート。
+ * Template Name: WooCommerce Cart (Legacy)
+ * Description: 従来版 WooCommerce カートページ用テンプレート（ショートコード版）。
  *
- * Gutenberg の「WooCommerce → カート」ブロックをページ本文に配置して使用します。
- * 従来の [woocommerce_cart] ショートコードは使用しません。
+ * WooCommerce ブロック版ではなくクラシック型のショートコードで、
+ * cart/cart.php などの従来テンプレートと PHP フックを利用します。
  *
  * @package PRO_SHOP_WAVE
  */
@@ -18,10 +18,9 @@ get_header();
     <?php
     // Breadcrumb navigation
     get_template_part('template-parts/breadcrumb/breadcrumb');
-
-    // ブロックエディタで配置したコンテンツ（カートブロック）をそのまま出力
-    if (function_exists('the_content')) {
-      the_content();
+    // WooCommerce カートページをショートコード経由で出力
+    if (class_exists('WC_Shortcodes')) {
+      echo do_shortcode('[woocommerce_cart]');
     }
     ?>
   </div>

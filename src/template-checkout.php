@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Template Name: WooCommerce Checkout (Block)
- * Description: ブロック版 WooCommerce チェックアウトページ用テンプレート。
+ * Template Name: WooCommerce Checkout (Legacy)
+ * Description: 従来版 WooCommerce チェックアウトページ用テンプレート（ショートコード版）。
  *
- * Gutenberg の「WooCommerce → チェックアウト」ブロックをページ本文に配置して使用します。
- * 従来の [woocommerce_checkout] ショートコードは使用しません。
+ * WooCommerce ブロック版ではなくクラシック型のショートコードで、
+ * checkout/form-checkout.php などの従来テンプレートと PHP フックを利用します。
  *
  * @package PRO_SHOP_WAVE
  */
@@ -18,10 +18,9 @@ get_header();
     <?php
     // Breadcrumb navigation
     get_template_part('template-parts/breadcrumb/breadcrumb');
-
-    // ブロックエディタで配置したコンテンツ（チェックアウトブロック）をそのまま出力
-    if (function_exists('the_content')) {
-      the_content();
+    // WooCommerce チェックアウトページをショートコード経由で出力
+    if (class_exists('WC_Shortcodes')) {
+      echo do_shortcode('[woocommerce_checkout]');
     }
     ?>
   </div>
