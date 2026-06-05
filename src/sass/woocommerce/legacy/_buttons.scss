@@ -21,8 +21,13 @@
   button.button,
   input.button,
   #respond input#submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.75rem 1.25rem;
+    line-height: 1.2;
     margin: 0;
-    line-height: 1;
     cursor: pointer;
     position: relative;
     text-decoration: none;
@@ -31,13 +36,11 @@
     border: 0;
     box-shadow: none;
     text-shadow: none;
-    display: inline-block;
     color: $color-white;
     font-weight: 600;
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.5em 1em;
     border-radius: 0.3rem;
     background: $color-bright-red-gradient;
     transition: filter $transition;
