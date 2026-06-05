@@ -123,6 +123,91 @@
   }
 
   /**
+	 * Cart page
+	 */
+  table.cart,
+  #content table.cart {
+    img {
+      height: auto;
+    }
+
+    td.actions {
+      text-align: right;
+
+      .input-text {
+        width: 100%;
+      }
+
+      .coupon {
+        float: none !important;
+      }
+    }
+  }
+
+  .cart-collaterals {
+    margin-top: 2rem;
+
+    @include reset-clearfix();
+    width: 100%;
+
+    .related {
+      width: auto;
+      float: none !important;
+    }
+
+    .cross-sells {
+      width: auto;
+      float: none !important;
+
+      h2 {
+        margin: 0 0 1rem;
+        color: $color-white;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      ul.products {
+        float: none;
+
+        li {
+          width: auto;
+        }
+      }
+    }
+
+    .shipping_calculator {
+      width: auto;
+
+      @include reset-clearfix();
+      clear: none !important;
+      float: none !important;
+
+      .col2-set {
+        .col-1,
+        .col-2 {
+          width: auto;
+        }
+      }
+    }
+
+    .cart_totals {
+      float: none !important;
+      width: auto;
+    }
+  }
+
+  /**
+	 * Cart sidebar
+	 */
+  ul.cart_list,
+  ul.product_list_widget {
+    li {
+      @include reset-mediaright();
+    }
+  }
+
+  /**
 	 * Forms
 	 */
   form {

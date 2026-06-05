@@ -1,0 +1,327 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// 対象:
+//  - クラシック版カートページ（[woocommerce_cart]）
+//  - template-cart.php の .section--cart 配下
+// ========================
+
+/**
+ * Cart/checkout page
+ */
+.woocommerce-cart,
+.woocommerce-checkout,
+#add_payment_method {
+  table.cart {
+    .product-thumbnail {
+      min-width: 2rem;
+    }
+
+    img {
+      width: 5rem;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: $radius-card;
+      box-shadow: none;
+    }
+
+    th,
+    td {
+      vertical-align: middle;
+    }
+
+    // 将来的に product-quantity は共通ベースとしてコンポーネント化して、ページごとのサイズ調整だけ各ページ(product-page)で上書き
+    // 数量ボタン --start
+    .product-quantity {
+      &__label {
+        color: $color-gray;
+        font-size: 0.875rem;
+        font-weight: 700;
+
+        @include mq(lg) {
+          display: none;
+        }
+      }
+
+      &__controls {
+        display: inline-flex;
+        align-items: center;
+        border: $border-dark-gray;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2em;
+        height: 2em;
+        background: $color-dark-gray-gradient;
+        color: $color-white;
+        cursor: pointer;
+        user-select: none;
+        transition: filter $transition;
+        will-change: filter;
+
+        @include hover-active(
+          $hover: (
+            filter: brightness(2),
+          )
+        );
+
+        &--decrease::before {
+          content: "−";
+          font-size: 1.2em;
+          line-height: 1;
+        }
+
+        &--increase::before {
+          content: "+";
+          font-size: 1.2em;
+          line-height: 1;
+        }
+      }
+
+      &__input-wrapper {
+        flex: 0 0 auto;
+      }
+
+      &__input {
+        width: 2em;
+        height: 2em;
+        padding: 0.5em;
+        border: 0;
+        border-radius: 0;
+        background-color: $color-white;
+        color: $color-black;
+        font-size: 1rem;
+        text-align: center;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+    }
+    // 数量ボタン --end
+
+    td.actions {
+      .button {
+        min-height: 2.75rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        line-height: 1.2;
+      }
+
+      > .button {
+        align-self: center;
+      }
+    }
+
+    td.actions .coupon {
+      display: grid;
+      gap: 0.75rem;
+
+      @include mq(md) {
+        grid-template-columns: minmax(12rem, 18rem) auto;
+        align-items: stretch;
+        justify-content: start;
+      }
+
+      .input-text {
+        float: none !important;
+        box-sizing: border-box;
+        height: 100%;
+        min-height: 2.75rem;
+        margin: 0;
+        outline: 0;
+
+        @include input-base();
+        @include input-focus();
+
+        &.has-error {
+          @include input-focus();
+        }
+      }
+    }
+
+    td.actions .coupon .coupon-error-notice {
+      @include wc-cart-coupon-error-notice();
+    }
+
+    input {
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+
+  .wc-proceed-to-checkout {
+    @include reset-clearfix;
+    padding: 1em 0;
+
+    @include mq(lg) {
+      padding: 0;
+    }
+
+    a.checkout-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px; // Stripe/Linkボタンの 48px に合わせる
+      margin-bottom: 1em;
+      padding: 0.75rem 1rem;
+      font-size: 1.25em;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    #wc-stripe-express-checkout-element {
+      transition:
+        filter $transition,
+        transform $transition;
+      will-change: filter, transform;
+
+      @include hover-active(
+        $hover: (
+          filter: brightness(1.15),
+        ),
+        $active: (
+          filter: brightness(0.96),
+        )
+      );
+    }
+  }
+
+  .cart-collaterals {
+    .shipping-calculator-button {
+      float: none;
+      margin-top: 0.5em;
+      display: inline-block;
+      @include link-hovers();
+    }
+
+    .shipping-calculator-form {
+      margin: 1em 0 0 0;
+    }
+
+    .cart_totals {
+      margin-top: 2rem;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+
+      @include mq(lg) {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(16rem, 24rem);
+        gap: 1.5rem;
+        align-items: start;
+      }
+
+      h2 {
+        margin: 0 0 1rem;
+        @include heading-title();
+
+        @include mq(lg) {
+          margin: 0;
+          grid-column: 1 / -1;
+        }
+      }
+
+      p small,
+      table small {
+        color: $color-gray;
+        font-size: 0.85em;
+      }
+
+      table {
+        margin: 0;
+        padding: 0;
+        border-collapse: separate;
+        text-align: left;
+
+        tr:first-child {
+          th,
+          td {
+            border-top: 0;
+          }
+        }
+
+        th {
+          width: min(20vw, 150px);
+        }
+
+        th,
+        td {
+          vertical-align: top;
+          border-left: 0;
+          border-right: 0;
+          border-top: 0;
+          border-bottom: $border-dark-gray;
+          line-height: 1.5em;
+          padding: 0.875rem;
+          text-align: left;
+          color: $color-white;
+          font-size: 0.875rem;
+
+          @include mq(lg) {
+            font-size: 1rem;
+          }
+        }
+
+        td {
+          color: $color-white;
+          font-weight: 700;
+          text-align: right;
+        }
+
+        small {
+          color: $color-white;
+        }
+
+        select {
+          width: 100%;
+        }
+      }
+
+      .discount td,
+      .cart-discount td {
+        color: $color-red;
+
+        & .woocommerce-remove-coupon {
+          @include link-hovers();
+        }
+      }
+
+      tr td,
+      tr th {
+        border-top: 0;
+      }
+
+      .woocommerce-shipping-destination {
+        margin-bottom: 0;
+        color: $color-gray;
+        font-size: 0.75rem;
+        line-height: 1.6;
+
+        @include mq(lg) {
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .cross-sells ul.products li.product {
+      margin-top: 0;
+    }
+  }
+}

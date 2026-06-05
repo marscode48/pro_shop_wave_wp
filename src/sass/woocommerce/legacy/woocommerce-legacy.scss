@@ -17,13 +17,14 @@
 @use "../../globals/index" as *;
 @use "../woocommerce-index" as *;
 
- // パンくずリスト（components へ共通化）
+// パンくずリスト（components へ共通化）
 @use "../../components/breadcrumb";
 
 // 各モジュール（役割順）
 @use "./layout"; // WooCommerce全体のレイアウト構造
 @use "./smallscreen"; // モバイル表示のレイアウト
 @use "./product-page"; // 商品ページ
+@use "./cart-page"; // カートページ
 @use "./product-loops"; // 商品ループ（関連商品系）
 @use "./reviews"; // 商品レビュー
 @use "./star-ratings"; // レビュー用の星アイコン
@@ -33,5 +34,6 @@
 @use "./_auth-login-register"; // ログイン・認証
 @use "./filterbar"; // 商品検索フィルター
 @use "./buttons"; // ボタン
+@use "./remove-button"; // 削除ボタン
 @use "./notices"; // 通知表示
 @use "./account-page"; // マイアカウント用

@@ -37,3 +37,11 @@
     display: initial !important;
   }
 }
+
+// カートページのクーポンエラー表示用mixin
+@mixin wc-cart-coupon-error-notice() {
+  color: $color-red;
+  font-size: 0.85em;
+  margin: 0;
+  text-align: left;
+}

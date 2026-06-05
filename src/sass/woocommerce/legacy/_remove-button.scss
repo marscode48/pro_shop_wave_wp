@@ -1,0 +1,46 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// ========================
+
+/**
+ * Main WooCommerce styles
+ */
+.woocommerce {
+  a.remove {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: $border-dark-gray;
+    border-radius: 9999px;
+    background: rgba($color-white, 0.04);
+    color: $color-red !important;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      background-color $transition,
+      border-color $transition,
+      color $transition,
+      filter $transition;
+    will-change: background-color, border-color, color, filter;
+
+    @include hover-active(
+      $hover: (
+        background-color: $color-red,
+        border-color: $color-red,
+        color: $color-white,
+        filter: brightness(1.1),
+      )
+    );
+  }
+}
