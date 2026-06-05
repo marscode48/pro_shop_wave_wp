@@ -39,6 +39,8 @@
 
     .col-1,
     .col-2 {
+      display: grid;
+      gap: 0.75rem;
       width: auto !important;
       float: none !important;
 

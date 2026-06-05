@@ -45,3 +45,15 @@
   margin: 0;
   text-align: left;
 }
+
+// チェックアウトページのクーポンエラー表示用mixin
+@mixin wc-checkout-coupon-error-notice() {
+  display: block;
+  width: 100%;
+  color: $color-red;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  text-align: left;
+}

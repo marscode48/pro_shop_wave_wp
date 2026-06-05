@@ -1,0 +1,195 @@
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+@use "sass:color";
+
+// ========================
+// WooCommerce公式の woocommerce.scss からレイアウトスタイルをコピーし、
+// テーマ用にカスタマイズしたスタイル群
+// Based on: WooCommerce v8.9 default styles (woocommerce.scss)
+// Ref: https://github.com/woocommerce/woocommerce/blob/trunk/plugins/woocommerce/client/legacy/css/woocommerce.scss
+// 対象:
+//  - クラシック版チェックアウトページ（[woocommerce_checkout]）
+//  - template-checkout.php の .section--checkout 配下
+// ========================
+
+/**
+ * Cart/checkout page
+ */
+.woocommerce-cart,
+.woocommerce-checkout,
+#add_payment_method {
+  .checkout_coupon {
+    .button {
+      min-height: 48px; // Stripe/Linkボタンの 48px に合わせる
+    }
+  }
+
+  #wc-stripe-express-checkout-button-separator {
+    margin-bottom: 1.5em;
+  }
+
+  #customer_details {
+    margin-bottom: 2rem;
+  }
+
+  .woocommerce-billing-fields,
+  .woocommerce-shipping-fields,
+  .woocommerce-additional-fields {
+    h3 {
+      margin: 0 0 1rem;
+      @include heading-title();
+    }
+
+    &__field-wrapper {
+      display: grid;
+      gap: 0.75rem;
+    }
+  }
+
+  #ship-to-different-address {
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+  }
+
+  #order_review_heading {
+    margin: 0 0 1rem;
+    @include heading-title();
+  }
+
+  #order_review {
+    margin-bottom: 2rem;
+  }
+
+  .woocommerce-checkout-review-order-table {
+    margin-bottom: 0;
+
+    .cart-discount td {
+      color: $color-red;
+    }
+
+    .woocommerce-remove-coupon {
+      @include link-hovers();
+    }
+  }
+  .checkout {
+    .col-2 {
+      h3#ship-to-different-address {
+        float: none !important;
+        clear: none !important;
+      }
+
+      .notes {
+        clear: none !important;
+      }
+
+      .form-row-first {
+        clear: none !important;
+      }
+    }
+
+    .create-account small {
+      font-size: 0.75rem;
+      color: $color-gray;
+      font-weight: normal;
+    }
+
+    div.shipping-address {
+      padding: 0;
+      clear: none !important;
+      width: 100%;
+    }
+
+    .shipping_address {
+      clear: none !important;
+    }
+
+    .checkout-inline-error-message {
+      margin-bottom: 0;
+      color: $color-red;
+      font-size: 0.85rem;
+    }
+  }
+
+  #payment {
+    // We use the old WooCommerce color as the base on purpose. See https://github.com/woocommerce/woocommerce/issues/55165.
+    margin-top: 0;
+    background: rgba($color-red, 0.12);
+    border: $border-dark-gray;
+    border-top: 0;
+    border-radius: 0 0 $radius-card $radius-card;
+    overflow: hidden;
+
+    ul.payment_methods {
+      background: transparent;
+      border-bottom: 0;
+
+      li {
+        color: $color-white;
+
+        input {
+          margin: 0 1em 0 0;
+        }
+      }
+    }
+
+    div.form-row {
+      margin: 0;
+    }
+
+    div.payment_box {
+      background: $color-gray;
+      color: $color-black;
+
+      span.help {
+        color: $color-gray;
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        border: 1em solid $color-gray; /* arrow size / color */
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        position: absolute;
+        top: -0.75em;
+        left: 0;
+        margin: -1em 0 0 2em;
+      }
+    }
+
+    .woocommerce-privacy-policy-text,
+    .woocommerce-terms-and-conditions-wrapper {
+      display: grid;
+      gap: 0.75rem;
+      color: $color-white;
+      font-size: 0.875rem;
+      line-height: 1.7;
+
+      a {
+        @include link-hovers();
+      }
+    }
+
+    .form-row.place-order {
+      display: grid;
+      gap: 1rem;
+    }
+
+    #place_order {
+      width: 100%;
+      min-height: 2.75rem;
+      padding-inline: 1.25rem;
+
+      @include mq(md) {
+        justify-self: center;
+        width: auto;
+        min-width: 17.5rem;
+      }
+    }
+  }
+}
