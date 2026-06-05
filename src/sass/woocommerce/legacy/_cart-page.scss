@@ -118,10 +118,7 @@
 
     td.actions {
       .button {
-        min-height: 2.75rem;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        line-height: 1.2;
+        padding: 0.75rem 1.25rem;
       }
 
       > .button {
@@ -163,6 +160,122 @@
     input {
       margin: 0;
       vertical-align: middle;
+    }
+  }
+
+  // 空カート
+  .woocommerce-empty-cart {
+    display: grid;
+    place-items: center;
+    min-height: 24rem;
+    padding: 4rem 1rem 6rem;
+    text-align: center;
+
+    @include mq(lg) {
+      min-height: 32rem;
+      padding: 6rem 1rem 8rem;
+    }
+
+    &__content {
+      width: min(100%, 48rem);
+      padding: 2rem 1rem;
+      background: rgba($color-white, 0.04);
+      border: $border-dark-gray;
+      border-radius: $radius-card;
+
+      @include mq(lg) {
+        padding: 3rem;
+      }
+    }
+
+    &__eyebrow {
+      margin: 0 0 0.75rem;
+      color: $color-red;
+      font-family: $font-heading;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+
+    &__title {
+      margin: 0;
+      color: $color-white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.5;
+
+      @include mq(lg) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__text {
+      max-width: 36rem;
+      margin: 1rem auto 0;
+      color: $color-gray;
+      font-size: 0.9375rem;
+      line-height: 1.8;
+    }
+
+    &__actions {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+
+      @include mq(md) {
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+      }
+    }
+
+    &__button {
+      width: 100%;
+
+      @include mq(md) {
+        width: auto;
+      }
+    }
+
+    &__products {
+      width: min(100%, 72rem);
+      margin-top: 3rem;
+      text-align: left;
+
+      @include mq(lg) {
+        margin-top: 4rem;
+      }
+
+      ul.products {
+        padding: 0;
+      }
+    }
+
+    &__products-header {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    &__products-eyebrow {
+      margin: 0 0 0.5rem;
+      color: $color-red;
+      font-family: $font-heading;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+
+    &__products-title {
+      margin: 0;
+      color: $color-white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.4;
+
+      @include mq(lg) {
+        font-size: 1.5rem;
+      }
     }
   }
 
