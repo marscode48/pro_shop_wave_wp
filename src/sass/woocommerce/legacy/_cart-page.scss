@@ -36,8 +36,7 @@
       vertical-align: middle;
     }
 
-    // 将来的に product-quantity は共通ベースとしてコンポーネント化して、ページごとのサイズ調整だけ各ページ(product-page)で上書き
-    // 数量ボタン --start
+    // 数量ボタン：カートページ用のサイズ調整
     .product-quantity {
       &__label {
         color: $color-gray;
@@ -49,72 +48,16 @@
         }
       }
 
-      &__controls {
-        display: inline-flex;
-        align-items: center;
-        border: $border-dark-gray;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-
-      &__button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2em;
-        height: 2em;
-        background: $color-dark-gray-gradient;
-        color: $color-white;
-        cursor: pointer;
-        user-select: none;
-        transition: filter $transition;
-        will-change: filter;
-
-        @include hover-active(
-          $hover: (
-            filter: brightness(2),
-          )
-        );
-
-        &--decrease::before {
-          content: "−";
-          font-size: 1.2em;
-          line-height: 1;
-        }
-
-        &--increase::before {
-          content: "+";
-          font-size: 1.2em;
-          line-height: 1;
-        }
-      }
-
-      &__input-wrapper {
-        flex: 0 0 auto;
-      }
-
+      &__button,
       &__input {
         width: 2em;
         height: 2em;
-        padding: 0.5em;
-        border: 0;
-        border-radius: 0;
-        background-color: $color-white;
-        color: $color-black;
+      }
+
+      &__input {
         font-size: 1rem;
-        text-align: center;
-
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-
-        -moz-appearance: textfield;
-        appearance: textfield;
       }
     }
-    // 数量ボタン --end
 
     td.actions {
       .button {

@@ -213,7 +213,9 @@
           width: 100%;
           object-fit: cover;
           aspect-ratio: 3 / 2;
-          transition: transform $transition, filter $transition;
+          transition:
+            transform $transition,
+            filter $transition;
 
           // ホバー時に画像を少し拡大＋フラッシュアニメーション
           @include hover-active {
@@ -271,7 +273,9 @@
             width: 100%;
             display: block;
             opacity: 0.6;
-            transition: transform $transition, filter $transition,
+            transition:
+              transform $transition,
+              filter $transition,
               opacity $transition;
             aspect-ratio: 1 / 1;
             object-fit: cover;
@@ -448,6 +452,7 @@
 
       @include reset-clearfix();
 
+      // 数量ボタン：商品詳細ページ用のサイズ・配置調整
       .product-quantity {
         display: flex;
         align-items: center;
@@ -460,39 +465,10 @@
           color: $color-white;
         }
 
-        &__controls {
-          display: flex;
-          align-items: center;
-          border: $border-dark-gray;
-        }
-
-        &__button {
+        &__button,
+        &__input {
           width: 2.5em;
           height: 2.5em;
-          background: $color-dark-gray-gradient;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          user-select: none;
-          transition: filter $transition;
-          will-change: filter;
-
-          @include hover-active(
-            $hover: (
-              filter: brightness(2),
-            )
-          );
-
-          &--decrease::before {
-            content: "−";
-            font-size: 1.2em;
-          }
-
-          &--increase::before {
-            content: "+";
-            font-size: 1.2em;
-          }
         }
 
         &__input-wrapper {
@@ -500,22 +476,7 @@
         }
 
         &__input {
-          width: 2.5em;
-          height: 2.5em;
-          padding: 0.5em;
-          text-align: center;
           font-size: 1rem;
-          background-color: $color-white;
-
-          // スピンボタン非表示（Webkit系）
-          &::-webkit-inner-spin-button,
-          &::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-          }
-          // スピンボタン非表示（Firefox）
-          -moz-appearance: textfield;
-          appearance: textfield;
         }
       }
 
@@ -577,7 +538,8 @@
           border-radius: 4px;
           cursor: pointer;
           // グラデーション背景 + 白矢印アイコン（複数背景レイヤー）
-          background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jaGV2cm9uLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ii8+PC9zdmc+")
+          background:
+            url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jaGV2cm9uLWRvd24iPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ii8+PC9zdmc+")
               no-repeat calc(100% - 12px) 50% / 16px,
             $color-dark-gray-gradient;
           transition: filter $transition;

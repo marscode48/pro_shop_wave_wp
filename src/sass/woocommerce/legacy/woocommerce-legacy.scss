@@ -24,6 +24,7 @@
 @use "./layout"; // WooCommerce全体のレイアウト構造
 @use "./smallscreen"; // モバイル表示のレイアウト
 @use "./product-page"; // 商品ページ
+@use "./product-quantity"; // 数量ボタン
 @use "./cart-page"; // カートページ
 @use "./checkout-page"; // チェックアウトページ
 @use "./product-loops"; // 商品ループ（関連商品系）

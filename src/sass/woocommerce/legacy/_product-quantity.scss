@@ -1,0 +1,67 @@
+// WooCommerce 数量ボタン共通ベース
+// サイズや配置は各ページ側で調整する。
+@use "../../globals/index" as *;
+@use "../woocommerce-index" as *;
+
+.woocommerce {
+  .product-quantity {
+    &__controls {
+      display: inline-flex;
+      align-items: center;
+      border: $border-dark-gray;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $color-dark-gray-gradient;
+      color: $color-white;
+      cursor: pointer;
+      user-select: none;
+      transition: filter $transition;
+      will-change: filter;
+
+      @include hover-active(
+        $hover: (
+          filter: brightness(2),
+        )
+      );
+
+      &--decrease::before {
+        content: "−";
+        font-size: 1.2em;
+        line-height: 1;
+      }
+
+      &--increase::before {
+        content: "+";
+        font-size: 1.2em;
+        line-height: 1;
+      }
+    }
+
+    &__input-wrapper {
+      flex: 0 0 auto;
+    }
+
+    &__input {
+      border: 0;
+      border-radius: 0;
+      background-color: $color-white;
+      color: $color-black;
+      text-align: center;
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  }
+}
