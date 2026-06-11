@@ -117,7 +117,7 @@
   #payment {
     // We use the old WooCommerce color as the base on purpose. See https://github.com/woocommerce/woocommerce/issues/55165.
     margin-top: 0;
-    background: rgba($color-red, 0.12);
+    background: $color-wc-payment-bg;
     border: $border-dark-gray;
     border-top: 0;
     border-radius: 0 0 $radius-card $radius-card;
@@ -141,17 +141,25 @@
     }
 
     div.payment_box {
-      background: $color-gray;
+      background-color: $color-wc-payment-box-bg;
       color: $color-black;
 
-      span.help {
-        color: $color-gray;
+      span.help,
+      p,
+      label {
+        color: $color-black;
+      }
+
+      a {
+        color: $color-red;
+        text-decoration: underline;
+        @include link-hovers();
       }
 
       &::before {
         content: "";
         display: block;
-        border: 1em solid $color-gray; /* arrow size / color */
+        border: 1em solid $color-wc-payment-box-bg; /* arrow size / color */
         border-right-color: transparent;
         border-left-color: transparent;
         border-top-color: transparent;
@@ -171,24 +179,25 @@
       line-height: 1.7;
 
       a {
+        color: $color-red;
+        text-decoration: underline;
+        transition: color $transition;
         @include link-hovers();
       }
     }
 
     .form-row.place-order {
       display: grid;
-      gap: 1rem;
+      gap: 2rem;
     }
 
     #place_order {
       width: 100%;
-      min-height: 2.75rem;
-      padding-inline: 1.25rem;
 
       @include mq(md) {
         justify-self: center;
-        width: auto;
-        min-width: 17.5rem;
+        width: fit-content;
+        min-width: 25rem;
       }
     }
   }
