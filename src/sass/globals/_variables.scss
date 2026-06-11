@@ -65,7 +65,7 @@ $border-left-accent-gray: 4px solid $color-gray; // 左アクセント用（例:
 $panel-gray-bg-gradient: linear-gradient(
   135deg,
   $color-black 0%,
-  color.scale($color-gray, $lightness: -65%) 100%
+  color.scale($color-gray, $lightness: -80%) 100%
 );
 $panel-gray-border-color: color.scale($color-gray, $lightness: -30%);
 $panel-gray-border-radius: 4px;
