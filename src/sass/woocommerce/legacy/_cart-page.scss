@@ -300,19 +300,7 @@
     }
 
     #wc-stripe-express-checkout-element {
-      transition:
-        filter $transition,
-        transform $transition;
-      will-change: filter, transform;
-
-      @include hover-active(
-        $hover: (
-          filter: brightness(1.15),
-        ),
-        $active: (
-          filter: brightness(0.96),
-        )
-      );
+      @include wc-stripe-express-button-hover();
     }
   }
 
