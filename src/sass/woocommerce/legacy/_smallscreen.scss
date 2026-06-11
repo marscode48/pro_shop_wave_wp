@@ -65,6 +65,113 @@
       }
     }
 
+    // マイアカウント：SP用テーブル共通
+    // 左に項目名 / 右に値の2カラム表示へ調整する。
+    table.woocommerce-MyAccount-orders.shop_table_responsive,
+    table.woocommerce-MyAccount-paymentMethods.shop_table_responsive {
+      tr {
+        display: block;
+
+        th,
+        td {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 0.875rem 1rem;
+          border-bottom: $border-dark-gray;
+          text-align: right !important;
+        }
+
+        th::before,
+        td::before {
+          content: attr(data-title) ": ";
+          flex: 0 0 auto;
+          color: $color-gray;
+          font-weight: 700;
+          text-align: left;
+        }
+      }
+    }
+
+    // マイアカウント：注文一覧テーブル
+    table.woocommerce-MyAccount-orders.shop_table_responsive {
+      tbody {
+        th {
+          display: flex;
+        }
+      }
+
+      // 共通テーブル側の `.woocommerce table.shop_table tbody tr:last-child th/td` を打ち消す。
+      // SPの注文一覧では、最後の注文カード内の項目区切り線を残し、最後の「操作」セルの下線だけ消す。
+      &.shop_table tbody tr:last-child {
+        th,
+        td {
+          border-bottom: $border-dark-gray;
+        }
+
+        .woocommerce-orders-table__cell-order-actions {
+          border-bottom: 0;
+        }
+      }
+
+      .woocommerce-orders-table__cell-order-number {
+        a {
+          color: $color-white;
+        }
+      }
+
+      .woocommerce-orders-table__cell-order-total {
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 0.35rem 0.5rem;
+        row-gap: 0.25rem;
+
+        &::before {
+          margin-right: auto;
+        }
+      }
+
+      .woocommerce-orders-table__cell-order-actions {
+        .button {
+          margin-left: auto;
+        }
+      }
+    }
+
+    // マイアカウント：決済方法テーブル
+    table.woocommerce-MyAccount-paymentMethods.shop_table_responsive {
+      tr {
+        padding: 0;
+        border-bottom: $border-dark-gray;
+
+        &:last-child {
+          border-bottom: 0;
+        }
+
+        .payment-method-method,
+        .payment-method-expires {
+          color: $color-white;
+          font-weight: 700;
+        }
+
+        .payment-method-actions {
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          border-bottom: 0;
+
+          &::before {
+            display: none;
+          }
+
+          .button {
+            margin: 0;
+          }
+        }
+      }
+    }
+
     /**
      * Products
      */

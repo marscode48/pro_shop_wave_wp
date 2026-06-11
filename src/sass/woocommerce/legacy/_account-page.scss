@@ -15,6 +15,10 @@
 .woocommerce-account {
   .woocommerce {
     @include reset-clearfix();
+    .clear {
+      display: none !important;
+      clear: none !important;
+    }
 
     // =============================================================
     // ログイン & 登録画面
@@ -46,6 +50,8 @@
         a {
           color: $color-red;
           text-decoration: underline;
+          transition: color $transition;
+          @include link-hovers();
         }
       }
     }
@@ -75,10 +81,9 @@
         line-height: 1.7;
       }
 
-      // 送信ボタン
-      .woocommerce-Button.button,
-      button[type="submit"] {
-        @include button-cta();
+      // 送信行（最終行）
+      > p:last-of-type {
+        @include wc-form-submit-button-center();
       }
     }
 
@@ -104,16 +109,21 @@
 
         li {
           a {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.75rem;
             color: $color-white;
             font-weight: 600;
             font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            padding: 0.5em 1em;
+            padding: 0.5rem 1rem;
             border-radius: 0.3rem;
             background-color: $color-dark-gray;
-            transition: background-color $transition, color $transition;
+            transition:
+              background-color $transition,
+              color $transition;
 
             @include hover-active(
               $hover: (
@@ -149,6 +159,24 @@
 
       @include mq(md) {
         padding: 1.75rem;
+      }
+
+      // 注文一覧テーブルとページネーションの間隔
+      .woocommerce-orders-table {
+        margin-bottom: 1.25rem;
+
+        @include mq(lg) {
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      .woocommerce-pagination {
+        margin-top: 0;
+
+        .woocommerce-button {
+          min-width: 5rem;
+          padding-inline: 1.5rem;
+        }
       }
 
       // =============================================================
@@ -237,6 +265,8 @@
       // ダッシュボード内容: 住所（請求先 / お届け先）
       // =============================================================
       .woocommerce-Addresses.addresses {
+        margin-top: 1.25rem;
+
         // 各アドレスカード
         .woocommerce-Address {
           // カードヘッダー（見出し + 編集リンク）
@@ -246,7 +276,6 @@
             justify-content: space-between;
             flex-wrap: wrap;
             row-gap: 1rem;
-            margin: 0 0 0.75rem;
             @include reset-clearfix();
 
             h2 {
@@ -336,19 +365,52 @@
           }
 
           // フッター（住所を保存ボタン）
-          > p:last-child {
-            margin: 0;
+          > p:last-of-type {
+            @include wc-form-submit-button-center();
+          }
+        }
+      }
 
-            .button,
-            button[type="submit"],
-            .woocommerce-Button.button {
-              @include button-cta();
-            }
+      // =============================================================
+      // ダッシュボード内容: 決済方法
+      // =============================================================
+      .woocommerce-MyAccount-paymentMethods {
+        margin-bottom: 1.25rem;
 
-            input[type="hidden"] {
-              display: none;
+        @include mq(lg) {
+          margin-bottom: 1.5rem;
+        }
+
+        tbody {
+          .payment-method-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+
+            .button {
+              margin: 0;
             }
           }
+        }
+      }
+
+      .woocommerce-MyAccount-paymentMethods + .button {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-inline: auto;
+
+        @include mq(md) {
+          width: fit-content;
+          min-width: 17.5rem;
+        }
+      }
+
+      #add_payment_method {
+        #payment {
+          border: $border-dark-gray;
+          border-radius: $radius-card;
         }
       }
 
@@ -357,51 +419,42 @@
       // =============================================================
       form.woocommerce-EditAccountForm.edit-account {
         display: grid;
+        gap: 1.25rem;
         color: $color-white;
 
         // パスワード変更フィールドセット
         fieldset {
           border: 0;
-          margin: 1.5rem 0;
+          margin: 1rem 0;
+          display: grid;
+          gap: 0.75rem;
 
           // 「パスワードの変更」タイトル
           legend {
-            margin: 0 0 0.75rem;
+            margin: 0 0 1rem;
             @include heading-title();
           }
         }
 
         // 送信行（最終行）
         > p:last-child {
-          margin: 0;
-
-          .woocommerce-Button.button,
-          button[type="submit"],
-          .button {
-            @include button-cta();
-          }
+          @include wc-form-submit-button-center();
         }
       }
 
       p {
         font-size: 0.95rem;
         line-height: 1.8;
-        margin-bottom: 1.25rem;
 
         strong {
           font-weight: 700;
         }
 
         a {
-          color: $color-gray;
+          color: $color-red;
           text-decoration: underline;
           transition: color $transition;
-
-          @include hover-active(
-            $hover: (
-              color: $color-red,
-            )
-          );
+          @include link-hovers();
         }
       }
     }
