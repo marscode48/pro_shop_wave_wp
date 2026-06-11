@@ -40,6 +40,7 @@
     .col-1,
     .col-2 {
       display: grid;
+      align-content: start;
       gap: 0.75rem;
       width: auto !important;
       float: none !important;
