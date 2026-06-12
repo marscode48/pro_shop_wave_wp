@@ -206,8 +206,6 @@
 // Stripe Express Checkoutボタン
 // SPでは押しやすく全幅、md以上では通常フォームより主張しすぎないよう中央寄せの中幅にする。
 #wc-stripe-express-checkout-element {
-  @include wc-stripe-express-button-hover();
-
   width: 100%;
   max-width: 100%;
   margin-inline: auto;
@@ -215,6 +213,8 @@
   > div {
     flex: 1 1 100%;
   }
+
+  @include wc-stripe-express-button-hover();
 
   @include mq(md) {
     max-width: 25rem;
