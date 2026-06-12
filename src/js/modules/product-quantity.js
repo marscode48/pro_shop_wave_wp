@@ -1,5 +1,5 @@
 export class ProductQuantity {
-  constructor(selector = ".product-quantity") {
+  constructor(selector = ".js-product-quantity") {
     this.selector = selector;
     this.init();
   }

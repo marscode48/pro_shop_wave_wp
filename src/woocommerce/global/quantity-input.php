@@ -29,7 +29,7 @@ $max_value   = isset($max_value) ? wc_stock_amount($max_value) : '';
 $step        = isset($step) ? wc_stock_amount($step) : 1;
 
 ?>
-<div class="product-quantity">
+<div class="product-quantity js-product-quantity">
   <span class="product-quantity__label product-quantity__label">
     <?php echo esc_html__('数量', 'proshopwave'); ?>
   </span>
