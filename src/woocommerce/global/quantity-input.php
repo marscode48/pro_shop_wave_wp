@@ -39,7 +39,7 @@ $step        = isset($step) ? wc_stock_amount($step) : 1;
       <label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>">
         <?php
         // translators: %s: product name or "quantity".
-        $pw_quantity_label = $product ? $product->get_name() : __('数量', 'proshopwave');
+        $pw_quantity_label = isset($product) && $product instanceof WC_Product ? $product->get_name() : __('数量', 'proshopwave');
 
         printf(
           esc_html__('%s 個', 'proshopwave'),
