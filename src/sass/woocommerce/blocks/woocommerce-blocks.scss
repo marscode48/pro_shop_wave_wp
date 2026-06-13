@@ -1,9 +1,14 @@
 // =============================================================
 // WooCommerce Blocks bundle — Cart / Checkout
 // -------------------------------------------------------------
+// NOTE:
+// 現在はクラシック版 Cart / Checkout / My Account に移行済みのため、
+// この Blocks 用 Sass は読み込んでいない。
+// 将来的に WooCommerce Blocks へ戻す可能性がある場合の保管用として残す。
+
 // 目的:
-//   - ブロック版 (WooCommerce Blocks) のスタイルを集約し、
-//     Cart / Checkout ページに適用する。
+//   - ブロック版 (WooCommerce Blocks) へ戻す場合に備え、
+//     Cart / Checkout 用スタイルを保管する。
 // 方針:
 //   - スコープは `.section--commerce-ui` / `.section--checkout` / `.section--cart` を基本に、
 //     Blocks 固有クラス（.wc-block-*, .wp-block-woocommerce-*）配下で調整。
