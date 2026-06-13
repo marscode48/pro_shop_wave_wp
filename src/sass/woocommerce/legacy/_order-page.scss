@@ -27,6 +27,7 @@
 
     // 銀行振込の案内文直後に出る「銀行口座詳細」見出し
     > p + h2 {
+      margin-bottom: -0.75rem;
       @include heading-title();
 
       margin-bottom: -0.75rem;
