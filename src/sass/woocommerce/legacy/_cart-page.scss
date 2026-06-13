@@ -223,7 +223,7 @@
   }
 
   .wc-proceed-to-checkout {
-    @include reset-clearfix;
+    @include wc-reset-clearfix();
     padding: 1em 0;
 
     @include mq(lg) {

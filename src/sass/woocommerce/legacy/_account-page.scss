@@ -14,7 +14,7 @@
  */
 .woocommerce-account {
   .woocommerce {
-    @include reset-clearfix();
+    @include wc-reset-clearfix();
     .clear {
       display: none !important;
       clear: none !important;
@@ -276,7 +276,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
             row-gap: 1rem;
-            @include reset-clearfix();
+            @include wc-reset-clearfix();
 
             h2 {
               margin: 0;

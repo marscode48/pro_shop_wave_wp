@@ -37,7 +37,7 @@ nav[aria-label="Breadcrumb"] {
   padding: 0;
   font-size: 0.875rem;
   color: $color-white;
-  @include reset-clearfix();
+  @include wc-reset-clearfix();
   
   @include mq(lg) {
     font-size: 0.95rem;

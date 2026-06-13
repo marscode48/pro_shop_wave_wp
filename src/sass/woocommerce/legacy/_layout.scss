@@ -26,7 +26,7 @@
 	 * General layout styles
 	 */
   .col2-set {
-    @include reset-clearfix();
+    @include wc-reset-clearfix();
     width: auto !important;
     display: grid;
     grid-template-columns: 1fr;
@@ -80,13 +80,13 @@
       clear: none;
 
       ul.tabs {
-        @include reset-menu();
+        @include wc-reset-menu();
       }
     }
 
     #reviews {
       .comment {
-        @include reset-mediaright();
+        @include wc-reset-mediaright();
       }
     }
   }
@@ -97,7 +97,7 @@
   ul.products {
     clear: none;
 
-    @include reset-clearfix();
+    @include wc-reset-clearfix();
 
     li.product {
       float: none;
@@ -121,7 +121,7 @@
 
   .woocommerce-pagination {
     ul.page-numbers {
-      @include reset-menu();
+      @include wc-reset-menu();
     }
   }
 
@@ -150,7 +150,7 @@
   .cart-collaterals {
     margin-top: 2rem;
 
-    @include reset-clearfix();
+    @include wc-reset-clearfix();
     width: 100%;
 
     .related {
@@ -182,7 +182,7 @@
     .shipping_calculator {
       width: auto;
 
-      @include reset-clearfix();
+      @include wc-reset-clearfix();
       clear: none !important;
       float: none !important;
 
@@ -206,7 +206,7 @@
   ul.cart_list,
   ul.product_list_widget {
     li {
-      @include reset-mediaright();
+      @include wc-reset-mediaright();
     }
   }
 
@@ -215,7 +215,7 @@
 	 */
   form {
     .form-row {
-      @include reset-clearfix();
+      @include wc-reset-clearfix();
 
       label {
         display: inline-block;

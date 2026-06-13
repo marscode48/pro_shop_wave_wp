@@ -290,7 +290,7 @@
 
         .coupon {
           float: none !important;
-          @include reset-clearfix();
+          @include wc-reset-clearfix();
           padding-bottom: 0.5em;
 
           input,

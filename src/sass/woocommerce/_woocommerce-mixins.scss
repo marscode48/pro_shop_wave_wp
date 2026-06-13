@@ -9,7 +9,7 @@
 // ========================
 
 // clearfix()を打ち消すmixin
-@mixin reset-clearfix() {
+@mixin wc-reset-clearfix() {
   zoom: initial;
 
   &::before,
@@ -21,8 +21,8 @@
 }
 
 // mediaright()を打ち消すmixin
-@mixin reset-mediaright() {
-  @include reset-clearfix();
+@mixin wc-reset-mediaright() {
+  @include wc-reset-clearfix();
   img {
     float: none !important;
     height: auto;
@@ -30,8 +30,8 @@
 }
 
 // menu()を打ち消すmixin
-@mixin reset-menu() {
-  @include reset-clearfix();
+@mixin wc-reset-menu() {
+  @include wc-reset-clearfix();
 
   li {
     display: initial !important;

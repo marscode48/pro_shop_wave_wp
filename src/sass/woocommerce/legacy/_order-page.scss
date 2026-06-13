@@ -30,8 +30,6 @@
       margin-bottom: -0.75rem;
       @include heading-title();
 
-      margin-bottom: -0.75rem;
-
       @include mq(md) {
         margin-bottom: -1rem;
       }
@@ -53,7 +51,7 @@
 
   // 完了直後の概要（注文番号/日付/メール/合計/決済方法）
   ul.order_details {
-    @include reset-clearfix();
+    @include wc-reset-clearfix();
     @include panel-surface-black();
     padding: 1rem;
     margin: 0;

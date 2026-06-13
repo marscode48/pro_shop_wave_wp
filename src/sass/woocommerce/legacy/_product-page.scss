@@ -450,7 +450,7 @@
     form.cart {
       margin-bottom: 0;
 
-      @include reset-clearfix();
+      @include wc-reset-clearfix();
 
       // 数量ボタン：商品詳細ページ用のサイズ・配置調整
       .product-quantity {

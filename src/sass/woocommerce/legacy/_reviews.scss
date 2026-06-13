@@ -37,7 +37,7 @@
       }
 
       ol.commentlist {
-        @include reset-clearfix();
+        @include wc-reset-clearfix();
 
         li {
           margin: 0 0 1rem;
@@ -61,7 +61,7 @@
             // border: 1px solid $color-red;
             // background-color: $color-black;
             @include panel-surface-gray();
-            @include reset-clearfix();
+            @include wc-reset-clearfix();
 
             .star-rating {
               margin: 0 8px 1em 0;

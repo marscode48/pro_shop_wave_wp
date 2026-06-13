@@ -20,7 +20,7 @@
 	 * Generic forms styles used in places such as my account and the shortcode based checkout.
 	 */
   form .form-row {
-    @include reset-clearfix();
+    @include wc-reset-clearfix();
     display: grid;
     gap: 0.375rem;
     margin: 0;
