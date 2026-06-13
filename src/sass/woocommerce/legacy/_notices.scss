@@ -48,6 +48,11 @@
     padding-left: 0;
     margin-left: 0;
   }
+
+  // 注文合計テーブル直下に表示する送料別途見積の注意文
+  &.proshopwave-estimate-shipping-notice {
+    margin: 1.25rem 0 0;
+  }
 }
 
 .woocommerce-error {
