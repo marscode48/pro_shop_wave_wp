@@ -54,7 +54,9 @@
       letter-spacing: 0.02em;
       color: rgba($color-white, 0.8);
       border-bottom: 3px solid transparent;
-      transition: color $transition, border-color $transition,
+      transition:
+        color $transition,
+        border-color $transition,
         background-color $transition;
 
       // ホバー/フォーカス時のアクセント
@@ -100,17 +102,37 @@
       gap: 2rem;
     }
 
-    // 検索結果が空の場合のメッセージ
-    .search-results__empty {
+    // 検索結果が空の場合の表示
+    &__empty-state {
+      display: grid;
+      justify-items: center;
+      gap: 1rem;
+      padding: 4rem 1.5rem;
       text-align: center;
-      color: $color-gray;
+      @include panel-surface-gray();
+
+      @include mq(lg) {
+        padding: 5rem 3rem;
+      }
+    }
+
+    .search-results__empty {
+      margin: 0;
+      color: $color-white;
       font-size: 1.1rem;
-      padding: 4rem 3rem;
+      font-weight: 700;
 
       @include mq(lg) {
         font-size: 1.25rem;
-        padding: 5rem 3rem;
       }
+    }
+
+    &__empty-lead {
+      max-width: 40rem;
+      margin: 0;
+      color: $color-gray;
+      font-size: 0.95rem;
+      line-height: 1.8;
     }
 
     // 商品グリッドレイアウト

@@ -95,12 +95,20 @@ get_header('shop'); ?>
        */
       do_action('woocommerce_after_shop_loop');
     } else {
-      /**
-       * Hook: woocommerce_no_products_found.
-       *
-       * @hooked wc_no_products_found - 10
-       */
-      do_action('woocommerce_no_products_found');
+      $shop_page_url = function_exists('wc_get_page_permalink') ? wc_get_page_permalink('shop') : home_url('/');
+    ?>
+      <div class="product-archive__empty-state fadeup">
+        <p class="product-archive__empty-title">
+          <?php echo esc_html__('該当する商品は見つかりませんでした。', 'proshopwave'); ?>
+        </p>
+        <p class="product-archive__empty-lead">
+          <?php echo esc_html__('絞り込み条件を変更するか、商品一覧から他の商品もご覧ください。', 'proshopwave'); ?>
+        </p>
+        <a class="section__button" href="<?php echo esc_url($shop_page_url); ?>">
+          <span class="section__button-inner"><?php echo esc_html__('商品一覧を見る', 'proshopwave'); ?></span>
+        </a>
+      </div>
+    <?php
     }
 
     /**

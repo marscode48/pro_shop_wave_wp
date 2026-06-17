@@ -27,7 +27,7 @@ $empty_cart_products = new WP_Query(
   array(
     'post_type'           => 'product',
     'post_status'         => 'publish',
-    'posts_per_page'      => 4,
+    'posts_per_page'      => 3,
     'orderby'             => 'date',
     'order'               => 'DESC',
     'ignore_sticky_posts' => 1,
