@@ -69,7 +69,9 @@
       box-shadow: none;
       object-fit: cover;
       aspect-ratio: 3 / 2;
-      transition: transform $transition, filter $transition;
+      transition:
+        transform $transition,
+        filter $transition;
     }
   }
 
@@ -87,6 +89,8 @@
     font-size: 0.8rem;
     color: $color-gray;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     .product-card__brand-link {
       transition: color $transition;
@@ -97,14 +101,16 @@
         )
       );
     }
+
+    .product-card__brand-separator {
+      color: $color-gray;
+    }
   }
 
   .product-card__category {
     font-size: 0.8rem;
     color: $color-gray;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 
     a {
       transition: color $transition;

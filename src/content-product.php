@@ -51,12 +51,13 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
   <div class="product-card__body">
     <div class="product-card__topline">
       <div class="product-card__category">
+        <!-- カテゴリーが複数の場合を対応する -->
         <?php echo wc_get_product_category_list($product->get_id(), ', '); ?>
       </div>
       <?php
       // -----------------------------
       // ブランド表示（型式は表示しない）
-      // ルール: まず「車種（子）」を優先表示。存在しなければ「メーカー（親）」を表示。
+      // ルール: 「車種（子）」をすべて表示。存在しなければ「メーカー（親）」を表示。
       // 対応タクソノミー: product_brand or pa_brand（存在する方を使用）
       // ※ 商品に型式（孫）が付いている場合は、その親である「車種」を表示します。
       // -----------------------------
@@ -66,6 +67,7 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
         $terms = get_the_terms($product->get_id(), $brand_tax);
 
         if (! is_wp_error($terms) && ! empty($terms)) {
+
           // term_id => WP_Term の辞書（親たどり用）
           $dict = [];
           foreach ($terms as $t) {
@@ -76,6 +78,7 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
           $depth_of = function ($term) use ($dict) {
             $d = 0;
             $p = $term->parent ?? 0;
+
             while ($p && isset($dict[$p])) {
               $d++;
               $p = $dict[$p]->parent ?? 0;
@@ -83,47 +86,57 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
             return $d; // 0=親（メーカー）, 1=子（車種）, 2+=孫（型式…）
           };
 
-          $display = null; // 表示対象（WP_Term）
+          $display_terms = []; // 表示対象（term_id => WP_Term）
 
-          // 1) 型式（孫）があれば、その親＝車種を表示対象に
+          // 1) 型式（孫）があれば、その親＝車種をすべて表示対象に
           foreach ($terms as $t) {
             if ($depth_of($t) >= 2) {
               $parent_id = $t->parent ?? 0;
+
               if ($parent_id && isset($dict[$parent_id])) {
-                $display = $dict[$parent_id];
-                break; // 最優先が見つかったので終了
+                $display_terms[$parent_id] = $dict[$parent_id];
               }
             }
           }
 
-          // 2) 車種（子）が直接付いていればそれを表示
-          if (! $display) {
-            foreach ($terms as $t) {
-              if ($depth_of($t) === 1) {
-                $display = $t;
-                break;
-              }
+          // 2) 車種（子）が直接付いていれば、それもすべて表示対象に追加
+          foreach ($terms as $t) {
+            if ($depth_of($t) === 1) {
+              $display_terms[$t->term_id] = $t;
             }
           }
 
-          // 3) それも無ければ メーカー（親）を表示
-          if (! $display) {
+          // 3) 車種が無ければ メーカー（親）を表示
+          if (empty($display_terms)) {
             foreach ($terms as $t) {
               if ($depth_of($t) === 0) {
-                $display = $t;
+                $display_terms[$t->term_id] = $t;
                 break;
               }
             }
           }
 
-          if ($display) :
-            $term_link = get_term_link($display);
-            if (! is_wp_error($term_link)) :
+          if (! empty($display_terms)) :
+            $display_items = [];
+
+            foreach ($display_terms as $display_term) {
+              $term_link = get_term_link($display_term);
+
+              if (is_wp_error($term_link)) {
+                continue;
+              }
+
+              $display_items[] = sprintf(
+                '<a href="%s" class="product-card__brand-link">%s</a>',
+                esc_url($term_link),
+                esc_html($display_term->name)
+              );
+            }
+
+            if (! empty($display_items)) :
       ?>
-              <div class="product-card__brand">
-                <a href="<?php echo esc_url($term_link); ?>" class="product-card__brand-link">
-                  <?php echo esc_html($display->name); ?>
-                </a>
+              <div class="product-card__brand" title="<?php echo esc_attr(wp_strip_all_tags(implode(' / ', wp_list_pluck($display_terms, 'name')))); ?>">
+                <?php echo wp_kses_post(implode('<span class="product-card__brand-separator"> / </span>', $display_items)); ?>
               </div>
       <?php
             endif;
@@ -150,7 +163,7 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
     ?>
     <div class="product-card__more">
       <a href="<?php the_permalink(); ?>" class="product-card__more-link">
-        <?php echo esc_html__( 'More', 'proshopwave' ); ?><i class="fas fa-arrow-right" aria-hidden="true"></i>
+        <?php echo esc_html__('More', 'proshopwave'); ?><i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
     <?php
