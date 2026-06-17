@@ -121,7 +121,9 @@
         color: $color-white;
         border: 1px solid $color-red;
         cursor: pointer;
-        transition: border-color $transition, filter $transition;
+        transition:
+          border-color $transition,
+          filter $transition;
 
         @include hover-active(
           $hover: (
@@ -152,6 +154,39 @@
         }
       }
     }
+  }
+
+  // 商品一覧・絞り込み結果が0件の場合の表示
+  .product-archive__empty-state {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    @include panel-surface-gray();
+
+    @include mq(lg) {
+      padding: 5rem 3rem;
+    }
+  }
+
+  .product-archive__empty-title {
+    margin: 0;
+    color: $color-white;
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    @include mq(lg) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .product-archive__empty-lead {
+    max-width: 40rem;
+    margin: 0;
+    color: $color-gray;
+    font-size: 0.95rem;
+    line-height: 1.8;
   }
 
   .woocommerce-ordering {

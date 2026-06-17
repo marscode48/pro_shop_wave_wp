@@ -148,7 +148,19 @@ $posts_panel_id    = 'search-panel-posts';
             <?php endif; ?>
 
           <?php else : ?>
-            <p class="search-results__empty"><?php echo esc_html__('該当する商品は見つかりませんでした。', 'proshopwave'); ?></p>
+            <div class="search-results__empty-state">
+              <p class="search-results__empty">
+                <?php echo esc_html__('該当する商品は見つかりませんでした。', 'proshopwave'); ?>
+              </p>
+              <p class="search-results__empty-lead">
+                <?php echo esc_html__('キーワードを短くするか、車種名・型式・カテゴリ名で再検索してみてください。', 'proshopwave'); ?>
+              </p>
+              <?php if (function_exists('wc_get_page_permalink')) : ?>
+                <a class="section__button" href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>">
+                  <span class="section__button-inner"><?php echo esc_html__('商品一覧を見る', 'proshopwave'); ?></span>
+                </a>
+              <?php endif; ?>
+            </div>
           <?php endif; ?>
         </section>
       <?php endif; ?>
@@ -178,7 +190,21 @@ $posts_panel_id    = 'search-panel-posts';
           <?php endif; ?>
 
         <?php else : ?>
-          <p class="search-results__empty"><?php echo esc_html__('該当する記事は見つかりませんでした。', 'proshopwave'); ?></p>
+          <div class="search-results__empty-state">
+            <p class="search-results__empty">
+              <?php echo esc_html__('該当する記事は見つかりませんでした。', 'proshopwave'); ?>
+            </p>
+            <p class="search-results__empty-lead">
+              <?php echo esc_html__('キーワードを短くするか、別の言葉で再検索してみてください。', 'proshopwave'); ?>
+            </p>
+            <?php
+            $posts_page_id = (int) get_option('page_for_posts');
+            $posts_page_url = $posts_page_id > 0 ? get_permalink($posts_page_id) : home_url('/');
+            ?>
+            <a class="section__button" href="<?php echo esc_url($posts_page_url); ?>">
+              <span class="section__button-inner"><?php echo esc_html__('記事一覧を見る', 'proshopwave'); ?></span>
+            </a>
+          </div>
         <?php endif; ?>
       </section>
     </div>
