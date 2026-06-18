@@ -51,8 +51,51 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
   <div class="product-card__body">
     <div class="product-card__topline">
       <div class="product-card__category">
-        <!-- カテゴリーが複数の場合を対応する -->
-        <?php echo wc_get_product_category_list($product->get_id(), ', '); ?>
+        <?php
+        // 商品カードではカテゴリーを「一番子側」のカテゴリー1件だけ表示する。
+        // WooCommerce標準の wc_get_product_category_list() は、商品に付いている親・子カテゴリーをまとめて出力するため、
+        // 例: 「サスペンション, パーツ」のように複数表示される。
+        // 一覧カードでは表示を簡潔にするため、商品に付いているカテゴリーのうち「一番子側」のカテゴリーを優先して表示する。
+        $product_categories = get_the_terms($product->get_id(), 'product_cat');
+
+        if (! is_wp_error($product_categories) && ! empty($product_categories)) {
+
+          $display_category = null;
+
+          // 商品に付いているカテゴリー同士を比較し、
+          // 「他のカテゴリーの親になっていないカテゴリー」= 一番子側のカテゴリーを表示対象にする。
+          foreach ($product_categories as $category) {
+            $has_child_in_product = false;
+
+            foreach ($product_categories as $compare_category) {
+              if ((int) $compare_category->parent === (int) $category->term_id) {
+                $has_child_in_product = true;
+                break;
+              }
+            }
+
+            if (! $has_child_in_product) {
+              $display_category = $category;
+              break;
+            }
+          }
+
+          // 念のため表示対象が決まらなかった場合は、先頭のカテゴリーを表示する。
+          if (! $display_category) {
+            $display_category = reset($product_categories);
+          }
+
+          $category_link = get_term_link($display_category);
+
+          if (! is_wp_error($category_link)) :
+        ?>
+            <a href="<?php echo esc_url($category_link); ?>" rel="tag">
+              <?php echo esc_html($display_category->name); ?>
+            </a>
+        <?php
+          endif;
+        }
+        ?>
       </div>
       <?php
       // -----------------------------
