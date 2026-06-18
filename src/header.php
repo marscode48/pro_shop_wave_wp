@@ -172,7 +172,7 @@
           <!-- アカウントアイコン（PCのみ表示） -->
           <div class="header__account">
             <a href="<?php echo esc_url($account_url); ?>" class="header__account-link" aria-label="<?php echo esc_attr($account_label); ?>">
-              <i class="fas fa-user" aria-hidden="true"></i>
+              <i class="fas fa-user-circle" aria-hidden="true"></i>
             </a>
           </div>
 
