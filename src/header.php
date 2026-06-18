@@ -119,12 +119,14 @@
               </a>
             </li>
 
-            <!-- 多言語切り替え（SPのみ表示） -->
+            <?php /*
+            <!-- 多言語切り替え（SPのみ表示 / WPML実装後に有効化） -->
             <li class="header__nav-item header__nav-lang">
               <a href="#" class="is-active">🇯🇵 JP</a>
               <span class="header__lang-separator">|</span>
               <a href="#">🇺🇸 EN</a>
             </li>
+            */ ?>
 
             <!-- ロゴ（SPのみ表示） -->
             <li class="header__nav-item header__logo">
@@ -186,12 +188,14 @@
             </a>
           </div>
 
-          <!-- 多言語切り替え -->
+          <?php /*
+          <!-- 多言語切り替え（WPML実装後に有効化） -->
           <div class="header__lang">
             <a href="#" class="is-active">🇯🇵 JP</a>
             <span class="header__lang-separator">|</span>
             <a href="#">🇺🇸 EN</a>
           </div>
+          */ ?>
         </div>
 
       </div>
