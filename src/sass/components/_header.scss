@@ -10,7 +10,7 @@
   z-index: 100;
   height: $header-height;
   padding: 0 $space-inline-header;
-  background-color: $color-black;
+  background-color: $color-header-bg;
   box-shadow: 0 4px 12px rgba($color-black, 0.25);
   transition: border-color $transition, background-color $transition;
 
@@ -31,7 +31,7 @@
   }
 
   &.is-scrolled {
-    background-color: rgba($color-black, 0.8);
+    background-color: rgba($color-header-bg, 0.8);
     border-bottom: $border-dark-gray;
   }
 
