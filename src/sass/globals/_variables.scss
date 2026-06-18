@@ -7,6 +7,7 @@ $color-red: #e60012;
 $color-white: #ffffff;
 $color-gray: #b3b3b3;
 $color-dark-gray: #211d1d;
+$color-header-bg: #100303;
 $color-wc-payment-bg: rgba($color-red, 0.1);
 $color-wc-payment-box-bg: #c3a5a5;
 $color-dark-red-gradient: linear-gradient(
@@ -84,7 +85,7 @@ $panel-black-inset-shadow: inset 0 -6px 10px 0 rgba($color-red, 0.15);
 
 // filter, pill-btn
 $fb-border-color: rgba($color-white, 0.28);
-$fb-border-soft-color: rgba($color-white, 0.20);
+$fb-border-soft-color: rgba($color-white, 0.2);
 $fb-card: linear-gradient(
   180deg,
   rgba($color-black, 0.96),
