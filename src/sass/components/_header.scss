@@ -12,7 +12,9 @@
   padding: 0 $space-inline-header;
   background-color: $color-header-bg;
   box-shadow: 0 4px 12px rgba($color-black, 0.25);
-  transition: border-color $transition, background-color $transition;
+  transition:
+    border-color $transition,
+    background-color $transition;
 
   // ========================
   // WordPress 管理バー対策
@@ -64,7 +66,10 @@
       background-color: color.adjust($color-red, $lightness: 10%);
       left: 0;
       border-radius: 2px;
-      transition: transform $transition, width $transition, top $transition;
+      transition:
+        transform $transition,
+        width $transition,
+        top $transition;
 
       &:nth-child(1) {
         top: 0;
@@ -145,7 +150,9 @@
     opacity: 0;
     transform: translateX(-100%);
     pointer-events: none;
-    transition: transform $transition, opacity $transition;
+    transition:
+      transform $transition,
+      opacity $transition;
 
     &.is-open {
       opacity: 1;
@@ -256,7 +263,9 @@
           border-right: 2px solid $color-white;
           border-bottom: 2px solid $color-white;
           transform: rotate(45deg);
-          transition: transform $transition, border-color $transition;
+          transition:
+            transform $transition,
+            border-color $transition;
         }
 
         @include hover-active {
@@ -292,7 +301,9 @@
           visibility: hidden;
           transform: translateY(8px);
           pointer-events: none;
-          transition: opacity $transition, transform $transition,
+          transition:
+            opacity $transition,
+            transform $transition,
             visibility $transition;
           @include panel-surface-black($bg: $color-black);
         }
@@ -527,7 +538,9 @@
       font-weight: 700;
       line-height: 1;
       box-shadow: 0 0 0 2px $color-black; // 背景が暗くても視認性確保
-      transition: opacity $transition, transform $transition;
+      transition:
+        opacity $transition,
+        transform $transition;
 
       &.is-active {
         display: inline-flex;
