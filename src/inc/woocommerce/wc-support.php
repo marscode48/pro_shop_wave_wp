@@ -736,7 +736,8 @@ add_action('init', function () {
 
 // ---------------------------------------------
 // WooCommerce: ヘッダーのカート数量バッジをAJAXで更新
-// （wc-ajax=add_to_cart 後のフラグメントで .header__cart-count を差し替え）
+// 目的: WooCommerce フラグメント更新時に .header__cart-count を差し替え、
+//       商品追加・数量変更・削除後もヘッダーのカート数量を最新状態にする。
 // ---------------------------------------------
 if (function_exists('add_filter')) {
   add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
@@ -761,9 +762,10 @@ if (function_exists('add_filter')) {
 }
 
 // ---------------------------------------------
-// WooCommerce: カート画面で最後の商品を削除した場合に空カート表示へ切り替える
-// 目的: /cart/ 表示中に商品削除でカートが空になった際、
-//       WooCommerce のカートHTMLが空になるだけで終わらないように、
+// WooCommerce: カート画面更新後のヘッダー数量・空カート表示を同期
+// 目的: /cart/ 表示中に数量変更・削除が行われた際、
+//       ヘッダーのカート数量バッジを最新化する。
+//       また、最後の商品削除でカートが空になった場合は、
 //       /cart/ を再読み込みして cart-empty.php を表示させる。
 // ---------------------------------------------
 add_action('wp_footer', function () {
@@ -778,14 +780,27 @@ add_action('wp_footer', function () {
       }
 
       var cartUrl = <?php echo wp_json_encode(wc_get_cart_url()); ?>;
+      var isReloadingCart = false;
+
+      function refreshHeaderCartCount() {
+        $(document.body).trigger('wc_fragment_refresh');
+      }
 
       function reloadCartWhenEmpty() {
+        if (isReloadingCart) {
+          return;
+        }
+
         if ($('.woocommerce-cart-form__cart-item').length === 0) {
+          isReloadingCart = true;
           window.location.href = cartUrl;
         }
       }
 
-      $(document.body).on('removed_from_cart updated_wc_div', reloadCartWhenEmpty);
+      $(document.body).on('removed_from_cart updated_wc_div updated_cart_totals', function() {
+        refreshHeaderCartCount();
+        reloadCartWhenEmpty();
+      });
     })(window.jQuery);
   </script>
 <?php
