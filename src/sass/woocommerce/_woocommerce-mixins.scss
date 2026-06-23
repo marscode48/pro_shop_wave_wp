@@ -76,21 +76,3 @@
     }
   }
 }
-
-// Stripe Express Checkoutボタンのhover演出用mixin
-// 幅や配置はページごとに調整し、共通の操作感だけをまとめる。
-@mixin wc-stripe-express-button-hover() {
-  transition:
-    filter $transition,
-    transform $transition;
-  will-change: filter, transform;
-
-  @include hover-active(
-    $hover: (
-      filter: brightness(1.15),
-    ),
-    $active: (
-      filter: brightness(0.96),
-    )
-  );
-}

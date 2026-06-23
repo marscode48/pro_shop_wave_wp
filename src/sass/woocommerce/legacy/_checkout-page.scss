@@ -223,8 +223,6 @@
     flex: 1 1 100%;
   }
 
-  @include wc-stripe-express-button-hover();
-
   @include mq(md) {
     max-width: $width-wc-checkout-action-button;
 

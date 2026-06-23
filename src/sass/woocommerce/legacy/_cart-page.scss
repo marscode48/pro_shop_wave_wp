@@ -248,10 +248,6 @@
         max-width: $width-wc-checkout-action-button;
       }
     }
-
-    #wc-stripe-express-checkout-element {
-      @include wc-stripe-express-button-hover();
-    }
   }
 
   .cart-collaterals {
