@@ -206,7 +206,7 @@
       @include mq(md) {
         justify-self: center;
         width: fit-content;
-        min-width: 25rem;
+        min-width: $width-wc-checkout-action-button;
       }
     }
   }
@@ -226,7 +226,7 @@
   @include wc-stripe-express-button-hover();
 
   @include mq(md) {
-    max-width: 25rem;
+    max-width: $width-wc-checkout-action-button;
 
     > div {
       flex: 0 1 100%;

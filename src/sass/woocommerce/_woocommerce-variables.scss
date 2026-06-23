@@ -1,0 +1,8 @@
+@use "../globals/index" as *;
+
+// Checkout payment
+$color-wc-payment-bg: rgba($color-red, 0.1);
+$color-wc-payment-box-bg: #2f2929;
+
+// Checkout action button
+$width-wc-checkout-action-button: 25rem;

@@ -234,12 +234,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      max-width: 100%;
+      margin-inline: auto;
       min-height: 48px; // Stripe/Linkボタンの 48px に合わせる
       margin-bottom: 1em;
       padding: 0.75rem 1rem;
       font-size: 1.25em;
       line-height: 1.2;
       text-align: center;
+
+      @include mq(md) {
+        max-width: $width-wc-checkout-action-button;
+      }
     }
 
     #wc-stripe-express-checkout-element {
