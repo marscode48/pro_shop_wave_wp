@@ -142,12 +142,12 @@
 
     div.payment_box {
       background-color: $color-wc-payment-box-bg;
-      color: $color-black;
+      color: $color-white;
 
       span.help,
       p,
       label {
-        color: $color-black;
+        color: $color-white;
       }
 
       a {
@@ -168,6 +168,15 @@
         left: 0;
         margin: -1em 0 0 2em;
       }
+    }
+
+    // Stripe決済フォームの fieldset に付くブラウザ標準スタイルをリセット
+    #wc-stripe-upe-form {
+      display: block;
+      min-inline-size: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
     }
 
     .woocommerce-privacy-policy-text,
@@ -197,7 +206,7 @@
       @include mq(md) {
         justify-self: center;
         width: fit-content;
-        min-width: 25rem;
+        min-width: $width-wc-checkout-action-button;
       }
     }
   }
@@ -214,10 +223,8 @@
     flex: 1 1 100%;
   }
 
-  @include wc-stripe-express-button-hover();
-
   @include mq(md) {
-    max-width: 25rem;
+    max-width: $width-wc-checkout-action-button;
 
     > div {
       flex: 0 1 100%;
