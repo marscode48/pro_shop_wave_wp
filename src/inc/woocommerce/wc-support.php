@@ -752,13 +752,44 @@ if (function_exists('add_filter')) {
     ob_start();
     ?>
     <span class="header__cart-count<?php echo esc_attr($class); ?>" aria-live="polite" aria-atomic="true"><?php echo esc_html($count); ?></span>
-<?php
+  <?php
     // バッファの中身を取り出して変数に代入し、バッファをクリア
     $fragments['span.header__cart-count'] = ob_get_clean();
 
     return $fragments;
   });
 }
+
+// ---------------------------------------------
+// WooCommerce: カート画面で最後の商品を削除した場合に空カート表示へ切り替える
+// 目的: /cart/ 表示中に商品削除でカートが空になった際、
+//       WooCommerce のカートHTMLが空になるだけで終わらないように、
+//       /cart/ を再読み込みして cart-empty.php を表示させる。
+// ---------------------------------------------
+add_action('wp_footer', function () {
+  if (! function_exists('is_cart') || ! is_cart() || ! function_exists('wc_get_cart_url')) {
+    return;
+  }
+  ?>
+  <script>
+    (function($) {
+      if (typeof $ === 'undefined') {
+        return;
+      }
+
+      var cartUrl = <?php echo wp_json_encode(wc_get_cart_url()); ?>;
+
+      function reloadCartWhenEmpty() {
+        if ($('.woocommerce-cart-form__cart-item').length === 0) {
+          window.location.href = cartUrl;
+        }
+      }
+
+      $(document.body).on('removed_from_cart updated_wc_div', reloadCartWhenEmpty);
+    })(window.jQuery);
+  </script>
+<?php
+});
 
 // ---------------------------------------------
 // WooCommerce: 送料別途見積商品のカート・チェックアウト制御
