@@ -72,7 +72,7 @@
         </address>
       </div>
       <div class="footer__sns">
-        <a href="https://www.instagram.com/proshopwave/" aria-label="<?php echo esc_attr__('Instagram', 'proshopwave'); ?>" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/pro_shop_wave/" aria-label="<?php echo esc_attr__('Instagram', 'proshopwave'); ?>" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-instagram"></i>
         </a>
         <a href="https://x.com/proshopwave" aria-label="<?php echo esc_attr__('X (Twitter)', 'proshopwave'); ?>" target="_blank" rel="noopener noreferrer">
