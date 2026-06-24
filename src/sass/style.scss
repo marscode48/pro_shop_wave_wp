@@ -9,44 +9,45 @@ Text Domain: proshopwave
 // ========================
 // グローバル設定（変数・関数・リセットなど）
 // ========================
-@use 'globals/index' as *;
+@use "globals/index" as *;
 
 // ========================
 // パーツ（共通パーツなど）
 // ========================
-@use 'parts/base'; // ベーススタイル（body、img、ul、aなど）
-@use 'parts/layout'; // レイアウトユーティリティ（.l-container / 表示制御）
-@use 'parts/vivus-logo'; // Vivusアニメーションロゴ用
+@use "parts/base"; // ベーススタイル（body、img、ul、aなど）
+@use "parts/layout"; // レイアウトユーティリティ（.l-container / 表示制御）
+@use "parts/vivus-logo"; // Vivusアニメーションロゴ用
 
 // ========================
 // コンポーネント（複数ページで共通のセクションなど）
 // ========================
-@use 'components/section'; // セクション共通スタイル（.section__titleなど）
-@use 'components/header'; // ヘッダー（.headerなど）
-@use 'components/footer'; // フッター（.footerなど）
-@use 'components/nav-overlay'; // ナビオーバーレイ（.nav-overlay）
-@use 'components/search-form-sp'; // モバイル検索フォーム（.search-form-sp）
-@use 'components/breadcrumb';  // パンくずリスト（front-page以外の全体）
-@use 'components/back-to-top';  // 「トップへ戻る」ボタン
-@use 'components/blog-card'; // ブログカード
-@use 'components/blog-sidebar'; // 記事サイドバー
+@use "components/section"; // セクション共通スタイル（.section__titleなど）
+@use "components/header"; // ヘッダー（.headerなど）
+@use "components/footer"; // フッター（.footerなど）
+@use "components/nav-overlay"; // ナビオーバーレイ（.nav-overlay）
+@use "components/search-form-sp"; // モバイル検索フォーム（.search-form-sp）
+@use "components/breadcrumb"; // パンくずリスト（front-page以外の全体）
+@use "components/back-to-top"; // 「トップへ戻る」ボタン
+@use "components/blog-card"; // ブログカード
+@use "components/blog-sidebar"; // 記事サイドバー
 
 // ========================
 // ページ別スタイル
 // ========================
-@use 'pages/front-page'; // front-page.php 用（トップページ）
-@use 'pages/blog-archive'; // home.php 用（投稿一覧ページ）
-@use 'pages/single-blog'; // single.php 用（投稿詳細ページ）
-@use 'pages/search'; // search.php 用（検索結果ページ）
-@use 'pages/about'; // page-contact.php 用（お問い合わせページ）
-@use 'pages/contact'; // page-contact.php 用（お問い合わせページ）
-@use 'pages/access'; // page-access.php 用（アクセスページ）
-@use 'pages/guide'; // page-guide.php 用（ご利用ガイドページ）
-@use 'pages/faq'; // page-faq.php 用（よくある質問ページ）
-@use 'pages/returns'; // page-returns.php 用（返品・交換・キャンセルページ）
-@use 'pages/terms'; // page-terms.php 用（利用規約ページ）
-@use 'pages/privacy'; // page-privacy.php 用（プライバシーポリシーページ）
-@use 'pages/tokushoho'; // page-tokushoho.php 用（特定商取引法ページ）
+@use "pages/front-page"; // front-page.php 用（トップページ）
+@use "pages/blog-archive"; // home.php 用（投稿一覧ページ）
+@use "pages/single-blog"; // single.php 用（投稿詳細ページ）
+@use "pages/search"; // search.php 用（検索結果ページ）
+@use "pages/not-found"; // 404.php 用（ページ未検出ページ）
+@use "pages/about"; // page-contact.php 用（お問い合わせページ）
+@use "pages/contact"; // page-contact.php 用（お問い合わせページ）
+@use "pages/access"; // page-access.php 用（アクセスページ）
+@use "pages/guide"; // page-guide.php 用（ご利用ガイドページ）
+@use "pages/faq"; // page-faq.php 用（よくある質問ページ）
+@use "pages/returns"; // page-returns.php 用（返品・交換・キャンセルページ）
+@use "pages/terms"; // page-terms.php 用（利用規約ページ）
+@use "pages/privacy"; // page-privacy.php 用（プライバシーポリシーページ）
+@use "pages/tokushoho"; // page-tokushoho.php 用（特定商取引法ページ）
 
 // ========================
 // WooCommerce専用スタイルは別ビルドで管理
