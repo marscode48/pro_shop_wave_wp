@@ -119,7 +119,7 @@ add_action('init', 'proshopwave_register_product_categories');
 // -----------------------------
 // WooCommerce 商品登録時にSKUを自動生成（WAVE-000123形式 / 投稿IDベース）
 // -----------------------------
-function proshopwave_generate_auto_sku($post_id)
+function proshopwave_generate_auto_sku(int $post_id): void
 {
   // 対象: 商品投稿タイプのみ
   if (get_post_type($post_id) !== 'product') {
@@ -199,7 +199,7 @@ add_action('woocommerce_before_single_product', 'proshopwave_remove_product_meta
 // -----------------------------
 // WooCommerce 商品ループ <li> に fadeup クラスを追加
 // -----------------------------
-function add_fadeup_class_to_product_loop_item($classes)
+function add_fadeup_class_to_product_loop_item(array $classes): array
 {
   $classes[] = 'fadeup';
   return $classes;
@@ -251,7 +251,7 @@ add_action('init', function () {
 // -----------------------------
 // WooCommerceのパンくずリスト（breadcrumb）のマークアップをカスタマイズ
 // -----------------------------
-function custom_woocommerce_breadcrumbs($defaults)
+function custom_woocommerce_breadcrumbs(array $defaults): array
 {
   $defaults['delimiter']   = ''; // 区切り文字（>）はCSSや ::before で制御するため空に
   $defaults['wrap_before'] = '<div class="woocommerce-breadcrumb"><ul class="breadcrumb__list">';
@@ -267,7 +267,7 @@ add_filter('woocommerce_breadcrumb_defaults', 'custom_woocommerce_breadcrumbs');
 // Helper: 二重URLエンコード等を考慮してクエリ文字列を安全に取得
 // 例) "%25e3%2582%25a2..." → rawurldecode 2段階で「アパレル」へ
 // ---------------------------------------------
-function get_query_slug($key)
+function get_query_slug(string $key): string
 {
   if (! isset($_GET[$key])) {
     return '';
