@@ -259,7 +259,85 @@
     }
 
     .shipping-calculator-form {
+      display: grid;
+      gap: 0.875rem;
       margin: 1em 0 0 0;
+      text-align: left;
+
+      .form-row {
+        float: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: $color-white;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      .required {
+        color: $color-red;
+      }
+
+      .input-text,
+      select,
+      .select2-container .select2-selection--single {
+        width: 100%;
+        min-height: 3rem;
+        @include input-base();
+        @include input-focus();
+      }
+
+      .select2-container {
+        width: 100% !important;
+      }
+
+      .select2-container .select2-selection--single {
+        display: flex;
+        align-items: center;
+        height: auto;
+        padding: 0.55em 0.9em;
+      }
+
+      .select2-container .select2-selection__rendered {
+        width: 100%;
+        padding-right: 2.5rem;
+        padding-left: 0;
+        color: $color-white;
+        line-height: 1.5;
+        text-align: left;
+      }
+
+      .select2-container .select2-selection__arrow {
+        top: 50%;
+        right: 0.875rem;
+        width: 1rem;
+        height: 1rem;
+        transform: translateY(-50%);
+      }
+
+      // 最後の p 要素を更新ボタン行として扱う
+      p:last-of-type {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0;
+      }
+
+      .button {
+        width: 100%;
+        min-height: 3rem;
+        padding: 0.75rem 1.5rem;
+
+        @include mq(md) {
+          width: auto;
+          min-width: 10rem;
+        }
+      }
     }
 
     .cart_totals {
@@ -356,7 +434,7 @@
       }
 
       .woocommerce-shipping-destination {
-        margin-bottom: 0;
+        margin: 0.5em 0 0;
         color: $color-gray;
         font-size: 0.75rem;
         line-height: 1.6;
