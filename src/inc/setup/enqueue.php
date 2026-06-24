@@ -99,4 +99,24 @@ function proshopwave_enqueue_woocommerce_styles()
   }
   // それ以外（非WooCommerceページ）は読み込まない → パフォーマンス最適化
 }
+
 add_action('wp_enqueue_scripts', 'proshopwave_enqueue_woocommerce_styles', 20);
+
+// ==============================
+// WooCommerce カートフラグメントの読み込み
+// ・カートページで数量変更 / 商品削除を行った際に、ヘッダーのカート数量バッジを更新するために使用
+// ・wc_fragment_refresh を受け取る WooCommerce 側の cart-fragments.js を明示的に読み込む
+// ==============================
+function proshopwave_enqueue_woocommerce_cart_fragments()
+{
+  // WooCommerce が無効な環境では処理しない
+  if (! function_exists('is_cart')) {
+    return;
+  }
+
+  // カートページのみ、ヘッダーのカート数量バッジ更新に必要なフラグメントJSを読み込む
+  if (is_cart()) {
+    wp_enqueue_script('wc-cart-fragments');
+  }
+}
+add_action('wp_enqueue_scripts', 'proshopwave_enqueue_woocommerce_cart_fragments', 30);
