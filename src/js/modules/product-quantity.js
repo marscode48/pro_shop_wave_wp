@@ -1,39 +1,45 @@
 export class ProductQuantity {
   constructor(selector = ".js-product-quantity") {
     this.selector = selector;
+    this.handleClick = this.handleClick.bind(this);
     this.init();
   }
 
   init() {
-    const quantityContainers = document.querySelectorAll(this.selector);
+    // カート更新後はWooCommerceが数量フォームのHTMLをAjaxで差し替えるため、
+    // 個別の数量ボタンではなくdocumentでクリックを受け取る。
+    document.addEventListener("click", this.handleClick);
+  }
 
-    quantityContainers.forEach((container) => {
-      const input = container.querySelector("input.qty");
-      const btnIncrease = container.querySelector(".js-quantity-increase");
-      const btnDecrease = container.querySelector(".js-quantity-decrease");
+  handleClick(event) {
+    const button = event.target.closest(
+      ".js-quantity-increase, .js-quantity-decrease",
+    );
 
-      if (!input || !btnIncrease || !btnDecrease) return;
+    if (!button) return;
 
-      const step = parseInt(input.getAttribute("step")) || 1;
-      const min = parseInt(input.getAttribute("min")) || 1;
-      const maxAttr = input.getAttribute("max");
-      const max = maxAttr ? parseInt(maxAttr) : Infinity;
+    const container = button.closest(this.selector);
+    if (!container) return;
 
-      btnIncrease.addEventListener("click", () => {
-        let currentVal = parseInt(input.value) || 0;
-        if (currentVal < max) {
-          input.value = currentVal + step;
-          input.dispatchEvent(new Event("change", { bubbles: true }));
-        }
-      });
+    const input = container.querySelector("input.qty");
+    if (!input) return;
 
-      btnDecrease.addEventListener("click", () => {
-        let currentVal = parseInt(input.value) || 0;
-        if (currentVal > min) {
-          input.value = currentVal - step;
-          input.dispatchEvent(new Event("change", { bubbles: true }));
-        }
-      });
-    });
+    const step = parseInt(input.getAttribute("step"), 10) || 1;
+    const min = parseInt(input.getAttribute("min"), 10) || 1;
+    const maxAttr = input.getAttribute("max");
+    const max = maxAttr ? parseInt(maxAttr, 10) : Infinity;
+    const currentVal = parseInt(input.value, 10) || 0;
+
+    if (button.classList.contains("js-quantity-increase")) {
+      if (currentVal >= max) return;
+      input.value = currentVal + step;
+    }
+
+    if (button.classList.contains("js-quantity-decrease")) {
+      if (currentVal <= min) return;
+      input.value = currentVal - step;
+    }
+
+    input.dispatchEvent(new Event("change", { bubbles: true }));
   }
 }
