@@ -22,7 +22,6 @@
     line-height: 1;
     color: $color-red;
     text-shadow: 1px 1px 2px rgba($color-black, 0.6);
-    padding-top: 1.5rem; // text-shadow を広げるため
 
     &::before {
       color: $color-red;
@@ -65,7 +64,7 @@
     padding: 1.25rem;
     @include panel-surface-gray();
 
-    max-inline-size: 800px;
+    max-inline-size: $width-wc-product-review-content;
     margin-inline: auto;
 
     @include mq(lg) {
@@ -75,11 +74,7 @@
 
   #review_form #respond {
     @include wc-reset-clearfix();
-    font-size: 0.875rem;
-
-    @include mq(lg) {
-      font-size: 1rem;
-    }
+    font-size: 1rem;
 
     #reply-title {
       display: block;
@@ -95,13 +90,24 @@
     }
 
     p.comment-notes {
-      font-size: 0.75rem;
+      font-size: 0.875rem;
       text-align: center;
       line-height: 2;
-      margin: 0 0 10px;
+      margin: 0;
 
       & > * {
         display: block;
+      }
+    }
+
+    #commentform {
+      display: grid;
+      gap: 1.25rem;
+      max-width: $width-wc-product-review-content;
+      margin-inline: auto;
+
+      @include mq(lg) {
+        gap: 2rem;
       }
     }
 
@@ -111,21 +117,26 @@
 
     #comment-form-rating-label {
       display: block;
-      margin: 0 0 10px;
+      margin: 0;
     }
 
     .comment-form-rating {
       text-align: center;
     }
 
+    p {
+      margin: 0;
+    }
+
     p[class^="comment-form-"],
     p[class*=" comment-form-"] {
-      max-width: 600px;
-      margin: 0 auto 2rem;
+      width: 100%;
+      margin: 0;
+      display: grid;
+      gap: 0.5rem;
 
       label {
         display: block;
-        margin: 0 0 5px;
       }
 
       textarea,
@@ -150,7 +161,7 @@
       display: flex;
       align-items: center;
       gap: 0.5em;
-      margin: 0 auto 2rem;
+      margin: 0;
 
       & input {
         display: block;
@@ -160,17 +171,13 @@
 
       & label {
         margin: 0;
-        font-size: 0.625rem;
-
-        @include mq() {
-          font-size: 0.75rem;
-        }
+        font-size: 0.75rem;
       }
     }
 
     .form-submit {
       text-align: center;
-      margin: 0 auto;
+      margin: 0;
 
       input#submit {
         line-height: normal;
@@ -187,8 +194,12 @@
 
   p.stars {
     a {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       color: $color-red;
+
+      @include mq(lg) {
+        font-size: 1.75rem;
+      }
     }
   }
 }
