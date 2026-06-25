@@ -864,7 +864,7 @@ add_action('woocommerce_review_order_before_payment', function () {
   }
 
   echo '<div class="woocommerce-info proshopwave-estimate-shipping-notice">';
-  echo esc_html__('大型商品・エアロパーツが含まれるため、送料は別途見積となります。画面上の合計金額には、別途見積の送料は含まれていません。ご注文後、送料を含めたお支払い総額を当店よりご案内いたします。お支払いはご案内後の銀行振込にてお願いいたします。', 'proshopwave');
+  echo esc_html__('大型商品・エアロパーツ・大型外装品が含まれるご注文は、送料が別途見積となります。画面上の合計金額には、別途見積の送料は含まれていません。ご注文後、送料を含めたお支払い総額を当店よりご案内いたします。お支払いは、ご案内後に銀行振込にてお願いいたします。', 'proshopwave');
   echo '</div>';
 });
 
