@@ -1,0 +1,17 @@
+@use "../globals/index" as *;
+@use "sass:color";
+
+// ========================
+// Shipping Page（配送・送料）
+// ========================
+.shipping {
+  &__lead {
+    // 配送・送料ページ上部のリード文（抜粋）
+    @include page-lead();
+  }
+
+  &__content {
+    // 配送・送料ページ本文
+    @include page-content-body($panel: gray);
+  }
+}
