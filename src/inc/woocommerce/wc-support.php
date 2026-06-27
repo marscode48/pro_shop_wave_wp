@@ -807,7 +807,7 @@ add_action('wp_footer', function () {
 });
 
 // ---------------------------------------------
-// WooCommerce: 送料別途見積商品のカート・チェックアウト制御
+// WooCommerce: 送料別途見積商品のカート・チェックアウト・メール制御
 // 対象: 配送クラス slug が aero-estimate の商品
 //
 // 目的:
@@ -815,8 +815,11 @@ add_action('wp_footer', function () {
 // - 対象商品が含まれる注文では、即時決済を避けて bankjp のみ表示する
 // - カート・チェックアウトの送料表示を「送料別途見積」に差し替える
 // - 送料金額・送料税額をチェックアウト時点では 0 にし、後ほど総額を案内する運用にする
+// - 対象注文のメール本文にも、送料別途見積の注意文を表示する
 // ---------------------------------------------
-function proshopwave_cart_has_estimate_shipping_item()
+const PROSHOPWAVE_ESTIMATE_SHIPPING_CLASS_SLUG = 'aero-estimate';
+
+function proshopwave_cart_has_estimate_shipping_item(): bool
 {
   if (! function_exists('WC') || ! WC()->cart) {
     return false;
@@ -829,12 +832,41 @@ function proshopwave_cart_has_estimate_shipping_item()
       continue;
     }
 
-    if ($product->get_shipping_class() === 'aero-estimate') {
+    if ($product->get_shipping_class() === PROSHOPWAVE_ESTIMATE_SHIPPING_CLASS_SLUG) {
       return true;
     }
   }
 
   return false;
+}
+
+// 送料別途見積商品が含まれる注文かを判定する。
+// メール送信時は WC()->cart ではなく、確定済みの注文データ（WC_Order）から商品を取得する。
+// 各注文商品に紐づく商品データの配送クラスを確認し、対象 slug が含まれていれば true を返す。
+function proshopwave_order_has_estimate_shipping_item(WC_Order $order): bool
+{
+  foreach ($order->get_items() as $item) {
+    if (! $item instanceof WC_Order_Item_Product) {
+      continue;
+    }
+
+    $product = $item->get_product();
+
+    if (! $product instanceof WC_Product) {
+      continue;
+    }
+
+    if ($product->get_shipping_class() === PROSHOPWAVE_ESTIMATE_SHIPPING_CLASS_SLUG) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function proshopwave_get_estimate_shipping_notice_text(): string
+{
+  return esc_html__('大型商品・エアロパーツ・大型外装品が含まれるご注文は、送料が別途見積となります。表示されている合計金額には、別途見積の送料は含まれていません。ご注文内容を確認後、送料を含めたお支払い総額を当店よりご案内いたします。お支払いは、ご案内後に銀行振込にてお願いいたします。', 'proshopwave');
 }
 
 // 送料別途見積商品が含まれる場合、支払い方法を bankjp のみに制限する。
@@ -864,9 +896,32 @@ add_action('woocommerce_review_order_before_payment', function () {
   }
 
   echo '<div class="woocommerce-info proshopwave-estimate-shipping-notice">';
-  echo esc_html__('大型商品・エアロパーツ・大型外装品が含まれるご注文は、送料が別途見積となります。画面上の合計金額には、別途見積の送料は含まれていません。ご注文後、送料を含めたお支払い総額を当店よりご案内いたします。お支払いは、ご案内後に銀行振込にてお願いいたします。', 'proshopwave');
+  echo proshopwave_get_estimate_shipping_notice_text();
   echo '</div>';
 });
+
+// 送料別途見積商品が含まれる注文の場合、注文メール本文にも注意文を表示する。
+add_action('woocommerce_email_before_order_table', function ($order, $sent_to_admin, $plain_text, $email) {
+  if (! $order instanceof WC_Order || ! proshopwave_order_has_estimate_shipping_item($order)) {
+    return;
+  }
+
+  // 【送料別途見積について】の注意文は、注文受付直後の「注文保留」メールだけに表示する。
+  if (! $email instanceof WC_Email || $email->id !== 'customer_on_hold_order') {
+    return;
+  }
+
+  if ($plain_text) {
+    echo "\n" . esc_html__('【送料別途見積について】', 'proshopwave') . "\n";
+    echo proshopwave_get_estimate_shipping_notice_text() . "\n\n";
+    return;
+  }
+
+  echo '<div class="proshopwave-estimate-shipping-email-notice" style="margin: 0 0 24px; padding: 16px; border: 1px solid #e60012; background: #fff5f5;">';
+  echo '<p style="margin: 0 0 8px; font-weight: bold; color: #e60012;">' . esc_html__('【送料別途見積について】', 'proshopwave') . '</p>';
+  echo '<p style="margin: 0; line-height: 1.8;">' . proshopwave_get_estimate_shipping_notice_text() . '</p>';
+  echo '</div>';
+}, 10, 4);
 
 // 送料別途見積商品が含まれる場合、配送方法ラベルから金額表示を隠す。
 add_filter('woocommerce_cart_shipping_method_full_label', function ($label, $method) {
