@@ -807,6 +807,41 @@ add_action('wp_footer', function () {
 });
 
 // ---------------------------------------------
+// WooCommerce: 日本国内配送のみの注意文をカート・チェックアウトに表示
+// 目的:
+// - 海外ユーザーが国内住所を選択して注文・決済へ進んでしまうことを防ぐ
+// - オンライン注文は日本国内配送のみであることを、購入前に日英併記で案内する
+// - 海外配送希望者は注文前の問い合わせへ誘導する
+// ---------------------------------------------
+function proshopwave_render_domestic_shipping_only_notice(): void
+{
+  $contact_url = home_url('/contact/');
+
+  echo '<div class="woocommerce-info proshopwave-domestic-shipping-notice" role="note">';
+  echo '<p class="proshopwave-domestic-shipping-notice__text">';
+  echo esc_html__('現在、オンライン注文での配送先は日本国内のみ対応しております。海外配送をご希望の場合は、ご注文前に', 'proshopwave');
+  echo '<a href="' . esc_url($contact_url) . '">';
+  echo esc_html__('お問い合わせください', 'proshopwave');
+  echo '</a>';
+  echo esc_html__('。', 'proshopwave');
+  echo '</p>';
+  echo '<p class="proshopwave-domestic-shipping-notice__text" lang="en">';
+  echo esc_html__('Currently, online checkout is available for shipping within Japan only. For international shipping inquiries, ', 'proshopwave');
+  echo '<a href="' . esc_url($contact_url) . '">';
+  echo esc_html__('please contact us', 'proshopwave');
+  echo '</a>';
+  echo esc_html__(' before placing an order.', 'proshopwave');
+  echo '</p>';
+  echo '</div>';
+}
+
+// カートページ: 「購入手続きに進む」ボタンより前に表示する。
+add_action('woocommerce_proceed_to_checkout', 'proshopwave_render_domestic_shipping_only_notice', 5);
+
+// チェックアウトページ: 入力フォーム・決済導線より前に表示する。
+add_action('woocommerce_before_checkout_form', 'proshopwave_render_domestic_shipping_only_notice', 15);
+
+// ---------------------------------------------
 // WooCommerce: 送料別途見積商品のカート・チェックアウト・メール制御
 // 対象: 配送クラス slug が aero-estimate の商品
 //

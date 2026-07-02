@@ -53,6 +53,35 @@
   &.proshopwave-estimate-shipping-notice {
     margin: 1.25rem 0 0;
   }
+
+  // カート・チェックアウトに表示する日本国内配送のみの注意文
+  &.proshopwave-domestic-shipping-notice {
+    display: grid;
+    gap: 0.35rem;
+    align-items: stretch;
+    justify-content: stretch;
+    margin: 0 0 1.5rem;
+    border-left: 4px solid $color-red;
+    line-height: 1.7;
+
+    .proshopwave-domestic-shipping-notice__text {
+      margin: 0;
+      color: inherit;
+      font-size: 0.875rem;
+
+      @include mq(lg) {
+        font-size: 0.9375rem;
+      }
+    }
+
+    a {
+      color: $color-white;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+
+      @include link-hovers($opacity: 1, $afterTextColor: $color-red);
+    }
+  }
 }
 
 .woocommerce-error {
