@@ -178,7 +178,7 @@ export class FilterbarWooCommerce {
     if (!this.state.catChild && this.currentCatFromPath) {
       this.state.catChild = this.currentCatFromPath;
       // 親も分かるなら補完（childrenMap を走査してどの親配下かを特定）
-      // childrenMap のすべての親スラッグ（"parts" / "apparel" など）を走査する
+      // childrenMap のすべての親スラッグ（"parts" / "apparel-goods" など）を走査する
       for (const parentSlug of Object.keys(this.childrenMap || {})) {
         // その親に対応する子カテゴリリストを取得（配列に正規化）
         const list = this._toArray(this.childrenMap[parentSlug]);
@@ -241,7 +241,7 @@ export class FilterbarWooCommerce {
     // category（子優先→親→未選択）
     // 常に 1キー=1値（?product_cat=slug）に正規化。未選択なら削除。
     const catParam = this.state.catChild || this.state.catParent || "";
-    if (catParam) sp.set("product_cat", catParam); // 例: ?product_cat=apparel
+    if (catParam) sp.set("product_cat", catParam); // 例: ?product_cat=apparel-goods
     else sp.delete("product_cat");
 
     // tag（1値に正規化。未選択なら削除）
@@ -694,7 +694,7 @@ export class FilterbarWooCommerce {
   // slug が文字列: その親の子だけ可（不透明＋クリック可）、他は不可
   _setCatChildrenInteractivityPC(slug = "") {
     // Object.keys() で引数に渡したオブジェクト自身が持つ（＝継承ではない）列挙可能なプロパティ名（キー）を
-    // 配列で返すので、すべての親スラッグ（["parts","apparel"] など）を配列で取得
+    // 配列で返すので、すべての親スラッグ（["parts","apparel-goods"] など）を配列で取得
     Object.keys(this.childrenMap).forEach((parentSlug) => {
       const box = this.$(this.selectors.pcCatChildrenPrefix + parentSlug);
       if (!box) return;
@@ -820,7 +820,7 @@ export class FilterbarWooCommerce {
 
         // すべての親グループに対して、子の選択表示を同期（どの親の子DOMでも選択が一貫）
         // Object.keys() で引数に渡したオブジェクト自身が持つ（＝継承ではない）列挙可能なプロパティ名（キー）を
-        // 配列で返すので、すべての親スラッグ（["parts","apparel"] など）を配列で取得
+        // 配列で返すので、すべての親スラッグ（["parts","apparel-goods"] など）を配列で取得
         Object.keys(this.childrenMap).forEach((parentSlug) => {
           this._selectChip(
             this.selectors.pcCatChildrenPrefix + parentSlug,
@@ -1434,7 +1434,7 @@ export class FilterbarWooCommerce {
 
     // 子カテゴリが入っていれば、すべての「親ごとの子グループ」に対して
     // 選択表示（data-selected="true"）を同期する
-    // 例）pc-cat-children-parts / pc-cat-children-apparel の両方で同じ子が選択状態になる
+    // 例）pc-cat-children-parts / pc-cat-children-apparel-goods の両方で同じ子が選択状態になる
     if (this.state.catChild) {
       // Object.keys() で引数に渡したオブジェクト自身が持つ（＝継承ではない）列挙可能なプロパティ名（キー）を
       // 配列で返すので、すべての親スラッグ（["parts","apparel"] など）を配列で取得

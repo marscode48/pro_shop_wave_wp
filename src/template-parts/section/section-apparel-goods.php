@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Template part for Apparel section
+ * Template part for Apparel goods section
  *
  * @package PRO_SHOP_WAVE
  */
 ?>
-<section class="section section--categories section--apparel section--reverse">
+<section class="section section--categories section--apparel-goods section--reverse">
   <div class="section__flex">
     <div class="section__content">
-      <h2 class="section__title fadeup"><?php echo esc_html__('Apparel', 'proshopwave'); ?></h2>
+      <h2 class="section__title fadeup"><?php echo esc_html__('Apparel & Goods', 'proshopwave'); ?></h2>
       <p class="section__text fadeup">
-        <?php echo wp_kses_post(__('90’sストリートカルチャーを纏う、<br class="sp-only">オリジナルJDMアパレル。', 'proshopwave')); ?>
+        <?php echo wp_kses_post(__('90’sストリートカルチャーを纏う、<br class="sp-only">オリジナルJDMアパレル・グッズ。', 'proshopwave')); ?>
       </p>
-      <a href="/product-category/apparel/" class="section__button faderight">
+      <a href="/product-category/apparel-goods/" class="section__button faderight">
         <?php echo esc_html__('More', 'proshopwave'); ?>
       </a>
     </div>
-    <a href="/product-category/apparel/" class="section__link">
+    <a href="/product-category/apparel-goods/" class="section__link">
       <picture class="section__picture fadeup">
         <!-- PC: WebP + JPG -->
         <source
@@ -34,7 +34,7 @@
           type="image/webp" />
         <img
           src="<?php echo get_theme_file_uri('images/section-apparel-sp.jpg'); ?>"
-          alt="<?php echo esc_attr__('アパレルカテゴリ', 'proshopwave'); ?>"
+          alt="<?php echo esc_attr__('アパレル・グッズカテゴリ', 'proshopwave'); ?>"
           class="section__image" />
       </picture>
     </a>

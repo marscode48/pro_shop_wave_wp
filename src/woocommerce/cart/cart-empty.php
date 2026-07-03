@@ -56,8 +56,8 @@ $empty_cart_products = new WP_Query(
         <?php esc_html_e('パーツを見る', 'proshopwave'); ?>
       </a>
 
-      <a class="button woocommerce-empty-cart__button" href="<?php echo esc_url(home_url('/product-category/apparel/')); ?>">
-        <?php esc_html_e('アパレルを見る', 'proshopwave'); ?>
+      <a class="button woocommerce-empty-cart__button" href="<?php echo esc_url(home_url('/product-category/apparel-goods/')); ?>">
+        <?php esc_html_e('アパレル・グッズを見る', 'proshopwave'); ?>
       </a>
     </div>
   </div>

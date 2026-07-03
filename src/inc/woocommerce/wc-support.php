@@ -49,7 +49,7 @@ add_filter(
 );
 
 // -----------------------------
-// WooCommerce 商品カテゴリの初期登録（パーツ・アパレル）
+// WooCommerce 商品カテゴリの初期登録（パーツ・アパレル・グッズ）
 // -----------------------------
 function proshopwave_register_product_categories()
 {
@@ -85,14 +85,14 @@ function proshopwave_register_product_categories()
     }
   }
 
-  // アパレルカテゴリ
-  $apparel_parent_slug = 'apparel';
+  // アパレル・グッズカテゴリ
+  $apparel_parent_slug = 'apparel-goods';
   $apparel_parent_term = term_exists($apparel_parent_slug, 'product_cat');
 
   if (! $apparel_parent_term) {
-    $apparel_parent_term = wp_insert_term('アパレル', 'product_cat', [
+    $apparel_parent_term = wp_insert_term('アパレル・グッズ', 'product_cat', [
       'slug'        => $apparel_parent_slug,
-      'description' => 'チームグッズやウェアなどのアパレルカテゴリ',
+      'description' => 'チームグッズやウェアなどのアパレル・グッズカテゴリ',
     ]);
   }
 
@@ -101,7 +101,7 @@ function proshopwave_register_product_categories()
     ['name' => 'パーカー',   'slug' => 'hoodie'],
     ['name' => 'キャップ',   'slug' => 'cap'],
     ['name' => 'ステッカー', 'slug' => 'sticker'],
-    ['name' => 'その他',     'slug' => 'other-apparel'],
+    ['name' => 'その他',     'slug' => 'other-apparel-goods'],
   ];
 
   foreach ($apparel_child_categories as $child) {
@@ -683,7 +683,7 @@ add_action('init', function () {
       <div class="form-field term-group">
         <label for="pw_show_fitment">適合車種を表示</label>
         <input type="checkbox" id="pw_show_fitment" name="pw_show_fitment" value="1" checked />
-        <p class="description">このブランドのタームを商品の「適合車種」セクションに含めます。汎用ブランド（UNIVERSAL 等）やアパレルなど、適合が関係ない場合はチェックを外してください。</p>
+        <p class="description">このブランドのタームを商品の「適合車種」セクションに含めます。汎用ブランド（UNIVERSAL 等）やアパレル・グッズなど、適合が関係ない場合はチェックを外してください。</p>
       </div>
     <?php
     });
@@ -699,7 +699,7 @@ add_action('init', function () {
         <th scope="row"><label for="pw_show_fitment">適合車種を表示</label></th>
         <td>
           <input type="checkbox" id="pw_show_fitment" name="pw_show_fitment" value="1" <?php echo $checked; ?> />
-          <p class="description">このブランドのタームを商品の「適合車種」セクションに含めます。汎用ブランド（UNIVERSAL 等）やアパレルなど、適合が関係ない場合はチェックを外してください。</p>
+          <p class="description">このブランドのタームを商品の「適合車種」セクションに含めます。汎用ブランド（UNIVERSAL 等）やアパレル・グッズなど、適合が関係ない場合はチェックを外してください。</p>
         </td>
       </tr>
     <?php

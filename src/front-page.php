@@ -25,7 +25,7 @@ get_header();
 
     <?php get_template_part('template-parts/section/section', 'new-arrivals'); ?>
     <?php get_template_part('template-parts/section/section', 'custom-parts'); ?>
-    <?php get_template_part('template-parts/section/section', 'apparel'); ?>
+    <?php get_template_part('template-parts/section/section', 'apparel-goods'); ?>
     <?php get_template_part('template-parts/section/section', 'blog'); ?>
 
   </div>

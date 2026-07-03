@@ -1,7 +1,7 @@
 // ---------------------------------
 // modules/header-submenu-toggle.js
 // ---------------------------------
-// Shop配下のサブメニュー（Parts/Apparel）の開閉制御
+// Shop配下のサブメニュー（Parts/Apparel & Goods）の開閉制御
 // - トグルボタンをクリックで親<li>に is-open を付与/除去
 // - aria-expanded を true/false に更新
 // - 別の場所をクリックでクローズ（PC向け）

@@ -20,10 +20,10 @@ function get_terms_safe($args)
 }
 
 // --------------------------------------------------
-// 1) カテゴリ：親=parts/apparel を優先して取得、無ければ親カテゴリ一覧を列挙
+// 1) カテゴリ：親=parts/apparel-goods を優先して取得、無ければ親カテゴリ一覧を列挙
 // --------------------------------------------------
-$parent_slugs = ['parts', 'apparel'];
-// 親カテゴリ（parts/apparelを優先して取得）
+$parent_slugs = ['parts', 'apparel-goods'];
+// 親カテゴリ（parts/apparel-goodsを優先して取得）
 $parent_terms = get_terms_safe([
   'taxonomy'   => 'product_cat',
   'hide_empty' => true,
@@ -42,12 +42,12 @@ if (count($parent_terms) < 2) {
 }
 
 // --------------------------------------------------
-// 親カテゴリの表示順を固定（parts → apparel）
+// 親カテゴリの表示順を固定（parts → apparel-goods）
 // get_terms() の結果順に依存せず、常に希望順で並べる
 // --------------------------------------------------
-$desired_order = ['parts', 'apparel'];
-// $desired_order = ['parts', 'apparel'] を
-// array_flip() で ['parts' => 0, 'apparel' => 1] に変換。
+$desired_order = ['parts', 'apparel-goods'];
+// $desired_order = ['parts', 'apparel-goods'] を
+// array_flip() で ['parts' => 0, 'apparel-goods' => 1] に変換。
 // これにより、slug をキーにして「希望の順番インデックス」を素早く参照できる。
 $order_index = array_flip($desired_order);
 
@@ -78,7 +78,7 @@ foreach ($parent_terms as $p) {
   //   'parts'   => [ WP_Term(/*外装エアロ*/),
   //                  WP_Term(/*冷却系*/),
   //                  ... ],
-  //   'apparel' => [ WP_Term(/*Tシャツ*/),
+  //   'apparel-goods' => [ WP_Term(/*Tシャツ*/),
   //                  WP_Term(/*パーカー*/),
   //                  ... ],
   //    ];

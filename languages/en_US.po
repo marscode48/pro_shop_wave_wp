@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: content-product.php:153 template-parts/section/section-apparel.php:17
+#: content-product.php:153 template-parts/section/section-apparel-goods.php:17
 #: template-parts/section/section-custom-parts.php:16
 #: template-parts/section/section-new-arrivals.php:36
 msgid "More"
@@ -149,9 +149,9 @@ msgstr "PRO SHOP WAVE logo"
 msgid "Parts"
 msgstr "Parts"
 
-#: header.php:104 template-parts/section/section-apparel.php:12
-msgid "Apparel"
-msgstr "Apparel"
+#: header.php:104 template-parts/section/section-apparel-goods.php:12
+msgid "Apparel & Goods"
+msgstr "Apparel & Goods"
 
 #: header.php:146 header.php:199
 msgid "サイト内検索"
@@ -579,17 +579,17 @@ msgstr "Bringing authentic drift culture<br class=\"sp-only\">from Japan to the 
 msgid "更新"
 msgstr "Updated"
 
-#: template-parts/section/section-apparel.php:14
-msgid "90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレル。"
-msgstr "Wear 90’s street culture<br class=\"sp-only\">with our original JDM apparel."
+#: template-parts/section/section-apparel-goods.php:14
+msgid "90’sストリートカルチャーを纏う、<br class=\"sp-only\">オリジナルJDMアパレル・グッズ。"
+msgstr "Wear 90’s street culture<br class=\"sp-only\">with our original JDM apparel and goods."
 
-#: template-parts/section/section-apparel.php:23
-msgid "アパレルカテゴリ"
-msgstr "Apparel categories"
+#: template-parts/section/section-apparel-goods.php:23
+msgid "アパレル・グッズカテゴリ"
+msgstr "Apparel & Goods categories"
 
 #: template-parts/section/section-blog.php:11
-msgid "ドリフトパーツやアパレルの<br class=\"sp-only\">最新情報をピックアップ。"
-msgstr "Pick up the latest news<br class=\"sp-only\">on drift parts and apparel."
+msgid "ドリフトパーツやアパレル・グッズの<br class=\"sp-only\">最新情報をピックアップ。"
+msgstr "Pick up the latest news<br class=\"sp-only\">on drift parts, apparel, and goods."
 
 #: template-parts/section/section-blog.php:29
 msgid "View All"

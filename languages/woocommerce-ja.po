@@ -18978,7 +18978,7 @@ msgstr "健康・美容"
 
 #: src/Internal/Admin/Onboarding/OnboardingIndustries.php:30
 msgid "Fashion, apparel, and accessories"
-msgstr "ファッション、アパレル、アクセサリー"
+msgstr "ファッション、アパレル・グッズ、アクセサリー"
 
 #: src/Internal/Admin/Analytics.php:190
 #: src/Internal/Features/FeaturesController.php:248

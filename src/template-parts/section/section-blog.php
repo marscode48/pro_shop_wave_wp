@@ -8,7 +8,7 @@
 <section class="section section--blog">
   <div class="section__inner">
     <h2 class="section__title fadeup"><?php echo esc_html__( 'Blog', 'proshopwave' ); ?></h2>
-    <p class="section__text fadeup"><?php echo wp_kses_post( __( 'ドリフトパーツやアパレルの<br class="sp-only">最新情報をピックアップ。', 'proshopwave' ) ); ?></p>
+    <p class="section__text fadeup"><?php echo wp_kses_post( __( 'ドリフトパーツやアパレル・グッズの<br class="sp-only">最新情報をピックアップ。', 'proshopwave' ) ); ?></p>
     <div class="card-list card-list--blog">
       <?php
       $blog_query = new WP_Query([

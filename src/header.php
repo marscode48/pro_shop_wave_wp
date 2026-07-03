@@ -104,7 +104,7 @@
               </button>
               <ul class="header__submenu">
                 <li><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>"><?php esc_html_e('Parts', 'proshopwave'); ?></a></li>
-                <li><a href="<?php echo esc_url(get_term_link('apparel', 'product_cat')); ?>"><?php esc_html_e('Apparel', 'proshopwave'); ?></a></li>
+                <li><a href="<?php echo esc_url(get_term_link('apparel-goods', 'product_cat')); ?>"><?php esc_html_e('Apparel & Goods', 'proshopwave'); ?></a></li>
               </ul>
             </li>
             <li class="header__nav-item"><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'proshopwave'); ?></a></li>
