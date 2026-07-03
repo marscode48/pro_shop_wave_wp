@@ -146,8 +146,8 @@ msgid "PRO SHOP WAVE ロゴ"
 msgstr "PRO SHOP WAVE logo"
 
 #: header.php:103
-msgid "Parts"
-msgstr "Parts"
+msgid "Custom Parts"
+msgstr "Custom Parts"
 
 #: header.php:104 template-parts/section/section-apparel-goods.php:12
 msgid "Apparel & Goods"
@@ -588,8 +588,8 @@ msgid "アパレル・グッズカテゴリ"
 msgstr "Apparel & Goods categories"
 
 #: template-parts/section/section-blog.php:11
-msgid "ドリフトパーツやアパレル・グッズの<br class=\"sp-only\">最新情報をピックアップ。"
-msgstr "Pick up the latest news<br class=\"sp-only\">on drift parts, apparel, and goods."
+msgid "カスタムパーツやアパレル・グッズの<br class=\"sp-only\">最新情報をピックアップ。"
+msgstr "Pick up the latest news<br class=\"sp-only\">on custom parts, apparel, and goods."
 
 #: template-parts/section/section-blog.php:29
 msgid "View All"
@@ -601,11 +601,11 @@ msgstr "Custom Parts"
 
 #: template-parts/section/section-custom-parts.php:14
 msgid "90’sストリートのスピリットを、<br class=\"sp-only\">現代に甦らせるチューニングパーツ。"
-msgstr "Tuning parts that revive the spirit<br class=\"sp-only\">of 90’s street style in the modern era."
+msgstr "Custom parts that revive the spirit<br class=\"sp-only\">of 90’s street style in the modern era."
 
 #: template-parts/section/section-custom-parts.php:22
 msgid "カスタムパーツカテゴリ"
-msgstr "Custom parts categories"
+msgstr "Custom Parts categories"
 
 #: template-parts/section/section-hero.php:15
 msgid "Scroll"

@@ -49,18 +49,18 @@ add_filter(
 );
 
 // -----------------------------
-// WooCommerce 商品カテゴリの初期登録（パーツ・アパレル・グッズ）
+// WooCommerce 商品カテゴリの初期登録（カスタムパーツ・アパレル・グッズ）
 // -----------------------------
 function proshopwave_register_product_categories()
 {
-  // パーツカテゴリ
+  // カスタムパーツカテゴリ
   $parts_parent_slug = 'parts';
   $parts_parent_term = term_exists($parts_parent_slug, 'product_cat');
 
   if (! $parts_parent_term) {
-    $parts_parent_term = wp_insert_term('パーツ', 'product_cat', [
+    $parts_parent_term = wp_insert_term('カスタムパーツ', 'product_cat', [
       'slug'        => $parts_parent_slug,
-      'description' => '各種チューニング・補修用パーツのカテゴリ',
+      'description' => '各種チューニング・補修用カスタムパーツのカテゴリ',
     ]);
   }
 
@@ -73,7 +73,7 @@ function proshopwave_register_product_categories()
     ['name' => 'ブレーキ',     'slug' => 'brake'],
     ['name' => '電装系',       'slug' => 'electrical'],
     ['name' => '外装エアロ',   'slug' => 'exterior'],
-    ['name' => '内装パーツ',   'slug' => 'interior'],
+    ['name' => '内装カスタムパーツ',   'slug' => 'interior'],
   ];
 
   foreach ($parts_child_categories as $child) {

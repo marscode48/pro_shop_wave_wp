@@ -103,7 +103,7 @@
                 <span class="header__nav-toggle-icon"></span>
               </button>
               <ul class="header__submenu">
-                <li><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>"><?php esc_html_e('Parts', 'proshopwave'); ?></a></li>
+                <li><a href="<?php echo esc_url(get_term_link('parts', 'product_cat')); ?>"><?php esc_html_e('Custom Parts', 'proshopwave'); ?></a></li>
                 <li><a href="<?php echo esc_url(get_term_link('apparel-goods', 'product_cat')); ?>"><?php esc_html_e('Apparel & Goods', 'proshopwave'); ?></a></li>
               </ul>
             </li>

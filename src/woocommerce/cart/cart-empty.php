@@ -44,7 +44,7 @@ $empty_cart_products = new WP_Query(
     </h2>
 
     <p class="woocommerce-empty-cart__text">
-      <?php esc_html_e('気になるパーツやアパレルを探して、カスタムの準備を始めましょう。', 'proshopwave'); ?>
+      <?php esc_html_e('気になるカスタムパーツやアパレル・グッズを探して、カスタムの準備を始めましょう。', 'proshopwave'); ?>
     </p>
 
     <div class="woocommerce-empty-cart__actions">
@@ -53,7 +53,7 @@ $empty_cart_products = new WP_Query(
       </a>
 
       <a class="button woocommerce-empty-cart__button" href="<?php echo esc_url(home_url('/product-category/parts/')); ?>">
-        <?php esc_html_e('パーツを見る', 'proshopwave'); ?>
+        <?php esc_html_e('カスタムパーツを見る', 'proshopwave'); ?>
       </a>
 
       <a class="button woocommerce-empty-cart__button" href="<?php echo esc_url(home_url('/product-category/apparel-goods/')); ?>">
