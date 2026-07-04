@@ -437,6 +437,28 @@
       }
     }
 
+    // 外部商品（BASE販売商品）用の注意文。購入ボタン前に表示し、外部サイトへ遷移することを明示する
+    .proshopwave-external-product-notice {
+      margin: 1rem 0 0;
+      padding: 1rem;
+      @include panel-surface-black($border-color: rgba($color-red, 0.65));
+      font-size: 0.875rem;
+      line-height: 1.6;
+
+      @include mq(lg) {
+        max-width: min(36rem, 100%);
+      }
+
+      &__text {
+        margin: 0;
+        color: rgba($color-white, 0.9);
+
+        & + .proshopwave-external-product-notice__text {
+          margin-top: 0.25rem;
+        }
+      }
+    }
+
     form.cart {
       margin-bottom: 0;
 

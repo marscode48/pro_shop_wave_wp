@@ -84,6 +84,24 @@
     margin-bottom: 0.5rem;
   }
 
+  .product-card__external-badge {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    font-family: $font-heading;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+
+    @include pill(
+      $padding: 0.25em 0.6em,
+      $font-size: 0.72rem,
+      $border-color: rgba($color-red, 0.8),
+      $fg: $color-white,
+      $bg: rgba($color-red, 0.22),
+      $with-selected: false
+    );
+  }
+
   .product-card__brand {
     margin-left: auto;
     font-size: 0.8rem;

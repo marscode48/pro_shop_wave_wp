@@ -50,6 +50,9 @@ if (! is_a($product, WC_Product::class) || ! $product->is_visible()) {
   </div>
   <div class="product-card__body">
     <div class="product-card__topline">
+      <?php if ($product->is_type('external')) : ?>
+        <span class="product-card__external-badge"><?php echo esc_html__('BASE SHOP', 'proshopwave'); ?></span>
+      <?php endif; ?>
       <div class="product-card__category">
         <?php
         // 商品カードではカテゴリーを「一番子側」のカテゴリー1件だけ表示する。
