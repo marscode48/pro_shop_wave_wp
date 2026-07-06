@@ -28,7 +28,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 		<?php echo esc_html__('ボタンを押すと、外部サイトのBASE商品ページへ移動します。', 'proshopwave'); ?>
 	</p>
 	<p class="proshopwave-external-product-notice__text">
-		<?php echo esc_html__('サイズ・在庫状況・海外発送についてはBASE商品ページをご確認ください。', 'proshopwave'); ?>
+		<?php echo esc_html__('在庫状況・発送についてはBASE商品ページをご確認ください。', 'proshopwave'); ?>
 	</p>
 </div>
 
